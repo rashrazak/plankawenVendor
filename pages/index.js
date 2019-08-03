@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Head from 'next/head'
+import '../css/index.css'
 
 export default class index extends Component {
     render() {
