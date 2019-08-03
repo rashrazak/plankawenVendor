@@ -1,5 +1,7 @@
+@import "//fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900&display=swap";
 body{
     margin: 0;
+    font-family: "Lato" !important;
 }
 .body-layout{
     width: 100%;
