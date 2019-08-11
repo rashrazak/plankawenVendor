@@ -4,29 +4,37 @@ import LoginContext from '../contexts/LoginContext'
 import Swal from 'sweetalert2'
 
 
-
 const Login = () => {
 
-    const { signIn } = useContext(LoginContext);
+    const { signIn, check } = useContext(LoginContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
-    const authenticate = e => {
+    const authenticate = async (e) => {
         Swal.showLoading();
         e.preventDefault();
         if (email != '' || password != '') {
-          signIn(email, password);
-          Swal.close();
+            let result = await check(email);
+            if (!result) {
+                setMessage('You are not registered, please contact admin')
+                Swal.close();
+
+            }else{
+                signIn(email, password);
+                Swal.close();
+            }
         } else {
           setMessage('Please enter your email and password');
+          Swal.close();
+
         }
     };
 
     return (
         <div className="login-layout"> 
-            <h1>Welcome Vendor</h1>
+            <h1>Welcome Admin</h1>
             <div className="form-layout">
                 <form>
                     <input type="email" className="form-control" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />

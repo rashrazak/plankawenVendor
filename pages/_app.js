@@ -4,7 +4,6 @@ import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import firebase from '../config/firebaseConfig';
 
-
 class MyApp extends App {
 
   constructor(props){
@@ -58,33 +57,29 @@ class MyApp extends App {
   };
 
   signIn = async (email, password) => {
-    let result =  await firebase.signIn(email, password);
-    let user = result.user;
-    console.log(user)
-    if (user != null) {
-      this.setState({
-        user:{
-              name:user.displayName,
-              email:user.email,
-              photoUrl: user.photoURL,
-              emailVerified: user.emailVerified,
-              uid: user.uid
-          },
-        isLogin:true
-      },
-      () =>  {
-        Router.push('/dashboard')
-      });
+    try{
+      let result =  await firebase.signIn(email, password);
+      let user = result.user;
+      console.log(user)
+      if (user != null) {
+        this.setState({
+          user:{
+                name:user.displayName,
+                email:user.email,
+                photoUrl: user.photoURL,
+                emailVerified: user.emailVerified,
+                uid: user.uid
+            },
+          isLogin:true
+        },
+        () =>  {
+          Router.push('/dashboard')
+        });
+      }
+    }catch(error){
+      alert(error.message)
     }
-    // this.setState(
-    //   {
-    //     user
-    //   },
-    //   () => {
-    //     Router.push('/dashboard');
-    //   }
-    // );
-   
+     
   };
 
   signOut = () => {
