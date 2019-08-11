@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import '../css/login.css'
 import LoginContext from '../contexts/LoginContext'
+import Swal from 'sweetalert2'
+
 
 
 const Login = () => {
@@ -12,9 +14,11 @@ const Login = () => {
     const [message, setMessage] = useState('');
 
     const authenticate = e => {
+        Swal.showLoading();
         e.preventDefault();
         if (email != '' || password != '') {
           signIn(email, password);
+          Swal.close();
         } else {
           setMessage('Please enter your email and password');
         }

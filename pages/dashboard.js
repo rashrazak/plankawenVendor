@@ -3,10 +3,10 @@ import LoginContext from '../contexts/LoginContext'
 import Head from '../components/Headx'
 
 function dashboard() {
-    const {email, signOut} = useContext(LoginContext);
+    const {user, signOut} = useContext(LoginContext);
     return (
         <Head title={ 'Vendor Dashboard'}>
-            <h1>Welcome to PlanKawen Vendor {email}</h1>
+            <h1>Welcome to PlanKawen Vendor {user.email}</h1>
             <button onClick={ signOut }>Log Out</button>
         </Head>
     )
