@@ -34,7 +34,7 @@ const Login = () => {
 
     return (
         <div className="login-layout"> 
-            <h1>Welcome Admin</h1>
+            <h1>Welcome Vendor</h1>
             <div className="form-layout">
                 <form>
                     <input type="email" className="form-control" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />

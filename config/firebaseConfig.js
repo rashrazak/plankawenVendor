@@ -1,7 +1,6 @@
 import * as app from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
-
 // const config = {
 //     apiKey: process.env.REACT_APP_FIREBASE_KEY ,
 //     authDomain: process.env.REACT_APP_FIREBASE_DOMAIN ,
