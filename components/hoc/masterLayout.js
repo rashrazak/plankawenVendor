@@ -1,11 +1,14 @@
 import React from 'react'
+import '../../css/index.css'
 
 function masterLayout(WrappedComponent) {
 
     return (props) =>{
         return (
             <React.Fragment>
-                <WrappedComponent {...props} />
+                <div className="master-layout">
+                    <WrappedComponent {...props} />
+                </div>
             </React.Fragment>
         )
     }
