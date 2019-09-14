@@ -49,6 +49,10 @@ class Firebase {
     currentUser(){
         return this.auth.currentUser;
     }
+
+    addService(collectionType, colllectionObject){
+        this.db.collection(collectionType).add(colllectionObject)
+    }
 }
 
 
