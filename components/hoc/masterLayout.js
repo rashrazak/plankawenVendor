@@ -1,11 +1,11 @@
 import React from 'react'
 
-function masterLayout(wrappedComponent) {
+function masterLayout(WrappedComponent) {
 
     return (props) =>{
         return (
             <React.Fragment>
-                <wrappedComponent {...props} />
+                <WrappedComponent {...props} />
             </React.Fragment>
         )
     }

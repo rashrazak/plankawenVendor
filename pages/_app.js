@@ -96,6 +96,7 @@ class MyApp extends App {
     try{
       let exist = await firebase.check(email)
       let result = await exist.docs
+      console.log(result);
       return result.length;
     }catch(error){
       alert(error.message)
