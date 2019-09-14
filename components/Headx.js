@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Head from 'next/head'
 import '../css/bootstrap.min.css'
 import '../css/index.css'
+import Masterlayout from '../components/hoc/masterLayout'
 
 import {
     Collapse,
@@ -15,6 +16,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import masterLayout from '../components/hoc/masterLayout'
 
 export class Headx extends Component {
     render() {
@@ -64,4 +66,4 @@ export class Headx extends Component {
     }
 }
 
-export default Headx
+export default masterLayout(Headx)
