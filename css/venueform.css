@@ -1,0 +1,27 @@
+.form-custom { 
+    border-radius: 4px; 
+    font-weight: 400;
+    font-size: 14px;
+    color: #3E3E3E;
+}
+textarea { 
+    resize: none;
+}
+.btn-cancel, .btn-cancel:hover{
+    background-color: #9B9B9B; 
+    color: #FFFFFF; 
+    font-weight: 400;
+    width: 160px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+}
+.btn-next, .btn-next:hover{
+    background-color: #47CBC4; 
+    color: #FFFFFF; 
+    font-weight: 400;
+    width: 160px;
+    height: 40px;
+    border-radius: 25px;
+    border: none;
+}
