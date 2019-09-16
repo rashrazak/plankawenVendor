@@ -20,7 +20,6 @@ import masterLayout from '../components/hoc/masterLayout'
 
 export class Headx extends Component {
     render() {
-        console.log(this.props)
         return (
             <div>
                 <Head>

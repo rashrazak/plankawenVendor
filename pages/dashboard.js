@@ -1,9 +1,13 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import LoginContext from '../contexts/LoginContext'
 import Head from '../components/Headx'
 
 function dashboard() {
     const {user, signOut} = useContext(LoginContext);
+
+    useEffect(() => {
+        console.log(user);
+    },[LoginContext])
     return (
         <Head title={ 'Vendor Dashboard'}>
             <h1>Welcome to PlanKawen Vendor {user.email}</h1>

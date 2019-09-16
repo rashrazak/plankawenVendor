@@ -27,27 +27,52 @@ class MyApp extends App {
 
   //FIREBASE USE WILL MOUNT
   componentDidMount = () => {
-    firebase.isInitialized().then(val => {
-      if (val) {
-        console.log(val)
-        this.setState({
-          user:{
-                name:val.displayName,
-                email:val.email,
-                photoUrl: val.photoURL,
-                emailVerified: val.emailVerified,
-                uid: val.uid
-            },
-          isLogin:true
-        })
-        if ( Router.pathname == '/'){
-          Router.push('/dashboard');
+    let user = localStorage.getItem('user');
+    user = JSON.parse(user)
+    if (user == null){
+      firebase.isInitialized().then(val => {
+        if (val) {
+          console.log(val)
+          this.setState({
+            user:{
+                  name:val.displayName,
+                  email:val.email,
+                  photoUrl: val.photoURL,
+                  emailVerified: val.emailVerified,
+                  uid: val.uid
+              },
+            isLogin:true
+          })
+          localStorage.setItem('user', JSON.stringify({
+            name:val.displayName,
+            email:val.email,
+            photoUrl: val.photoURL,
+            emailVerified: val.emailVerified,
+            uid: val.uid
+          }))
+          if ( Router.pathname == '/'){
+            Router.push('/dashboard');
+          }
+        } else {
+          Router.push('/');
         }
-      } else {
-        Router.push('/');
+        
+      })
+    }else{
+      this.setState({
+        user:{
+              name:user.name,
+              email:user.email,
+              photoUrl: user.photoUrl,
+              emailVerified: user.emailVerified,
+              uid: user.uid
+          },
+        isLogin:true
+      })
+      if ( Router.pathname == '/'){
+        Router.push('/dashboard');
       }
-      
-    })
+    }
     
     // if (userx == false) {
     // }else{
@@ -73,6 +98,13 @@ class MyApp extends App {
           isLogin:true
         },
         () =>  {
+          localStorage.setItem('user', JSON.stringify({
+            name:user.displayName,
+            email:user.email,
+            photoUrl: user.photoURL,
+            emailVerified: user.emailVerified,
+            uid: user.uid
+          }))
           Router.push('/dashboard')
         });
       }
@@ -83,12 +115,13 @@ class MyApp extends App {
   };
 
   signOut = () => {
+    // this.setState({
+    //   user: null,
+    //   isLogin:false
+    // });
     firebase.signOut().then( ()=> {
-      this.setState({
-        user: null,
-        isLogin:false
-      });
       Router.push('/');
+      localStorage.removeItem('user');
     })
   };
 
@@ -96,6 +129,7 @@ class MyApp extends App {
     try{
       let exist = await firebase.check(email)
       let result = await exist.docs
+      console.log(result);
       return result.length;
     }catch(error){
       alert(error.message)
