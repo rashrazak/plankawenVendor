@@ -3,6 +3,7 @@ import App, { Container } from 'next/app';
 import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import firebase from '../config/firebaseConfig';
+import AddServiceContext from '../contexts/AddServiceContext'
 
 class MyApp extends App {
 
@@ -10,7 +11,13 @@ class MyApp extends App {
     super(props);
     this.state = {
       user: null,
-      isLogin:false
+      isLogin:false,
+      addServiceAbout:{
+        serviceType:null,
+        serviceName:null,
+        description:null,
+        areaCovered:null,
+      },
     };
   }
   
@@ -43,6 +50,7 @@ class MyApp extends App {
               },
             isLogin:true
           })
+          console.log(this.state)
           localStorage.setItem('user', JSON.stringify({
             name:val.displayName,
             email:val.email,
@@ -69,6 +77,7 @@ class MyApp extends App {
           },
         isLogin:true
       })
+      console.log(this.state)
       if ( Router.pathname == '/'){
         Router.push('/dashboard');
       }
@@ -98,6 +107,7 @@ class MyApp extends App {
           isLogin:true
         },
         () =>  {
+          console.log(this.state)
           localStorage.setItem('user', JSON.stringify({
             name:user.displayName,
             email:user.email,
@@ -136,12 +146,25 @@ class MyApp extends App {
     }
   }
 
+  addServiceAbout = ({serviceType, serviceName, areaCovered, description}) => {
+    this.setState({
+      addServiceAbout:{
+        serviceType:serviceType,
+        serviceName:serviceName,
+        description:description,
+        areaCovered:areaCovered,
+      }
+    })
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
       <Container>
         <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check }}>
-          <Component {...pageProps} />
+            <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout}}>
+              <Component {...pageProps} />
+            </AddServiceContext.Provider>
         </LoginContext.Provider>
       </Container>
     );
