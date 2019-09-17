@@ -16,7 +16,7 @@ class MyApp extends App {
         serviceType:null,
         serviceName:null,
         description:null,
-        areaCovered:null,
+        areaCovered:[],
       },
     };
   }
