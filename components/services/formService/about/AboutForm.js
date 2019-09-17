@@ -137,16 +137,18 @@ function Venue() {
                     {/* let chckd  = false; */}
                     let chckd = cityArray.includes(bandar) ? true : false;
                     return(
-                        <div key={index}>
-                            <label>
-                            <input type="checkbox"
-                            name={bandar} 
-                            checked={chckd}
-                            onChange={(e) => handleChangeKawasan(e)}
-                            />
-                            {bandar}
-                            </label>
-                        </div>
+                        
+                            <div key={index} className="area-covered-div">
+                                <label>
+                                    <input type="checkbox"
+                                        name={bandar} 
+                                        checked={chckd}
+                                        onChange={(e) => handleChangeKawasan(e)}
+                                    />
+                                    {bandar}
+                                </label>
+                            </div>
+                            
                     )
                 } )}
             </div>
@@ -160,6 +162,9 @@ function Venue() {
                 p {font-weight:400; color: #3e3e3e; font-size: 14px; }
                 .form-section { margin: 20px 0; }
                 h4 { text-align: center; font-weight: 400; color: #75848E; font-size: 16px; margin-bottom: 10px; }
+                .area-covered-div { display: inline-block; margin-right: 10px; }
+                .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
+                .area-covered-div > label > input { margin-right: 5px; }
             `}</style>
         </div>
     )
