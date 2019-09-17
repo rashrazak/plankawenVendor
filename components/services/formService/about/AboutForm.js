@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
+import Swal from 'sweetalert2'
     
 function Venue() {
     const gMapsCities = [
@@ -64,10 +65,38 @@ function Venue() {
     const {getServiceAbout} = useContext(AddServiceContext);
     const kawasan = getServiceAbout.areaCovered;
     const [cityArray, setCityArray] = useState(kawasan);
+    // const [vend, setVend] = useState({
+    //     serviceName:'',
+    //     description:'',
+    //     serviceType:'',
+    //     areaCovered:[]
+    // });
 
     useEffect( () =>{
         setCityArray(kawasan)
     },[kawasan])
+
+    useEffect(() =>{
+        const getx = () => {
+            console.log(cityArray)
+        }
+        getx();
+    },[cityArray])
+
+    const handleChangeKawasan = (e) => {
+        Swal.showLoading()
+        let name = e.target.name;
+        let check = e.target.checked;
+        let x = cityArray;
+        if (check) {
+            setCityArray(old =>[...old, name])
+        }else{
+            let index = cityArray.indexOf(name);
+            x.splice(index,1);
+            setCityArray([...x]);
+        }
+        Swal.close()
+    }
     return (
         <div className="form-service">
             {/* <div className="form-section">
