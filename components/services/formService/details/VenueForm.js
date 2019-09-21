@@ -40,7 +40,7 @@ function VenueForm({serviceType}) {
                 <Autocomplete
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', }}
                     onPlaceSelected={(place) => {
-                    console.log(place);
+                    setlokasi(place)
                     }}
                     types={[]}
                     componentRestrictions={{country: "my"}}

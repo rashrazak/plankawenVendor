@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import About from '../../../components/services/addServices/About'
 import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
@@ -11,6 +11,10 @@ function AddServiceAbout(props) {
     const typeChange = (name) => {
         setServiceType(name)
     }
+
+    // useEffect(() => {
+    //     console.log(serviceType)
+    // }, [setServiceType])
     return (
         <Head title={ 'Add Services'}>
             <div>

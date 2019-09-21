@@ -23,6 +23,18 @@ class MyApp extends App {
         hargaSewa:0,
         lokasi:'',
         waktuOperasi:''
+      },
+      addServiceDetailsPhotographer:{
+        harga:0,
+        jenisEvent:[]
+      },
+      addServiceDetailsVideographer:{
+        harga:0,
+        jenisEvent:[]
+      },
+      addServiceDetailsPelamin:{
+        harga:0,
+        jenisEvent:[]
       }
     };
   }
@@ -90,6 +102,9 @@ class MyApp extends App {
     
     this.getServiceAbout()
     this.getServiceDetailsVenue()
+    this.getServiceDetailsPhotographer()
+    this.getServiceDetailsVideographer()
+    this.getServiceDetailsPelamin()
   };
 
   signIn = async (email, password) => {
@@ -214,13 +229,91 @@ class MyApp extends App {
     }
   }
 
+  addServiceDetailsPhotographer = (harga, jenisEvent) => {
+    let {addServiceDetailsPhotographer} = {...this.state}
+    let currentService = addServiceDetailsPhotographer;
+    let har = harga;
+    let je = jenisEvent;
+    currentService['harga'] = har;
+    currentService['jenisEvent'] = je;
+    this.setState({addServiceDetailsPhotographer:currentService})
+    localStorage.setItem('addServiceDetailsPhotographer', JSON.stringify(this.state.addServiceDetailsPhotographer) ) 
+  }
+
+  getServiceDetailsPhotographer = () => {
+    let about = localStorage.getItem('addServiceDetailsPhotographer');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsPhotographer} = {...this.state}
+      let currentService = addServiceDetailsPhotographer;
+      let har = about.harga;
+      let je = about.jenisEvent;
+      currentService['harga'] = har;
+      currentService['jenisEvent'] = je;
+      this.setState({addServiceDetailsPhotographer:currentService})
+    }
+  }
+
+  addServiceDetailsVideographer = (harga, jenisEvent) => {
+    let {addServiceDetailsVideographer} = {...this.state}
+    let currentService = addServiceDetailsVideographer;
+    let har = harga;
+    let je = jenisEvent;
+    currentService['harga'] = har;
+    currentService['jenisEvent'] = je;
+    this.setState({addServiceDetailsVideographer:currentService})
+    localStorage.setItem('addServiceDetailsVideographer', JSON.stringify(this.state.addServiceDetailsVideographer) ) 
+  }
+
+  getServiceDetailsVideographer = () => {
+    let about = localStorage.getItem('addServiceDetailsVideographer');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsVideographer} = {...this.state}
+      let currentService = addServiceDetailsVideographer;
+      let har = about.harga;
+      let je = about.jenisEvent;
+      currentService['harga'] = har;
+      currentService['jenisEvent'] = je;
+      this.setState({addServiceDetailsVideographer:currentService})
+    }
+  }
+
+  addServiceDetailsPelamin = (harga, jenisEvent) => {
+    let {addServiceDetailsPelamin} = {...this.state}
+    let currentService = addServiceDetailsPelamin;
+    let har = harga;
+    let je = jenisEvent;
+    currentService['harga'] = har;
+    currentService['jenisEvent'] = je;
+    this.setState({addServiceDetailsPelamin:currentService})
+    localStorage.setItem('addServiceDetailsPelamin', JSON.stringify(this.state.addServiceDetailsPelamin) ) 
+  }
+
+  getServiceDetailsPelamin = () => {
+    let about = localStorage.getItem('addServiceDetailsPelamin');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsPelamin} = {...this.state}
+      let currentService = addServiceDetailsPelamin;
+      let har = about.harga;
+      let je = about.jenisEvent;
+      currentService['harga'] = har;
+      currentService['jenisEvent'] = je;
+      this.setState({addServiceDetailsPelamin:currentService})
+    }
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
       <Container>
         <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check }}>
             <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout, addServiceAboutTypeName:this.addServiceAboutTypeName,
-            addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue }}>
+            addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,
+            addServiceDetailsPhotographer:this.addServiceDetailsPhotographer, getServiceDetailsPhotographer:this.state.addServiceDetailsPhotographer,
+            addServiceDetailsVideographer:this.addServiceDetailsVideographer, getServiceDetailsVideographer:this.state.addServiceDetailsVideographer,
+            addServiceDetailsPelamin:this.addServiceDetailsPelamin, getServiceDetailsPelamin:this.state.addServiceDetailsPelamin }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>
