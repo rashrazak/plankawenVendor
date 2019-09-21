@@ -1,87 +1,47 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Router from 'next/router';
 import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
+// import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function Venue() {
+function AboutForm({serviceType}) {
+    const {getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
+   
     const gMapsCities = [
-        {city:'Ampang', status:false},
-        {city:'Bandar Baru Bangi', status:false},
-        {city:'Bangsar', status:false},
-        {city:'Bandar Baru Selayang', status:false},
-        {city:'Bandar Sri Damansara', status:false},
-        {city:'Bandar Utama', status:false},
-        {city:'Batu Caves', status:false},
-        {city:'Bukit Damansara', status:false},
-        {city:'Bukit Jalil', status:false},
-        {city:'Bukit Kiara', status:false},
-        {city:'Cheras', status:false},
-        {city:'Cyberjaya', status:false},
-        {city:'Damansara Jaya', status:false},
-        {city:'Damansara Town Centre', status:false},
-        {city:'Damansara Utama', status:false},
-        {city:'Gombak', status:false},
-        {city:'Hulu Langat', status:false},
-        {city:'Kajang', status:false},
-        {city:'Kelana Jaya', status:false},
-        {city:'Kepong', status:false},
-        {city:'Klang', status:false},
-        {city:'Kota Damansara', status:false},
-        {city:'Kuala Lumpur', status:false},
-        {city:'Lembah Beringin', status:false},
-        {city:'Maluri', status:false},
-        {city:'Miharja', status:false},
-        {city:'Petaling Jaya', status:false},
-        {city:'Port Klang', status:false},
-        {city:'Puchong', status:false},
-        {city:'Pudu', status:false},
-        {city:'Putrajaya', status:false},
-        {city:'Rawang', status:false},
-        {city:'Segambut', status:false},
-        {city:'Selayang', status:false},
-        {city:'Sentul', status:false},
-        {city:'Semenyih', status:false},
-        {city:'Sepang', status:false},
-        {city:'Seri Kembangan', status:false},
-        {city:'Setapak', status:false},
-        {city:'Shah Alam', status:false},
-        {city:'Sri Hartamas', status:false},
-        {city:'Sri Petaling', status:false},
-        {city:'Subang Jaya', status:false},
-        {city:'Subang', status:false},
-        {city:'Sungai Besi', status:false},
-        {city:'Sungai Buloh', status:false},
-        {city:'Taman Melawati', status:false},
-        {city:'Taman Tun Dr Ismail', status:false},
-        {city:'USJ', status:false},
-        {city:'Wangsa Maju', status:false},
-        {city:'Wilayah Persekutuan Putrajaya', status:false},
-        {city:'Wilayah Persekutuan Kuala Lumpur', status:false},
-        {city:'Federal Territory of Kuala Lumpur', status:false},
-        {city:'Federal Territory of Putrajaya', status:false},
-        {city:'Kuala Lumpur',status:false}
+        {state:'Johor', status:false},
+        {state:'Kedah', status:false},
+        {state:'Kelantan', status:false},
+        {state:'Melaka', status:false},
+        {state:'Negeri Sembilan', status:false},
+        {state:'Pahang', status:false},
+        {state:'Penang', status:false},
+        {state:'Perak', status:false},
+        {state:'Perlis', status:false},
+        {state:'Sabah', status:false},
+        {state:'Sarawak', status:false},
+        {state:'Selangor', status:false},
+        {state:'Kuala Lumpur', status:false},
+        {state:'Terengganu', status:false},
+        {state:'Labuan', status:false},
+        {state:'Putrajaya', status:false},
     ];
-    const {getServiceAbout} = useContext(AddServiceContext);
-    const kawasan = getServiceAbout.areaCovered;
-    const [cityArray, setCityArray] = useState(kawasan);
-    // const [vend, setVend] = useState({
-    //     serviceName:'',
-    //     description:'',
-    //     serviceType:'',
-    //     areaCovered:[]
-    // });
 
-    useEffect( () =>{
-        setCityArray(kawasan)
-    },[kawasan])
+
+    // const serviceAbout = getServiceAbout();
+    // const kawasan = getServiceAbout.areaCovered == null|| getServiceAbout.areaCovered == [] ? [] : getServiceAbout.areaCovered ;
+    const [cityArray, setCityArray] = useState([]);
+    const [descriptionx, setDescriptionx] = useState('');
+    const [title, setTitle] = useState('');
+    const [serviceTypex, setServiceTypex] = useState(serviceType)
 
     useEffect(() =>{
-        const getx = () => {
-            console.log(cityArray)
-        }
-        getx();
-    },[cityArray])
+        setCityArray(getServiceAbout.areaCovered);
+        setDescriptionx(getServiceAbout.description);
+        setTitle(getServiceAbout.serviceName);
+        setServiceTypex(getServiceAbout.serviceType);
+    },[getServiceAbout])
 
     const handleChangeKawasan = (e) => {
         Swal.showLoading()
@@ -97,45 +57,23 @@ function Venue() {
         }
         Swal.close()
     }
+
+    const submitServiceAbout = () => {
+        addServiceAbout(title , cityArray, descriptionx)
+        let aaa = serviceTypex.toLowerCase();
+        Router.push(`/addservice/details/${aaa}`);
+    }
     return (
         <div className="form-service">
-            {/* <div className="form-section">
-                <h4>Type</h4>
-                <div className="checkbox-type">
-                    <FormGroup check>
-                        <Label check>
-                            <Input type="checkbox" />{' '}
-                            <p>Nikah</p>
-                        </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                        <Label check>
-                            <Input type="checkbox" />{' '}
-                            <p>Walimah</p>
-                        </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                        <Label check>
-                            <Input type="checkbox" />{' '}
-                            <p>Outdoor</p>
-                        </Label>
-                    </FormGroup>
-                </div>
-            </div> */}
-            <div className="form-section">
-                <h4>Add title to your service</h4>
-                <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" />
-            </div>
-            <div className="form-section">
-                <h4>Description for your service</h4>
-                <Input className="form-custom" type="textarea" name="text" id="descService" />
-            </div>
             <div className="form-section">
                 <h4>Area Covered</h4>
                 {gMapsCities.map( (cty, index) =>{
-                    let bandar = cty.city;
-                    {/* let chckd  = false; */}
-                    let chckd = cityArray.includes(bandar) ? true : false;
+                    let bandar = cty.state;
+                    let chckd  = false;
+                    if (cityArray != null) {
+                        chckd = cityArray.includes(bandar) ? true : false;
+                    }
+                    
                     return(
                         
                             <div key={index} className="area-covered-div">
@@ -152,9 +90,17 @@ function Venue() {
                     )
                 } )}
             </div>
+            <div className="form-section">
+                <h4>Add title to your service</h4>
+                <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Description for your service</h4>
+                <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
+            </div>
             <div className="form-button">
-                <Button  className="btn-cancel">Cancel</Button>{' '}
-                <Button  className="btn-next">Next</Button>{' '}
+                <Button  className="btn-cancel" disabled={true}>Cancel</Button>{' '}
+                <Button  className="btn-next" onClick={() => submitServiceAbout()}>Next</Button>{' '}
             </div>
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
@@ -170,4 +116,4 @@ function Venue() {
     )
 }
 
-export default Venue
+export default AboutForm

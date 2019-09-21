@@ -124,7 +124,7 @@ class Firebase {
                 senaraiLauk:['nasik','ayam masak merah', 'kuah dal'],
                 description:'lorem ipsum blalalalala'
             }
-        }else if(collectionType == 'door gift'){
+        }else if(collectionType == 'doorgift'){
             let data = {
                 name:'batavia door gift',
                 created: new Date(),
@@ -152,7 +152,7 @@ class Firebase {
                 }],
                 description:'lorem ipsum blalalalala'
             }
-        }else if(collectionType == 'kad kahwin dan banner'){
+        }else if(collectionType == 'kadbanner'){
             let data = {
                 name:'batavia door gift',
                 created: new Date(),

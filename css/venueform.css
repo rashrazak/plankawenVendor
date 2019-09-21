@@ -5,7 +5,8 @@
     color: #3E3E3E;
 }
 textarea { 
-    resize: none;
+    /* resize: none; */
+    height: 500px;
 }
 .btn-cancel, .btn-cancel:hover{
     background-color: #9B9B9B; 

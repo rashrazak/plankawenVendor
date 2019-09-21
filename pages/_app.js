@@ -13,11 +13,17 @@ class MyApp extends App {
       user: null,
       isLogin:false,
       addServiceAbout:{
-        serviceType:null,
-        serviceName:null,
-        description:null,
+        serviceType:'',
+        serviceName:'',
+        description:'',
         areaCovered:[],
+        status:'pending'
       },
+      addServiceDetailsVenue:{
+        hargaSewa:0,
+        lokasi:'',
+        waktuOperasi:''
+      }
     };
   }
   
@@ -77,17 +83,13 @@ class MyApp extends App {
           },
         isLogin:true
       })
-      console.log(this.state)
       if ( Router.pathname == '/'){
         Router.push('/dashboard');
       }
     }
     
-    // if (userx == false) {
-    // }else{
-    //   // this.getUser();
-    //   Router.push('/dashboard')
-    // }
+    this.getServiceAbout()
+    this.getServiceDetailsVenue()
   };
 
   signIn = async (email, password) => {
@@ -145,16 +147,71 @@ class MyApp extends App {
       alert(error.message)
     }
   }
+  addServiceAboutTypeName = (type) => {
+    let {addServiceAbout} = {...this.state}
+    let currentService = addServiceAbout;
+    let typeName = type;
+    currentService['serviceType'] = typeName;
+    this.setState({addServiceAbout:currentService})
+  }
+  addServiceAbout = (name, area, desc) => {
+    let {addServiceAbout} = {...this.state}
+    let currentService = addServiceAbout;
+    let serviceName = name;
+    let coveredArea = area;
+    let description = desc;
+    currentService['serviceName'] = serviceName;
+    currentService['areaCovered'] = coveredArea;
+    currentService['description'] = description;
+    this.setState({addServiceAbout:currentService})
+    localStorage.setItem('addServiceAbout', JSON.stringify(this.state.addServiceAbout) ) 
+  }
 
-  addServiceAbout = ({serviceType, serviceName, areaCovered, description}) => {
-    this.setState({
-      addServiceAbout:{
-        serviceType:serviceType,
-        serviceName:serviceName,
-        description:description,
-        areaCovered:areaCovered,
-      }
-    })
+  getServiceAbout = () => {
+    let about = localStorage.getItem('addServiceAbout');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceAbout} = {...this.state}
+      let currentService = addServiceAbout;
+      let typeName = about.serviceType;
+      let serviceName = about.serviceName;
+      let coveredArea = about.areaCovered;
+      let description = about.description;
+      currentService['serviceType'] = typeName;
+      currentService['serviceName'] = serviceName;
+      currentService['areaCovered'] = coveredArea;
+      currentService['description'] = description;
+      this.setState({addServiceAbout:currentService})
+    }
+  }
+
+  addServiceDetailsVenue = (harga, lokasi, waktuOperasi) => {
+    let {addServiceDetailsVenue} = {...this.state}
+    let currentService = addServiceDetailsVenue;
+    let hargaSewa = harga;
+    let lok = lokasi;
+    let wo = waktuOperasi;
+    currentService['hargaSewa'] = hargaSewa;
+    currentService['lokasi'] = lok;
+    currentService['waktuOperasi'] = wo;
+    this.setState({addServiceDetailsVenue:currentService})
+    localStorage.setItem('addServiceDetailsVenue', JSON.stringify(this.state.addServiceDetailsVenue) ) 
+  }
+
+  getServiceDetailsVenue = () => {
+    let about = localStorage.getItem('addServiceDetailsVenue');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsVenue} = {...this.state}
+      let currentService = addServiceDetailsVenue;
+      let hargaSewa = about.harga;
+      let lokasi = about.lokasi;
+      let waktuOperasi = about.waktuOperasi;
+      currentService['hargaSewa'] = hargaSewa;
+      currentService['lokasi'] = lokasi;
+      currentService['waktuOperasi'] = waktuOperasi;
+      this.setState({addServiceDetailsVenue:currentService})
+    }
   }
 
   render() {
@@ -162,7 +219,8 @@ class MyApp extends App {
     return (
       <Container>
         <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check }}>
-            <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout}}>
+            <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout, addServiceAboutTypeName:this.addServiceAboutTypeName,
+            addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

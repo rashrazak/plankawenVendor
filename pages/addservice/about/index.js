@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import About from '../../../components/services/addServices/About'
 import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
@@ -7,14 +7,18 @@ import '../../../css/venueform.css'
 import '../../../css/about.css'
 import AboutForm from '../../../components/services/formService/about/AboutForm'
 function AddServiceAbout(props) {
+    const [serviceType, setServiceType] = useState('')
+    const typeChange = (name) => {
+        setServiceType(name)
+    }
     return (
         <Head title={ 'Add Services'}>
             <div>
                 <Step progress={0} />
             </div>
             <div>
-                <About />
-                <AboutForm />   
+                <About typeChange={typeChange} />
+                <AboutForm serviceType={serviceType} />   
             </div>
         </Head>
     )
