@@ -20,37 +20,46 @@ class MyApp extends App {
         status:'pending'
       },
       addServiceDetailsVenue:{
-        hargaSewa:0,
+        hargaSewa:null,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsWeddingDress:{
-        hargaSewa:0,
+        hargaSewa:null,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsKugiran:{
-        hargaSewa:0,
+        hargaSewa:null,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsPhotographer:{
-        harga:0,
+        harga:null,
         jenisEvent:[]
       },
       addServiceDetailsVideographer:{
-        harga:0,
+        harga:null,
         jenisEvent:[]
       },
       addServiceDetailsPelamin:{
-        harga:0,
+        harga:null,
         jenisEvent:[]
       },
       addServiceDetailsMakeup:{
-        hargaTouchup:0,
-        hargaFull:0,
+        hargaTouchup:null,
+        hargaFull:null,
         jenisMakeup:[],
         jantina:[]
+      },
+      addServiceDetailsKadBanner:{
+        hargaPerPerson:null,
+        discount:[],
+        banner:false,
+        bannerDesc:{
+          bannerSize:[],
+          description:''
+        }
       }
     };
   }
@@ -414,6 +423,59 @@ class MyApp extends App {
     }
   }
 
+  addServiceDetailsKadBanner = (hargaPerPerson, discount, banner, bannerSize, bannerDescription) => {
+    //add kad first
+    let {addServiceDetailsKadBanner} = {...this.state}
+    let currentService = addServiceDetailsKadBanner;
+    let har = hargaPerPerson;
+    let disc = discount;
+    let ba = banner;
+    currentService['hargaPerPerson'] = har;
+    currentService['discount'] = disc;
+    currentService['banner'] = ba;
+
+    if (ba) { //if banner true
+      let {bannerDesc} = {...this.state.addServiceDetailsKadBanner}
+      let bannerD = bannerDesc;
+      let banS = bannerSize;
+      let banD = bannerDescription;
+      bannerD['bannerSize'] = banS;
+      bannerD['description'] = banD;
+      currentService['bannerDesc'] = bannerD;
+    }
+
+    this.setState({addServiceDetailsKadBanner:currentService})
+
+    localStorage.setItem('addServiceDetailsKadBanner', JSON.stringify(this.state.addServiceDetailsKadBanner) ) 
+  }
+
+  getServiceDetailsKadBanner = () => {
+    let about = localStorage.getItem('addServiceDetailsKadBanner');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsKadBanner} = {...this.state}
+      let currentService = addServiceDetailsKadBanner;
+      let har = about.hargaPerPerson;
+      let disc = about.discount;
+      let ba = about.banner;
+      currentService['hargaPerPerson'] = har;
+      currentService['discount'] = disc;
+      currentService['banner'] = ba;
+
+      if (ba) { //if banner true
+        let {bannerDesc} = {...this.state.addServiceDetailsKadBanner}
+        let bannerD = bannerDesc;
+        let bannerDLS = about.bannerDesc //from localStorage
+        let banS = bannerDLS.bannerSize;
+        let banD = bannerDLS.bannerDescription;
+        bannerD['bannerSize'] = banS;
+        bannerD['banD'] = banD;
+        currentService['bannerDesc'] = bannerD;
+      }
+      this.setState({addServiceDetailsKadBanner:currentService})
+    }
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -425,7 +487,8 @@ class MyApp extends App {
             addServiceDetailsVideographer:this.addServiceDetailsVideographer, getServiceDetailsVideographer:this.state.addServiceDetailsVideographer,
             addServiceDetailsPelamin:this.addServiceDetailsPelamin, getServiceDetailsPelamin:this.state.addServiceDetailsPelamin,
             addServiceDetailsWeddingDress:this.addServiceDetailsWeddingDress, getServiceDetailsWeddingDress:this.state.addServiceDetailsWeddingDress,
-            addServiceDetailsMakeup:this.addServiceDetailsMakeup, getServiceDetailsMakeup:this.state.addServiceDetailsMakeup }}>
+            addServiceDetailsMakeup:this.addServiceDetailsMakeup, getServiceDetailsMakeup:this.state.addServiceDetailsMakeup,
+            addServiceDetailsKadBanner:this.addServiceDetailsKadBanner, getServiceDetailsKadBanner:this.state.addServiceDetailsKadBanner }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

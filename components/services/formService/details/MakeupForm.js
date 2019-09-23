@@ -93,6 +93,10 @@ function MakeupForm() {
             alert('Sila input harga `Touchup` ')
             return false
         }
+        if (hargaFull == 0 && hargaTouchup == 0) {
+            alert('Sila pilih jenis `makeup` ')
+            return false
+        }
         addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina)
         Router.push(`/addservice/upload`);
     }

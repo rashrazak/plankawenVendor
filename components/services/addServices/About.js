@@ -8,7 +8,7 @@ function About({typeChange}) {
     const selection = [
         {name:'Venue',isActive:false},
         {name:'Canopy',isActive:false},
-        {name:'Kad & Banner',isActive:false},
+        {name:'KadBanner',isActive:false},
         {name:'Weddingdress',isActive:false},
         {name:'Makeup',isActive:false},
         {name:'Photographer',isActive:false},
