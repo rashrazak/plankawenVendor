@@ -9,8 +9,8 @@ function About({typeChange}) {
         {name:'Venue',isActive:false},
         {name:'Canopy',isActive:false},
         {name:'Kad & Banner',isActive:false},
-        {name:'Baju Pengantin',isActive:false},
-        {name:'Make Up',isActive:false},
+        {name:'Weddingdress',isActive:false},
+        {name:'Makeup',isActive:false},
         {name:'Photographer',isActive:false},
         {name:'Videographer',isActive:false},
         {name:'Pelamin',isActive:false},
@@ -48,7 +48,7 @@ function About({typeChange}) {
                     <p>Please choose your category</p>
                     <div className="choose-category">
                         <Button onClick={() => eventSelection(0)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Venue</Button>{' '}
-                        <Button onClick={() => eventSelection(1)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '}
+                        {/* <Button onClick={() => eventSelection(1)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
                         <Button onClick={() => eventSelection(2)} className={`btn-category btn-invitation ${serviceType == 'Kadbanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
                         <Button onClick={() => eventSelection(3)} className={`btn-category btn-dress ${serviceType == 'Weddingdress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
                         <Button onClick={() => eventSelection(4)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>Make Up</Button>{' '}

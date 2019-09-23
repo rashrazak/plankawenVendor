@@ -34,13 +34,17 @@ function AboutForm({serviceType}) {
     const [cityArray, setCityArray] = useState([]);
     const [descriptionx, setDescriptionx] = useState('');
     const [title, setTitle] = useState('');
-    const [serviceTypex, setServiceTypex] = useState(serviceType)
+    const [serviceTypex, setServiceTypex] = useState('')
+
+    useEffect(() => {
+        // console.log(getServiceAbout)
+        setServiceTypex(getServiceAbout.serviceType);
+    }, [serviceType])
 
     useEffect(() =>{
         setCityArray(getServiceAbout.areaCovered);
         setDescriptionx(getServiceAbout.description);
         setTitle(getServiceAbout.serviceName);
-        setServiceTypex(getServiceAbout.serviceType);
     },[getServiceAbout])
 
     const handleChangeKawasan = (e) => {
@@ -63,40 +67,38 @@ function AboutForm({serviceType}) {
         let aaa = serviceTypex.toLowerCase();
         Router.push(`/addservice/details/${aaa}`);
     }
+
     return (
         <div className="form-service">
             <div className="form-section">
-                <h4>Area Covered</h4>
+                <h4>Nama atau Tajuk Servis/Produk</h4>
+                <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Description Servis/Produk (dengan lengkap)</h4>
+                <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
+            </div>
+            <div className="form-section">
+                <h4> Area Covered</h4>
                 {gMapsCities.map( (cty, index) =>{
                     let bandar = cty.state;
                     let chckd  = false;
                     if (cityArray != null) {
                         chckd = cityArray.includes(bandar) ? true : false;
                     }
-                    
                     return(
-                        
-                            <div key={index} className="area-covered-div">
-                                <label>
-                                    <input type="checkbox"
-                                        name={bandar} 
-                                        checked={chckd}
-                                        onChange={(e) => handleChangeKawasan(e)}
-                                    />
-                                    {bandar}
-                                </label>
-                            </div>
-                            
+                        <div key={index} className="area-covered-div">
+                            <label>
+                                <input type="checkbox"
+                                    name={bandar} 
+                                    checked={chckd}
+                                    onChange={(e) => handleChangeKawasan(e)}
+                                />
+                                {bandar}
+                            </label>
+                        </div>
                     )
                 } )}
-            </div>
-            <div className="form-section">
-                <h4>Add title to your service</h4>
-                <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
-            </div>
-            <div className="form-section">
-                <h4>Description for your service</h4>
-                <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" disabled={true}>Cancel</Button>{' '}
