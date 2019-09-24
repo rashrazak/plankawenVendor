@@ -6,40 +6,35 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function KadBannerForm() {
-    const {getServiceDetailsKadBanner, addServiceDetailsKadBanner} = useContext(AddServiceContext);
+function CatererForm() {
+
+    const {getServiceDetailsCaterer, addServiceDetailsCaterer} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
     const [discount, setdiscount] = useState([])
-    const [banner, setbanner] = useState(false)
-    const [bannerSize, setbannerSize] = useState([])
-    const [bannerDescription, setbannerDescription] = useState('')
+    const [senaraiLauk, setsenaraiLauk] = useState([])
 
     //min max value
     const [minDiscount, setminDiscount] = useState(0)
     const [maxDiscount, setmaxDiscount] = useState(0)
     const [discountVal, setdiscountVal] = useState(0)
     const [arraySizeDiscount, setarraySizeDiscount] = useState(0)
+    const [lauk, setlauk] = useState('')
 
-    //size harga banner
-    const [sizex, setsizex] = useState('');
-    const [pricex, setpricex] = useState(0);
-    
+
 
     useEffect(() =>{
-        sethargaPerPerson(getServiceDetailsKadBanner.hargaPerPerson)
-        setdiscount(getServiceDetailsKadBanner.discount)
-        setbanner(getServiceDetailsKadBanner.banner)
-        setbannerSize(getServiceDetailsKadBanner.bannerDesc.bannerSize)
-        setbannerDescription(getServiceDetailsKadBanner.bannerDesc.description)
+        sethargaPerPerson(getServiceDetailsCaterer.hargaPerPerson)
+        setdiscount(getServiceDetailsCaterer.discount)
+        setsenaraiLauk(getServiceDetailsCaterer.senaraiLauk)
         setarraySizeDiscount(() => {
-            let disc = getServiceDetailsKadBanner.discount
+            let disc = getServiceDetailsCaterer.discount
             if (disc.length > 0) {
                 let discL = disc.length
                 return discL
             }
         })
         setminDiscount(() => {
-            let disc = getServiceDetailsKadBanner.discount
+            let disc = getServiceDetailsCaterer.discount
             if (disc.length > 0) {
                 let discL = disc.length
                 let discIndex = disc[discL - 1]
@@ -50,7 +45,7 @@ function KadBannerForm() {
                 return 1;
             }
         })
-    },[getServiceDetailsKadBanner])
+    },[getServiceDetailsCaterer])
 
     const addDiscount = () => {
         let max = parseInt(maxDiscount)
@@ -85,26 +80,17 @@ function KadBannerForm() {
         setarraySizeDiscount(old => old - 1)
     }
 
-    const addBanner = () => {
-        if (pricex == 0 && sizex == '') {
-            alert('Informasi tidak diisi')
-            return false
-        }
-        let data = {
-            harga:pricex,
-            size:sizex
-        }
-        setbannerSize(old => [...old, data])
-        setpricex(0)
-        setsizex('')
+    const addLauk = () => {
+        const la = lauk
+        setsenaraiLauk(old => [...old, la])
+        setlauk('')
     }
 
-    const deleteBanner = (index) => {
-        let ban = bannerSize;
-        ban.splice(index, 1);
-        setbannerSize([...ban]);
-        setpricex(0)
-        setsizex('')
+    const deleteLauk = (index) => {
+        let sl = senaraiLauk;
+        sl.splice(index, 1);
+        setsenaraiLauk([...sl]);
+        setlauk('')
     }
 
     useEffect(() => {
@@ -112,16 +98,16 @@ function KadBannerForm() {
     }, [discount])
 
     useEffect(() => {
-        console.log(bannerSize)
-    }, [bannerSize])
+        console.log(senaraiLauk)
+    }, [senaraiLauk])
 
     const submitServiceDetails = () => {
-        addServiceDetailsKadBanner(hargaPerPerson, discount, banner, bannerSize, bannerDescription)
+        addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk)
         Router.push(`/addservice/upload`);
     }
+
     return (
         <div className="form-service">
-            
             <div className="form-section">
                 <h4>Harga Satu Kepala (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
@@ -157,7 +143,6 @@ function KadBannerForm() {
                         return(
                             <React.Fragment key={index}>
                                 <div  className="area-covered-div">
-                                    <label>
                                         <span>Min: {mi}</span>
                                         <span>Max: {ma}</span>
                                         <span>Discount: {d} %</span>
@@ -169,7 +154,6 @@ function KadBannerForm() {
 
                                         }
                                         <br/>
-                                    </label>
                                 </div>
                             </React.Fragment>
                         )
@@ -178,69 +162,41 @@ function KadBannerForm() {
                 }
             </div>
             <div className="form-section">
-                <h4>Ada Service Banner ?</h4>
-                <div className="area-covered-div">
-                    <label>
-                        <input type="checkbox"
-                            checked={banner}
-                            onChange={(e) => setbanner(e.target.checked)}
-                        />
-                        {banner ? "<< Ya" : "<< Tidak"}
-                    </label>
-                </div>
+                <h4>Jenis Lauk</h4>
+                <br/>
+                <p>Nama Lauk</p>
+                <Input className="form-custom" type="textarea" placeholder="Nama Lauk dan Description" value={lauk} onChange={(e) => {setlauk(e.target.value)}} />
+                <br/>
+                <Button  color="primary" onClick={() => addLauk()}>Add</Button>
             </div>
-            {
-                banner ?
-                <React.Fragment> 
-                    <div className="form-section">
-                        <h4>Description Banner</h4>
-                        <Input className="form-custom" type="textarea" placeholder="" value={bannerDescription} onChange={(e) => {setbannerDescription(e.target.value)}} />
-                    </div>
-                    <div className="form-section">
-                        <h4>Jenis Banner</h4>
-                        <br/>
-                        <p>Size</p>
-                        <Input className="form-custom" type="text" placeholder="Size Banner" value={sizex} onChange={(e) => {setsizex(e.target.value)}} />
-                        <br/>
-                        <p>Harga (RM)</p>
-                        <Input className="form-custom" type="number" placeholder="Harga Seunit" value={pricex}  onChange={(e) => {setpricex(e.target.value)}} />
-                        <br/>
-                        <Button  color="primary" onClick={() => addBanner()}>Add</Button>
-                    </div>
-                    <div className="form-section">
-                        { bannerSize.length > 0 ?
-                            <p>Senarai Banner</p>
-                            :
-                            ''
-                        }
-                        <br/>
-                        {   bannerSize.length > 0 ?
-                            
-                            bannerSize.map( (val, index) =>{
-                                let sz = val.size;
-                                let hrg = val.harga;
+            <div className="form-section">
+                { senaraiLauk.length > 0 ?
+                    <p>Senarai Lauk</p>
+                    :
+                    ''
+                }
+                <br/>
+                {   senaraiLauk.length > 0 ?
+                    
+                    senaraiLauk.map( (val, index) =>{
+                        let lauk = val
 
-                                return(
-                                    <React.Fragment key={index}>
-                                        <div  className="area-covered-div">
-                                            <label>
-                                                <span>size: {sz}</span>
-                                                <span>Harga: {hrg}</span>
-                                                <Button  color="danger" onClick={() => deleteBanner(index)}>Delete</Button>
-                                            </label>
-                                            <br/>
-                                        </div>
-                                    </React.Fragment>
-                                )
-                            })
-                            : ''
-                        }
-                    </div>
-                </React.Fragment>
-                : ''
-                
-            }
-            
+                        return(
+                            <React.Fragment key={index}>
+                                <div  className="area-covered-div">
+                                    <label>
+                                        <span>Lauk: {lauk}</span>
+                                        <Button  color="danger" onClick={() => deleteLauk(index)}>Delete</Button>
+                                    </label>
+                                    <br/>
+                                </div>
+                            </React.Fragment>
+                        )
+                    })
+                    : ''
+                }
+            </div>
+    
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
@@ -259,4 +215,4 @@ function KadBannerForm() {
     )
 }
 
-export default KadBannerForm
+export default CatererForm

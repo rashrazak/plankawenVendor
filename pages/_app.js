@@ -20,46 +20,63 @@ class MyApp extends App {
         status:'pending'
       },
       addServiceDetailsVenue:{
-        hargaSewa:null,
+        hargaSewa:0,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsWeddingDress:{
-        hargaSewa:null,
+        hargaSewa:0,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsKugiran:{
-        hargaSewa:null,
+        hargaSewa:0,
         lokasi:'',
         waktuOperasi:''
       },
       addServiceDetailsPhotographer:{
-        harga:null,
+        harga:0,
         jenisEvent:[]
       },
       addServiceDetailsVideographer:{
-        harga:null,
+        harga:0,
         jenisEvent:[]
       },
       addServiceDetailsPelamin:{
-        harga:null,
+        harga:0,
         jenisEvent:[]
       },
       addServiceDetailsMakeup:{
-        hargaTouchup:null,
-        hargaFull:null,
+        hargaTouchup:0,
+        hargaFull:0,
         jenisMakeup:[],
         jantina:[]
       },
       addServiceDetailsKadBanner:{
-        hargaPerPerson:null,
+        hargaPerPerson:0,
         discount:[],
         banner:false,
         bannerDesc:{
           bannerSize:[],
           description:''
         }
+      },
+      addServiceDetailsCaterer:{
+        hargaPerPerson:0,
+        discount:[],
+        senaraiLauk:[]
+      },
+      addServiceDetailsDoorGift:{
+        hargaPerPerson:0,
+        discount:[]
+      },
+      addServiceDetailsHantaran:{
+        hargaPerPerson:0,
+        discount:[]
+      },
+      addServiceDetailsKugiran:{
+        namaKugiran:'',
+        hargaKugiran:0
       }
     };
   }
@@ -476,6 +493,93 @@ class MyApp extends App {
     }
   }
 
+  addServiceDetailsCaterer = (hargaPerPerson, discount, senaraiLauk) => {
+    //add kad first
+    let {addServiceDetailsCaterer} = {...this.state}
+    let currentService = addServiceDetailsCaterer;
+    let har = hargaPerPerson;
+    let disc = discount;
+    let sl = senaraiLauk;
+    currentService['hargaPerPerson'] = har;
+    currentService['discount'] = disc;
+    currentService['senaraiLauk'] = sl;
+
+    this.setState({addServiceDetailsCaterer:currentService})
+
+    localStorage.setItem('addServiceDetailsCaterer', JSON.stringify(this.state.addServiceDetailsCaterer) ) 
+  }
+
+  getServiceDetailsCaterer = () => {
+    let about = localStorage.getItem('addServiceDetailsCaterer');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsCaterer} = {...this.state}
+      let currentService = addServiceDetailsCaterer;
+      let har = about.hargaPerPerson;
+      let disc = about.discount;
+      let sl = about.senaraiLauk;
+      currentService['hargaPerPerson'] = har;
+      currentService['discount'] = disc;
+      currentService['senaraiLauk'] = sl;
+
+      this.setState({addServiceDetailsCaterer:currentService})
+    }
+  }
+
+  addServiceDetailsDoorGift = (hargaPerPerson, discount) => {
+    //add kad first
+    let {addServiceDetailsDoorGift} = {...this.state}
+    let currentService = addServiceDetailsDoorGift;
+    let har = hargaPerPerson;
+    let disc = discount;
+    currentService['hargaPerPerson'] = har;
+    currentService['discount'] = disc;
+    this.setState({addServiceDetailsDoorGift:currentService})
+
+    localStorage.setItem('addServiceDetailsDoorGift', JSON.stringify(this.state.addServiceDetailsDoorGift) ) 
+  }
+
+  getServiceDetailsDoorGift = () => {
+    let about = localStorage.getItem('addServiceDetailsDoorGift');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsDoorGift} = {...this.state}
+      let currentService = addServiceDetailsDoorGift;
+      let har = about.hargaPerPerson;
+      let disc = about.discount;
+      currentService['hargaPerPerson'] = har;
+      currentService['discount'] = disc;
+      this.setState({addServiceDetailsDoorGift:currentService})
+    }
+  }
+
+  addServiceDetailsKugiran = (namaKugiran, hargaKugiran) => {
+    //add kad first
+    let {addServiceDetailsKugiran} = {...this.state}
+    let currentService = addServiceDetailsKugiran;
+    let nk = namaKugiran;
+    let kd = hargaKugiran;
+    currentService['namaKugiran'] = nk;
+    currentService['hargaKugiran'] = kd;
+    this.setState({addServiceDetailsKugiran:currentService})
+
+    localStorage.setItem('addServiceDetailsKugiran', JSON.stringify(this.state.addServiceDetailsKugiran) ) 
+  }
+
+  getServiceDetailsKugiran = () => {
+    let about = localStorage.getItem('addServiceDetailsKugiran');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsKugiran} = {...this.state}
+      let currentService = addServiceDetailsKugiran;
+      let nk = about.namaKugiran;
+      let kd = about.hargaKugiran;
+      currentService['namaKugiran'] = nk;
+      currentService['hargaKugiran'] = kd;
+      this.setState({addServiceDetailsKugiran:currentService})
+    }
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -488,7 +592,10 @@ class MyApp extends App {
             addServiceDetailsPelamin:this.addServiceDetailsPelamin, getServiceDetailsPelamin:this.state.addServiceDetailsPelamin,
             addServiceDetailsWeddingDress:this.addServiceDetailsWeddingDress, getServiceDetailsWeddingDress:this.state.addServiceDetailsWeddingDress,
             addServiceDetailsMakeup:this.addServiceDetailsMakeup, getServiceDetailsMakeup:this.state.addServiceDetailsMakeup,
-            addServiceDetailsKadBanner:this.addServiceDetailsKadBanner, getServiceDetailsKadBanner:this.state.addServiceDetailsKadBanner }}>
+            addServiceDetailsKadBanner:this.addServiceDetailsKadBanner, getServiceDetailsKadBanner:this.state.addServiceDetailsKadBanner,
+            addServiceDetailsCaterer:this.addServiceDetailsCaterer, getServiceDetailsCaterer:this.state.addServiceDetailsCaterer,
+            addServiceDetailsDoorGift:this.addServiceDetailsDoorGift, getServiceDetailsDoorGift:this.state.addServiceDetailsDoorGift,
+            addServiceDetailsKugiran:this.addServiceDetailsKugiran, getServiceDetailsKugiran:this.state.addServiceDetailsKugiran }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

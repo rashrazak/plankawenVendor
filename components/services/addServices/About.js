@@ -17,7 +17,7 @@ function About({typeChange}) {
         {name:'Caterer',isActive:false},
         {name:'Hantaran',isActive:false},
         {name:'Kugiran',isActive:false},
-        {name:'Door Gift',isActive:false},
+        {name:'DoorGift',isActive:false},
         {name:'Others',isActive:false},
     ]
     const [select, setSelect] = useState(selection)
