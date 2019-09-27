@@ -49,8 +49,8 @@ function About({typeChange}) {
                     <div className="choose-category">
                         <Button onClick={() => eventSelection(0)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Venue</Button>{' '}
                         {/* <Button onClick={() => eventSelection(1)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
-                        <Button onClick={() => eventSelection(2)} className={`btn-category btn-invitation ${serviceType == 'Kadbanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
-                        <Button onClick={() => eventSelection(3)} className={`btn-category btn-dress ${serviceType == 'Weddingdress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
+                        <Button onClick={() => eventSelection(2)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
+                        <Button onClick={() => eventSelection(3)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
                         <Button onClick={() => eventSelection(4)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>Make Up</Button>{' '}
                         <Button onClick={() => eventSelection(5)} className={`btn-category btn-photo ${serviceType == 'Photographer' ? 'btn-active':''} `}>Photographer</Button>{' '}
                         <Button onClick={() => eventSelection(6)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>Videographer</Button>{' '}
@@ -58,7 +58,7 @@ function About({typeChange}) {
                         <Button onClick={() => eventSelection(8)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>Caterer</Button>{' '}
                         <Button onClick={() => eventSelection(9)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>Hantaran</Button>{' '}
                         <Button onClick={() => eventSelection(10)} className={`btn-category btn-persembahan ${serviceType == 'Kugiran' ? 'btn-active':''} `}>Kugiran</Button>{' '}
-                        <Button onClick={() => eventSelection(11)} className={`btn-category btn-doorgift ${serviceType == 'Doorgift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
+                        <Button onClick={() => eventSelection(11)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
                         <Button onClick={() => eventSelection(12)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>Others</Button>{' '}
                     </div>
                 </div>

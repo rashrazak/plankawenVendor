@@ -9,38 +9,57 @@ import Swal from 'sweetalert2'
     
 function VenueForm({serviceType}) {
     const {getServiceDetailsVenue, addServiceDetailsVenue} = useContext(AddServiceContext);
-    const [hargaSewa, sethargaSewa] = useState('');
-    const [lokasi, setlokasi] = useState('');
+    const [hargaSewa, sethargaSewa] = useState(0);
+    const [lokasi, setlokasi] = useState({});
+    const [alamatPenuh, setalamatPenuh] = useState('')
     const [waktuOperasi, setwaktuOperasi] = useState('');
     const [lat, setlat] = useState(0);
     const [lng, setlng] = useState(0);
 
     useEffect(() =>{
-        sethargaSewa(getServiceDetailsVenue.hargaSewa)
+        sethargaSewa(() => {
+            let harg = getServiceDetailsVenue.hargaSewa
+            console.log(harg)
+            document.querySelector('.harga').value = harg;
+            return harg
+        })
         setlokasi(getServiceDetailsVenue.lokasi)
         setwaktuOperasi(getServiceDetailsVenue.waktuOperasi)
-        // setlat(getServiceDetailsVenue.lat)
-        // setlng(getServiceDetailsVenue.lng)
+        setalamatPenuh(() => {
+            let al = getServiceDetailsVenue.alamatPenuh
+            document.querySelector('.auto').value = al;
+            return al;
+        })
+        console.log(getServiceDetailsVenue.lokasi)
     },[getServiceDetailsVenue])
 
+    useEffect(() => {
+       console.log(alamatPenuh)
+    }, [alamatPenuh])
 
     const submitServiceDetails = () => {
-        addServiceDetailsVenue(hargaSewa , lokasi, waktuOperasi)
+        addServiceDetailsVenue(hargaSewa , lokasi, waktuOperasi, alamatPenuh)
         Router.push(`/addservice/upload`);
+    }
+
+    const addAlamat = () => {
+       let x = document.querySelector('.auto').value;
+       setalamatPenuh(x)
     }
     return (
         <div className="form-service">
             <div className="form-section">
                 <h4>Harga Sewa (RM)</h4>
-                <Input className="form-custom" type="number" placeholder="" value={hargaSewa} onChange={(e) => {sethargaSewa(e.target.value)}} />
+                <Input className="form-custom harga" type="number" onChange={(e) => {sethargaSewa(e.target.value)}} />
             </div>
             <div className="form-section">
                 <h4>Nama Lokasi (tak boleh letak className)</h4>
                 {/* <Input className="form-custom" type="text" placeholder="Nyatakan Lokasi Anda" value={lokasi} onChange={(e) => {setlokasi(e.target.value)}} /> */}
                 <Autocomplete
+                    className="auto"
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', }}
                     onPlaceSelected={(place) => {
-                    setlokasi(place)
+                        setlokasi(place)
                     }}
                     types={[]}
                     componentRestrictions={{country: "my"}}
@@ -48,7 +67,7 @@ function VenueForm({serviceType}) {
             </div>
             <div className="form-section">
                 <h4>Waktu Operasi</h4>
-                <Input className="form-custom" type="textarea" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
+                <Input className="form-custom" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}

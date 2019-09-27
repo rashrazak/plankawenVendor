@@ -12,6 +12,8 @@ class MyApp extends App {
     this.state = {
       user: null,
       isLogin:false,
+      vendorDetails:null,
+      vendorId:'',
       addServiceAbout:{
         serviceType:'',
         serviceName:'',
@@ -21,13 +23,14 @@ class MyApp extends App {
       },
       addServiceDetailsVenue:{
         hargaSewa:0,
-        lokasi:'',
+        lokasi:{},
+        alamatPenuh:'',
         waktuOperasi:''
       },
       addServiceDetailsWeddingDress:{
         hargaSewa:0,
         lokasi:'',
-        waktuOperasi:''
+        syaratSewaan:''
       },
       addServiceDetailsKugiran:{
         hargaSewa:0,
@@ -77,6 +80,12 @@ class MyApp extends App {
       addServiceDetailsKugiran:{
         namaKugiran:'',
         hargaKugiran:0
+      },
+      addServiceUpload:{
+        serviceType:'',
+        serviceId:'',
+        vendorId:'',
+        images:[] //max 3
       }
     };
   }
@@ -110,7 +119,6 @@ class MyApp extends App {
               },
             isLogin:true
           })
-          console.log(this.state)
           localStorage.setItem('user', JSON.stringify({
             name:val.displayName,
             email:val.email,
@@ -118,6 +126,7 @@ class MyApp extends App {
             emailVerified: val.emailVerified,
             uid: val.uid
           }))
+          
           if ( Router.pathname == '/'){
             Router.push('/dashboard');
           }
@@ -141,7 +150,6 @@ class MyApp extends App {
         Router.push('/dashboard');
       }
     }
-    
     this.getServiceAbout()
     this.getServiceDetailsVenue()
     this.getServiceDetailsWeddingDress()
@@ -150,6 +158,11 @@ class MyApp extends App {
     this.getServiceDetailsVideographer()
     this.getServiceDetailsPelamin()
     this.getServiceDetailsMakeup()
+    this.getServiceDetailsKadBanner()
+    this.getServiceDetailsDoorGift()
+    this.getServiceDetailsCaterer()
+    this.getServiceDetailsHantaran()
+    this.getServiceUpload()
   };
 
   signIn = async (email, password) => {
@@ -186,6 +199,15 @@ class MyApp extends App {
      
   };
 
+  saveVendorDetails = (id, details) => {
+    this.setState({
+      vendorDetails:details,
+      vendorId:id
+    })
+
+    console.log(this.state)
+  }
+
   signOut = () => {
     // this.setState({
     //   user: null,
@@ -207,12 +229,36 @@ class MyApp extends App {
       alert(error.message)
     }
   }
+  // addServiceAbout:{
+  //   serviceType:'',
+  //   serviceName:'',
+  //   description:'',
+  //   areaCovered:[],
+  //   status:'pending'
+  // },
+  createAddService = () => {
+    
+    let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
+    console.log(this.state.user)
+    // let {serviceType, serviceName, description, areaCovered, status} = {...this.state.user}
+    let objectType = `addServiceDetails${serviceType}`
+    let productVal = this.state[objectType]
+    console.log(productVal)
+
+    let data ={
+      
+    }
+
+  }
   addServiceAboutTypeName = (type) => {
-    let {addServiceAbout} = {...this.state}
+    let {addServiceAbout, addServiceUpload} = {...this.state}
     let currentService = addServiceAbout;
+    let up = addServiceUpload;
     let typeName = type;
     currentService['serviceType'] = typeName;
     this.setState({addServiceAbout:currentService})
+
+
   }
   addServiceAbout = (name, area, desc) => {
     let {addServiceAbout} = {...this.state}
@@ -245,15 +291,17 @@ class MyApp extends App {
     }
   }
 
-  addServiceDetailsVenue = (harga, lokasi, waktuOperasi) => {
+  addServiceDetailsVenue = (harga, lokasi, waktuOperasi, alamatPenuh) => {
     let {addServiceDetailsVenue} = {...this.state}
     let currentService = addServiceDetailsVenue;
-    let hargaSewa = harga;
+    let hargaSewa = parseInt(harga);
     let lok = lokasi;
     let wo = waktuOperasi;
+    let ap = alamatPenuh;
     currentService['hargaSewa'] = hargaSewa;
     currentService['lokasi'] = lok;
     currentService['waktuOperasi'] = wo;
+    currentService['alamatPenuh'] = ap;
     this.setState({addServiceDetailsVenue:currentService})
     localStorage.setItem('addServiceDetailsVenue', JSON.stringify(this.state.addServiceDetailsVenue) ) 
   }
@@ -264,25 +312,27 @@ class MyApp extends App {
     if (about != null) {
       let {addServiceDetailsVenue} = {...this.state}
       let currentService = addServiceDetailsVenue;
-      let hargaSewa = about.harga;
+      let hargaSewa = about.hargaSewa;
       let lokasi = about.lokasi;
       let waktuOperasi = about.waktuOperasi;
+      let alamatPenuh = about.alamatPenuh;
       currentService['hargaSewa'] = hargaSewa;
       currentService['lokasi'] = lokasi;
       currentService['waktuOperasi'] = waktuOperasi;
+      currentService['alamatPenuh'] = alamatPenuh;
       this.setState({addServiceDetailsVenue:currentService})
     }
   }
 
-  addServiceDetailsWeddingDress = (harga, lokasi, waktuOperasi) => {
+  addServiceDetailsWeddingDress = (harga, lokasi, syaratSewaan) => {
     let {addServiceDetailsWeddingDress} = {...this.state}
     let currentService = addServiceDetailsWeddingDress;
     let hargaSewa = harga;
     let lok = lokasi;
-    let wo = waktuOperasi;
+    let wo = syaratSewaan;
     currentService['hargaSewa'] = hargaSewa;
     currentService['lokasi'] = lok;
-    currentService['waktuOperasi'] = wo;
+    currentService['syaratSewaan'] = wo;
     this.setState({addServiceDetailsWeddingDress:currentService})
     localStorage.setItem('addServiceDetailsWeddingDress', JSON.stringify(this.state.addServiceDetailsWeddingDress) ) 
   }
@@ -295,10 +345,10 @@ class MyApp extends App {
       let currentService = addServiceDetailsWeddingDress;
       let hargaSewa = about.harga;
       let lokasi = about.lokasi;
-      let waktuOperasi = about.waktuOperasi;
+      let syaratSewaan = about.syaratSewaan;
       currentService['hargaSewa'] = hargaSewa;
       currentService['lokasi'] = lokasi;
-      currentService['waktuOperasi'] = waktuOperasi;
+      currentService['syaratSewaan'] = syaratSewaan;
       this.setState({addServiceDetailsWeddingDress:currentService})
     }
   }
@@ -553,6 +603,33 @@ class MyApp extends App {
     }
   }
 
+  addServiceDetailsHantaran = (hargaPerPerson, discount) => {
+    //add kad first
+    let {addServiceDetailsHantaran} = {...this.state}
+    let currentService = addServiceDetailsHantaran;
+    let har = hargaPerPerson;
+    let disc = discount;
+    currentService['hargaPerPerson'] = har;
+    currentService['discount'] = disc;
+    this.setState({addServiceDetailsHantaran:currentService})
+
+    localStorage.setItem('addServiceDetailsHantaran', JSON.stringify(this.state.addServiceDetailsHantaran) ) 
+  }
+
+  getServiceDetailsHantaran = () => {
+    let about = localStorage.getItem('addServiceDetailsHantaran');
+    about = JSON.parse(about)
+    if (about != null) {
+      let {addServiceDetailsHantaran} = {...this.state}
+      let currentService = addServiceDetailsHantaran;
+      let har = about.hargaPerPerson;
+      let disc = about.discount;
+      currentService['hargaPerPerson'] = har;
+      currentService['discount'] = disc;
+      this.setState({addServiceDetailsHantaran:currentService})
+    }
+  }
+
   addServiceDetailsKugiran = (namaKugiran, hargaKugiran) => {
     //add kad first
     let {addServiceDetailsKugiran} = {...this.state}
@@ -580,11 +657,40 @@ class MyApp extends App {
     }
   }
 
+  addServiceUpload = (images, serviceType) => {
+    let {addServiceUpload} = {...this.state}
+    let currentService = addServiceUpload;
+    let im = images;
+    let st = serviceType;
+  
+    currentService['images'] = im;
+    currentService['serviceType'] = st;
+    this.setState({addServiceUpload:currentService})
+    localStorage.setItem('addServiceUpload', JSON.stringify(this.state.addServiceUpload) ) 
+  }
+
+  getServiceUpload = () => {
+    let Upload = localStorage.getItem('addServiceUpload');
+    Upload = JSON.parse(Upload)
+    if (Upload != null) {
+      let {addServiceUpload} = {...this.state}
+      let currentService = addServiceUpload;
+      let im = Upload.images;
+      let st = Upload.serviceType;
+     
+      currentService['serviceType'] = st;
+      currentService['images'] = im;
+      this.setState({addServiceUpload:currentService})
+    }
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
       <Container>
-        <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check }}>
+        <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check, 
+          getVendorDetails:this.state.vendorDetails, getVendorId:this.state.vendorId,
+            saveVendorDetails:this.saveVendorDetails}}>
             <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout, addServiceAboutTypeName:this.addServiceAboutTypeName,
             addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,
             addServiceDetailsPhotographer:this.addServiceDetailsPhotographer, getServiceDetailsPhotographer:this.state.addServiceDetailsPhotographer,
@@ -595,7 +701,10 @@ class MyApp extends App {
             addServiceDetailsKadBanner:this.addServiceDetailsKadBanner, getServiceDetailsKadBanner:this.state.addServiceDetailsKadBanner,
             addServiceDetailsCaterer:this.addServiceDetailsCaterer, getServiceDetailsCaterer:this.state.addServiceDetailsCaterer,
             addServiceDetailsDoorGift:this.addServiceDetailsDoorGift, getServiceDetailsDoorGift:this.state.addServiceDetailsDoorGift,
-            addServiceDetailsKugiran:this.addServiceDetailsKugiran, getServiceDetailsKugiran:this.state.addServiceDetailsKugiran }}>
+            addServiceDetailsKugiran:this.addServiceDetailsKugiran, getServiceDetailsKugiran:this.state.addServiceDetailsKugiran,
+            addServiceDetailsHantarans:this.addServiceDetailsHantarans, getServiceDetailsHantarans:this.state.addServiceDetailsHantarans,
+            addServiceUpload:this.addServiceUpload, getServiceUpload:this.state.addServiceUpload,
+            getReview:this.state, createAddService:this.createAddService  }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

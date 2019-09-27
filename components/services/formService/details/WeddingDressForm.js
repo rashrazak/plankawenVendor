@@ -10,21 +10,21 @@ function WeddingDressForm({serviceType}) {
     const {getServiceDetailsWeddingDress, addServiceDetailsWeddingDress} = useContext(AddServiceContext);
     const [hargaSewa, sethargaSewa] = useState('');
     const [lokasi, setlokasi] = useState('');
-    const [waktuOperasi, setwaktuOperasi] = useState('');
+    const [syaratSewaan, setsyaratSewaan] = useState('');
     const [lat, setlat] = useState(0);
     const [lng, setlng] = useState(0);
 
     useEffect(() =>{
         sethargaSewa(getServiceDetailsWeddingDress.hargaSewa)
         setlokasi(getServiceDetailsWeddingDress.lokasi)
-        setwaktuOperasi(getServiceDetailsWeddingDress.waktuOperasi)
+        setsyaratSewaan(getServiceDetailsWeddingDress.syaratSewaan)
         // setlat(getServiceDetailsWeddingDress.lat)
         // setlng(getServiceDetailsWeddingDress.lng)
     },[getServiceDetailsWeddingDress])
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(hargaSewa , lokasi, waktuOperasi)
+        addServiceDetailsWeddingDress(hargaSewa , lokasi, syaratSewaan)
         Router.push(`/addservice/upload`);
     }
     return (
@@ -47,7 +47,7 @@ function WeddingDressForm({serviceType}) {
             <div className="form-section">
                 <h4>Syarat Sewaan Baju </h4>
                 {/* by default waktu operasi */}
-                <Input className="form-custom" type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
+                <Input className="form-custom" type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
