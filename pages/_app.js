@@ -4,90 +4,91 @@ import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import firebase from '../config/firebaseConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
+const initialState = {
+  user: null,
+  isLogin:false,
+  vendorDetails:null,
+  vendorId:'',
+  addServiceAbout:{
+    serviceType:'',
+    serviceName:'',
+    description:'',
+    areaCovered:[],
+    status:'pending'
+  },
+  addServiceDetailsVenue:{
+    hargaSewa:0,
+    lokasi:{},
+    alamatPenuh:'',
+    waktuOperasi:''
+  },
+  addServiceDetailsWeddingDress:{
+    hargaSewa:0,
+    lokasi:'',
+    syaratSewaan:''
+  },
+  addServiceDetailsKugiran:{
+    hargaSewa:0,
+    lokasi:'',
+    waktuOperasi:''
+  },
+  addServiceDetailsPhotographer:{
+    harga:0,
+    jenisEvent:[]
+  },
+  addServiceDetailsVideographer:{
+    harga:0,
+    jenisEvent:[]
+  },
+  addServiceDetailsPelamin:{
+    harga:0,
+    jenisEvent:[]
+  },
+  addServiceDetailsMakeup:{
+    hargaTouchup:0,
+    hargaFull:0,
+    jenisMakeup:[],
+    jantina:[]
+  },
+  addServiceDetailsKadBanner:{
+    hargaPerPerson:0,
+    discount:[],
+    banner:false,
+    bannerDesc:{
+      bannerSize:[],
+      description:''
+    }
+  },
+  addServiceDetailsCaterer:{
+    hargaPerPerson:0,
+    discount:[],
+    senaraiLauk:[]
+  },
+  addServiceDetailsDoorGift:{
+    hargaPerPerson:0,
+    discount:[]
+  },
+  addServiceDetailsHantaran:{
+    hargaPerPerson:0,
+    discount:[]
+  },
+  addServiceDetailsKugiran:{
+    namaKugiran:'',
+    hargaKugiran:0
+  },
+  addServiceUpload:{
+    serviceType:'',
+    serviceId:'',
+    vendorId:'',
+    images:[] //max 3
+  }
+};
 
 class MyApp extends App {
 
   constructor(props){
     super(props);
-    this.state = {
-      user: null,
-      isLogin:false,
-      vendorDetails:null,
-      vendorId:'',
-      addServiceAbout:{
-        serviceType:'',
-        serviceName:'',
-        description:'',
-        areaCovered:[],
-        status:'pending'
-      },
-      addServiceDetailsVenue:{
-        hargaSewa:0,
-        lokasi:{},
-        alamatPenuh:'',
-        waktuOperasi:''
-      },
-      addServiceDetailsWeddingDress:{
-        hargaSewa:0,
-        lokasi:'',
-        syaratSewaan:''
-      },
-      addServiceDetailsKugiran:{
-        hargaSewa:0,
-        lokasi:'',
-        waktuOperasi:''
-      },
-      addServiceDetailsPhotographer:{
-        harga:0,
-        jenisEvent:[]
-      },
-      addServiceDetailsVideographer:{
-        harga:0,
-        jenisEvent:[]
-      },
-      addServiceDetailsPelamin:{
-        harga:0,
-        jenisEvent:[]
-      },
-      addServiceDetailsMakeup:{
-        hargaTouchup:0,
-        hargaFull:0,
-        jenisMakeup:[],
-        jantina:[]
-      },
-      addServiceDetailsKadBanner:{
-        hargaPerPerson:0,
-        discount:[],
-        banner:false,
-        bannerDesc:{
-          bannerSize:[],
-          description:''
-        }
-      },
-      addServiceDetailsCaterer:{
-        hargaPerPerson:0,
-        discount:[],
-        senaraiLauk:[]
-      },
-      addServiceDetailsDoorGift:{
-        hargaPerPerson:0,
-        discount:[]
-      },
-      addServiceDetailsHantaran:{
-        hargaPerPerson:0,
-        discount:[]
-      },
-      addServiceDetailsKugiran:{
-        namaKugiran:'',
-        hargaKugiran:0
-      },
-      addServiceUpload:{
-        serviceType:'',
-        serviceId:'',
-        vendorId:'',
-        images:[] //max 3
-      }
-    };
+    this.state = initialState
   }
   
   
@@ -103,53 +104,53 @@ class MyApp extends App {
 
   //FIREBASE USE WILL MOUNT
   componentDidMount = () => {
-    let user = localStorage.getItem('user');
-    user = JSON.parse(user)
-    if (user == null){
-      firebase.isInitialized().then(val => {
-        if (val) {
-          console.log(val)
-          this.setState({
-            user:{
-                  name:val.displayName,
-                  email:val.email,
-                  photoUrl: val.photoURL,
-                  emailVerified: val.emailVerified,
-                  uid: val.uid
-              },
-            isLogin:true
-          })
-          localStorage.setItem('user', JSON.stringify({
-            name:val.displayName,
-            email:val.email,
-            photoUrl: val.photoURL,
-            emailVerified: val.emailVerified,
-            uid: val.uid
-          }))
-          
-          if ( Router.pathname == '/'){
-            Router.push('/dashboard');
+      let user = localStorage.getItem('user');
+      user = JSON.parse(user)
+      if (user == null){
+        firebase.isInitialized().then(val => {
+          if (val) {
+            console.log(val)
+            this.setState({
+              user:{
+                    name:val.displayName,
+                    email:val.email,
+                    photoUrl: val.photoURL,
+                    emailVerified: val.emailVerified,
+                    uid: val.uid
+                },
+              isLogin:true
+            })
+            localStorage.setItem('user', JSON.stringify({
+              name:val.displayName,
+              email:val.email,
+              photoUrl: val.photoURL,
+              emailVerified: val.emailVerified,
+              uid: val.uid
+            }))
+            
+            if ( Router.pathname == '/'){
+              Router.push('/dashboard');
+            }
+          } else {
+            Router.push('/');
           }
-        } else {
-          Router.push('/');
+          
+        })
+      }else{
+        this.setState({
+          user:{
+                name:user.name,
+                email:user.email,
+                photoUrl: user.photoUrl,
+                emailVerified: user.emailVerified,
+                uid: user.uid
+            },
+          isLogin:true
+        })
+        if ( Router.pathname == '/'){
+          Router.push('/dashboard');
         }
-        
-      })
-    }else{
-      this.setState({
-        user:{
-              name:user.name,
-              email:user.email,
-              photoUrl: user.photoUrl,
-              emailVerified: user.emailVerified,
-              uid: user.uid
-          },
-        isLogin:true
-      })
-      if ( Router.pathname == '/'){
-        Router.push('/dashboard');
       }
-    }
     this.getServiceAbout()
     this.getServiceDetailsVenue()
     this.getServiceDetailsWeddingDress()
@@ -163,6 +164,7 @@ class MyApp extends App {
     this.getServiceDetailsCaterer()
     this.getServiceDetailsHantaran()
     this.getServiceUpload()
+    this.getVendorDetails()
   };
 
   signIn = async (email, password) => {
@@ -204,8 +206,17 @@ class MyApp extends App {
       vendorDetails:details,
       vendorId:id
     })
-
     console.log(this.state)
+    localStorage.setItem('vendorDetails', JSON.stringify({...details, id}) ) 
+    
+  }
+
+  getVendorDetails = () => {
+    let about = localStorage.getItem('vendorDetails');
+    about = JSON.parse(about)
+    if (about != null) {
+      this.setState({vendorDetails:about})
+    }
   }
 
   signOut = () => {
@@ -229,26 +240,38 @@ class MyApp extends App {
       alert(error.message)
     }
   }
-  // addServiceAbout:{
-  //   serviceType:'',
-  //   serviceName:'',
-  //   description:'',
-  //   areaCovered:[],
-  //   status:'pending'
-  // },
+
   createAddService = () => {
     
     let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
-    console.log(this.state.user)
-    // let {serviceType, serviceName, description, areaCovered, status} = {...this.state.user}
+    let {images} = {...this.state.addServiceUpload}
+    let {email} = {...this.state.user}
+    let {id} = {...this.state.vendorDetails}
     let objectType = `addServiceDetails${serviceType}`
-    let productVal = this.state[objectType]
-    console.log(productVal)
-
-    let data ={
-      
+    let serviceDetails = this.state[objectType]
+    let x = new Date()
+    let data = {
+      vendorId:id,
+      email,
+      status,
+      serviceType,
+      serviceName,
+      description,
+      areaCovered,
+      serviceDetails,
+      images,
+      created: x,
+      getTime: x.getTime()
     }
 
+    let y = firebase.addService(serviceType, data)
+    y.then(() => {
+      alert('success')
+      Router.push('/addservice/done')
+    })
+    .catch((e) => {
+      console.log(e)
+    })
   }
   addServiceAboutTypeName = (type) => {
     let {addServiceAbout, addServiceUpload} = {...this.state}
@@ -684,6 +707,11 @@ class MyApp extends App {
     }
   }
 
+  resetAddService = () => {
+    this.setState(initialState)
+    return true
+  }
+
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -704,7 +732,7 @@ class MyApp extends App {
             addServiceDetailsKugiran:this.addServiceDetailsKugiran, getServiceDetailsKugiran:this.state.addServiceDetailsKugiran,
             addServiceDetailsHantarans:this.addServiceDetailsHantarans, getServiceDetailsHantarans:this.state.addServiceDetailsHantarans,
             addServiceUpload:this.addServiceUpload, getServiceUpload:this.state.addServiceUpload,
-            getReview:this.state, createAddService:this.createAddService  }}>
+            getReview:this.state, createAddService:this.createAddService, resetAddService:this.resetAddService  }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

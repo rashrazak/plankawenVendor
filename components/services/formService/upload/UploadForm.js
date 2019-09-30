@@ -6,6 +6,8 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
 import Filebase64 from 'react-file-base64'
+
+//pending patot ada image compressor
     
 function UploadForm() {
 
@@ -34,8 +36,8 @@ function UploadForm() {
     const uploadOnDone = (file) => {
         let f = file.file;
         let iL = imageLimit
-        if (f.size > 1000000) {
-            alert('Limit saiz gambar hanya 1mb sahaja untuk satu gambar')
+        if (f.size > 300000) {
+            alert('Limit saiz gambar hanya 300kb sahaja untuk satu gambar, sila compress gambar anda')
             return false
         }
         if (iL == 0) {

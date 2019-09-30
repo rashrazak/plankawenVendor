@@ -6,19 +6,17 @@ import Head from '../components/Headx'
 function dashboard() {
     const {user,signOut,saveVendorDetails} = useContext(LoginContext);
 
-    const [docId, setdocId] = useState('')
-    const [details, setdetails] = useState({})
-   
     useEffect( () => {
         async function getData(){
             if (user) {
                 var read = await firebase.check(user.email)
                 read.forEach(function(doc) {
-                    // setdocId(doc.id)
-                    // setdetails(doc.data())
                     let x = doc.id;
                     let y = doc.data()
-                    saveVendorDetails(x, y)
+                    //get vendor details
+                    if (localStorage.getItem('vendorDetails') == null) {
+                        saveVendorDetails(x, y)
+                    }
                 })
             }
         }

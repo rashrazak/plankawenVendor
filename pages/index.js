@@ -1,15 +1,36 @@
-import React, { Component } from 'react'
+import React, { useContext,useEffect } from 'react'
 import Head from '../components/Headx'
+import LoginContext from '../contexts/LoginContext'
 import Login from '../components/Login';
+import firebase from '../config/firebaseConfig'
 
-export default class index extends Component {
-    render() {
-        return (
-            <Head title={'Hello Admin'}>
-                <div className="body-layout">
-                    <Login/>
-                </div>
-            </Head>
-        )
-    }
+
+function index() {
+    const {user,saveVendorDetails} = useContext(LoginContext);
+
+    useEffect( () => {
+        async function getData(){
+            if (user) {
+                var read = await firebase.check(user.email)
+                read.forEach(function(doc) {
+                    let x = doc.id;
+                    let y = doc.data()
+                    //get vendor details
+                    if (localStorage.getItem('vendorDetails') == null) {
+                        saveVendorDetails(x, y)
+                    }
+                })
+            }
+        }
+        getData()
+    },[user])
+    return (
+        <Head title={'Hello Admin'}>
+            <div className="body-layout">
+                <Login/>
+            </div>
+        </Head>
+    )
 }
+
+export default index

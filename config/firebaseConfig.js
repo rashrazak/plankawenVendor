@@ -51,172 +51,18 @@ class Firebase {
     }
 
 
-    // async addService(collectionType, colllectionObject){
+    async addService(serviceType, data){
+        return await this.db.collection(serviceType).add(data)
+    }
+    //pending patot ada status = approved
+    async checkServiceType(serviceType, email){
+        return await this.db.collection(serviceType).where('email', '==', email).get() 
+    }
 
-    //     collectionType = 'photographer'
-    //     if (collectionType == 'photographer') {
-    //         let data = {
-    //             name:'batavia photographer',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             jenisEvent:['nikah','walimah','outdoor'],
-    //             totalEvent:data.jenisEvent.length,
-    //             vendorId:'',
-    //             status:'pending',
-    //             harga:140,
-    //             description:'lorem ipsum blalalalala'
-
-    //         }
-    //     }else if(collectionType == 'videographer'){
-    //         let data = {
-    //             name:'batavia videographer',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             jenisEvent:['nikah','walimah','outdoor'],
-    //             totalEvent:data.jenisEvent.length,
-    //             vendorId:'',
-    //             status:'pending',
-    //             harga:140,
-    //             description:'lorem ipsum blalalalala'
-
-    //         }
-    //     }else if(collectionType == 'caterer'){
-    //         let data = {
-    //             name:'batavia caterer',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             vendorId:'',
-    //             status:'pending',
-    //             hargaPerPerson:6,
-    //             discount:[{
-    //                 min:1,
-    //                 max:1000,
-    //                 discount: 0.10 //10 %
-    //             },
-    //             {
-    //                 min:1001,
-    //                 max:2000,
-    //                 discount: 0.20 //20 %
-    //             }],
-    //             senaraiLauk:['nasik','ayam masak merah', 'kuah dal'],
-    //             description:'lorem ipsum blalalalala'
-    //         }
-    //     }else if(collectionType == 'doorgift'){
-    //         let data = {
-    //             name:'batavia door gift',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             vendorId:'',
-    //             status:'pending',
-    //             hargaPerPerson:0.3,
-    //             discount:[{
-    //                 min:1,
-    //                 max:1000,
-    //                 discount: 0.10 //10 %
-    //             },
-    //             {
-    //                 min:1001,
-    //                 max:2000,
-    //                 discount: 0.20 //20 %
-    //             }],
-    //             description:'lorem ipsum blalalalala'
-    //         }
-    //     }else if(collectionType == 'kadbanner'){
-    //         let data = {
-    //             name:'batavia door gift',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             vendorId:'',
-    //             status:'pending',
-    //             hargaPerPerson:0.3,
-    //             discount:[{
-    //                 min:1,
-    //                 max:1000,
-    //                 discount: 0.10 //10 %
-    //             },
-    //             {
-    //                 min:1001,
-    //                 max:2000,
-    //                 discount: 0.20 //20 %
-    //             }],
-    //             description:'lorem ipsum blalalalala',
-    //             banner:true, //false banner description null
-    //             bannerDesc:{
-    //                 bannerSize:[
-    //                     {
-    //                         size:'100 x 300 cm',
-    //                         harga:200,
-    //                     },
-    //                     {
-    //                         size:'200 x 400 cm',
-    //                         harga:400,
-    //                     }
-    //                 ],
-    //                 description:'loren ipsum avadasd'
-    //             }
-    //         }
-    //     }else if(collectionType == 'pelamin'){
-    //         let data = {
-    //             name:'batavia boutique',
-    //             created: new Date(),
-    //             slug: data.name.replace(/ +/g, "") + new Date().getTime(),
-    //             getTime: new Date().getTime,
-    //             location:{
-    //                 lat:'123123123',
-    //                 lng:'123123123',
-    //                 city:'kajang',
-    //                 address:'asdassdasdasd'
-    //             },
-    //             areaCovered:['kajang','serdang','sepang'],
-    //             vendorId:'',
-    //             status:'pending',
-    //             jenisEvent:['nikah','walimah','outdoor'],
-    //             totalEvent:data.jenisEvent.length,
-    //             description:'lorem ipsum blalalalala',
-    //         }
-    //     }
-    //     return await this.db.collection(collectionType).add(colllectionObject)
-    // }
+    deleting(serviceType, id){
+        this.db.collection(serviceType).doc(id).delete();
+        location.reload();
+    }
 
     
 }

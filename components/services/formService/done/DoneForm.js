@@ -3,28 +3,32 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Router from 'next/router';
 import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
-import LoginContext from '../../../../contexts/LoginContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function AboutForm() {
-    const {getReview, createAddService} = useContext(AddServiceContext);
-    const {getVendorDetails} = useContext(LoginContext);
+function DoneForm() {
+    const {resetAddService, getReview} = useContext(AddServiceContext);
 
-    const submitReview = () => {
-        createAddService()
+    const complete = () => {
+        let x = resetAddService()
+        if (x) {
+            Router.push(`/dashboard`)
+        }
     }
 
     useEffect(() => {
-        console.log(getVendorDetails)
+        var user = localStorage.getItem('user');
+        var vendorDetails = localStorage.getItem('vendorDetails');
+        localStorage.clear();
+        localStorage.setItem('user',user);
+        localStorage.setItem('vendorDetails',vendorDetails);
+        console.log(getReview);
        
-    }, [getVendorDetails])
+    }, [resetAddService])
     return (
         <div className="form-service">
-            
             <div className="form-button">
-            <Button  className="btn-cancel" onClick={() => Router.push(`/addservice/upload`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}
+                <Button  color={'warning'} onClick={() => Router.push(`/dashboard`)}>Complete</Button>{' '}
             </div>
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
@@ -40,4 +44,4 @@ function AboutForm() {
     )
 }
 
-export default AboutForm
+export default DoneForm
