@@ -12,7 +12,7 @@ function Videographer(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <VideographerForm />
+                <VideographerForm pagex={'addservice'} />
             </div>
         </Head>
     )

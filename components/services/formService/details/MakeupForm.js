@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function MakeupForm() {
+function MakeupForm({pagex}) {
     const jenisMakeupArray = [
         {jenis:'Full Makeup', status:false},
         {jenis:'Touchup', status:false}
@@ -98,7 +98,7 @@ function MakeupForm() {
             return false
         }
         addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
@@ -183,7 +183,7 @@ function MakeupForm() {
            
             
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

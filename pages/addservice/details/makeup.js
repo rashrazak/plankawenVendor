@@ -12,7 +12,7 @@ function Makeup(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <MakeupForm />
+                <MakeupForm pagex={'addservice'} />
             </div>
         </Head>
     )

@@ -3,19 +3,19 @@ import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
-import HantaranForm from '../../../components/services/formService/details/HantaranForm'
-function Hantaran(props) {
+import PelaminForm from '../../../components/services/formService/details/PelaminForm'
+function Pelamin(props) {
 
     return (
-        <Head title={'Add Details'}>
+        <Head title={ 'Edit Details'}>
             <div>
                 <Step progress={1} />
             </div>
             <div>
-                <HantaranForm pagex={'addservice'} />
+                <PelaminForm pagex={'editservice'} />
             </div>
         </Head>
     )
 }
 
-export default Hantaran
+export default Pelamin

@@ -12,7 +12,7 @@ function KadBanner(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <KadBannerForm />
+                <KadBannerForm pagex={'addservice'} />
             </div>
         </Head>
     )

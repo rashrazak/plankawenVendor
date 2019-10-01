@@ -3,7 +3,6 @@ import About from '../../components/services/addServices/About'
 import EditServiceLists from '../../components/services/formService/EditServiceLists'
 import {Button} from 'reactstrap';
 import Head from '../../components/Headx'
-import Step from '../../components/StepByStep'
 import { Router } from 'next/router'
 import '../../css/venueform.css'
 import '../../css/about.css'

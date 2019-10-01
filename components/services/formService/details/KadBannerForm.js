@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function KadBannerForm() {
+function KadBannerForm({pagex}) {
     const {getServiceDetailsKadBanner, addServiceDetailsKadBanner} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
     const [discount, setdiscount] = useState([])
@@ -117,7 +117,7 @@ function KadBannerForm() {
 
     const submitServiceDetails = () => {
         addServiceDetailsKadBanner(hargaPerPerson, discount, banner, bannerSize, bannerDescription)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
@@ -242,7 +242,7 @@ function KadBannerForm() {
             }
             
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

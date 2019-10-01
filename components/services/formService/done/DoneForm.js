@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function DoneForm() {
+function DoneForm({pagex}) {
     const {resetAddService, getReview} = useContext(AddServiceContext);
 
     const complete = () => {

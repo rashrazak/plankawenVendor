@@ -12,7 +12,7 @@ function Venue(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <VenueForm />
+                <VenueForm pagex={'addservice'} />
             </div>
         </Head>
     )

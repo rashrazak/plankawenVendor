@@ -9,7 +9,7 @@ function About({typeChange}) {
         {name:'Venue',isActive:false},
         {name:'Canopy',isActive:false},
         {name:'KadBanner',isActive:false},
-        {name:'Weddingdress',isActive:false},
+        {name:'WeddingDress',isActive:false},
         {name:'Makeup',isActive:false},
         {name:'Photographer',isActive:false},
         {name:'Videographer',isActive:false},

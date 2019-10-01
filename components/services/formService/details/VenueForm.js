@@ -7,7 +7,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function VenueForm({serviceType}) {
+function VenueForm({serviceType, pagex}) {
     const {getServiceDetailsVenue, addServiceDetailsVenue} = useContext(AddServiceContext);
     const [hargaSewa, sethargaSewa] = useState(0);
     const [lokasi, setlokasi] = useState({});
@@ -39,7 +39,7 @@ function VenueForm({serviceType}) {
 
     const submitServiceDetails = () => {
         addServiceDetailsVenue(hargaSewa , lokasi, waktuOperasi, alamatPenuh)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
 
     const addAlamat = () => {
@@ -70,7 +70,7 @@ function VenueForm({serviceType}) {
                 <Input className="form-custom" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

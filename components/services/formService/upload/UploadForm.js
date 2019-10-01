@@ -9,29 +9,29 @@ import Filebase64 from 'react-file-base64'
 
 //pending patot ada image compressor
     
-function UploadForm() {
+function UploadForm({pagex}) {
 
     const {getServiceUpload, addServiceUpload, getServiceAbout} = useContext(AddServiceContext);
     const [images, setimages] = useState([])
     const [imageLimit, setimageLimit] = useState(3)
     const [serviceType, setserviceType] = useState('')
-
+    const [serviceId, setserviceId] = useState('')
 
     useEffect(() =>{
-        setimages(getServiceUpload.images)
         setimageLimit((old) => {
             let lim = getServiceUpload.images;
-            console.log(lim)
-            lim = 0
+            lim = lim.length
             let val = old - lim ;
             return val;
         })
+        setimages(getServiceUpload.images)
         setserviceType(getServiceAbout.serviceType)
+        setserviceId(getServiceUpload.serviceId)
     },[getServiceUpload])
 
     useEffect(() => {
-        console.log(images)
-    }, [images, imageLimit])
+        console.log(imageLimit)
+    }, [images])
 
     const uploadOnDone = (file) => {
         let f = file.file;
@@ -56,8 +56,8 @@ function UploadForm() {
     }
     
     const submitServiceUpload = () => {
-        addServiceUpload(images, serviceType)
-        Router.push(`/addservice/review`);
+        addServiceUpload(images, serviceType, serviceId)
+        Router.push(`/${pagex}/review`);
     }
     return (
         <div className="form-service">
@@ -77,7 +77,7 @@ function UploadForm() {
                 })}
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/addservice/details/${serviceType.toLowerCase()}`)}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/details/${serviceType.toLowerCase()}`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
             </div>
             <style jsx>{`

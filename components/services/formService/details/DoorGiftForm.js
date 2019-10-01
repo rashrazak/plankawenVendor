@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function DoorGiftForm() {
+function DoorGiftForm({pagex}) {
 
     const {getServiceDetailsDoorGift, addServiceDetailsDoorGift} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
@@ -83,7 +83,7 @@ function DoorGiftForm() {
 
     const submitServiceDetails = () => {
         addServiceDetailsDoorGift(hargaPerPerson, discount)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
 
     return (
@@ -142,7 +142,7 @@ function DoorGiftForm() {
                 }
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -3,21 +3,19 @@ import Head from '../../components/Headx'
 import Step from '../../components/StepByStep'
 import '../../css/venueform.css'
 import '../../css/about.css'
-import DoneForm from '../../components/services/formService/done/DoneForm'
-
-function review(props) {
+import UploadForm from '../../components/services/formService/upload/UploadForm'
+function Upload(props) {
 
     return (
-        <Head title={'Review'}>
+        <Head title={ 'edit Details'}>
             <div>
-                <Step progress={4} />
+                <Step progress={2} />
             </div>
             <div>
-                <h1>Done</h1>
-                <DoneForm pagex={'addservice'} />
+                <UploadForm pagex={'editservice'} />
             </div>
         </Head>
     )
 }
 
-export default review
+export default Upload

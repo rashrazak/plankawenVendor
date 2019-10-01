@@ -12,7 +12,7 @@ function DoorGift(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <DoorGiftForm />
+                <DoorGiftForm pagex={'addservice'} />
             </div>
         </Head>
     )

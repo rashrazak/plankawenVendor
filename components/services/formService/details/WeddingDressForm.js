@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function WeddingDressForm({serviceType}) {
+function WeddingDressForm({serviceType, pagex}) {
     const {getServiceDetailsWeddingDress, addServiceDetailsWeddingDress} = useContext(AddServiceContext);
     const [hargaSewa, sethargaSewa] = useState('');
     const [lokasi, setlokasi] = useState('');
@@ -25,7 +25,7 @@ function WeddingDressForm({serviceType}) {
 
     const submitServiceDetails = () => {
         addServiceDetailsWeddingDress(hargaSewa , lokasi, syaratSewaan)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
@@ -50,7 +50,7 @@ function WeddingDressForm({serviceType}) {
                 <Input className="form-custom" type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -14,7 +14,7 @@ function review(props) {
             </div>
             <div>
                 <h1>Done</h1>
-                <DoneForm pagex={'addservice'} />
+                <DoneForm pagex={'editservice'} />
             </div>
         </Head>
     )

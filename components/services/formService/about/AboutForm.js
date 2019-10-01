@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function AboutForm({serviceType}) {
+function AboutForm({serviceType, pagex}) {
     const {getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
    
     const gMapsCities = [
@@ -65,7 +65,7 @@ function AboutForm({serviceType}) {
     const submitServiceAbout = () => {
         addServiceAbout(title , cityArray, descriptionx)
         let aaa = serviceTypex.toLowerCase();
-        Router.push(`/addservice/details/${aaa}`);
+        Router.push(`/${pagex}/details/${aaa}`);
     }
 
     return (

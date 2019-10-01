@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function CatererForm() {
+function CatererForm({pagex}) {
 
     const {getServiceDetailsCaterer, addServiceDetailsCaterer} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
@@ -103,7 +103,7 @@ function CatererForm() {
 
     const submitServiceDetails = () => {
         addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
 
     return (
@@ -198,7 +198,7 @@ function CatererForm() {
             </div>
     
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`
