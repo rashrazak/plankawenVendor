@@ -36,7 +36,7 @@ function WeddingDressForm({serviceType}) {
             <div className="form-section">
                 <h4>Lokasi Butik (tak boleh letak className)</h4>
                 <Autocomplete
-                    style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', }}
+                    style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}
                     onPlaceSelected={(place) => {
                     setlokasi(place)
                     }}

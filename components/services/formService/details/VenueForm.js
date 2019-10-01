@@ -53,11 +53,11 @@ function VenueForm({serviceType}) {
                 <Input className="form-custom harga" type="number" onChange={(e) => {sethargaSewa(e.target.value)}} />
             </div>
             <div className="form-section">
-                <h4>Nama Lokasi (tak boleh letak className)</h4>
+                <h4>Nama Lokasi</h4>
                 {/* <Input className="form-custom" type="text" placeholder="Nyatakan Lokasi Anda" value={lokasi} onChange={(e) => {setlokasi(e.target.value)}} /> */}
                 <Autocomplete
                     className="auto"
-                    style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', }}
+                    style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}
                     onPlaceSelected={(place) => {
                         setlokasi(place)
                     }}
