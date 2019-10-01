@@ -22,7 +22,7 @@ function AddServiceAbout(props) {
             </div>
             <div>
                 <About typeChange={typeChange} />
-                <AboutForm serviceType={serviceType} pages={'addservice'} />   
+                <AboutForm serviceType={serviceType} pagex={'addservice'} />   
             </div>
         </Head>
     )
