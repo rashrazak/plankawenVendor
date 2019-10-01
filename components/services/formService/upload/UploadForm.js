@@ -53,6 +53,7 @@ function UploadForm({pagex}) {
         let im = images;
         im.splice(index, 1);
         setimages([...im]);
+        setimageLimit((old)=> old + 1)
     }
     
     const submitServiceUpload = () => {
@@ -69,9 +70,9 @@ function UploadForm({pagex}) {
                 {images.map((val,index) => {
                     let b64 = val.base64
                     return(
-                        <div key={index}>
+                        <div key={index} className="img-section">
                             <img src={b64} alt=""/>
-                            <Button  color="danger" onClick={() => deleteImage(index)}>Delete</Button>
+                            <div className="delete-image" onClick={() => deleteImage(index)}>X</div>
                         </div>
                     )
                 })}
@@ -89,6 +90,9 @@ function UploadForm({pagex}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
+                .img-section { display: inline-block; width: 150px; height: 150px; position:relative; margin-right: 10px;}
+                .img-section > img { width: 150px; height: 150px; object-fit: cover; border: 2px solid #EAEAEA;}
+                .delete-image { position: absolute; top: -5px; right: -5px; background-color: red; cursor: pointer; height: 18px; width: 18px; border-radius: 25px; text-align: center; font-size: 13px; color: #FFF;}
             `}</style>
         </div>
     )
