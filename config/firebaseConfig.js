@@ -54,6 +54,12 @@ class Firebase {
     async addService(serviceType, data){
         return await this.db.collection(serviceType).add(data)
     }
+    // async getAllService(uidx){
+    //     let service = await this.db.where('vendorId','==',uidx);
+    //     service.get().then(function (querySnapshot) {
+    //         console.log(querySnapshot)
+    //     })
+    // }
 
     async updateService(serviceType, data, serviceId){
         return await this.db.collection(serviceType).doc(serviceId).set(data)
