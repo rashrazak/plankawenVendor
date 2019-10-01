@@ -12,7 +12,7 @@ function WeddingDress(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <WeddingDressForm />
+                <WeddingDressForm pagex={'addservice'} />
             </div>
         </Head>
     )

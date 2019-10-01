@@ -12,7 +12,7 @@ function Upload(props) {
                 <Step progress={2} />
             </div>
             <div>
-                <UploadForm />
+                <UploadForm pagex={'addservice'} />
             </div>
         </Head>
     )

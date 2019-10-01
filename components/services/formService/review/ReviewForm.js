@@ -7,12 +7,12 @@ import LoginContext from '../../../../contexts/LoginContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function AboutForm() {
-    const {getReview, createAddService} = useContext(AddServiceContext);
+function AboutForm({pagex}) {
+    const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
 
     const submitReview = () => {
-        createAddService()
+        pagex == 'addservice' ? createAddService(pagex) : updateAddService(pagex) ;
     }
 
     useEffect(() => {
@@ -23,7 +23,7 @@ function AboutForm() {
         <div className="form-service">
             
             <div className="form-button">
-            <Button  className="btn-cancel" onClick={() => Router.push(`/addservice/upload`)}>Back</Button>{' '}
+            <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/upload`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -7,12 +7,12 @@ import HantaranForm from '../../../components/services/formService/details/Hanta
 function Hantaran(props) {
 
     return (
-        <Head title={'Add Details'}>
+        <Head title={'Edit Details'}>
             <div>
                 <Step progress={1} />
             </div>
             <div>
-                <HantaranForm pagex={'addservice'} />
+                <HantaranForm pagex={'editservice'} />
             </div>
         </Head>
     )

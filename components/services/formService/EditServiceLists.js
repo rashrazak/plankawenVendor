@@ -1,12 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 import firebase from '../../../config/firebaseConfig';
 import LoginContext from '../../../contexts/LoginContext'
+import AddServiceContext from '../../../contexts/AddServiceContext'
 import { Table, Button } from 'reactstrap';
 import Swal from 'sweetalert2';
 import Router from 'next/router';
 
 function EditServiceLists({serviceType}) {
     const {user} = useContext(LoginContext);
+    let objectType = `addServiceDetails${serviceType}`
+
+    const {addServiceAbout, addServiceUpload, getServiceDetailsEdit } = useContext(AddServiceContext);
 
     const [service, setservice] = useState('')
     const [serviceList, setserviceList] = useState([])
@@ -15,6 +19,7 @@ function EditServiceLists({serviceType}) {
         if (user && service) {
             
             var getData = async () => {
+                
                 var read = await firebase.checkServiceType(service, user.email)
                 setserviceList([])
                 read.forEach(function(doc) {
@@ -35,6 +40,14 @@ function EditServiceLists({serviceType}) {
     }, [serviceType,service,deleteFunction])
 
     const editFunction = (index) => {
+        let sl = serviceList[index]
+        console.log(sl);
+        let id = sl.id;
+        addServiceAbout(sl.serviceName, sl.areaCovered, sl.description)
+        addServiceUpload(sl.images, serviceType, id);
+        getServiceDetailsEdit(objectType, sl.serviceDetails, id)
+
+        Router.push('/editservice/about')
 
     }
 

@@ -3,18 +3,16 @@ import Head from '../../components/Headx'
 import Step from '../../components/StepByStep'
 import '../../css/venueform.css'
 import '../../css/about.css'
-import DoneForm from '../../components/services/formService/done/DoneForm'
-
+import ReviewForm from '../../components/services/formService/review/ReviewForm'
 function review(props) {
 
     return (
         <Head title={'Review'}>
             <div>
-                <Step progress={4} />
+                <Step progress={3} />
             </div>
             <div>
-                <h1>Done</h1>
-                <DoneForm pagex={'addservice'} />
+                <ReviewForm pagex={'editservice'} />
             </div>
         </Head>
     )

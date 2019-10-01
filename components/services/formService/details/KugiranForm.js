@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function KugiranForm() {
+function KugiranForm({pagex}) {
 
     const {getServiceDetailsKugiran, addServiceDetailsKugiran} = useContext(AddServiceContext);
     const [hargaKugiran, sethargaKugiran] = useState('')
@@ -21,7 +21,7 @@ function KugiranForm() {
     
     const submitServiceDetails = () => {
         addServiceDetailsKugiran(nameKugiran ,hargaKugiran)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
@@ -34,7 +34,7 @@ function KugiranForm() {
                 <Input className="form-custom" type="text" placeholder="" value={nameKugiran} onChange={(e) => {setnameKugiran(e.target.value)}} />
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -3,19 +3,19 @@ import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
-import HantaranForm from '../../../components/services/formService/details/HantaranForm'
-function Hantaran(props) {
+import MakeupForm from '../../../components/services/formService/details/MakeupForm'
+function Makeup(props) {
 
     return (
-        <Head title={'Add Details'}>
+        <Head title={ 'Edit Details'}>
             <div>
                 <Step progress={1} />
             </div>
             <div>
-                <HantaranForm pagex={'addservice'} />
+                <MakeupForm pagex={'editservice'} />
             </div>
         </Head>
     )
 }
 
-export default Hantaran
+export default Makeup

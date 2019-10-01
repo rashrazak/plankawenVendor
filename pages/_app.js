@@ -241,7 +241,7 @@ class MyApp extends App {
     }
   }
 
-  createAddService = () => {
+  createAddService = (pagex) => {
     
     let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
@@ -267,9 +267,43 @@ class MyApp extends App {
     let y = firebase.addService(serviceType, data)
     y.then(() => {
       alert('success')
-      Router.push('/addservice/done')
+      Router.push(`/${pagex}/done`)
     })
     .catch((e) => {
+      console.log(e)
+    })
+  }
+
+  updateAddService = (pagex) => {
+    
+    let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
+    let {images, serviceId} = {...this.state.addServiceUpload}
+    let {email} = {...this.state.user}
+    let {id} = {...this.state.vendorDetails}
+    let objectType = `addServiceDetails${serviceType}`
+    let serviceDetails = this.state[objectType]
+    let x = new Date()
+    let data = {
+      vendorId:id,
+      email,
+      status,
+      serviceType,
+      serviceName,
+      description,
+      areaCovered,
+      serviceDetails,
+      images,
+      created: x,
+      getTime: x.getTime()
+    }
+
+    let y = firebase.updateService(serviceType, data, serviceId)
+    y.then(() => {
+      alert('success')
+      Router.push(`/${pagex}/done`)
+    })
+    .catch((e) => {
+      alert('error')
       console.log(e)
     })
   }
@@ -345,6 +379,16 @@ class MyApp extends App {
       currentService['alamatPenuh'] = alamatPenuh;
       this.setState({addServiceDetailsVenue:currentService})
     }
+  }
+
+  getServiceDetailsEdit = (name, val, id) => {
+    const x = this.state;
+    const serv = x[name]
+    console.log(serv)
+    this.setState({[name]:val});
+    localStorage.setItem([name], JSON.stringify(val) ) 
+    return true
+
   }
 
   addServiceDetailsWeddingDress = (harga, lokasi, syaratSewaan) => {
@@ -680,14 +724,16 @@ class MyApp extends App {
     }
   }
 
-  addServiceUpload = (images, serviceType) => {
+  addServiceUpload = (images, serviceType, serviceId) => {
     let {addServiceUpload} = {...this.state}
     let currentService = addServiceUpload;
     let im = images;
     let st = serviceType;
+    let id = serviceId;
   
     currentService['images'] = im;
     currentService['serviceType'] = st;
+    currentService['serviceId'] = id;
     this.setState({addServiceUpload:currentService})
     localStorage.setItem('addServiceUpload', JSON.stringify(this.state.addServiceUpload) ) 
   }
@@ -700,9 +746,11 @@ class MyApp extends App {
       let currentService = addServiceUpload;
       let im = Upload.images;
       let st = Upload.serviceType;
+      let id = Upload.serviceId;
      
       currentService['serviceType'] = st;
       currentService['images'] = im;
+      currentService['serviceId'] = id;
       this.setState({addServiceUpload:currentService})
     }
   }
@@ -730,9 +778,9 @@ class MyApp extends App {
             addServiceDetailsCaterer:this.addServiceDetailsCaterer, getServiceDetailsCaterer:this.state.addServiceDetailsCaterer,
             addServiceDetailsDoorGift:this.addServiceDetailsDoorGift, getServiceDetailsDoorGift:this.state.addServiceDetailsDoorGift,
             addServiceDetailsKugiran:this.addServiceDetailsKugiran, getServiceDetailsKugiran:this.state.addServiceDetailsKugiran,
-            addServiceDetailsHantarans:this.addServiceDetailsHantarans, getServiceDetailsHantarans:this.state.addServiceDetailsHantarans,
+            addServiceDetailsHantaran:this.addServiceDetailsHantaran, getServiceDetailsHantaran:this.state.addServiceDetailsHantaran,
             addServiceUpload:this.addServiceUpload, getServiceUpload:this.state.addServiceUpload,
-            getReview:this.state, createAddService:this.createAddService, resetAddService:this.resetAddService  }}>
+            getReview:this.state, createAddService:this.createAddService, updateAddService:this.updateAddService, resetAddService:this.resetAddService, getServiceDetailsEdit:this.getServiceDetailsEdit  }}>
               <Component {...pageProps} />
             </AddServiceContext.Provider>
         </LoginContext.Provider>

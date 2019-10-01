@@ -12,7 +12,7 @@ function Caterer(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <CatererForm />
+                <CatererForm pagex={'addservice'} />
             </div>
         </Head>
     )

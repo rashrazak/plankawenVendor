@@ -12,7 +12,7 @@ function Photographer(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <PhotographerForm />
+                <PhotographerForm pagex={'addservice'} />
             </div>
         </Head>
     )

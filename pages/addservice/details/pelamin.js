@@ -12,7 +12,7 @@ function Pelamin(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <PelaminForm />
+                <PelaminForm pagex={'addservice'} />
             </div>
         </Head>
     )

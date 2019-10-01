@@ -54,6 +54,10 @@ class Firebase {
     async addService(serviceType, data){
         return await this.db.collection(serviceType).add(data)
     }
+
+    async updateService(serviceType, data, serviceId){
+        return await this.db.collection(serviceType).doc(serviceId).set(data)
+    }
     //pending patot ada status = approved
     async checkServiceType(serviceType, email){
         return await this.db.collection(serviceType).where('email', '==', email).get() 

@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function VideographerForm() {
+function VideographerForm({pagex}) {
     const jenisEventArray = [
         {jenis:'Nikah', status:false},
         {jenis:'Walimah', status:false},
@@ -40,7 +40,7 @@ function VideographerForm() {
 
     const submitServiceDetails = () => {
         addServiceDetailsVideographer(harga ,jenisEvent)
-        Router.push(`/addservice/upload`);
+        Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
@@ -74,7 +74,7 @@ function VideographerForm() {
                 <Input className="form-custom" type="number" placeholder="" value={harga} onChange={(e) => {setharga(e.target.value)}} />
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -6,9 +6,9 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function HantaranForm() {
+function HantaranForm({pagex}) {
 
-    const {getServiceDetailsDoorGift, addServiceDetailsDoorGift} = useContext(AddServiceContext);
+    const {getServiceDetailsHantaran, addServiceDetailsHantaran} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
     const [discount, setdiscount] = useState([])
 
@@ -21,17 +21,17 @@ function HantaranForm() {
 
 
     useEffect(() =>{
-        sethargaPerPerson(getServiceDetailsDoorGift.hargaPerPerson)
-        setdiscount(getServiceDetailsDoorGift.discount)
+        sethargaPerPerson(getServiceDetailsHantaran.hargaPerPerson)
+        setdiscount(getServiceDetailsHantaran.discount)
         setarraySizeDiscount(() => {
-            let disc = getServiceDetailsDoorGift.discount
+            let disc = getServiceDetailsHantaran.discount
             if (disc.length > 0) {
                 let discL = disc.length
                 return discL
             }
         })
         setminDiscount(() => {
-            let disc = getServiceDetailsDoorGift.discount
+            let disc = getServiceDetailsHantaran.discount
             if (disc.length > 0) {
                 let discL = disc.length
                 let discIndex = disc[discL - 1]
@@ -42,7 +42,7 @@ function HantaranForm() {
                 return 1;
             }
         })
-    },[getServiceDetailsDoorGift])
+    },[getServiceDetailsHantaran])
 
     const addDiscount = () => {
         let max = parseInt(maxDiscount)
@@ -82,8 +82,8 @@ function HantaranForm() {
     }, [discount])
 
     const submitServiceDetails = () => {
-        addServiceDetailsDoorGift(hargaPerPerson, discount)
-        Router.push(`/addservice/upload`);
+        addServiceDetailsHantaran(hargaPerPerson, discount)
+        Router.push(`/${pagex}/upload`);
     }
 
     return (
@@ -142,7 +142,7 @@ function HantaranForm() {
                 }
             </div>
             <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push('/addservice/about')}>Back</Button>{' '}
+                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
             </div>
             <style jsx>{`

@@ -12,7 +12,7 @@ function Kugiran(props) {
                 <Step progress={1} />
             </div>
             <div>
-                <KugiranForm />
+                <KugiranForm pagex={'addservice'} />
             </div>
         </Head>
     )
