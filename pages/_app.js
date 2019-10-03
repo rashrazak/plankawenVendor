@@ -11,6 +11,7 @@ import AddServiceContext from '../contexts/AddServiceContext'
           /addServiceDetailsVideographer/addServiceDetailsPelamin
   hargaTouchup,hargaDiscountTouchup
   hargaFull,hargaDiscountFull
+  lokasi / addServiceDetailsVenue/addServiceDetailsWeddingDress/ Kugiran
 
   */
 const initialState = {
@@ -32,11 +33,10 @@ const initialState = {
     discount:0,
     hargaDiscount:0,
     lokasi:{
-      address:'',
-      lat:'',
-      lng:'',
+      street:'',
       state:'',
-      city:''
+      city:'',
+      postcode:''
     },
     alamatPenuh:'',
     waktuOperasi:''
@@ -46,11 +46,10 @@ const initialState = {
     discount:0,
     hargaDiscount:0,
     lokasi:{
-      address:'',
-      lat:'',
-      lng:'',
+      street:'',
       state:'',
-      city:''
+      city:'',
+      postcode:''
     },
     syaratSewaan:'',
     jenisSewa:[]
@@ -60,11 +59,10 @@ const initialState = {
     discount:0,
     hargaDiscount:0,
     lokasi:{
-      address:'',
-      lat:'',
-      lng:'',
+      street:'',
       state:'',
-      city:''
+      city:'',
+      postcode:''
     },
     waktuOperasi:''
   },
@@ -418,10 +416,14 @@ class MyApp extends App {
     let ap = alamatPenuh;
     let d = discount;
     let hd = hargaDiscount;
+    
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['lokasi'] = lok;
+    currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
+    currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
+    currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
+    currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
     currentService['waktuOperasi'] = wo;
     currentService['alamatPenuh'] = ap;
     this.setState({addServiceDetailsVenue:currentService})
@@ -460,7 +462,10 @@ class MyApp extends App {
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['lokasi'] = lok;
+    currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
+    currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
+    currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
+    currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
     currentService['syaratSewaan'] = wo;
     currentService['jenisSewa'] = js;
     this.setState({addServiceDetailsWeddingDress:currentService})
@@ -496,7 +501,10 @@ class MyApp extends App {
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['lokasi'] = lok;
+    currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
+    currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
+    currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
+    currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
     currentService['waktuOperasi'] = wo;
     this.setState({addServiceDetailsKugiran:currentService})
     localStorage.setItem('addServiceDetailsKugiran', JSON.stringify(this.state.addServiceDetailsKugiran) ) 

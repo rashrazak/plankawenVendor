@@ -76,6 +76,7 @@ function VenueForm({serviceType, pagex}) {
                     className="auto"
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}
                     onPlaceSelected={(place) => {
+                        console.log(place)
                         setlokasi(place)
                     }}
                     types={[]}
