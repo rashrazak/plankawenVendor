@@ -9,16 +9,16 @@ import Swal from 'sweetalert2'
     
 function VenueForm({serviceType, pagex}) {
     const {getServiceDetailsVenue, addServiceDetailsVenue} = useContext(AddServiceContext);
-    const [hargaSewa, sethargaSewa] = useState(0);
+    const [harga, setharga] = useState(0);
+    const [hargaDiscount, sethargaDiscount] = useState(0);
+    const [discount, setdiscount] = useState(0);
     const [lokasi, setlokasi] = useState({});
     const [alamatPenuh, setalamatPenuh] = useState('')
     const [waktuOperasi, setwaktuOperasi] = useState('');
-    const [lat, setlat] = useState(0);
-    const [lng, setlng] = useState(0);
 
     useEffect(() =>{
-        sethargaSewa(() => {
-            let harg = getServiceDetailsVenue.hargaSewa
+        setharga(() => {
+            let harg = getServiceDetailsVenue.harga
             console.log(harg)
             document.querySelector('.harga').value = harg;
             return harg
@@ -30,7 +30,9 @@ function VenueForm({serviceType, pagex}) {
             document.querySelector('.auto').value = al;
             return al;
         })
-        console.log(getServiceDetailsVenue.lokasi)
+        setdiscount(getServiceDetailsVenue.discount)
+        sethargaDiscount(getServiceDetailsVenue.hargaDiscount)
+        console.log(getServiceDetailsVenue)
     },[getServiceDetailsVenue])
 
     useEffect(() => {
@@ -38,7 +40,7 @@ function VenueForm({serviceType, pagex}) {
     }, [alamatPenuh])
 
     const submitServiceDetails = () => {
-        addServiceDetailsVenue(hargaSewa , lokasi, waktuOperasi, alamatPenuh)
+        addServiceDetailsVenue(harga , lokasi, waktuOperasi, alamatPenuh, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
 
@@ -49,12 +51,27 @@ function VenueForm({serviceType, pagex}) {
     return (
         <div className="form-service">
             <div className="form-section">
-                <h4>Harga Sewa (RM)</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {sethargaSewa(e.target.value)}} />
+                <h4>Harga (RM)</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+            </div>
+            <div className="form-section">
+                <h4>Discount</h4>
+                <Input className="form-custom harga" type="number" value={discount} onChange={(e) => {
+                    let x = e.target.value;
+                    let har = harga;
+                    x = x / 100;
+                    har = har - (har * x);
+                    sethargaDiscount(har);
+                    setdiscount(e.target.value)
+                }}
+                />
+            </div>
+            <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
                 <h4>Nama Lokasi</h4>
-                {/* <Input className="form-custom" type="text" placeholder="Nyatakan Lokasi Anda" value={lokasi} onChange={(e) => {setlokasi(e.target.value)}} /> */}
                 <Autocomplete
                     className="auto"
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}

@@ -15,11 +15,15 @@ function PhotographerForm({pagex}) {
     const {getServiceDetailsPhotographer, addServiceDetailsPhotographer} = useContext(AddServiceContext);
     const [harga, setharga] = useState('')
     const [jenisEvent, setjenisEvent] = useState([])
+    const [hargaDiscount, sethargaDiscount] = useState(0);
+    const [discount, setdiscount] = useState(0);
 
 
     useEffect(() =>{
         setharga(getServiceDetailsPhotographer.harga)
         setjenisEvent(getServiceDetailsPhotographer.jenisEvent)
+        setdiscount(getServiceDetailsPhotographer.discount)
+        sethargaDiscount(getServiceDetailsPhotographer.hargaDiscount)
     },[getServiceDetailsPhotographer])
 
     const handleChangeJenis = (e) => {
@@ -39,7 +43,7 @@ function PhotographerForm({pagex}) {
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsPhotographer(harga ,jenisEvent)
+        addServiceDetailsPhotographer(harga ,jenisEvent, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -70,8 +74,24 @@ function PhotographerForm({pagex}) {
                 } )}
             </div>
             <div className="form-section">
-                <h4>Harga Servis (RM)</h4>
-                <Input className="form-custom" type="number" placeholder="" value={harga} onChange={(e) => {setharga(e.target.value)}} />
+                <h4>Harga (RM)</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+            </div>
+            <div className="form-section">
+                <h4>Discount</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {
+                    let x = e.target.value;
+                    let har = harga;
+                    x = x / 100;
+                    har = har - (har * x);
+                    sethargaDiscount(har);
+                    setdiscount(e.target.value)
+                    }} value={discount} 
+                />
+            </div>
+            <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

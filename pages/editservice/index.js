@@ -12,7 +12,6 @@ import Swal from 'sweetalert2'
 function EditService(props) {
     const [serviceType, setServiceType] = useState('')
     const typeChange = (name) => {
-        Swal.showLoading()
         setServiceType(name)
     }
 
@@ -22,8 +21,7 @@ function EditService(props) {
                 {/* <Step progress={0} /> */}
             </div>
             <div>
-                <About typeChange={typeChange} />
-                <EditServiceLists serviceType={serviceType} />   
+                <EditServiceLists />   
             </div>
             <div className="form-service">
             

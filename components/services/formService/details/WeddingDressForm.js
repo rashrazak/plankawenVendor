@@ -7,31 +7,93 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 import Swal from 'sweetalert2'
     
 function WeddingDressForm({serviceType, pagex}) {
+    const jenisSewaArray = [
+        {jenis:'Lelaki', status:false},
+        {jenis:'Wanita', status:false},
+        {jenis:'Pasangan', status:false},
+    ];
     const {getServiceDetailsWeddingDress, addServiceDetailsWeddingDress} = useContext(AddServiceContext);
-    const [hargaSewa, sethargaSewa] = useState('');
+    const [harga, setharga] = useState('');
     const [lokasi, setlokasi] = useState('');
     const [syaratSewaan, setsyaratSewaan] = useState('');
-    const [lat, setlat] = useState(0);
-    const [lng, setlng] = useState(0);
+    const [jenisSewa, setjenisSewa] = useState([])
+    const [hargaDiscount, sethargaDiscount] = useState(0);
+    const [discount, setdiscount] = useState(0);
 
     useEffect(() =>{
-        sethargaSewa(getServiceDetailsWeddingDress.hargaSewa)
+        setharga(getServiceDetailsWeddingDress.harga)
         setlokasi(getServiceDetailsWeddingDress.lokasi)
         setsyaratSewaan(getServiceDetailsWeddingDress.syaratSewaan)
-        // setlat(getServiceDetailsWeddingDress.lat)
-        // setlng(getServiceDetailsWeddingDress.lng)
+        setdiscount(getServiceDetailsWeddingDress.discount)
+        sethargaDiscount(getServiceDetailsWeddingDress.hargaDiscount)
+        setjenisSewa(getServiceDetailsWeddingDress.jenisSewa)
     },[getServiceDetailsWeddingDress])
 
+    const handleChangeJenis = (e) => {
+        Swal.showLoading()
+        let name = e.target.name;
+        let check = e.target.checked;
+        let x = jenisSewa;
+        if (check) {
+            setjenisSewa(old =>[...old, name])
+        }else{
+            let index = jenisSewa.indexOf(name);
+            x.splice(index,1);
+            setjenisSewa([...x]);
+        }
+        Swal.close()
+    }
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(hargaSewa , lokasi, syaratSewaan)
+        addServiceDetailsWeddingDress(harga , lokasi, syaratSewaan, jenisSewa, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
             <div className="form-section">
+                <h4>Jenis Sewa</h4>
+                {jenisSewaArray.map( (cty, index) =>{
+                    let jen = cty.jenis;
+                    let chckd  = false;
+                    if (jenisSewa != null) {
+                        chckd = jenisSewa.includes(jen) ? true : false;
+                    }
+                    
+                    return(
+                        
+                            <div key={index} className="area-covered-div">
+                                <label>
+                                    <input type="checkbox"
+                                        name={jen} 
+                                        checked={chckd}
+                                        onChange={(e) => handleChangeJenis(e)}
+                                    />
+                                    {jen}
+                                </label>
+                            </div>
+                            
+                    )
+                } )}
+            </div>
+            <div className="form-section">
                 <h4>Harga Sewa (RM)</h4>
-                <Input className="form-custom" type="number" placeholder="" value={hargaSewa} onChange={(e) => {sethargaSewa(e.target.value)}} />
+                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+            </div>
+            <div className="form-section">
+                <h4>Discount</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {
+                    let x = e.target.value;
+                    let har = harga;
+                    x = x / 100;
+                    har = har - (har * x);
+                    sethargaDiscount(har);
+                    setdiscount(e.target.value)
+                    }} value={discount} 
+                />
+            </div>
+            <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
                 <h4>Lokasi Butik (tak boleh letak className)</h4>

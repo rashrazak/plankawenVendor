@@ -35,6 +35,8 @@ function AboutForm({serviceType, pagex}) {
     const [descriptionx, setDescriptionx] = useState('');
     const [title, setTitle] = useState('');
     const [serviceTypex, setServiceTypex] = useState('')
+    const [tnc, settnc] = useState('');
+    const [extra, setextra] = useState('');
 
     useEffect(() => {
         // console.log(getServiceAbout)
@@ -45,6 +47,8 @@ function AboutForm({serviceType, pagex}) {
         setCityArray(getServiceAbout.areaCovered);
         setDescriptionx(getServiceAbout.description);
         setTitle(getServiceAbout.serviceName);
+        settnc(getServiceAbout.tnc)
+        setextra(getServiceAbout.extra)
     },[getServiceAbout])
 
     const handleChangeKawasan = (e) => {
@@ -63,7 +67,7 @@ function AboutForm({serviceType, pagex}) {
     }
 
     const submitServiceAbout = () => {
-        addServiceAbout(title , cityArray, descriptionx)
+        addServiceAbout(title , cityArray, descriptionx, tnc, extra)
         let aaa = serviceTypex.toLowerCase();
         Router.push(`/${pagex}/details/${aaa}`);
     }
@@ -77,6 +81,14 @@ function AboutForm({serviceType, pagex}) {
             <div className="form-section">
                 <h4>Description Servis/Produk (dengan lengkap)</h4>
                 <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
+            </div>
+            <div className="form-section">
+                <h4>Terms & Conditions</h4>
+                <Input className="form-custom" onChange={(e) => settnc(e.target.value)} type="textarea" placeholder="Terms & Conditions" value={tnc} />
+            </div>
+            <div className="form-section">
+                <h4>Extra Details</h4>
+                <Input className="form-custom" onChange={(e) => setextra(e.target.value)} type="textarea" placeholder="Extra Details, free gift etc" value={extra} />
             </div>
             <div className="form-section">
                 <h4> Area Covered</h4>

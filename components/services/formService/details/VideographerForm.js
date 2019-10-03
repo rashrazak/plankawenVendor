@@ -1,9 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Router from 'next/router';
-// import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
-// import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
 function VideographerForm({pagex}) {
@@ -15,11 +13,15 @@ function VideographerForm({pagex}) {
     const {getServiceDetailsVideographer, addServiceDetailsVideographer} = useContext(AddServiceContext);
     const [harga, setharga] = useState('')
     const [jenisEvent, setjenisEvent] = useState([])
+    const [hargaDiscount, sethargaDiscount] = useState(0);
+    const [discount, setdiscount] = useState(0);
 
 
     useEffect(() =>{
         setharga(getServiceDetailsVideographer.harga)
         setjenisEvent(getServiceDetailsVideographer.jenisEvent)
+        setdiscount(getServiceDetailsVideographer.discount)
+        sethargaDiscount(getServiceDetailsVideographer.hargaDiscount)
     },[getServiceDetailsVideographer])
 
     const handleChangeJenis = (e) => {
@@ -39,12 +41,12 @@ function VideographerForm({pagex}) {
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsVideographer(harga ,jenisEvent)
+        addServiceDetailsVideographer(harga ,jenisEvent, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
-        <div className="form-section">
+            <div className="form-section">
                 <h4>Jenis Event</h4>
                 {jenisEventArray.map( (cty, index) =>{
                     let jen = cty.jenis;
@@ -70,8 +72,24 @@ function VideographerForm({pagex}) {
                 } )}
             </div>
             <div className="form-section">
-                <h4>Harga Servis (RM)</h4>
-                <Input className="form-custom" type="number" placeholder="" value={harga} onChange={(e) => {setharga(e.target.value)}} />
+                <h4>Harga (RM)</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+            </div>
+            <div className="form-section">
+                <h4>Discount</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {
+                    let x = e.target.value;
+                    let har = harga;
+                    x = x / 100;
+                    har = har - (har * x);
+                    sethargaDiscount(har);
+                    setdiscount(e.target.value)
+                    }} value={discount} 
+                />
+            </div>
+            <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

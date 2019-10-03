@@ -81,8 +81,8 @@ function Package(props) {
                                         <td>{val.serviceName}</td>
                                         <td>{val.status}</td>
                                         <td>{date.toString()}</td>
-                                        <td><Button onClick={() => editFunction(index)} >Click </Button></td>
-                                        <td><Button onClick={() => deleteFunction(index)} >Click </Button></td>
+                                        <td><Button onClick={() => selectService(index)} >Click </Button></td>
+                                        <td><Button onClick={() => viewInformation(index)} >Click </Button></td>
                                     </tr>
                                 )
                             })}

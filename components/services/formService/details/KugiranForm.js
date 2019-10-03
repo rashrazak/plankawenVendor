@@ -9,25 +9,45 @@ import Swal from 'sweetalert2'
 function KugiranForm({pagex}) {
 
     const {getServiceDetailsKugiran, addServiceDetailsKugiran} = useContext(AddServiceContext);
-    const [hargaKugiran, sethargaKugiran] = useState('')
+    const [harga, setharga] = useState('')
     const [nameKugiran, setnameKugiran] = useState([])
+    const [hargaDiscount, sethargaDiscount] = useState(0);
+    const [discount, setdiscount] = useState(0);
 
 
     useEffect(() =>{
-        sethargaKugiran(getServiceDetailsKugiran.hargaKugiran)
+        setharga(getServiceDetailsKugiran.harga)
         setnameKugiran(getServiceDetailsKugiran.nameKugiran)
+        setdiscount(getServiceDetailsKugiran.discount)
+        sethargaDiscount(getServiceDetailsKugiran.hargaDiscount)
     },[getServiceDetailsKugiran])
 
     
     const submitServiceDetails = () => {
-        addServiceDetailsKugiran(nameKugiran ,hargaKugiran)
+        addServiceDetailsKugiran(nameKugiran ,harga, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
             <div className="form-section">
-                <h4>Harga Servis (RM)</h4>
-                <Input className="form-custom" type="number" placeholder="" value={hargaKugiran} onChange={(e) => {sethargaKugiran(e.target.value)}} />
+                <h4>Harga Sewa (RM)</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+            </div>
+            <div className="form-section">
+                <h4>Discount</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {
+                    let x = e.target.value;
+                    let har = harga;
+                    x = x / 100;
+                    har = har - (har * x);
+                    sethargaDiscount(har);
+                    setdiscount(e.target.value)
+                    }} value={discount} 
+                />
+            </div>
+            <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
                 <h4>Nama Kugiran</h4>

@@ -71,7 +71,7 @@ class Firebase {
 
     deleting(serviceType, id){
         this.db.collection(serviceType).doc(id).delete();
-        location.reload();
+        // location.reload();
     }
 
     

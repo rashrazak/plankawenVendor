@@ -4,53 +4,102 @@ import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import firebase from '../config/firebaseConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
+/*
+  hargaPerPerson,discount // addServiceDetailsKadBanner/addServiceDetailsCaterer/addServiceDetailsDoorGift/addServiceDetailsHantaran
+  harga,hargaDiscount // addServiceDetailsVenue/addServiceDetailsWeddingDress
+          /addServiceDetailsKugiran/addServiceDetailsPhotographer
+          /addServiceDetailsVideographer/addServiceDetailsPelamin
+  hargaTouchup,hargaDiscountTouchup
+  hargaFull,hargaDiscountFull
+
+  */
 const initialState = {
   user: null,
   isLogin:false,
   vendorDetails:null,
   vendorId:'',
   addServiceAbout:{
+    tnc:'',
+    extra:'',
     serviceType:'',
     serviceName:'',
     description:'',
     areaCovered:[],
-    status:'pending'
+    status:'pending' //pending,active,inactive
   },
-  addServiceDetailsVenue:{
-    hargaSewa:0,
-    lokasi:{},
+  addServiceDetailsVenue:{ // A
+    harga:0,
+    discount:0,
+    hargaDiscount:0,
+    lokasi:{
+      address:'',
+      lat:'',
+      lng:'',
+      state:'',
+      city:''
+    },
     alamatPenuh:'',
     waktuOperasi:''
   },
-  addServiceDetailsWeddingDress:{
-    hargaSewa:0,
-    lokasi:'',
-    syaratSewaan:''
+  addServiceDetailsWeddingDress:{ // A
+    harga:0,
+    discount:0,
+    hargaDiscount:0,
+    lokasi:{
+      address:'',
+      lat:'',
+      lng:'',
+      state:'',
+      city:''
+    },
+    syaratSewaan:'',
+    jenisSewa:[]
   },
-  addServiceDetailsKugiran:{
-    hargaSewa:0,
-    lokasi:'',
+  addServiceDetailsKugiran:{ // A
+    harga:0,
+    discount:0,
+    hargaDiscount:0,
+    lokasi:{
+      address:'',
+      lat:'',
+      lng:'',
+      state:'',
+      city:''
+    },
     waktuOperasi:''
   },
-  addServiceDetailsPhotographer:{
+  addServiceDetailsPhotographer:{ // A
     harga:0,
+    discount:0,
+    hargaDiscount:0,
     jenisEvent:[]
   },
-  addServiceDetailsVideographer:{
+  addServiceDetailsVideographer:{ // A
     harga:0,
+    discount:0,
+    hargaDiscount:0,
     jenisEvent:[]
+  
   },
-  addServiceDetailsPelamin:{
+  addServiceDetailsPelamin:{ // A
     harga:0,
+    discount:0,
+    hargaDiscount:0,
     jenisEvent:[]
+  
   },
-  addServiceDetailsMakeup:{
+  addServiceDetailsMakeup:{ // C
     hargaTouchup:0,
+    discountTouchup:0,
+    hargaDiscountTouchup:0,
     hargaFull:0,
+    discountFull:0,
+    hargaDiscountFull:0,
     jenisMakeup:[],
     jantina:[]
+  
   },
-  addServiceDetailsKadBanner:{
+  addServiceDetailsKadBanner:{ // B
     hargaPerPerson:0,
     discount:[],
     banner:false,
@@ -58,23 +107,23 @@ const initialState = {
       bannerSize:[],
       description:''
     }
+  
   },
-  addServiceDetailsCaterer:{
+  addServiceDetailsCaterer:{ // B
     hargaPerPerson:0,
     discount:[],
     senaraiLauk:[]
+  
   },
-  addServiceDetailsDoorGift:{
+  addServiceDetailsDoorGift:{ // B
     hargaPerPerson:0,
     discount:[]
+  
   },
-  addServiceDetailsHantaran:{
+  addServiceDetailsHantaran:{ // B
     hargaPerPerson:0,
     discount:[]
-  },
-  addServiceDetailsKugiran:{
-    namaKugiran:'',
-    hargaKugiran:0
+  
   },
   addServiceUpload:{
     serviceType:'',
@@ -166,7 +215,6 @@ class MyApp extends App {
     this.getServiceUpload()
     this.getVendorDetails()
   };
-
   signIn = async (email, password) => {
     try{
       let result =  await firebase.signIn(email, password);
@@ -200,7 +248,6 @@ class MyApp extends App {
     }
      
   };
-
   saveVendorDetails = (id, details) => {
     this.setState({
       vendorDetails:details,
@@ -210,7 +257,6 @@ class MyApp extends App {
     localStorage.setItem('vendorDetails', JSON.stringify({...details, id}) ) 
     
   }
-
   getVendorDetails = () => {
     let about = localStorage.getItem('vendorDetails');
     about = JSON.parse(about)
@@ -218,7 +264,6 @@ class MyApp extends App {
       this.setState({vendorDetails:about})
     }
   }
-
   signOut = () => {
     // this.setState({
     //   user: null,
@@ -229,7 +274,6 @@ class MyApp extends App {
       localStorage.removeItem('user');
     })
   };
-
   check = async (email) =>{
     try{
       let exist = await firebase.check(email)
@@ -240,10 +284,9 @@ class MyApp extends App {
       alert(error.message)
     }
   }
-
   createAddService = (pagex) => {
     
-    let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
+    let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
     let {id} = {...this.state.vendorDetails}
@@ -260,6 +303,8 @@ class MyApp extends App {
       areaCovered,
       serviceDetails,
       images,
+      tnc,
+      extra,
       created: x,
       getTime: x.getTime()
     }
@@ -273,10 +318,9 @@ class MyApp extends App {
       console.log(e)
     })
   }
-
   updateAddService = (pagex) => {
     
-    let {serviceType, serviceName, description, areaCovered, status} = {...this.state.addServiceAbout}
+    let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images, serviceId} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
     let {id} = {...this.state.vendorDetails}
@@ -293,6 +337,8 @@ class MyApp extends App {
       areaCovered,
       serviceDetails,
       images,
+      tnc,
+      extra,
       created: x,
       getTime: x.getTime()
     }
@@ -307,6 +353,15 @@ class MyApp extends App {
       console.log(e)
     })
   }
+  getServiceDetailsEdit = (name, val, id) => {
+    const x = this.state;
+    const serv = x[name]
+    console.log(serv)
+    this.setState({[name]:val});
+    localStorage.setItem([name], JSON.stringify(val) ) 
+    return true
+
+  }
   addServiceAboutTypeName = (type) => {
     let {addServiceAbout, addServiceUpload} = {...this.state}
     let currentService = addServiceAbout;
@@ -317,19 +372,22 @@ class MyApp extends App {
 
 
   }
-  addServiceAbout = (name, area, desc) => {
+  addServiceAbout = (name, area, desc, tnc, extra) => {
     let {addServiceAbout} = {...this.state}
     let currentService = addServiceAbout;
     let serviceName = name;
     let coveredArea = area;
     let description = desc;
+    let terms = tnc;
+    let ex = extra;
     currentService['serviceName'] = serviceName;
     currentService['areaCovered'] = coveredArea;
     currentService['description'] = description;
+    currentService['tnc'] = terms;
+    currentService['extra'] = ex;
     this.setState({addServiceAbout:currentService})
     localStorage.setItem('addServiceAbout', JSON.stringify(this.state.addServiceAbout) ) 
   }
-
   getServiceAbout = () => {
     let about = localStorage.getItem('addServiceAbout');
     about = JSON.parse(about)
@@ -340,126 +398,142 @@ class MyApp extends App {
       let serviceName = about.serviceName;
       let coveredArea = about.areaCovered;
       let description = about.description;
+      let terms = about.tnc;
+      let ex = about.extra;
       currentService['serviceType'] = typeName;
       currentService['serviceName'] = serviceName;
       currentService['areaCovered'] = coveredArea;
       currentService['description'] = description;
+      currentService['tnc'] = terms;
+      currentService['extra'] = ex;
       this.setState({addServiceAbout:currentService})
     }
   }
-
-  addServiceDetailsVenue = (harga, lokasi, waktuOperasi, alamatPenuh) => {
+  addServiceDetailsVenue = (hargax, lokasi, waktuOperasi, alamatPenuh, discount, hargaDiscount) => {
     let {addServiceDetailsVenue} = {...this.state}
     let currentService = addServiceDetailsVenue;
-    let hargaSewa = parseInt(harga);
+    let harga = parseInt(hargax);
     let lok = lokasi;
     let wo = waktuOperasi;
     let ap = alamatPenuh;
-    currentService['hargaSewa'] = hargaSewa;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
+    currentService['harga'] = harga;
     currentService['lokasi'] = lok;
     currentService['waktuOperasi'] = wo;
     currentService['alamatPenuh'] = ap;
     this.setState({addServiceDetailsVenue:currentService})
     localStorage.setItem('addServiceDetailsVenue', JSON.stringify(this.state.addServiceDetailsVenue) ) 
   }
-
-  getServiceDetailsVenue = () => {
+  getServiceDetailsVenue = () => { 
     let about = localStorage.getItem('addServiceDetailsVenue');
     about = JSON.parse(about)
     if (about != null) {
       let {addServiceDetailsVenue} = {...this.state}
       let currentService = addServiceDetailsVenue;
-      let hargaSewa = about.hargaSewa;
+      let harga = about.harga;
       let lokasi = about.lokasi;
       let waktuOperasi = about.waktuOperasi;
       let alamatPenuh = about.alamatPenuh;
-      currentService['hargaSewa'] = hargaSewa;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
+      currentService['harga'] = harga;
       currentService['lokasi'] = lokasi;
       currentService['waktuOperasi'] = waktuOperasi;
       currentService['alamatPenuh'] = alamatPenuh;
       this.setState({addServiceDetailsVenue:currentService})
     }
   }
-
-  getServiceDetailsEdit = (name, val, id) => {
-    const x = this.state;
-    const serv = x[name]
-    console.log(serv)
-    this.setState({[name]:val});
-    localStorage.setItem([name], JSON.stringify(val) ) 
-    return true
-
-  }
-
-  addServiceDetailsWeddingDress = (harga, lokasi, syaratSewaan) => {
+  addServiceDetailsWeddingDress = (hargax, lokasi, syaratSewaan, jenisSewa, discount, hargaDiscount) => {
     let {addServiceDetailsWeddingDress} = {...this.state}
     let currentService = addServiceDetailsWeddingDress;
-    let hargaSewa = harga;
+    let harga = hargax;
     let lok = lokasi;
     let wo = syaratSewaan;
-    currentService['hargaSewa'] = hargaSewa;
+    let js = jenisSewa;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
+    currentService['harga'] = harga;
     currentService['lokasi'] = lok;
     currentService['syaratSewaan'] = wo;
+    currentService['jenisSewa'] = js;
     this.setState({addServiceDetailsWeddingDress:currentService})
     localStorage.setItem('addServiceDetailsWeddingDress', JSON.stringify(this.state.addServiceDetailsWeddingDress) ) 
   }
-
   getServiceDetailsWeddingDress = () => {
     let about = localStorage.getItem('addServiceDetailsWeddingDress');
     about = JSON.parse(about)
     if (about != null) {
       let {addServiceDetailsWeddingDress} = {...this.state}
       let currentService = addServiceDetailsWeddingDress;
-      let hargaSewa = about.harga;
+      let harga = about.harga;
       let lokasi = about.lokasi;
       let syaratSewaan = about.syaratSewaan;
-      currentService['hargaSewa'] = hargaSewa;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
+      currentService['harga'] = harga;
       currentService['lokasi'] = lokasi;
       currentService['syaratSewaan'] = syaratSewaan;
       this.setState({addServiceDetailsWeddingDress:currentService})
     }
   }
-
-  addServiceDetailsKugiran = (harga, lokasi, waktuOperasi) => {
+  addServiceDetailsKugiran = (hargax, lokasi, waktuOperasi, discount, hargaDiscount) => {
     let {addServiceDetailsKugiran} = {...this.state}
     let currentService = addServiceDetailsKugiran;
-    let hargaSewa = harga;
+    let harga = hargax;
     let lok = lokasi;
     let wo = waktuOperasi;
-    currentService['hargaSewa'] = hargaSewa;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
+    currentService['harga'] = harga;
     currentService['lokasi'] = lok;
     currentService['waktuOperasi'] = wo;
     this.setState({addServiceDetailsKugiran:currentService})
     localStorage.setItem('addServiceDetailsKugiran', JSON.stringify(this.state.addServiceDetailsKugiran) ) 
   }
-
   getServiceDetailsKugiran = () => {
     let about = localStorage.getItem('addServiceDetailsKugiran');
     about = JSON.parse(about)
     if (about != null) {
       let {addServiceDetailsKugiran} = {...this.state}
       let currentService = addServiceDetailsKugiran;
-      let hargaSewa = about.harga;
+      let harga = about.harga;
       let lokasi = about.lokasi;
       let waktuOperasi = about.waktuOperasi;
-      currentService['hargaSewa'] = hargaSewa;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
+      currentService['harga'] = harga;
       currentService['lokasi'] = lokasi;
       currentService['waktuOperasi'] = waktuOperasi;
       this.setState({addServiceDetailsKugiran:currentService})
     }
   }
-
-  addServiceDetailsPhotographer = (harga, jenisEvent) => {
+  addServiceDetailsPhotographer = (harga, jenisEvent, discount, hargaDiscount) => {
     let {addServiceDetailsPhotographer} = {...this.state}
     let currentService = addServiceDetailsPhotographer;
     let har = harga;
     let je = jenisEvent;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
     currentService['harga'] = har;
     currentService['jenisEvent'] = je;
     this.setState({addServiceDetailsPhotographer:currentService})
     localStorage.setItem('addServiceDetailsPhotographer', JSON.stringify(this.state.addServiceDetailsPhotographer) ) 
   }
-
   getServiceDetailsPhotographer = () => {
     let about = localStorage.getItem('addServiceDetailsPhotographer');
     about = JSON.parse(about)
@@ -468,23 +542,29 @@ class MyApp extends App {
       let currentService = addServiceDetailsPhotographer;
       let har = about.harga;
       let je = about.jenisEvent;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
       currentService['harga'] = har;
       currentService['jenisEvent'] = je;
       this.setState({addServiceDetailsPhotographer:currentService})
     }
   }
-
-  addServiceDetailsVideographer = (harga, jenisEvent) => {
+  addServiceDetailsVideographer = (harga, jenisEvent, discount, hargaDiscount) => {
     let {addServiceDetailsVideographer} = {...this.state}
     let currentService = addServiceDetailsVideographer;
     let har = harga;
     let je = jenisEvent;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
     currentService['harga'] = har;
     currentService['jenisEvent'] = je;
     this.setState({addServiceDetailsVideographer:currentService})
     localStorage.setItem('addServiceDetailsVideographer', JSON.stringify(this.state.addServiceDetailsVideographer) ) 
   }
-
   getServiceDetailsVideographer = () => {
     let about = localStorage.getItem('addServiceDetailsVideographer');
     about = JSON.parse(about)
@@ -493,23 +573,29 @@ class MyApp extends App {
       let currentService = addServiceDetailsVideographer;
       let har = about.harga;
       let je = about.jenisEvent;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
       currentService['harga'] = har;
       currentService['jenisEvent'] = je;
       this.setState({addServiceDetailsVideographer:currentService})
     }
   }
-
-  addServiceDetailsPelamin = (harga, jenisEvent) => {
+  addServiceDetailsPelamin = (harga, jenisEvent, discount, hargaDiscount) => {
     let {addServiceDetailsPelamin} = {...this.state}
     let currentService = addServiceDetailsPelamin;
     let har = harga;
     let je = jenisEvent;
+    let d = discount;
+    let hd = hargaDiscount;
+    currentService['discount'] = d;
+    currentService['hargaDiscount'] = hd;
     currentService['harga'] = har;
     currentService['jenisEvent'] = je;
     this.setState({addServiceDetailsPelamin:currentService})
     localStorage.setItem('addServiceDetailsPelamin', JSON.stringify(this.state.addServiceDetailsPelamin) ) 
   }
-
   getServiceDetailsPelamin = () => {
     let about = localStorage.getItem('addServiceDetailsPelamin');
     about = JSON.parse(about)
@@ -518,12 +604,15 @@ class MyApp extends App {
       let currentService = addServiceDetailsPelamin;
       let har = about.harga;
       let je = about.jenisEvent;
+      let d = about.discount;
+      let hd = about.hargaDiscount;
+      currentService['discount'] = d;
+      currentService['hargaDiscount'] = hd;
       currentService['harga'] = har;
       currentService['jenisEvent'] = je;
       this.setState({addServiceDetailsPelamin:currentService})
     }
   }
-
   addServiceDetailsMakeup = (hargaTouchup, hargaFull, jenisMakeup, jantina) => {
     let {addServiceDetailsMakeup} = {...this.state}
     let currentService = addServiceDetailsMakeup;
@@ -538,7 +627,6 @@ class MyApp extends App {
     this.setState({addServiceDetailsMakeup:currentService})
     localStorage.setItem('addServiceDetailsMakeup', JSON.stringify(this.state.addServiceDetailsMakeup) ) 
   }
-
   getServiceDetailsMakeup = () => {
     let about = localStorage.getItem('addServiceDetailsMakeup');
     about = JSON.parse(about)
@@ -556,7 +644,6 @@ class MyApp extends App {
       this.setState({addServiceDetailsMakeup:currentService})
     }
   }
-
   addServiceDetailsKadBanner = (hargaPerPerson, discount, banner, bannerSize, bannerDescription) => {
     //add kad first
     let {addServiceDetailsKadBanner} = {...this.state}

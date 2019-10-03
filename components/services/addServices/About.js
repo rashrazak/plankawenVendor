@@ -26,6 +26,7 @@ function About({typeChange}) {
         // setSelect(selection);
         setSelect(select[index].isActive = true) 
         const namex = select[index].name;
+        console.log(namex)
         addServiceAboutTypeName(namex)
         typeChange(namex)
     }
