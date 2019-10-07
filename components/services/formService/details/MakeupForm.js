@@ -21,12 +21,20 @@ function MakeupForm({pagex}) {
     const [jantina, setjantina] = useState('')
     const [jenisMakeup, setjenisMakeup] = useState('')
     const [makeupFull, setmakeupFull] = useState(false)
+    const [hargaDiscountFull, sethargaDiscountFull] = useState(0);
+    const [discountFull, setdiscountFull] = useState(0);
     const [makeupTouchup, setmakeupTouchup] = useState(false)
+    const [hargaDiscountTouchup, sethargaDiscountTouchup] = useState(0);
+    const [discountTouchup, setdiscountTouchup] = useState(0);
 
 
     useEffect(() =>{
         sethargaTouchup(getServiceDetailsMakeup.hargaTouchup)
+        sethargaDiscountTouchup(getServiceDetailsMakeup.hargaDiscountTouchup)
+        setdiscountTouchup(getServiceDetailsMakeup.discountTouchup)
         sethargaFull(getServiceDetailsMakeup.hargaFull)
+        sethargaDiscountFull(getServiceDetailsMakeup.hargaDiscountFull)
+        setdiscountFull(getServiceDetailsMakeup.discountFull)
         setjantina(getServiceDetailsMakeup.jantina)
         setjenisMakeup(getServiceDetailsMakeup.jenisMakeup)
         setmakeupFull(()=> {
@@ -97,7 +105,7 @@ function MakeupForm({pagex}) {
             alert('Sila pilih jenis `makeup` ')
             return false
         }
-        addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina)
+        addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina, discountTouchup, discountFull, hargaDiscountTouchup, hargaDiscountFull)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -156,10 +164,28 @@ function MakeupForm({pagex}) {
                 }
             </div>
             {
-                makeupTouchup ? 
-                    <div className="form-section">
-                        <h4>Harga Makeup Touchup (RM)</h4>
-                        <Input className="form-custom" type="number" placeholder="" value={hargaTouchup} onChange={(e) => {sethargaTouchup(e.target.value)}} />
+                makeupTouchup ?
+                    <div> 
+                        <div className="form-section">
+                            <h4>Harga Makeup Touchup (RM)</h4>
+                            <Input className="form-custom" type="number" placeholder="" value={hargaTouchup} onChange={(e) => {sethargaTouchup(e.target.value)}} />
+                        </div>
+                        <div className="form-section">
+                        <h4>Discount</h4>
+                        <Input className="form-custom harga" type="number" onChange={(e) => {
+                                let x = e.target.value;
+                                let har = hargaTouchup;
+                                x = x / 100;
+                                har = har - (har * x);
+                                sethargaDiscountTouchup(har);
+                                setdiscountTouchup(e.target.value)
+                                }} value={discountTouchup} 
+                            />
+                        </div>
+                        <div className="form-section">
+                            <h4>Discount Price</h4>
+                            <Input className="form-custom harga" type="number" disabled value={hargaDiscountTouchup} />
+                        </div>
                     </div>
                 :
                     <div>
@@ -169,10 +195,28 @@ function MakeupForm({pagex}) {
 
             {
                 makeupFull ? 
-                <div className="form-section">
-                    <h4>Harga Makeup Full (RM)</h4>
-                    <Input className="form-custom" type="number" placeholder="" value={hargaFull} onChange={(e) => {sethargaFull(e.target.value)}} />
-                </div>
+                <div>
+                    <div className="form-section">
+                        <h4>Harga Makeup Full (RM)</h4>
+                        <Input className="form-custom" type="number" placeholder="" value={hargaFull} onChange={(e) => {sethargaFull(e.target.value)}} />
+                    </div>
+                    <div className="form-section">
+                    <h4>Discount</h4>
+                    <Input className="form-custom harga" type="number" onChange={(e) => {
+                            let x = e.target.value;
+                            let har = hargaFull;
+                            x = x / 100;
+                            har = har - (har * x);
+                            sethargaDiscountFull(har);
+                            setdiscountFull(e.target.value)
+                            }} value={discountFull} 
+                        />
+                    </div>
+                    <div className="form-section">
+                        <h4>Discount Price</h4>
+                        <Input className="form-custom harga" type="number" disabled value={hargaDiscountFull} />
+                    </div>
+                </div>       
                 :
                     <div>
                         {''}

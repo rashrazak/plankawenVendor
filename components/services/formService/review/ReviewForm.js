@@ -1,15 +1,39 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button } from 'reactstrap';
 import Router from 'next/router';
 import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 import LoginContext from '../../../../contexts/LoginContext'
-// import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
+
+
     
 function AboutForm({pagex}) {
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
+    const [coverImage, setcoverImage] = useState('')
+    const [images, setimages] = useState([])
+    const [serviceType, setserviceType] = useState('')
+    const [details, setdetails] = useState([])
+    const [about, setabout] = useState([])
+
+    useEffect(() => {
+        let images = getReview.addServiceUpload.images;
+        if (images.length > 0) {
+            setcoverImage(images[0]);
+            setimages(images);
+        }
+        console.log(getReview)
+        let x   = getReview.addServiceAbout.serviceType;
+        setserviceType(x);
+        let s   = 'addServiceDetails'+x;
+        
+        let details = getReview[s];
+        setdetails(details);
+
+        let about = getReview.addServiceAbout
+        setabout(about)
+    }, [getReview])
 
     const submitReview = () => {
         pagex == 'addservice' ? createAddService(pagex) : updateAddService(pagex) ;
@@ -21,30 +45,110 @@ function AboutForm({pagex}) {
     }, [getVendorDetails])
     return (
         <div className="review-form">
-            <div className="hero-review">
-                    <img src="/static/images/placeholder/placeholder-review-master.png"/>
-                <div className="hero-son-review">
-                    <img src="/static/images/placeholder/placeholder-review-master.png"/>
-                    <img src="/static/images/placeholder/placeholder-review-master.png"/>
-                    <img src="/static/images/placeholder/placeholder-review-master.png"/>
-                    <img src="/static/images/placeholder/placeholder-review-master.png"/>
-                </div>
-            </div>
+            {
+                images && coverImage ? 
+                    <div className="hero-review">
+                            <img src={coverImage.base64}/>
+                        <div className="hero-son-review">
+                            {images.map((v,i) => {
+                                return (<img key={i} onClick={() =>setcoverImage(v)} src={v.base64}/>)
+                            })}
+                        </div>
+                    </div>
+                :
+                    <div className="hero-review">
+                            <img src="/static/images/logos/unavailable.png"/>
+                        <div className="hero-son-review">
+                            <img src="/static/images/logos/unavailable.png"/>
+                            <img src="/static/images/logos/unavailable.png"/>
+                            <img src="/static/images/logos/unavailable.png"/>
+                            <img src="/static/images/logos/unavailable.png"/>
+                        </div>
+                    </div>
+
+            }
+            
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img src="/static/images/icon/ico-venue-white.png"/></span> Venue</p>
+                    <p><span><img src="/static/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
                 </div>
-                <div className="review-price">
-                    <img src="/static/images/icon/ico-dollar.png"/>
-                    <p><span>MYR</span> <br></br> 5,500</p>
-                </div>
+                {
+                    (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
+                    ? 
+                        <React.Fragment>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                               
+                            </div>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
+                            </div>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <p><span>% (Diskaun)</span> <br></br>{details.hargaTouchup}</p>
+                            </div>
+                            {
+                             'Untuk KadBanner'
+                            }
+                        </React.Fragment>
+                    : serviceType == 'Makeup'
+                    ?
+                        <React.Fragment>
+                            <div className="review-price">
+                                <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
+                                <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
+                                <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
+                            </div>
+                            <div className="review-price">
+                                <p><span>MYR (Touchup)</span> <br></br>{details.hargaFull}</p>
+                                <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
+                                <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
+                            </div>
+                        </React.Fragment>
+                    : 
+                        <React.Fragment>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <p><span>MYR (Harga Asal)</span> <br></br>{details.harga}</p>
+                            </div>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
+                            </div>
+                            <div className="review-price">
+                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
+                            </div>
+                            {
+                                'untuk weddingDress'
+                            }
+                        </React.Fragment>
+
+                }
+                
             </div>
-            <div className="review-name-and-places">
-                <h4>Dewan Serbaguna Section 9, Shah Alam</h4>
-                <p><span><img src="/static/images/icon/ico-location.png"/></span>Section 9, Shah Alam</p>
-            </div>
+            {
+                ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
+                    <div className="review-name-and-places">
+                        <h4>Service Name {about.serviceName}</h4>
+                        <p><span><img src="/static/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
+                    </div>
+                :
+                    <div className="review-name-and-places">
+                        <h4>Service Name {about.serviceName}</h4>
+                    </div>
+            }
+            
             <div className="review-desc">
-                <p>Why read motivational sayings? For motivation! You might need a bit, if you can use last year’s list of goals this year because it’s as good as new. All of us can benefit from inspirational thoughts, so here are ten great ones.</p>
+                <p>Description:</p>
+                <p>{about.description}</p>
+
+                <p>Terms And Condition:</p>
+                <p>{about.tnc}</p>
+
+                <p>Extra:</p>
+                <p>{about.extra}</p>
             </div>
             <div className="review-user">
                 <div className="review-user-image-and-det">
@@ -58,7 +162,7 @@ function AboutForm({pagex}) {
                     </div>
                 </div>
                 <div className="">
-                    <p>Kami menyediakan dewan dan beberapa pakej lain yang menarik. Sesuai untuk anda yang mempunyai budget yang limited  beserta pilihan barangan yang pelbagai.</p>
+                    <p>{about.description}</p>
                 </div>
             </div>
             <div className="form-button">

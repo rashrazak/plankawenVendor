@@ -19,6 +19,7 @@ function WeddingDressForm({serviceType, pagex}) {
     const [jenisSewa, setjenisSewa] = useState([])
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
+    const [alamatPenuh, setalamatPenuh] = useState('')
 
     useEffect(() =>{
         setharga(getServiceDetailsWeddingDress.harga)
@@ -27,6 +28,11 @@ function WeddingDressForm({serviceType, pagex}) {
         setdiscount(getServiceDetailsWeddingDress.discount)
         sethargaDiscount(getServiceDetailsWeddingDress.hargaDiscount)
         setjenisSewa(getServiceDetailsWeddingDress.jenisSewa)
+        setalamatPenuh(() => {
+            let al = getServiceDetailsWeddingDress.alamatPenuh
+            document.querySelector('.auto').value = al;
+            return al;
+        })
     },[getServiceDetailsWeddingDress])
 
     const handleChangeJenis = (e) => {
@@ -43,9 +49,14 @@ function WeddingDressForm({serviceType, pagex}) {
         }
         Swal.close()
     }
+    
+    const addAlamat = () => {
+        let x = document.querySelector('.auto').value;
+        setalamatPenuh(x)
+     }
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, syaratSewaan, jenisSewa, discount, hargaDiscount)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -109,7 +120,7 @@ function WeddingDressForm({serviceType, pagex}) {
             <div className="form-section">
                 <h4>Syarat Sewaan Baju </h4>
                 {/* by default waktu operasi */}
-                <Input className="form-custom" type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
+                <Input className="form-custom" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

@@ -51,7 +51,8 @@ const initialState = {
       city:'',
       postcode:''
     },
-    syaratSewaan:'',
+    alamatPenuh:'',
+    waktuOperasi:'',
     jenisSewa:[]
   },
   addServiceDetailsKugiran:{ // A
@@ -64,6 +65,7 @@ const initialState = {
       city:'',
       postcode:''
     },
+    alamatPenuh:'',
     waktuOperasi:''
   },
   addServiceDetailsPhotographer:{ // A
@@ -420,12 +422,16 @@ class MyApp extends App {
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
-    currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
-    currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
-    currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
+
+    if (currentService['alamatPenuh'] != alamatPenuh) {
+      currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
+      currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
+      currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
+      currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
+      currentService['alamatPenuh'] = ap;
+    }
+
     currentService['waktuOperasi'] = wo;
-    currentService['alamatPenuh'] = ap;
     this.setState({addServiceDetailsVenue:currentService})
     localStorage.setItem('addServiceDetailsVenue', JSON.stringify(this.state.addServiceDetailsVenue) ) 
   }
@@ -450,7 +456,7 @@ class MyApp extends App {
       this.setState({addServiceDetailsVenue:currentService})
     }
   }
-  addServiceDetailsWeddingDress = (hargax, lokasi, syaratSewaan, jenisSewa, discount, hargaDiscount) => {
+  addServiceDetailsWeddingDress = (hargax, lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount) => {
     let {addServiceDetailsWeddingDress} = {...this.state}
     let currentService = addServiceDetailsWeddingDress;
     let harga = hargax;
@@ -462,10 +468,15 @@ class MyApp extends App {
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
-    currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
-    currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
-    currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
+
+    if (currentService['alamatPenuh'] != alamatPenuh) {
+      currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
+      currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
+      currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
+      currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
+      currentService['alamatPenuh'] = ap;
+    }
+
     currentService['syaratSewaan'] = wo;
     currentService['jenisSewa'] = js;
     this.setState({addServiceDetailsWeddingDress:currentService})
@@ -482,11 +493,13 @@ class MyApp extends App {
       let syaratSewaan = about.syaratSewaan;
       let d = about.discount;
       let hd = about.hargaDiscount;
+      let alamatPenuh = about.alamatPenuh;
       currentService['discount'] = d;
       currentService['hargaDiscount'] = hd;
       currentService['harga'] = harga;
       currentService['lokasi'] = lokasi;
       currentService['syaratSewaan'] = syaratSewaan;
+      currentService['alamatPenuh'] = alamatPenuh;
       this.setState({addServiceDetailsWeddingDress:currentService})
     }
   }
@@ -621,13 +634,21 @@ class MyApp extends App {
       this.setState({addServiceDetailsPelamin:currentService})
     }
   }
-  addServiceDetailsMakeup = (hargaTouchup, hargaFull, jenisMakeup, jantina) => {
+  addServiceDetailsMakeup = (hargaTouchup, hargaFull, jenisMakeup, jantina, discountTouchup, discountFull, hargaDiscountTouchup, hargaDiscountFull) => {
     let {addServiceDetailsMakeup} = {...this.state}
     let currentService = addServiceDetailsMakeup;
     let harT = hargaTouchup;
     let harF = hargaFull;
     let je = jenisMakeup;
     let j = jantina;
+    let dT = discountTouchup;
+    let dF = discountFull;
+    let hDT = hargaDiscountTouchup;
+    let hDF = hargaDiscountFull;
+    currentService['hargaDiscountFull'] = hDF;
+    currentService['hargaDiscountTouchup'] = hDT;
+    currentService['discountFull'] = dF;
+    currentService['discountTouchup'] = dT;
     currentService['hargaTouchup'] = harT;
     currentService['hargaFull'] = harF;
     currentService['jenisMakeup'] = je;
@@ -645,6 +666,14 @@ class MyApp extends App {
       let harF = about.hargaFull;
       let je = about.jenisMakeup;
       let j = about.jantina;
+      let dT = about.discountTouchup;
+      let dF = about.discountFull;
+      let hDT = about.hargaDiscountTouchup;
+      let hDF = about.hargaDiscountFull;
+      currentService['hargaDiscountFull'] = hDF;
+      currentService['hargaDiscountTouchup'] = hDT;
+      currentService['discountFull'] = dF;
+      currentService['discountTouchup'] = dT;
       currentService['hargaTouchup'] = harT;
       currentService['hargaFull'] = harF;
       currentService['jenisMakeup'] = je;
