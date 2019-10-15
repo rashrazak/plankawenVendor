@@ -25,47 +25,22 @@ function PackageList() {
                     'Others']
     const [serviceList, setserviceList] = useState([])
     const [service, setservice] = useState([])
-    const [indexServiceList, setindexServiceList] = useState('');
+    const [serviceBefore, setserviceBefore] = useState([])
+    const [quantity, setquantity] = useState(100)
+    const [totalAfter, settotalAfter] = useState(0)
+    const [totalBefore, settotalBefore] = useState(0)
     const [modal, setmodal] = useState(false)
-    const [serviceType, setserviceType] = useState('')
-    const [serviceId, setserviceId] = useState('')
-    const [hargaPerPerson, sethargaPerPerson] = useState(0)
+    const [packageDiscount, setpackageDiscount] = useState(0)
 
-    //banner
-    const [bannerSize, setbannerSize] = useState([])
+    
 
-    //makeup
-    const [hargaTouchup, sethargaTouchup] = useState(0)
-    const [hargaFull, sethargaFull] = useState(0)
-
-    const confirmService = () => {
-        alert('hahahha')
-        var x = {};
-        if (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran') {
-            x = {serviceId,hargaPerPerson,serviceType}
-
-            if (serviceType == 'KadBanner') {
-                x.bannerSize = bannerSize
-            }
-        }else if (serviceType == 'Makeup') {
-            x = {serviceId,hargaTouchup,hargaFull,serviceType}
-        }else{
-
-        }
-        console.log(x)
-
-    }
+    
 
     const selectService = (index) => {
-        setindexServiceList(index)
         let data = serviceList[index];
         console.log(data)
-        setservice(data)
-        setserviceId(data.id)
-        setserviceType(data.serviceType)
-        data.serviceType =='KadBanner' ? setbannerSize(data.serviceDetails.bannerDesc.bannerSize) : '';
-        setmodal(!modal)
-
+        setservice([...service,data])
+        setserviceBefore([...serviceBefore,data])
     }
     
     const toggle = () => setmodal(!modal);
@@ -90,136 +65,185 @@ function PackageList() {
         }
     }, [user])
 
+
+    const deleteService = (index) => {
+        let sl = service;
+        sl.splice(index, 1);
+        setservice([...sl]);
+        setserviceBefore([...sl])
+    }
+
     useEffect(() => {
-        console.log(bannerSize)
-     }, [setbannerSize])
+        const calculateServiceBefore = () => {
+
+            if (serviceBefore.length > 0 && quantity) {
+    
+                var serv = serviceBefore
+                var totalPrice = 0;
+                var q = quantity; 
+    
+                serv.map((val, index) => {
+                    let st = val.serviceType
+                    if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran') {
+                        var hpp = parseInt(val.serviceDetails.hargaPerPerson)
+                        var disc = val.serviceDetails.discount
+    
+                        disc.map((val,index) =>{
+                            let dis = val.discount
+                            let max = val.max;
+                            let min = val.min
+    
+                            if (q >= min && q <= max ) {
+                                let har = q * hpp;
+                                dis = dis / 100;
+                                har = har - (har * dis);
+                                totalPrice += har
+                                
+                            }
+                        })
+                        if (st == 'KadBanner') {
+                            let setB = val.serviceDetails.banner
+                            if (setB) {
+                                let BSize = val.serviceDetails.bannerDesc.bannerSize
+                                BSize.map((val, index) =>{
+                                    let harg = parseInt(val.harga);
+                                    totalPrice += harg;
+                                })
+    
+                            }
+                        }
+                    }else if (st == 'Makeup') {
+                    
+                    }else{
+            
+                    }
+                    
+                });
+                let x = totalPrice;
+                settotalBefore(x)
+                if (totalAfter != 0) {
+                    let z = totalAfter
+                    let y = x;
+                    let d = (z / y) * 100
+                    d     = Math.round(d);
+                    d = d > 100 ? -d : d;
+                    setpackageDiscount(d)
+                }
+            }else{
+                settotalBefore(0)
+            }
+        }
+        calculateServiceBefore()
+    }, [serviceBefore,quantity])
 
     return (
-        
             <div>
-            {serviceList ? 
-                <div>
-                    <h1>Select Services</h1>
-                    <Table>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Service Type</th>
-                            <th>Service Name</th>
-                            <th>Status</th>
-                            <th>Date Created</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {serviceList.map((val,index) => {
-                                let date = new Date(val.getTime)
-                                return (
-                                    <tr key={index}>
-                                        <th scope="row">{index + 1}</th>
-                                        <td>{val.serviceType}</td>
-                                        <td>{val.serviceName}</td>
-                                        <td>{val.status}</td>
-                                        <td>{date.toString()}</td>
-                                        <td><Button onClick={() => selectService(index)} >Click </Button></td>
-                                        <td><Button onClick={() => viewInformation(index)} >Click </Button></td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </Table>
-                </div>
-            :
-                <div>
-                    <h1>Loading...</h1>
-                </div>
-           }
-                <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>{serviceType}</ModalHeader>
-                    <ModalBody>
-                        {serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran'? 
+                <Button onClick={toggle}>Add Service</Button>
+                {
+                    service.length > 0 ?
+                        <React.Fragment>
                             <div>
-                                <Label>Harga Per Pax (before) RM: {service.serviceDetails.hargaPerPerson}</Label>
-                                {
-                                    service.serviceDetails.discount.map((v,i) => {
-                                        return(
-                                            <li key={i}>Minimum:{v.min} Maximum:{v.max} Discount:{v.discount}</li>
-                                        )
-                                    })
-                                }
-                                <hr/>
-                                <Input type="number" placeholder="Please input the new harga per pax" onChange={(e)=> sethargaPerPerson(e.target.value)} />
-                                {
-                                    serviceType == 'KadBanner' && service.serviceDetails.banner == true ?
-                                        <React.Fragment>
-                                            <hr/>
-                                            <p>Butiran Banner</p>
-                                            <p>{service.serviceDetails.bannerDesc.description}</p>
-                                            {
-                                                service.serviceDetails.bannerDesc.bannerSize.map((v,i) => {
-                                                    return(
-                                                        <React.Fragment key={i}>
-                                                            <li >
-                                                                Harga lama:{v.harga} <br/> Size:{v.size}
-                                                                <p>Harga baru:{bannerSize[i].harga} <br/> Size:{bannerSize[i].size}</p>
-                                                                <Input type="number" placeholder={'Please add new banner price'} onChange={(e)=> {
-                                                                    let x = e.target.value || 0
-                                                                    setbannerSize((old)=>{
-                                                                        let y = old;
-                                                                        y[i] = {harga:x ,size:v.size};
-                                                                        return y;
-
-                                                                    }) }}/>
-                                                            </li>
-                                                            
-                                                        </React.Fragment>
-                                                    )
-                                                })
-                                            }        
-                                        </React.Fragment>
-                                    : serviceType == 'Caterer' ?
-                                        <React.Fragment>
-                                            <hr/>
-                                            <p>Senarai Lauk</p>
-                                            {
-                                                service.serviceDetails.senaraiLauk.map((v,i) => {
-                                                    return(
-                                                        <li key={i}>{v}</li>
-                                                    )
-                                                })
-                                            }   
-                                        </React.Fragment>
-                                        : ''
-                                }
+                                <Label>Quantity (if any)</Label>
+                                <Input type="number" value={quantity} onChange={e => {
+                                    setquantity(parseInt(e.target.value))
+                                
+                                }  }/>
                             </div>
-                            : serviceType == 'Makeup'
-                            ?
-                                <React.Fragment>
-                                    <div className="review-price">
-                                        <p><span>MYR (Touchup)</span> <br></br>{service.serviceDetails.hargaTouchup}</p>
-                                        <p><span>MYR (Diskaun)</span> <br></br>{service.serviceDetails.hargaDiscountTouchup}</p>
-                                        <p><span>% (Diskaun)</span> <br></br>{service.serviceDetails.discountTouchup}</p>
-
-                                        <Input type="number" placeholder={'Please add new touchup price'} onChange={(e)=> sethargaTouchup(e.target.value)}/>
-
-                                    </div>
-                                    <div className="review-price">
-                                        <p><span>MYR (Touchup)</span> <br></br>{service.serviceDetails.hargaFull}</p>
-                                        <p><span>MYR (Diskaun)</span> <br></br>{service.serviceDetails.hargaDiscountFull}</p>
-                                        <p><span>% (Diskaun)</span> <br></br>{service.serviceDetails.discountFull}</p>
-
-                                        <Input type="number" placeholder={'Please add new touchup price'} onChange={(e)=> sethargaFull(e.target.value)}/>
-                                    </div>
-                                </React.Fragment>
-                            : ''
-
-                        }
+                            <Table>
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service Type</th>
+                                    <th>Service Name</th>
+                                    <th>Details</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {service.map((val,index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
+                                                <td style={{width:'10%'}}>{val.serviceType}</td>
+                                                <td style={{width:'10%'}}>{val.serviceName}</td>
+                                                <td style={{width:'70%'}}>
+                                                 
+                                                </td>
+                                                <td style={{width:'10%'}}><Button onClick={() => deleteService(index)} >Delete </Button></td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Quantity: {quantity}</th>
+                                        <th>Total Before: {totalBefore}</th>
+                                        <th>Total After: <Input type="number" value={totalAfter} onChange={e => {
+                                                let x = parseInt(e.target.value) || 0
+                                                let y = totalBefore;
+                                                let d = (x / y) * 100
+                                                d     = Math.round(d);
+                                                d = d > 100 ? -d : d;
+                                                settotalAfter(x)
+                                                setpackageDiscount(d)
+                                            }}/>
+                                        </th>
+                                        <th>
+                                            Discount Difference: %{packageDiscount}
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </Table>
+                        </React.Fragment>
+                    : ''
+                }
+                
+                <Modal isOpen={modal} toggle={toggle} size={'lg'}>
+                    <ModalHeader toggle={toggle}>Service List</ModalHeader>
+                    <ModalBody>
+                    {serviceList ? 
+                        <div>
+                            <h4>Select Services</h4>
+                            <Table>
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Service Type</th>
+                                    <th>Service Name</th>
+                                    <th>Status</th>
+                                    <th>Date Created</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {serviceList.map((val,index) => {
+                                        let date = new Date(val.getTime)
+                                        return (
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
+                                                <td>{val.serviceType}</td>
+                                                <td>{val.serviceName}</td>
+                                                <td>{val.status}</td>
+                                                <td>{date.toString()}</td>
+                                                <td><Button onClick={() => selectService(index)} >Click </Button></td>
+                                                <td><Button onClick={() => viewInformation(index)} >Click </Button></td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </Table>
+                        </div>
+                    :
+                        <div>
+                            <h1>Loading...</h1>
+                        </div>
+                    }
                     
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={confirmService}>Confirm</Button>{' '}
-                        <Button color="secondary" onClick={toggle}>Cancel</Button>
+                        {/* <Button color="primary" onClick={confirmService}>Confirm</Button>{' '} */}
+                        <Button color="secondary" onClick={toggle}>OK</Button>
                     </ModalFooter>
                 </Modal> 
             </div>

@@ -9,7 +9,7 @@ import '../../css/about.css'
 import Swal from 'sweetalert2'
 import firebase from '../../config/firebaseConfig'
 import PackageName from '../../components/package/formService/PackageName';
-import PackageList from '../../components/package/formService/packageList';
+import PackageList from '../../components/package/formService/PackageList';
 
 
 function Package() {
