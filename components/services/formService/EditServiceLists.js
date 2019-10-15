@@ -9,6 +9,7 @@ import { get } from 'https';
 
 function EditServiceLists({serviceType}) {
     const {user} = useContext(LoginContext);
+    const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName} = useContext(AddServiceContext)
     const services = ['Venue',
                     'Canopy',
                     'KadBanner',
@@ -37,8 +38,6 @@ function EditServiceLists({serviceType}) {
                         let x = doc.id;
                         let y = doc.data()
                         let data = {...y, id:x}
-                        console.log(data)
-
                         setserviceList((old) => [...old, data])
                         setsearchList((old) => [...old, data]);
                     })
@@ -52,14 +51,15 @@ function EditServiceLists({serviceType}) {
         }
     }, [user])
 
-    const editFunction = (index) => {
+    const editFunction = async (index) => {
         let sl = serviceList[index]
-        console.log(sl);
+        let st = sl.serviceType;
+        let serv = 'addServiceDetails'+st;
         let id = sl.id;
-        addServiceAbout(sl.serviceName, sl.areaCovered, sl.description)
-        addServiceUpload(sl.images, serviceType, id);
-        getServiceDetailsEdit(objectType, sl.serviceDetails, id)
-
+        await addServiceAboutTypeName(st);
+        await addServiceAbout(sl.serviceName, sl.areaCovered, sl.description, sl.tnc, sl.extra)
+        await addServiceUpload(sl.images, st, id);
+        await getServiceDetailsEdit(serv, sl.serviceDetails, id)
         Router.push('/editservice/about')
 
     }

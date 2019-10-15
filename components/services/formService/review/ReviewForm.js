@@ -11,11 +11,13 @@ import Swal from 'sweetalert2'
 function AboutForm({pagex}) {
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
+
     const [coverImage, setcoverImage] = useState('')
     const [images, setimages] = useState([])
     const [serviceType, setserviceType] = useState('')
     const [details, setdetails] = useState([])
     const [about, setabout] = useState([])
+    const [vendorDetails, setvendorDetails] = useState([])
 
     useEffect(() => {
         let images = getReview.addServiceUpload.images;
@@ -23,13 +25,14 @@ function AboutForm({pagex}) {
             setcoverImage(images[0]);
             setimages(images);
         }
-        console.log(getReview)
+       
         let x   = getReview.addServiceAbout.serviceType;
         setserviceType(x);
         let s   = 'addServiceDetails'+x;
         
         let details = getReview[s];
         setdetails(details);
+        console.log(details)
 
         let about = getReview.addServiceAbout
         setabout(about)
@@ -40,8 +43,7 @@ function AboutForm({pagex}) {
     }
 
     useEffect(() => {
-        console.log(getVendorDetails)
-       
+        setvendorDetails(getVendorDetails)
     }, [getVendorDetails])
     return (
         <div className="review-form">
@@ -78,19 +80,8 @@ function AboutForm({pagex}) {
                         <React.Fragment>
                             <div className="review-price">
                                 <img src="/static/images/icon/ico-dollar.png"/>
-                               
+                                <p><span>MYR (Harga Pax)</span> <br></br>{details.hargaPerPerson}</p>
                             </div>
-                            <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
-                                <p><span>% (Diskaun)</span> <br></br>{details.hargaTouchup}</p>
-                            </div>
-                            {
-                             'Untuk KadBanner'
-                            }
                         </React.Fragment>
                     : serviceType == 'Makeup'
                     ?
@@ -101,7 +92,7 @@ function AboutForm({pagex}) {
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
                             </div>
                             <div className="review-price">
-                                <p><span>MYR (Touchup)</span> <br></br>{details.hargaFull}</p>
+                                <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                 <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
                             </div>
@@ -120,9 +111,6 @@ function AboutForm({pagex}) {
                                 <img src="/static/images/icon/ico-dollar.png"/>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
                             </div>
-                            {
-                                'untuk weddingDress'
-                            }
                         </React.Fragment>
 
                 }
@@ -131,7 +119,7 @@ function AboutForm({pagex}) {
             {
                 ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
                     <div className="review-name-and-places">
-                        <h4>Service Name {about.serviceName}</h4>
+                        <h4> {about.serviceName}</h4>
                         <p><span><img src="/static/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
                     </div>
                 :
@@ -141,6 +129,75 @@ function AboutForm({pagex}) {
             }
             
             <div className="review-desc">
+                {serviceType == "WeddingDress" ?
+                    <React.Fragment>
+                        <p>Jenis Baju</p>
+                        <ul>
+                            {
+                                details.jenisSewa.map((v,i) => {
+                                    return(
+                                        <li key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </React.Fragment>
+                    : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Pelamin' ? 
+                    <React.Fragment>
+                        <p>Jenis Kenduri</p>
+                        <ul>
+                            {
+                                details.jenisEvent.map((v,i) => {
+                                    return(
+                                        <li key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </React.Fragment>
+                    : serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
+                    <React.Fragment>
+                        <p>Bayaran Majlis</p>
+                        <ul>
+                            <li>Harga Pax: {details.hargaPerPerson}</li>
+                            {
+                                details.discount.map((v,i) => {
+                                    return(
+                                        <li key={i}>Minimum:{v.min} Maximum:{v.max} Discount:{v.discount}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                        {
+                            serviceType == 'KadBanner' && details.banner == true ?
+                                <React.Fragment>
+                                    <p>Butiran Banner</p>
+                                    <p>{details.bannerDesc.description}</p>
+                                    {
+                                        details.bannerDesc.bannerSize.map((v,i) => {
+                                            return(
+                                                <li key={i}>Harga:{v.harga} <br/> Size:{v.size}</li>
+                                            )
+                                        })
+                                    }        
+                                </React.Fragment>
+                            : serviceType == 'Caterer' ?
+                                <React.Fragment>
+                                    <p>Senarai Lauk</p>
+                                    {
+                                        details.senaraiLauk.map((v,i) => {
+                                            return(
+                                                <li key={i}>{v}</li>
+                                            )
+                                        })
+                                    }   
+                                </React.Fragment>
+                                : ''
+                        }
+                    </React.Fragment>
+                    :
+                    ''
+                }
                 <p>Description:</p>
                 <p>{about.description}</p>
 
@@ -150,21 +207,18 @@ function AboutForm({pagex}) {
                 <p>Extra:</p>
                 <p>{about.extra}</p>
             </div>
-            <div className="review-user">
+            {/* <div className="review-user">
                 <div className="review-user-image-and-det">
                     <div className="review-user-image">
                         <img src="/static/images/placeholder/placeholder-rara.jpg"/>
                     </div>
                     <div className="review-user-image-det">
                         <p>Provided by</p>
-                        <p>Tom John!</p>
-                        <p>Verified</p>
+                        <p>{vendorDetails.namaPemilik}</p>
+                        <p>{about.status}</p>
                     </div>
                 </div>
-                <div className="">
-                    <p>{about.description}</p>
-                </div>
-            </div>
+            </div> */}
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/upload`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}

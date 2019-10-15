@@ -21,13 +21,15 @@ function About({typeChange}) {
         {name:'Others',isActive:false},
     ]
     const [select, setSelect] = useState(selection)
+    const [click, setclick] = useState(false)
 
-    const eventSelection = (index) => {
-        // setSelect(selection);
+    const eventSelection = (index, e) => {
+        e.preventDefault()
         setSelect(select[index].isActive = true) 
         const namex = select[index].name;
         console.log(namex)
         addServiceAboutTypeName(namex)
+        setclick(true)
         typeChange(namex)
     }
 
@@ -37,10 +39,9 @@ function About({typeChange}) {
     }, [getServiceAbout])
 
     useEffect(() => {
-        return () => {
-            setSelect(selection);
-        };
-    }, [eventSelection])
+        setSelect(selection)
+        setclick(false)
+    }, [click])
 
     return (
         <React.Fragment>
@@ -48,19 +49,19 @@ function About({typeChange}) {
                 <div className="container container-1">
                     <p>Please choose your category</p>
                     <div className="choose-category">
-                        <Button onClick={() => eventSelection(0)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Venue</Button>{' '}
-                        {/* <Button onClick={() => eventSelection(1)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
-                        <Button onClick={() => eventSelection(2)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
-                        <Button onClick={() => eventSelection(3)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
-                        <Button onClick={() => eventSelection(4)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>Make Up</Button>{' '}
-                        <Button onClick={() => eventSelection(5)} className={`btn-category btn-photo ${serviceType == 'Photographer' ? 'btn-active':''} `}>Photographer</Button>{' '}
-                        <Button onClick={() => eventSelection(6)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>Videographer</Button>{' '}
-                        <Button onClick={() => eventSelection(7)} className={`btn-category btn-pelamin ${serviceType == 'Pelamin' ? 'btn-active':''} `}>Pelamin</Button>{' '}
-                        <Button onClick={() => eventSelection(8)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>Caterer</Button>{' '}
-                        <Button onClick={() => eventSelection(9)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>Hantaran</Button>{' '}
-                        <Button onClick={() => eventSelection(10)} className={`btn-category btn-persembahan ${serviceType == 'Kugiran' ? 'btn-active':''} `}>Kugiran</Button>{' '}
-                        <Button onClick={() => eventSelection(11)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
-                        <Button onClick={() => eventSelection(12)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>Others</Button>{' '}
+                        <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Venue</Button>{' '}
+                        {/* <Button onClick={(e) => eventSelection(1, e)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
+                        <Button onClick={(e) => eventSelection(2, e)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
+                        <Button onClick={(e) => eventSelection(3, e)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
+                        <Button onClick={(e) => eventSelection(4, e)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>Make Up</Button>{' '}
+                        <Button onClick={(e) => eventSelection(5, e)} className={`btn-category btn-photo ${serviceType == 'Photographer' ? 'btn-active':''} `}>Photographer</Button>{' '}
+                        <Button onClick={(e) => eventSelection(6, e)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>Videographer</Button>{' '}
+                        <Button onClick={(e) => eventSelection(7, e)} className={`btn-category btn-pelamin ${serviceType == 'Pelamin' ? 'btn-active':''} `}>Pelamin</Button>{' '}
+                        <Button onClick={(e) => eventSelection(8, e)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>Caterer</Button>{' '}
+                        <Button onClick={(e) => eventSelection(9, e)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>Hantaran</Button>{' '}
+                        <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Kugiran' ? 'btn-active':''} `}>Kugiran</Button>{' '}
+                        <Button onClick={(e) => eventSelection(11, e)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
+                        <Button onClick={(e) => eventSelection(12, e)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>Others</Button>{' '}
                     </div>
                 </div>
             </div>

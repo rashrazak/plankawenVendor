@@ -1,7 +1,8 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
+import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
 /*
@@ -311,7 +312,6 @@ class MyApp extends App {
 
     let y = firebase.addService(serviceType, data)
     y.then(() => {
-      alert('success')
       Router.push(`/${pagex}/done`)
     })
     .catch((e) => {
@@ -342,7 +342,6 @@ class MyApp extends App {
       created: x,
       getTime: x.getTime()
     }
-
     let y = firebase.updateService(serviceType, data, serviceId)
     y.then(() => {
       alert('success')
@@ -465,6 +464,7 @@ class MyApp extends App {
     let js = jenisSewa;
     let d = discount;
     let hd = hargaDiscount;
+    let ap = alamatPenuh;
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
@@ -725,9 +725,9 @@ class MyApp extends App {
         let bannerD = bannerDesc;
         let bannerDLS = about.bannerDesc //from localStorage
         let banS = bannerDLS.bannerSize;
-        let banD = bannerDLS.bannerDescription;
+        let banD = bannerDLS.description;
         bannerD['bannerSize'] = banS;
-        bannerD['banD'] = banD;
+        bannerD['description'] = banD;
         currentService['bannerDesc'] = bannerD;
       }
       this.setState({addServiceDetailsKadBanner:currentService})
@@ -887,7 +887,6 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Container>
         <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check, 
           getVendorDetails:this.state.vendorDetails, getVendorId:this.state.vendorId,
             saveVendorDetails:this.saveVendorDetails}}>
@@ -905,10 +904,11 @@ class MyApp extends App {
             addServiceDetailsHantaran:this.addServiceDetailsHantaran, getServiceDetailsHantaran:this.state.addServiceDetailsHantaran,
             addServiceUpload:this.addServiceUpload, getServiceUpload:this.state.addServiceUpload,
             getReview:this.state, createAddService:this.createAddService, updateAddService:this.updateAddService, resetAddService:this.resetAddService, getServiceDetailsEdit:this.getServiceDetailsEdit  }}>
-              <Component {...pageProps} />
+              <PackageContextProvider>
+                <Component {...pageProps} />
+              </PackageContextProvider>
             </AddServiceContext.Provider>
         </LoginContext.Provider>
-      </Container>
     );
   }
 }

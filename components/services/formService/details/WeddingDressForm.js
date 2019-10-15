@@ -49,7 +49,7 @@ function WeddingDressForm({serviceType, pagex}) {
         }
         Swal.close()
     }
-    
+
     const addAlamat = () => {
         let x = document.querySelector('.auto').value;
         setalamatPenuh(x)
@@ -108,7 +108,7 @@ function WeddingDressForm({serviceType, pagex}) {
             </div>
             <div className="form-section">
                 <h4>Lokasi Butik (tak boleh letak className)</h4>
-                <Autocomplete
+                <Autocomplete className="auto"
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}
                     onPlaceSelected={(place) => {
                     setlokasi(place)

@@ -26,6 +26,7 @@ function KadBannerForm({pagex}) {
     
 
     useEffect(() =>{
+        console.log(getServiceDetailsKadBanner)
         sethargaPerPerson(getServiceDetailsKadBanner.hargaPerPerson)
         setdiscount(getServiceDetailsKadBanner.discount)
         setbanner(getServiceDetailsKadBanner.banner)

@@ -12,9 +12,9 @@ function AddServiceAbout(props) {
         setServiceType(name)
     }
 
-    // useEffect(() => {
-    //     console.log(serviceType)
-    // }, [setServiceType])
+    useEffect(() => {
+        console.log(serviceType)
+    }, [setServiceType])
     return (
         <Head title={ 'Add Services'}>
             <div>
