@@ -19,13 +19,15 @@ function CatererForm({pagex}) {
     const [discountVal, setdiscountVal] = useState(0)
     const [arraySizeDiscount, setarraySizeDiscount] = useState(0)
     const [lauk, setlauk] = useState('')
-
-
+    const [changeMenu, setchangeMenu] = useState('')
+    const [changeVenue, setchangeVenue] = useState('')
 
     useEffect(() =>{
         sethargaPerPerson(getServiceDetailsCaterer.hargaPerPerson)
         setdiscount(getServiceDetailsCaterer.discount)
         setsenaraiLauk(getServiceDetailsCaterer.senaraiLauk)
+        setchangeMenu(getServiceDetailsCaterer.changeMenu)
+        setchangeVenue(getServiceDetailsCaterer.changeVenue)
         setarraySizeDiscount(() => {
             let disc = getServiceDetailsCaterer.discount
             if (disc.length > 0) {
@@ -102,12 +104,20 @@ function CatererForm({pagex}) {
     }, [senaraiLauk])
 
     const submitServiceDetails = () => {
-        addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk)
+        addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk, changeMenu, changeVenue)
         Router.push(`/${pagex}/upload`);
     }
 
     return (
         <div className="form-service">
+            <div className="form-section">
+                <h4>Change Menu</h4>
+                <Input className="form-custom" type="text" placeholder="" value={changeMenu} onChange={(e) => {setchangeMenu(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Change Venue</h4>
+                <Input className="form-custom" type="text" placeholder="" value={changeVenue} onChange={(e) => {setchangeVenue(e.target.value)}} />
+            </div>
             <div className="form-section">
                 <h4>Harga Satu Kepala (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />

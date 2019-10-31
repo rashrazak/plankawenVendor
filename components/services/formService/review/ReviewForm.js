@@ -142,9 +142,9 @@ function AboutForm({pagex}) {
                             }
                         </ul>
                     </React.Fragment>
-                    : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Pelamin' ? 
+                    : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Pelamin' || serviceType == 'Others' ? 
                     <React.Fragment>
-                        <p>Jenis Kenduri</p>
+                        <p>Jenis Kenduri/Event</p>
                         <ul>
                             {
                                 details.jenisEvent.map((v,i) => {
@@ -195,7 +195,39 @@ function AboutForm({pagex}) {
                                 : ''
                         }
                     </React.Fragment>
+                    : serviceType == 'Others' || serviceType == 'Pelamin' || serviceType == 'DoorGift' || serviceType == 'Hantaran'|| serviceType == 'Videographer'|| serviceType == 'Photographer' ?
+                    <React.Fragment>
+                        <p>Waktu Tiba</p>
+                        <p>details.waktuTiba</p>
+                    </React.Fragment>
+                    : serviceType == 'WeddingDress' || serviceType == 'Pelamin' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
+                    <React.Fragment>
+                        <p>Perubahan Design Berapa Kali</p>
+                        <p>{details.maxDesignChanges}</p>
+                    </React.Fragment>
+                    : serviceType == 'WeddingDress' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
+                    <React.Fragment>
+                        <React.Fragment>
+                                    <p>Kaedah Hantar</p>
+                                    {
+                                        details.jenisHantar.map((v,i) => {
+                                            return(
+                                                <li key={i}>{v}</li>
+                                            )
+                                        })
+                                    }   
+                        </React.Fragment>
+                              
+                    </React.Fragment>
+                    : serviceType == 'Caterer' ?
+                    <React.Fragment>
+                        <p>Berapa Kali Tukar Menu</p>
+                        <p>details.changeMenu</p>
+                        <p>Berapa Kali Tukar Venue</p>
+                        <p>details.changeVenue</p>
+                    </React.Fragment>
                     :
+                    
                     ''
                 }
                 <p>Description:</p>

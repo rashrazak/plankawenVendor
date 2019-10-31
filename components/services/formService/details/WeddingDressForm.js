@@ -6,12 +6,13 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function WeddingDressForm({serviceType, pagex}) {
+function WeddingDressForm({pagex}) {
     const jenisSewaArray = [
         {jenis:'Lelaki', status:false},
         {jenis:'Wanita', status:false},
         {jenis:'Pasangan', status:false},
     ];
+   
     const {getServiceDetailsWeddingDress, addServiceDetailsWeddingDress} = useContext(AddServiceContext);
     const [harga, setharga] = useState('');
     const [lokasi, setlokasi] = useState('');
@@ -20,6 +21,9 @@ function WeddingDressForm({serviceType, pagex}) {
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
     const [alamatPenuh, setalamatPenuh] = useState('')
+    const [jenisMaterial, setJenisMaterial] = useState('')
+    const [maxDesignChanges, setmaxDesignChanges] = useState(0)
+    const [jenisHantar, setjenisHantar] = useState('')
 
     useEffect(() =>{
         setharga(getServiceDetailsWeddingDress.harga)
@@ -28,6 +32,10 @@ function WeddingDressForm({serviceType, pagex}) {
         setdiscount(getServiceDetailsWeddingDress.discount)
         sethargaDiscount(getServiceDetailsWeddingDress.hargaDiscount)
         setjenisSewa(getServiceDetailsWeddingDress.jenisSewa)
+        setJenisMaterial(getServiceDetailsWeddingDress.jenisMaterial)
+        setmaxDesignChanges(getServiceDetailsWeddingDress.maxDesignChanges)
+        setjenisHantar(getServiceDetailsWeddingDress.jenisHantar)
+
         setalamatPenuh(() => {
             let al = getServiceDetailsWeddingDress.alamatPenuh
             document.querySelector('.auto').value = al;
@@ -56,7 +64,7 @@ function WeddingDressForm({serviceType, pagex}) {
      }
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -87,6 +95,13 @@ function WeddingDressForm({serviceType, pagex}) {
                 } )}
             </div>
             <div className="form-section">
+                <h4>Jenis Material</h4>
+                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+            </div><div className="form-section">
+                <h4>Max Changes Design</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+            </div>
+            <div className="form-section">
                 <h4>Harga Sewa (RM)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
             </div>
@@ -105,6 +120,21 @@ function WeddingDressForm({serviceType, pagex}) {
             <div className="form-section">
                 <h4>Discount Price</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
+            </div>
+            <div className="form-section">
+                <h4>Jenis Hantar</h4>
+                <FormGroup check>
+                    <Label check>
+                        <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        Postage
+                    </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                    <Label check>
+                        <Input type="radio" name="jenisHantar" value="self-pickup" checked={ jenisHantar == 'self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        Self Pickup
+                    </Label>
+                </FormGroup>
             </div>
             <div className="form-section">
                 <h4>Lokasi Butik (tak boleh letak className)</h4>

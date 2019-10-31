@@ -6,14 +6,14 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function PhotographerForm({pagex}) {
+function OthersForm({pagex}) {
     const jenisEventArray = [
         {jenis:'Nikah', status:false},
         {jenis:'Walimah', status:false},
         {jenis:'Outdoor', status:false},
     ];
-    const {getServiceDetailsPhotographer, addServiceDetailsPhotographer} = useContext(AddServiceContext);
-    const [harga, setharga] = useState('')
+    const {getServiceDetailsOthers, addServiceDetailsOthers} = useContext(AddServiceContext);
+    const [harga, setharga] = useState(0)
     const [jenisEvent, setjenisEvent] = useState([])
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
@@ -21,12 +21,12 @@ function PhotographerForm({pagex}) {
 
 
     useEffect(() =>{
-        setharga(getServiceDetailsPhotographer.harga)
-        setjenisEvent(getServiceDetailsPhotographer.jenisEvent)
-        setdiscount(getServiceDetailsPhotographer.discount)
-        sethargaDiscount(getServiceDetailsPhotographer.hargaDiscount)
-        setwaktuTiba(getServiceDetailsPhotographer.setwaktuTiba)
-    },[getServiceDetailsPhotographer])
+        setharga(getServiceDetailsOthers.harga)
+        setjenisEvent(getServiceDetailsOthers.jenisEvent)
+        setdiscount(getServiceDetailsOthers.discount)
+        sethargaDiscount(getServiceDetailsOthers.hargaDiscount)
+        setwaktuTiba(getServiceDetailsOthers.waktuTiba)
+    },[getServiceDetailsOthers])
 
     const handleChangeJenis = (e) => {
         Swal.showLoading()
@@ -45,12 +45,12 @@ function PhotographerForm({pagex}) {
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsPhotographer(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
+        addServiceDetailsOthers(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
         Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
-        <div className="form-section">
+            <div className="form-section">
                 <h4>Jenis Event</h4>
                 {jenisEventArray.map( (cty, index) =>{
                     let jen = cty.jenis;
@@ -58,9 +58,7 @@ function PhotographerForm({pagex}) {
                     if (jenisEvent != null) {
                         chckd = jenisEvent.includes(jen) ? true : false;
                     }
-                    
                     return(
-                        
                             <div key={index} className="area-covered-div">
                                 <label>
                                     <input type="checkbox"
@@ -71,9 +69,12 @@ function PhotographerForm({pagex}) {
                                     {jen}
                                 </label>
                             </div>
-                            
                     )
                 } )}
+            </div>
+            <div className="form-section">
+                <h4>Waktu Tiba</h4>
+                <Input className="form-custom harga" onChange={(e) => {setwaktuTiba(e.target.value)}} value={waktuTiba} />
             </div>
             <div className="form-section">
                 <h4>Harga (RM)</h4>
@@ -95,10 +96,7 @@ function PhotographerForm({pagex}) {
                 <h4>Discount Price</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
-            <div className="form-section">
-                <h4>Waktu Tiba</h4>
-                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
-            </div>
+            
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
@@ -117,4 +115,4 @@ function PhotographerForm({pagex}) {
     )
 }
 
-export default PhotographerForm
+export default OthersForm

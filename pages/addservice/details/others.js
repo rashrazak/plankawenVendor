@@ -3,19 +3,19 @@ import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
-import KugiranForm from '../../../components/services/formService/details/KugiranForm'
-function Kugiran(props) {
+import OthersForm from '../../../components/services/formService/details/OthersForm'
+function Others(props) {
 
     return (
-        <Head title={'Edit Details'}>
+        <Head title={ 'Add Details'}>
             <div>
                 <Step progress={1} />
             </div>
             <div>
-                <KugiranForm pagex={'editservice'} />
+                <OthersForm pagex={'addservice'} />
             </div>
         </Head>
     )
 }
 
-export default Kugiran
+export default Others

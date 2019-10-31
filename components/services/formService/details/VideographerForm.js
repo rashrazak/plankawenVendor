@@ -15,6 +15,7 @@ function VideographerForm({pagex}) {
     const [jenisEvent, setjenisEvent] = useState([])
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
+    const [waktuTiba, setwaktuTiba] = useState('')
 
 
     useEffect(() =>{
@@ -22,6 +23,7 @@ function VideographerForm({pagex}) {
         setjenisEvent(getServiceDetailsVideographer.jenisEvent)
         setdiscount(getServiceDetailsVideographer.discount)
         sethargaDiscount(getServiceDetailsVideographer.hargaDiscount)
+        setwaktuTiba(getServiceDetailsVideographer.waktuTiba)
     },[getServiceDetailsVideographer])
 
     const handleChangeJenis = (e) => {
@@ -41,7 +43,7 @@ function VideographerForm({pagex}) {
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsVideographer(harga ,jenisEvent, discount, hargaDiscount)
+        addServiceDetailsVideographer(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -90,6 +92,10 @@ function VideographerForm({pagex}) {
             <div className="form-section">
                 <h4>Discount Price</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
+            </div>
+            <div className="form-section">
+                <h4>Waktu Tiba</h4>
+                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

@@ -6,25 +6,27 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function KugiranForm({pagex}) {
+function PersembahanForm({pagex}) {
 
-    const {getServiceDetailsKugiran, addServiceDetailsKugiran} = useContext(AddServiceContext);
-    const [harga, setharga] = useState('')
-    const [nameKugiran, setnameKugiran] = useState([])
+    const {getServiceDetailsPersembahan, addServiceDetailsPersembahan} = useContext(AddServiceContext);
+    const [harga, setharga] = useState(0)
+    const [namaPersembahan, setnamaPersembahan] = useState('')
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
+    const [kaliPersembahan, setkaliPersembahan] = useState(0)
 
 
     useEffect(() =>{
-        setharga(getServiceDetailsKugiran.harga)
-        setnameKugiran(getServiceDetailsKugiran.nameKugiran)
-        setdiscount(getServiceDetailsKugiran.discount)
-        sethargaDiscount(getServiceDetailsKugiran.hargaDiscount)
-    },[getServiceDetailsKugiran])
+        setharga(getServiceDetailsPersembahan.harga)
+        setnamaPersembahan(getServiceDetailsPersembahan.namaPersembahan)
+        setdiscount(getServiceDetailsPersembahan.discount)
+        sethargaDiscount(getServiceDetailsPersembahan.hargaDiscount)
+        setkaliPersembahan(getServiceDetailsPersembahan.kaliPersembahan)
+    },[getServiceDetailsPersembahan])
 
     
     const submitServiceDetails = () => {
-        addServiceDetailsKugiran(nameKugiran ,harga, discount, hargaDiscount)
+        addServiceDetailsPersembahan(harga, discount, hargaDiscount, kaliPersembahan, namaPersembahan)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -50,8 +52,12 @@ function KugiranForm({pagex}) {
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
-                <h4>Nama Kugiran</h4>
-                <Input className="form-custom" type="text" placeholder="" value={nameKugiran} onChange={(e) => {setnameKugiran(e.target.value)}} />
+                <h4>Nama Persembahan</h4>
+                <Input className="form-custom" type="text" placeholder="" value={namaPersembahan} onChange={(e) => {setnamaPersembahan(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Berapa Kali Persembahan</h4>
+                <Input className="form-custom" type="number" placeholder="" value={kaliPersembahan} onChange={(e) => {setkaliPersembahan(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
@@ -71,4 +77,4 @@ function KugiranForm({pagex}) {
     )
 }
 
-export default KugiranForm
+export default PersembahanForm

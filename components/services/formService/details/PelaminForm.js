@@ -17,6 +17,9 @@ function PelaminForm({pagex}) {
     const [jenisEvent, setjenisEvent] = useState([])
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
+    const [waktuTiba, setwaktuTiba] = useState('')
+    const [jenisMaterial, setJenisMaterial] = useState('')
+    const [maxDesignChanges, setmaxDesignChanges] = useState(0)
 
 
     useEffect(() =>{
@@ -24,6 +27,9 @@ function PelaminForm({pagex}) {
         setjenisEvent(getServiceDetailsPelamin.jenisEvent)
         setdiscount(getServiceDetailsPelamin.discount)
         sethargaDiscount(getServiceDetailsPelamin.hargaDiscount)
+        setwaktuTiba(getServiceDetailsPelamin.waktuTiba)
+        setJenisMaterial(getServiceDetailsPelamin.jenisMaterial)
+        setmaxDesignChanges(getServiceDetailsPelamin.maxDesignChanges)
     },[getServiceDetailsPelamin])
 
     const handleChangeJenis = (e) => {
@@ -43,7 +49,7 @@ function PelaminForm({pagex}) {
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsPelamin(harga ,jenisEvent, discount, hargaDiscount)
+        addServiceDetailsPelamin(harga ,jenisEvent, discount, hargaDiscount, waktuTiba, jenisMaterial, maxDesignChanges)
         Router.push(`/${pagex}/upload`);
     }
     return (
@@ -90,8 +96,20 @@ function PelaminForm({pagex}) {
                 />
             </div>
             <div className="form-section">
+                <h4>Jenis Material</h4>
+                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+            </div>
+            <div className="form-section">
+                <h4>Max Changes Design</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+            </div>
+            <div className="form-section">
                 <h4>Discount Price</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
+            </div>
+            <div className="form-section">
+                <h4>Waktu Tiba</h4>
+                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

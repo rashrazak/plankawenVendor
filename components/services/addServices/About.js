@@ -16,7 +16,7 @@ function About({typeChange}) {
         {name:'Pelamin',isActive:false},
         {name:'Caterer',isActive:false},
         {name:'Hantaran',isActive:false},
-        {name:'Kugiran',isActive:false},
+        {name:'Persembahan',isActive:false},
         {name:'DoorGift',isActive:false},
         {name:'Others',isActive:false},
     ]
@@ -59,7 +59,7 @@ function About({typeChange}) {
                         <Button onClick={(e) => eventSelection(7, e)} className={`btn-category btn-pelamin ${serviceType == 'Pelamin' ? 'btn-active':''} `}>Pelamin</Button>{' '}
                         <Button onClick={(e) => eventSelection(8, e)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>Caterer</Button>{' '}
                         <Button onClick={(e) => eventSelection(9, e)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>Hantaran</Button>{' '}
-                        <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Kugiran' ? 'btn-active':''} `}>Kugiran</Button>{' '}
+                        <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Persembahan' ? 'btn-active':''} `}>Persembahan</Button>{' '}
                         <Button onClick={(e) => eventSelection(11, e)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
                         <Button onClick={(e) => eventSelection(12, e)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>Others</Button>{' '}
                     </div>

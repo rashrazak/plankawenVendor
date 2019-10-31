@@ -17,12 +17,19 @@ function DoorGiftForm({pagex}) {
     const [maxDiscount, setmaxDiscount] = useState(0)
     const [discountVal, setdiscountVal] = useState(0)
     const [arraySizeDiscount, setarraySizeDiscount] = useState(0)
-
+    const [waktuTiba, setwaktuTiba] = useState('')
+    const [jenisMaterial, setJenisMaterial] = useState('')
+    const [maxDesignChanges, setmaxDesignChanges] = useState(0)
+    const [jenisHantar, setjenisHantar] = useState('')
 
 
     useEffect(() =>{
         sethargaPerPerson(getServiceDetailsDoorGift.hargaPerPerson)
         setdiscount(getServiceDetailsDoorGift.discount)
+        setwaktuTiba(getServiceDetailsDoorGift.waktuTiba)
+        setJenisMaterial(getServiceDetailsDoorGift.jenisMaterial)
+        setmaxDesignChanges(getServiceDetailsDoorGift.maxDesignChanges)
+        setjenisHantar(getServiceDetailsDoorGift.jenisHantar)
         setarraySizeDiscount(() => {
             let disc = getServiceDetailsDoorGift.discount
             if (disc.length > 0) {
@@ -82,12 +89,20 @@ function DoorGiftForm({pagex}) {
     }, [discount])
 
     const submitServiceDetails = () => {
-        addServiceDetailsDoorGift(hargaPerPerson, discount)
+        addServiceDetailsDoorGift(hargaPerPerson, discount, waktuTiba, jenisMaterial, maxDesignChanges, jenisHantar)
         Router.push(`/${pagex}/upload`);
     }
 
     return (
         <div className="form-service">
+            <div className="form-section">
+                <h4>Jenis Material</h4>
+                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+            </div>
+            <div className="form-section">
+                <h4>Max Changes Design</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+            </div>
             <div className="form-section">
                 <h4>Harga Satu Kepala (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
@@ -140,6 +155,25 @@ function DoorGiftForm({pagex}) {
                     })
                     : ''
                 }
+            </div>
+            <div className="form-section">
+                <h4>Waktu Tiba</h4>
+                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Jenis Hantar</h4>
+                <FormGroup check>
+                    <Label check>
+                        <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        Postage
+                    </Label>
+                    </FormGroup>
+                    <FormGroup check>
+                    <Label check>
+                        <Input type="radio" name="jenisHantar" value="self-pickup" checked={ jenisHantar == 'self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        Self Pickup
+                    </Label>
+                </FormGroup>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
