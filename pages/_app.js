@@ -85,9 +85,8 @@ const initialState = {
     harga:0,
     discount:0,
     hargaDiscount:0,
-    jenisEvent:[],
+    jenisEvent:'',
     waktuTiba:''
-  
   },
   addServiceDetailsPelamin:{ // A
     harga:0,
@@ -602,18 +601,23 @@ class MyApp extends App {
       this.setState({addServiceDetailsPhotographer:currentService})
     }
   }
-  addServiceDetailsOthers = (harga, jenisEvent, discount, hargaDiscount, waktuTiba) => {
+  addJenisEventOthers = (jenis) =>{
+    let {addServiceDetailsOthers} = {...this.state}
+    let currentService = addServiceDetailsOthers;
+    let je = jenis;
+    currentService['jenisEvent'] = je;
+    this.setState({addServiceDetailsOthers:currentService})
+  }
+  addServiceDetailsOthers = (harga, discount, hargaDiscount, waktuTiba) => {
     let {addServiceDetailsOthers} = {...this.state}
     let currentService = addServiceDetailsOthers;
     let har = harga;
-    let je = jenisEvent;
     let d = discount;
     let hd = hargaDiscount;
     let wt = waktuTiba
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = har;
-    currentService['jenisEvent'] = je;
     currentService['waktuTiba'] = wt;
     
     this.setState({addServiceDetailsOthers:currentService})
@@ -992,7 +996,7 @@ class MyApp extends App {
             addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,
             addServiceDetailsPhotographer:this.addServiceDetailsPhotographer, getServiceDetailsPhotographer:this.state.addServiceDetailsPhotographer,
             addServiceDetailsVideographer:this.addServiceDetailsVideographer, getServiceDetailsVideographer:this.state.addServiceDetailsVideographer,
-            addServiceDetailsOthers:this.addServiceDetailsOthers, getServiceDetailsOthers:this.state.addServiceDetailsOthers,
+            addServiceDetailsOthers:this.addServiceDetailsOthers, getServiceDetailsOthers:this.state.addServiceDetailsOthers,addJenisEventOthers:this.addJenisEventOthers,
             addServiceDetailsPelamin:this.addServiceDetailsPelamin, getServiceDetailsPelamin:this.state.addServiceDetailsPelamin,
             addServiceDetailsWeddingDress:this.addServiceDetailsWeddingDress, getServiceDetailsWeddingDress:this.state.addServiceDetailsWeddingDress,
             addServiceDetailsMakeup:this.addServiceDetailsMakeup, getServiceDetailsMakeup:this.state.addServiceDetailsMakeup,

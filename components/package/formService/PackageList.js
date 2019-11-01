@@ -32,10 +32,6 @@ function PackageList() {
     const [modal, setmodal] = useState(false)
     const [packageDiscount, setpackageDiscount] = useState(0)
 
-    
-
-    
-
     const selectService = (index) => {
         let data = serviceList[index];
         console.log(data)
@@ -85,8 +81,8 @@ function PackageList() {
                 serv.map((val, index) => {
                     let st = val.serviceType
                     if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran') {
-                        var hpp = parseInt(val.serviceDetails.hargaPerPerson)
-                        var disc = val.serviceDetails.discount
+                        let hpp = parseInt(val.serviceDetails.hargaPerPerson)
+                        let disc = val.serviceDetails.discount
     
                         disc.map((val,index) =>{
                             let dis = val.discount
@@ -113,9 +109,13 @@ function PackageList() {
                             }
                         }
                     }else if (st == 'Makeup') {
-                    
-                    }else{
-            
+                        let hargaTouchup =  val.serviceDetails.hargaDiscountTouchup;
+                        let hargaFull = val.serviceDetails.hargaDiscountFull;
+                        totalPrice += hargaTouchup;
+                        totalPrice += hargaFull;
+
+                    }else if (st == 'Videographer' || st == 'Photographer' || st == 'Others'){
+                        
                     }
                     
                 });
@@ -126,6 +126,7 @@ function PackageList() {
                     let y = x;
                     let d = (z / y) * 100
                     d     = Math.round(d);
+                    d = 100 - d;
                     d = d > 100 ? -d : d;
                     setpackageDiscount(d)
                 }
@@ -183,6 +184,7 @@ function PackageList() {
                                                 let y = totalBefore;
                                                 let d = (x / y) * 100
                                                 d     = Math.round(d);
+                                                d = 100 - d;
                                                 d = d > 100 ? -d : d;
                                                 settotalAfter(x)
                                                 setpackageDiscount(d)

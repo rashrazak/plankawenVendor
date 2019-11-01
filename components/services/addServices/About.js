@@ -27,14 +27,12 @@ function About({typeChange}) {
         e.preventDefault()
         setSelect(select[index].isActive = true) 
         const namex = select[index].name;
-        console.log(namex)
         addServiceAboutTypeName(namex)
         setclick(true)
         typeChange(namex)
     }
 
     useEffect(() => {
-        console.log(serviceType)
         
     }, [getServiceAbout])
 

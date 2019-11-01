@@ -7,14 +7,9 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 import Swal from 'sweetalert2'
     
 function OthersForm({pagex}) {
-    const jenisEventArray = [
-        {jenis:'Nikah', status:false},
-        {jenis:'Walimah', status:false},
-        {jenis:'Outdoor', status:false},
-    ];
+
     const {getServiceDetailsOthers, addServiceDetailsOthers} = useContext(AddServiceContext);
     const [harga, setharga] = useState(0)
-    const [jenisEvent, setjenisEvent] = useState([])
     const [hargaDiscount, sethargaDiscount] = useState(0);
     const [discount, setdiscount] = useState(0);
     const [waktuTiba, setwaktuTiba] = useState('');
@@ -22,7 +17,7 @@ function OthersForm({pagex}) {
 
     useEffect(() =>{
         setharga(getServiceDetailsOthers.harga)
-        setjenisEvent(getServiceDetailsOthers.jenisEvent)
+        // setjenisEvent(getServiceDetailsOthers.jenisEvent)
         setdiscount(getServiceDetailsOthers.discount)
         sethargaDiscount(getServiceDetailsOthers.hargaDiscount)
         setwaktuTiba(getServiceDetailsOthers.waktuTiba)
@@ -33,49 +28,18 @@ function OthersForm({pagex}) {
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisEvent;
-        if (check) {
-            setjenisEvent(old =>[...old, name])
-        }else{
-            let index = jenisEvent.indexOf(name);
-            x.splice(index,1);
-            setjenisEvent([...x]);
-        }
+        
         Swal.close()
     }
 
 
     const submitServiceDetails = () => {
-        addServiceDetailsOthers(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
+        addServiceDetailsOthers(harga, discount, hargaDiscount, waktuTiba)
         Router.push(`/${pagex}/upload`);
     }
     return (
         <div className="form-service">
-            <div className="form-section">
-                <h4>Jenis Event</h4>
-                {jenisEventArray.map( (cty, index) =>{
-                    let jen = cty.jenis;
-                    let chckd  = false;
-                    if (jenisEvent != null) {
-                        chckd = jenisEvent.includes(jen) ? true : false;
-                    }
-                    return(
-                            <div key={index} className="area-covered-div">
-                                <label>
-                                    <input type="checkbox"
-                                        name={jen} 
-                                        checked={chckd}
-                                        onChange={(e) => handleChangeJenis(e)}
-                                    />
-                                    {jen}
-                                </label>
-                            </div>
-                    )
-                } )}
-            </div>
-            <div className="form-section">
-                <h4>Waktu Tiba</h4>
-                <Input className="form-custom harga" onChange={(e) => {setwaktuTiba(e.target.value)}} value={waktuTiba} />
-            </div>
+           
             <div className="form-section">
                 <h4>Harga (RM)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
@@ -96,7 +60,10 @@ function OthersForm({pagex}) {
                 <h4>Discount Price</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
-            
+            <div className="form-section">
+                <h4>Waktu Tiba</h4>
+                <Input className="form-custom harga" onChange={(e) => {setwaktuTiba(e.target.value)}} value={waktuTiba} />
+            </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}

@@ -83,8 +83,7 @@ function AboutForm({pagex}) {
                                 <p><span>MYR (Harga Pax)</span> <br></br>{details.hargaPerPerson}</p>
                             </div>
                         </React.Fragment>
-                    : serviceType == 'Makeup'
-                    ?
+                    : serviceType == 'Makeup' ?
                         <React.Fragment>
                             <div className="review-price">
                                 <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
@@ -121,6 +120,8 @@ function AboutForm({pagex}) {
                     <div className="review-name-and-places">
                         <h4> {about.serviceName}</h4>
                         <p><span><img src="/static/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
+                        <h4>Waktu Operasi</h4>
+                        <p>{details.waktuOperasi}</p>
                     </div>
                 :
                     <div className="review-name-and-places">
@@ -129,7 +130,7 @@ function AboutForm({pagex}) {
             }
             
             <div className="review-desc">
-                {serviceType == "WeddingDress" ?
+                {   serviceType == "WeddingDress" ?
                     <React.Fragment>
                         <p>Jenis Baju</p>
                         <ul>
@@ -141,8 +142,12 @@ function AboutForm({pagex}) {
                                 })
                             }
                         </ul>
+                        <p>Perubahan Design Berapa Kali</p>
+                        <p>{details.maxDesignChanges}</p>
+                        <p>Kaedah Hantar</p>
+                            {details.jenisHantar}
                     </React.Fragment>
-                    : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Pelamin' || serviceType == 'Others' ? 
+                    : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Others' ? 
                     <React.Fragment>
                         <p>Jenis Kenduri/Event</p>
                         <ul>
@@ -154,8 +159,10 @@ function AboutForm({pagex}) {
                                 })
                             }
                         </ul>
+                        <p>Waktu Tiba</p>
+                        <p>{details.waktuTiba}</p>
                     </React.Fragment>
-                    : serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
+                    : serviceType == 'KadBanner' ?
                     <React.Fragment>
                         <p>Bayaran Majlis</p>
                         <ul>
@@ -168,68 +175,80 @@ function AboutForm({pagex}) {
                                 })
                             }
                         </ul>
+                        <p>Butiran Banner</p>
+                        <p>{details.bannerDesc.description}</p>
                         {
-                            serviceType == 'KadBanner' && details.banner == true ?
-                                <React.Fragment>
-                                    <p>Butiran Banner</p>
-                                    <p>{details.bannerDesc.description}</p>
-                                    {
-                                        details.bannerDesc.bannerSize.map((v,i) => {
-                                            return(
-                                                <li key={i}>Harga:{v.harga} <br/> Size:{v.size}</li>
-                                            )
-                                        })
-                                    }        
-                                </React.Fragment>
-                            : serviceType == 'Caterer' ?
-                                <React.Fragment>
-                                    <p>Senarai Lauk</p>
-                                    {
-                                        details.senaraiLauk.map((v,i) => {
-                                            return(
-                                                <li key={i}>{v}</li>
-                                            )
-                                        })
-                                    }   
-                                </React.Fragment>
-                                : ''
-                        }
+                            details.bannerDesc.bannerSize.map((v,i) => {
+                                return(
+                                    <li key={i}>Harga:{v.harga} <br/> Size:{v.size}</li>
+                                )
+                            })
+                        }        
                     </React.Fragment>
-                    : serviceType == 'Others' || serviceType == 'Pelamin' || serviceType == 'DoorGift' || serviceType == 'Hantaran'|| serviceType == 'Videographer'|| serviceType == 'Photographer' ?
-                    <React.Fragment>
-                        <p>Waktu Tiba</p>
-                        <p>details.waktuTiba</p>
-                    </React.Fragment>
-                    : serviceType == 'WeddingDress' || serviceType == 'Pelamin' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
-                    <React.Fragment>
-                        <p>Perubahan Design Berapa Kali</p>
-                        <p>{details.maxDesignChanges}</p>
-                    </React.Fragment>
-                    : serviceType == 'WeddingDress' || serviceType == 'DoorGift' || serviceType == 'Hantaran' ?
-                    <React.Fragment>
+                    :   (serviceType == 'DoorGift' || serviceType == 'Hantaran') ?
                         <React.Fragment>
-                                    <p>Kaedah Hantar</p>
-                                    {
-                                        details.jenisHantar.map((v,i) => {
-                                            return(
-                                                <li key={i}>{v}</li>
-                                            )
-                                        })
-                                    }   
+                            <p>Material</p>
+                            <p>{details.jenisMaterial}</p>
+                            <p>Max Design Changes</p>
+                            <p>{details.maxDesignChanges}</p>
+                            <p>Jenis Hantar</p>
+                            <p>{details.jenisHantar}</p>
+                            <p>Waktu Tiba</p>
+                            <p>details.waktuTiba</p>
+                            <p>Kaedah Hantar</p>
+                            <p>{details.jenisHantar}</p>
+                            <p>Bayaran Majlis</p>
+                            {/* <ul>
+                                <li>Harga Pax: {details.hargaPerPerson}</li>
+                                {
+                                    details.discount.map((v,i) => {
+                                        return(
+                                            <li key={i}>Minimum:{v.min} Maximum:{v.max} Discount:{v.discount}</li>
+                                        )
+                                    })
+                                }
+                            </ul> */}
                         </React.Fragment>
-                              
-                    </React.Fragment>
+                    : serviceType == 'Pelamin' ?
+                        <React.Fragment>
+                            <p>Material</p>
+                            <p>{details.jenisMaterial}</p>
+                            <p>Max Design Changes</p>
+                            <p>{details.maxDesignChanges}</p>
+                            <p>Waktu Tiba</p>
+                            <p>{details.waktuTiba}</p>
+                        </React.Fragment>
+                   
                     : serviceType == 'Caterer' ?
                     <React.Fragment>
+                        <p>Senarai Lauk</p>
+                        {
+                            details.senaraiLauk.map((v,i) => {
+                                return(
+                                    <li key={i}>{v}</li>
+                                )
+                            })
+                        }   
                         <p>Berapa Kali Tukar Menu</p>
-                        <p>details.changeMenu</p>
+                        <p>{details.changeMenu}</p>
+                        
                         <p>Berapa Kali Tukar Venue</p>
-                        <p>details.changeVenue</p>
+                        <p>{details.changeVenue}</p>
+                        
+                        
+                    </React.Fragment>
+                    : serviceType == 'Persembahan' ?
+                    <React.Fragment>
+                        <p>Nama Persembahan</p>
+                        <p>{details.namaPersembahan}</p>
+                        <p>Berapa Kali Persembahan</p>
+                        <p>{details.kaliPersembahan}</p>
                     </React.Fragment>
                     :
                     
                     ''
                 }
+                
                 <p>Description:</p>
                 <p>{about.description}</p>
 
@@ -239,18 +258,6 @@ function AboutForm({pagex}) {
                 <p>Extra:</p>
                 <p>{about.extra}</p>
             </div>
-            {/* <div className="review-user">
-                <div className="review-user-image-and-det">
-                    <div className="review-user-image">
-                        <img src="/static/images/placeholder/placeholder-rara.jpg"/>
-                    </div>
-                    <div className="review-user-image-det">
-                        <p>Provided by</p>
-                        <p>{vendorDetails.namaPemilik}</p>
-                        <p>{about.status}</p>
-                    </div>
-                </div>
-            </div> */}
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/upload`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}

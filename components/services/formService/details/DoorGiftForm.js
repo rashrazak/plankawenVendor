@@ -95,14 +95,7 @@ function DoorGiftForm({pagex}) {
 
     return (
         <div className="form-service">
-            <div className="form-section">
-                <h4>Jenis Material</h4>
-                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
-            </div>
-            <div className="form-section">
-                <h4>Max Changes Design</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
-            </div>
+            
             <div className="form-section">
                 <h4>Harga Satu Kepala (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
@@ -174,6 +167,14 @@ function DoorGiftForm({pagex}) {
                         Self Pickup
                     </Label>
                 </FormGroup>
+            </div>
+            <div className="form-section">
+                <h4>Jenis Material</h4>
+                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+            </div>
+            <div className="form-section">
+                <h4>Max Changes Design</h4>
+                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

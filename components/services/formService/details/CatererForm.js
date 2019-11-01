@@ -110,14 +110,7 @@ function CatererForm({pagex}) {
 
     return (
         <div className="form-service">
-            <div className="form-section">
-                <h4>Change Menu</h4>
-                <Input className="form-custom" type="text" placeholder="" value={changeMenu} onChange={(e) => {setchangeMenu(e.target.value)}} />
-            </div>
-            <div className="form-section">
-                <h4>Change Venue</h4>
-                <Input className="form-custom" type="text" placeholder="" value={changeVenue} onChange={(e) => {setchangeVenue(e.target.value)}} />
-            </div>
+            
             <div className="form-section">
                 <h4>Harga Satu Kepala (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
@@ -206,7 +199,14 @@ function CatererForm({pagex}) {
                     : ''
                 }
             </div>
-    
+            <div className="form-section">
+                <h4>Change Menu</h4>
+                <Input className="form-custom" type="text" placeholder="" value={changeMenu} onChange={(e) => {setchangeMenu(e.target.value)}} />
+            </div>
+            <div className="form-section">
+                <h4>Change Venue</h4>
+                <Input className="form-custom" type="text" placeholder="" value={changeVenue} onChange={(e) => {setchangeVenue(e.target.value)}} />
+            </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}

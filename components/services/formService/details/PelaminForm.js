@@ -96,16 +96,16 @@ function PelaminForm({pagex}) {
                 />
             </div>
             <div className="form-section">
+                <h4>Discount Price</h4>
+                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
+            </div>
+            <div className="form-section">
                 <h4>Jenis Material</h4>
                 <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
             </div>
             <div className="form-section">
                 <h4>Max Changes Design</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
-            </div>
-            <div className="form-section">
-                <h4>Discount Price</h4>
-                <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
                 <h4>Waktu Tiba</h4>
