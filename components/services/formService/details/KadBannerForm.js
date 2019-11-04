@@ -159,12 +159,12 @@ function KadBannerForm({pagex}) {
                             <React.Fragment key={index}>
                                 <div  className="area-covered-div">
                                     <label>
-                                        <span>Min: {mi}</span>
-                                        <span>Max: {ma}</span>
+                                        <span>Min: {mi} | </span>
+                                        <span>Max: {ma} | </span>
                                         <span>Discount: {d} %</span>
                                         {(index == (discount.length - 1) )
                                             ? 
-                                            <Button  color="danger" onClick={() => deleteDiscount(index)}>Delete</Button>
+                                            <Button color="danger" className="round-delete" onClick={() => deleteDiscount(index)}>x</Button>
                                             :
                                             <div></div>
 
@@ -227,7 +227,7 @@ function KadBannerForm({pagex}) {
                                             <label>
                                                 <span>size: {sz}</span>
                                                 <span>Harga: {hrg}</span>
-                                                <Button  color="danger" onClick={() => deleteBanner(index)}>Delete</Button>
+                                                <Button  color="danger" className="round-delete" onClick={() => deleteBanner(index)}>x</Button>
                                             </label>
                                             <br/>
                                         </div>

@@ -145,13 +145,13 @@ function CatererForm({pagex}) {
 
                         return(
                             <React.Fragment key={index}>
-                                <div  className="area-covered-div">
-                                        <span>Min: {mi}</span>
-                                        <span>Max: {ma}</span>
+                                <div className="area-covered-div">
+                                        <span>Min: {mi} | </span>
+                                        <span>Max: {ma} | </span>
                                         <span>Discount: {d} %</span>
                                         {(index == (discount.length - 1) )
                                             ? 
-                                            <Button  color="danger" onClick={() => deleteDiscount(index)}>Delete</Button>
+                                            <Button color="danger" className="round-delete" onClick={() => deleteDiscount(index)}>x</Button>
                                             :
                                             <div></div>
 
@@ -189,7 +189,7 @@ function CatererForm({pagex}) {
                                 <div  className="area-covered-div">
                                     <label>
                                         <span>Lauk: {lauk}</span>
-                                        <Button  color="danger" onClick={() => deleteLauk(index)}>Delete</Button>
+                                        <Button color="danger" className="round-delete" onClick={() => deleteLauk(index)}>x</Button>
                                     </label>
                                     <br/>
                                 </div>
@@ -217,7 +217,7 @@ function CatererForm({pagex}) {
                 p {font-weight:400; color: #3e3e3e; font-size: 14px; }
                 .form-section { margin: 20px 0; }
                 h4 { text-align: center; font-weight: 400; color: #75848E; font-size: 16px; margin-bottom: 10px; }
-                .area-covered-div { display: inline-block; margin-right: 10px; }
+                .area-covered-div { display: inline-block; margin-right: 10px; width: 100%; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
             `}</style>

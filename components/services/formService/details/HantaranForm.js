@@ -132,12 +132,12 @@ function HantaranForm({pagex}) {
                         return(
                             <React.Fragment key={index}>
                                 <div  className="area-covered-div">
-                                        <span>Min: {mi}</span>
-                                        <span>Max: {ma}</span>
+                                        <span>Min: {mi} | </span>
+                                        <span>Max: {ma} | </span>
                                         <span>Discount: {d} %</span>
                                         {(index == (discount.length - 1) )
                                             ? 
-                                            <Button  color="danger" onClick={() => deleteDiscount(index)}>Delete</Button>
+                                            <Button  color="danger" className="round-delete" onClick={() => deleteDiscount(index)}>x</Button>
                                             :
                                             <div></div>
 

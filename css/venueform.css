@@ -26,3 +26,11 @@ textarea {
     border-radius: 25px;
     border: none;
 }
+.round-delete{
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    font-size: 13px;
+    padding: 0;
+    margin-left: 20px;
+}
