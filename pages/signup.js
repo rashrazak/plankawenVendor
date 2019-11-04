@@ -9,7 +9,7 @@ const submitLoading =(e)=>{
 
 }
 
-class sweetTest extends Component {
+class signup extends Component {
     render() {
         return (
             <div>
@@ -20,4 +20,4 @@ class sweetTest extends Component {
     }
 }
 
-export default sweetTest
+export default signup
