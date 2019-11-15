@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import '../css/login.css'
 import LoginContext from '../contexts/LoginContext'
 import Swal from 'sweetalert2'
+import Link from 'next/link';
 
 
 const Login = () => {
@@ -43,7 +44,12 @@ const Login = () => {
                     {message != '' && <div className="message">{message}</div>}
                     <button type="button" className="btn btn-primary" onClick={e => authenticate(e)}>Login</button>
                 </form>
+                <Link href="/SignUp"><a>Sign Up</a></Link>
             </div>
+            <style jsx>{`
+                .form-layout { text-align: center; }
+                a { margin-top: 10px;}
+            `}</style>
         </div>
     )
 }

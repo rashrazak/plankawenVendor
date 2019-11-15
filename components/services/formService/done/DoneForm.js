@@ -31,7 +31,7 @@ function DoneForm({pagex}) {
             <h5>Congratulations!</h5>
             <p>You’ve succesfully add your new service.</p>
             <div className="form-button">
-                <Button  color={'warning'} className="btn-next" onClick={() => Router.push(`/dashboard`)}>Dashboard</Button>{' '}
+                <Button color={'warning'} className="btn-next" onClick={() => Router.push(`/dashboard`)}>Dashboard</Button>{' '}
             </div>
             <style jsx>{`
                 .form-button { text-align: center; }
