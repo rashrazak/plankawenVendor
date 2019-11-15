@@ -297,7 +297,6 @@ class MyApp extends App {
     }
   }
   createAddService = (pagex) => {
-    
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
