@@ -17,15 +17,15 @@ const Login = () => {
         Swal.showLoading();
         e.preventDefault();
         if (email != '' || password != '') {
-            // let result = await check(email);
-            // if (!result) {
-            //     setMessage('You are not registered, please contact admin')
-            //     Swal.close();
+            let result = await check(email);
+            if (!result) {
+                setMessage('You are not registered, please contact admin')
+                Swal.close();
 
-            // }else{
+            }else{
                 signIn(email, password);
                 Swal.close();
-            // }
+            }
         } else {
           setMessage('Please enter your email and password');
           Swal.close();
