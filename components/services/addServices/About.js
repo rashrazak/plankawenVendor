@@ -47,7 +47,7 @@ function About({typeChange}) {
                 <div className="container container-1">
                     <p>Please choose your category</p>
                     <div className="choose-category">
-                        <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Venue</Button>{' '}
+                        <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Lokasi</Button>{' '}
                         {/* <Button onClick={(e) => eventSelection(1, e)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
                         <Button onClick={(e) => eventSelection(2, e)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
                         <Button onClick={(e) => eventSelection(3, e)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}

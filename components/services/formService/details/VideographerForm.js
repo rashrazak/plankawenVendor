@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 import Swal from 'sweetalert2'
@@ -75,10 +75,13 @@ function VideographerForm({pagex}) {
             </div>
             <div className="form-section">
                 <h4>Harga (RM)</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <Input className="form-custom harga" href="#" id="tooltipHarga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <UncontrolledTooltip placement="left" target="tooltipHarga">
+                    Harga LumpSump termasuk kos photobook/album/ dan juga caj penghantaran yang akan disediakan oleh Pelanggan ialah diluar servis  PlanKawen
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Discount</h4>
+                <h4>Diskaun (%)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {
                     let x = e.target.value;
                     let har = harga;
@@ -90,12 +93,15 @@ function VideographerForm({pagex}) {
                 />
             </div>
             <div className="form-section">
-                <h4>Discount Price</h4>
+                <h4>Harga selepas Diskaun (RM)</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
-                <h4>Waktu Tiba</h4>
-                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <h4>Waktu Ketibaan & Penghantaran</h4>
+                <Input className="form-custom harga" href="#" id="tooltipTiba" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipTiba">
+                    Terangkan waktu ketibaan anda sebelum Majlis dan bila Gambar/Photobook akan siap untuk penghantaran kepada pelanggan
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

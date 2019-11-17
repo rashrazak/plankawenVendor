@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 import Autocomplete from 'react-google-autocomplete'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -70,7 +70,7 @@ function WeddingDressForm({pagex}) {
     return (
         <div className="form-service">
             <div className="form-section">
-                <h4>Jenis Sewa</h4>
+                <h4>Jenis Sewaan</h4>
                 {jenisSewaArray.map( (cty, index) =>{
                     let jen = cty.jenis;
                     let chckd  = false;
@@ -95,18 +95,21 @@ function WeddingDressForm({pagex}) {
                 } )}
             </div>
             <div className="form-section">
-                <h4>Jenis Material</h4>
+                <h4>Jenis Kain</h4>
                 <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
             </div><div className="form-section">
-                <h4>Max Changes Design</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <h4>Perubahan maksimum rekaan</h4>
+                <Input className="form-custom harga" href="#" id="tooltipRekaan" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <UncontrolledTooltip placement="left" target="tooltipRekaan">
+                    Tetapkan syarat untuk beberapa kali perubahan rekaan boleh dilakukan selepas pembayaran. Sekiranya tiada, boleh letakkan sebagai '0'
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
                 <h4>Harga Sewa (RM)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
             </div>
             <div className="form-section">
-                <h4>Discount</h4>
+                <h4>Diskaun (%)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {
                     let x = e.target.value;
                     let har = harga;
@@ -118,11 +121,11 @@ function WeddingDressForm({pagex}) {
                 />
             </div>
             <div className="form-section">
-                <h4>Discount Price</h4>
+                <h4>Harga selepas Diskaun (RM)</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
-                <h4>Jenis Hantar</h4>
+                <h4>Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
                         <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
@@ -150,7 +153,10 @@ function WeddingDressForm({pagex}) {
             <div className="form-section">
                 <h4>Syarat Sewaan Baju </h4>
                 {/* by default waktu operasi */}
-                <Input className="form-custom" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
+                <Input className="form-custom" href="#" id="tooltipSyarat" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipSyarat">
+                    Terangkan sebarang syarat yang dikenakan untuk baju yang disewa. Contoh, tarikh pemulangan semula, kerosakan pada baju, dan sebagainya
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

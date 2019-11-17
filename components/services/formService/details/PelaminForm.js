@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -81,10 +81,13 @@ function PelaminForm({pagex}) {
             </div>
             <div className="form-section">
                 <h4>Harga(RM)</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <Input className="form-custom harga" href="#" id="tooltipHarga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <UncontrolledTooltip placement="left" target="tooltipHarga">
+                    Harga LumpSump termasuk kos penghantaran/pemasangan/pengemasan untuk produk disiapkan. Sebarang kos penginapan yang akan disediakan oleh Pelanggan ialah diluar servis PlanKawen
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Discount</h4>
+                <h4>Diskaun (%)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {
                     let x = e.target.value;
                     let har = harga;
@@ -96,20 +99,34 @@ function PelaminForm({pagex}) {
                 />
             </div>
             <div className="form-section">
-                <h4>Discount Price</h4>
+                <h4>Harga selepas Diskaun (RM)</h4>
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
                 <h4>Jenis Material</h4>
-                <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+                <Input className="form-custom harga" href="#" id="tooltipMaterial" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
+                <UncontrolledTooltip placement="left" target="tooltipMaterial">
+                    Terangkan ciri-ciri pelamin anda seperti: <br></br>
+                    - Jenis bunga yang digunakan  <br></br>
+                    - Pencahayaan <br></br>
+                    - Jenis dekorasi
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Max Changes Design</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <h4>Perubahan maksimum rekaan?</h4>
+                <Input className="form-custom harga" href="#" id="tooltipRekaan" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <UncontrolledTooltip placement="left" target="tooltipRekaan">
+                    Tetapkan syarat untuk beberapa kali perubahan rekaan boleh dilakukan selepas pembayaran. Sekiranya tiada, boleh letakkan sebagai '0'
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Waktu Tiba</h4>
-                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <h4>Penghantaran</h4>
+                <Input className="form-custom harga" href="#" id="tooltipPenghantaran" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipPenghantaran">
+                    Tetapkan waktu untuk pemasangan dan mengemas  barang-barang pelamin tersebut. Contoh: <br></br>
+                    - Pemasangan - sehari sebelum majlis <br></br>
+                    - Pengemasan - Sesudah Majlis
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

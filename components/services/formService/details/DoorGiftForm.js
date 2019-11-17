@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -97,20 +97,26 @@ function DoorGiftForm({pagex}) {
         <div className="form-service">
             
             <div className="form-section">
-                <h4>Harga Satu Kepala (RM)</h4>
+                <h4>Harga per Unit (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
             </div>
             <div className="form-section">
                 <h4>Senarai harga</h4>
                 <br/>
-                <p>Min quantity</p>
+                <p>Kuantiti Minimum</p>
                 <Input className="form-custom" type="number" placeholder="min quantity" value={minDiscount} onChange={(e) => {setminDiscount(e.target.value)}} />
                 <br/>
-                <p>Max quantity</p>
+                <p>Kuantiti Maksimum</p>
                 <Input className="form-custom" type="number" placeholder="max quantity" value={maxDiscount}  onChange={(e) => {setmaxDiscount(e.target.value)}} />
                 <br/>
-                <p>Any discount added?</p>
-                <Input className="form-custom" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <p>Diskaun per Pax (%)</p>
+                <Input className="form-custom" href="#" id="tooltipDiskaun" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipDiskaun">
+                    Diskaun mengikut minimum dan maksimum per pax. Contoh: <br></br>
+                    1 - 500 (0% diskaun per unit) <br></br>
+                    501 - 1000 (5% diskaun per unit) <br></br>
+                    1001 - 1500 (8% diskaun per unit) 
+                </UncontrolledTooltip>
                 <br/>
                 <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
             </div>
@@ -150,11 +156,14 @@ function DoorGiftForm({pagex}) {
                 }
             </div>
             <div className="form-section">
-                <h4>Waktu Tiba</h4>
-                <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <h4>Waktu Penghantaran</h4>
+                <Input className="form-custom harga" href="#" id="tooltipPenghantaran" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipPenghantaran">
+                    Tetapkan jangkaan waktu untuk produk anda disiapkan selepas menerima pembayaran
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Jenis Hantar</h4>
+                <h4>Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
                         <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
@@ -173,8 +182,11 @@ function DoorGiftForm({pagex}) {
                 <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
             </div>
             <div className="form-section">
-                <h4>Max Changes Design</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <h4>Perubahan maksimum rekaan?</h4>
+                <Input className="form-custom harga" href="#" id="tooltipRekaan" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
+                <UncontrolledTooltip placement="left" target="tooltipRekaan">
+                    Tetapkan syarat untuk beberapa kali perubahan rekaan boleh dilakukan selepas pembayaran. Sekiranya tiada, boleh letakkan sebagai '0'
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
