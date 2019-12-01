@@ -81,15 +81,15 @@ function AboutForm({serviceType, pagex}) {
                 <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
             </div>
             <div className="form-section">
-                <h4>Terms & Conditions</h4>
+                <h4>Terma dan Syarat </h4>
                 <Input className="form-custom" onChange={(e) => settnc(e.target.value)} type="textarea" placeholder="Terms & Conditions" value={tnc} />
             </div>
             <div className="form-section">
-                <h4>Extra Details</h4>
+                <h4>Maklumat tambahan</h4>
                 <Input className="form-custom" onChange={(e) => setextra(e.target.value)} type="textarea" placeholder="Extra Details, free gift etc" value={extra} />
             </div>
             <div className="form-section">
-                <h4> Area Covered</h4>
+                <h4> Lokasi Jangkauan</h4>
                 {gMapsCities.map( (cty, index) =>{
                     let bandar = cty.state;
                     let chckd  = false;

@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -32,7 +32,7 @@ function PersembahanForm({pagex}) {
     return (
         <div className="form-service">
             <div className="form-section">
-                <h4>Harga Sewa (RM)</h4>
+                <h4>Harga Servis LumpSump (RM)</h4>
                 <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
             </div>
             <div className="form-section">
@@ -52,12 +52,17 @@ function PersembahanForm({pagex}) {
                 <Input className="form-custom harga" type="number" disabled value={hargaDiscount} />
             </div>
             <div className="form-section">
-                <h4>Nama Persembahan</h4>
+                <h4>Nama Persembahan / Kumpulan</h4>
                 <Input className="form-custom" type="text" placeholder="" value={namaPersembahan} onChange={(e) => {setnamaPersembahan(e.target.value)}} />
             </div>
             <div className="form-section">
-                <h4>Berapa Kali Persembahan</h4>
-                <Input className="form-custom" type="number" placeholder="" value={kaliPersembahan} onChange={(e) => {setkaliPersembahan(e.target.value)}} />
+                <h4>Bil. Persembahan</h4>
+                <Input className="form-custom" href="#" id="tooltipTiba" type="number" placeholder="" value={kaliPersembahan} onChange={(e) => {setkaliPersembahan(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipTiba">
+                    Terangkan berapa bilangan persembahan yang akan dipertontonkan semasa majlis berlangsung. contoh;<br></br>
+                    - Kompang - 2(Pengantin masuk & selepas doa) <br></br>
+                    - Kugiran - 10 (Lagu yang akan dinyanyikan semasa majlis)
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

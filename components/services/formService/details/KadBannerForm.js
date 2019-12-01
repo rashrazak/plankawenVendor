@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -124,20 +124,26 @@ function KadBannerForm({pagex}) {
         <div className="form-service">
             
             <div className="form-section">
-                <h4>Harga Satu Kepala (RM)</h4>
+                <h4>Harga per Unit (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
             </div>
             <div className="form-section">
                 <h4>Senarai harga</h4>
                 <br/>
-                <p>Min quantity</p>
+                <p>Kuantiti Minimum</p>
                 <Input className="form-custom" type="number" placeholder="min quantity" value={minDiscount} onChange={(e) => {setminDiscount(e.target.value)}} />
                 <br/>
-                <p>Max quantity</p>
+                <p>Kuantiti Maksimum</p>
                 <Input className="form-custom" type="number" placeholder="max quantity" value={maxDiscount}  onChange={(e) => {setmaxDiscount(e.target.value)}} />
                 <br/>
-                <p>Any discount added?</p>
-                <Input className="form-custom" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <p>Diskaun per Pax (%)</p>
+                <Input className="form-custom" href="#" id="tooltipDiskaun" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipDiskaun">
+                    Diskaun mengikut minimum dan maksimum per pax. Contoh: <br></br>
+                    1 - 500 (0% diskaun per unit) <br></br>
+                    501 - 1000 (5% diskaun per unit) <br></br>
+                    1001 - 1500 (8% diskaun per unit) 
+                </UncontrolledTooltip>
                 <br/>
                 <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
             </div>
@@ -159,9 +165,9 @@ function KadBannerForm({pagex}) {
                             <React.Fragment key={index}>
                                 <div  className="area-covered-div">
                                     <label>
-                                        <span>Min: {mi} | </span>
-                                        <span>Max: {ma} | </span>
-                                        <span>Discount: {d} %</span>
+                                        <span>Minimum: {mi} | </span>
+                                        <span>Maksimum: {ma} | </span>
+                                        <span>Diskaun: {d} %</span>
                                         {(index == (discount.length - 1) )
                                             ? 
                                             <Button color="danger" className="round-delete" onClick={() => deleteDiscount(index)}>x</Button>
@@ -179,7 +185,7 @@ function KadBannerForm({pagex}) {
                 }
             </div>
             <div className="form-section">
-                <h4>Ada Service Banner ?</h4>
+                <h4>Turut menyediakan servis banner?</h4>
                 <div className="area-covered-div">
                     <label>
                         <input type="checkbox"
@@ -195,12 +201,15 @@ function KadBannerForm({pagex}) {
                 <React.Fragment> 
                     <div className="form-section">
                         <h4>Description Banner</h4>
-                        <Input className="form-custom" type="textarea" placeholder="" value={bannerDescription} onChange={(e) => {setbannerDescription(e.target.value)}} />
+                        <Input className="form-custom" href="#" id="tooltipHarga" type="textarea" placeholder="" value={bannerDescription} onChange={(e) => {setbannerDescription(e.target.value)}} />
+                        <UncontrolledTooltip placement="left" target="tooltipHarga">
+                            Terangkan jenis kain/fabrik digunakan sebagai banner anda dan sebarang informasi berkaitan
+                        </UncontrolledTooltip>
                     </div>
                     <div className="form-section">
                         <h4>Jenis Banner</h4>
                         <br/>
-                        <p>Size</p>
+                        <p>Saiz</p>
                         <Input className="form-custom" type="text" placeholder="Size Banner" value={sizex} onChange={(e) => {setsizex(e.target.value)}} />
                         <br/>
                         <p>Harga (RM)</p>

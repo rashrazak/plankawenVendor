@@ -7,7 +7,7 @@ import '../../css/venueform.css'
 import '../../css/about.css'
 import AboutForm from '../../components/services/formService/about/AboutForm'
 import AddServiceContext from '../../contexts/AddServiceContext'
-import {FormGroup, Label, Input} from 'reactstrap'
+import {FormGroup, Label, Input, UncontrolledTooltip} from 'reactstrap'
 function AddServiceAbout(props) {
     const {addJenisEventOthers, getServiceAbout, getServiceDetailsOthers} = useContext(AddServiceContext);
     const [serviceType, setServiceType] = useState('')
@@ -40,7 +40,7 @@ function AddServiceAbout(props) {
                 {
                     serviceType == 'Others' || getServiceAbout.serviceType == 'Others'  ?
                     <div className="form-service">
-                        <div className="form-section">
+                        <div className="form-section" href="#" id="tooltipEvent">
                             <h4>Jenis Event</h4>
                             <FormGroup check>
                                 <Label check>
@@ -61,6 +61,12 @@ function AddServiceAbout(props) {
                                 </Label>
                             </FormGroup>
                         </div>
+                        <UncontrolledTooltip placement="left" target="tooltipEvent">
+                            Contoh: <br></br>
+                            Makanan: Cendol, Ice Cream <br></br>
+                            DJ: PA Sistem, Pengacara <br></br>
+                            Booth: Photobooth, Insta booth
+                        </UncontrolledTooltip>
                     </div>
                     :''
 

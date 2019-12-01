@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -112,20 +112,26 @@ function CatererForm({pagex}) {
         <div className="form-service">
             
             <div className="form-section">
-                <h4>Harga Satu Kepala (RM)</h4>
+                <h4>Harga per Unit (RM)</h4>
                 <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
             </div>
             <div className="form-section">
                 <h4>Senarai harga</h4>
                 <br/>
-                <p>Min quantity</p>
+                <p>Kuantiti Minimum</p>
                 <Input className="form-custom" type="number" placeholder="min quantity" value={minDiscount} onChange={(e) => {setminDiscount(e.target.value)}} />
                 <br/>
-                <p>Max quantity</p>
+                <p>Kuantiti Maksimum</p>
                 <Input className="form-custom" type="number" placeholder="max quantity" value={maxDiscount}  onChange={(e) => {setmaxDiscount(e.target.value)}} />
                 <br/>
-                <p>Any discount added?</p>
-                <Input className="form-custom" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <p>Diskaun per Pax (%)</p>
+                <Input className="form-custom" href="#" id="tooltipDiskaun" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipDiskaun">
+                    Diskaun mengikut minimum dan maksimum per pax. Contoh: <br></br>
+                    1 - 500 (0% diskaun per unit) <br></br>
+                    501 - 1000 (5% diskaun per unit) <br></br>
+                    1001 - 1500 (8% diskaun per unit) 
+                </UncontrolledTooltip>
                 <br/>
                 <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
             </div>
@@ -167,8 +173,15 @@ function CatererForm({pagex}) {
             <div className="form-section">
                 <h4>Jenis Lauk</h4>
                 <br/>
-                <p>Nama Lauk</p>
-                <Input className="form-custom" type="textarea" placeholder="Nama Lauk dan Description" value={lauk} onChange={(e) => {setlauk(e.target.value)}} />
+                <p>Nama hidangan / lauk</p>
+                <Input className="form-custom" href="#" id="tooltipHidangan" type="textarea" placeholder="Nama hidangan / lauk dan deskripsi" value={lauk} onChange={(e) => {setlauk(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipHidangan">
+                    Senaraikan satu per satu lauk/hidangan yang akan disediakan dalam servis anda. Contoh: <br></br>
+                    - Nasi Beriyani (beras basmathi) <br></br>
+                    -  Ayam Berempah / Ayam Masak Sambal <br></br>
+                    - Kuah dal sayur (boleh ditukar kepada acar) <br></br> 
+                    - Daging Berempah
+                </UncontrolledTooltip>
                 <br/>
                 <Button  color="primary" onClick={() => addLauk()}>Add</Button>
             </div>
@@ -200,12 +213,18 @@ function CatererForm({pagex}) {
                 }
             </div>
             <div className="form-section">
-                <h4>Change Menu</h4>
-                <Input className="form-custom" type="text" placeholder="" value={changeMenu} onChange={(e) => {setchangeMenu(e.target.value)}} />
+                <h4>Syarat Perubahan kepada Menu</h4>
+                <Input className="form-custom" href="#" id="tooltipMenu" type="text" placeholder="" value={changeMenu} onChange={(e) => {setchangeMenu(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipMenu">
+                    Terangkan sebarang syarat sekiranya terdapat sebarang perubahan pada menu dari pelanggan atau anda
+                </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Change Venue</h4>
-                <Input className="form-custom" type="text" placeholder="" value={changeVenue} onChange={(e) => {setchangeVenue(e.target.value)}} />
+                <h4>Syarat Perubahan kepada Lokasi</h4>
+                <Input className="form-custom" href="#" id="tooltipLokasi" type="text" placeholder="" value={changeVenue} onChange={(e) => {setchangeVenue(e.target.value)}} />
+                <UncontrolledTooltip placement="left" target="tooltipLokasi">
+                    Terangkan sebarang syarat sekiranya terdapat sebarang perubahan pada lokasi majlis
+                </UncontrolledTooltip>
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}

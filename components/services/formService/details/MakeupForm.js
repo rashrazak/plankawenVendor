@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
 // import '../../../../css/Venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
@@ -167,11 +167,11 @@ function MakeupForm({pagex}) {
                 makeupTouchup ?
                     <div> 
                         <div className="form-section">
-                            <h4>Harga Makeup Touchup (RM)</h4>
+                            <h4>Harga Touchup (RM)</h4>
                             <Input className="form-custom" type="number" placeholder="" value={hargaTouchup} onChange={(e) => {sethargaTouchup(e.target.value)}} />
                         </div>
                         <div className="form-section">
-                        <h4>Discount</h4>
+                        <h4>Diskaun (%)</h4>
                         <Input className="form-custom harga" type="number" onChange={(e) => {
                                 let x = e.target.value;
                                 let har = hargaTouchup;
@@ -183,7 +183,7 @@ function MakeupForm({pagex}) {
                             />
                         </div>
                         <div className="form-section">
-                            <h4>Discount Price</h4>
+                            <h4>Harga selepas Diskaun (RM)</h4>
                             <Input className="form-custom harga" type="number" disabled value={hargaDiscountTouchup} />
                         </div>
                     </div>
@@ -201,7 +201,7 @@ function MakeupForm({pagex}) {
                         <Input className="form-custom" type="number" placeholder="" value={hargaFull} onChange={(e) => {sethargaFull(e.target.value)}} />
                     </div>
                     <div className="form-section">
-                    <h4>Discount</h4>
+                    <h4>Diskaun (%)</h4>
                     <Input className="form-custom harga" type="number" onChange={(e) => {
                             let x = e.target.value;
                             let har = hargaFull;
@@ -213,7 +213,7 @@ function MakeupForm({pagex}) {
                         />
                     </div>
                     <div className="form-section">
-                        <h4>Discount Price</h4>
+                        <h4>Harga selepas Diskaun (RM)</h4>
                         <Input className="form-custom harga" type="number" disabled value={hargaDiscountFull} />
                     </div>
                 </div>       
