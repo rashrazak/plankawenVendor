@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import '../css/venueform.css'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Swal from 'sweetalert2'
 
 function VendorForm() {
 
@@ -24,6 +25,20 @@ function VendorForm() {
     ];
 
     const [cityArray, setCityArray] = useState([]);
+    const handleChangeKawasan = (e) => {
+        Swal.showLoading()
+        let name = e.target.name;
+        let check = e.target.checked;
+        let x = cityArray;
+        if (check) {
+            setCityArray(old =>[...old, name])
+        }else{
+            let index = cityArray.indexOf(name);
+            x.splice(index,1);
+            setCityArray([...x]);
+        }
+        Swal.close()
+    }
  
     return (
         <div className="">

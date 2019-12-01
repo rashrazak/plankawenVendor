@@ -21,15 +21,13 @@ const Login = () => {
             if (!result) {
                 setMessage('You are not registered, please contact admin')
                 Swal.close();
-
             }else{
                 signIn(email, password);
                 Swal.close();
             }
         } else {
-          setMessage('Please enter your email and password');
-          Swal.close();
-
+            setMessage('Please enter your email and password');
+            Swal.close();
         }
     };
 

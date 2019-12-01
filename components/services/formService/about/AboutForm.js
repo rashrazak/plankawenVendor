@@ -52,7 +52,6 @@ function AboutForm({serviceType, pagex}) {
     },[getServiceAbout])
 
     const handleChangeKawasan = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = cityArray;
@@ -63,7 +62,6 @@ function AboutForm({serviceType, pagex}) {
             x.splice(index,1);
             setCityArray([...x]);
         }
-        Swal.close()
     }
 
     const submitServiceAbout = () => {

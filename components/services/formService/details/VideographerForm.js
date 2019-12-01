@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
-import Swal from 'sweetalert2'
     
 function VideographerForm({pagex}) {
     const jenisEventArray = [
@@ -27,7 +26,6 @@ function VideographerForm({pagex}) {
     },[getServiceDetailsVideographer])
 
     const handleChangeJenis = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisEvent;
@@ -38,7 +36,6 @@ function VideographerForm({pagex}) {
             x.splice(index,1);
             setjenisEvent([...x]);
         }
-        Swal.close()
     }
 
 
