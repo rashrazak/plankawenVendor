@@ -17,7 +17,6 @@ class signup extends Component {
         return (
            
             <div className="bg-color">
-                <img className="logo-oficial" src="/static/images/logos/logo-official.png"></img>
                 <div className="vendor-signup-section">
                     <VendorForm></VendorForm>
                 </div> 
@@ -25,9 +24,9 @@ class signup extends Component {
                 <style jsx>{`
                     .form-layout { text-align: center; }
                     a { margin-top: 10px;}
-                    .bg-color { background: rgb(245,154,134); background: linear-gradient(360deg, rgba(245,154,134,1) 0%, rgba(244,244,244,1) 100%); width: 100%; position: relative; }
-                    .logo-oficial { position: absolute; top: 20px; left: 20px;}
-                    .vendor-signup-section { max-width: 700px; margin: auto; padding: 100px 0; height: 100vh;}
+                    .bg-color { background-color: #4bd19f; }
+                    .logo-oficial { margin: auto; }
+                    .vendor-signup-section { max-width: 700px; margin: auto; padding: 100px 0;}
                 `}</style>
             </div>
           

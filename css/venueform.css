@@ -45,11 +45,12 @@ textarea {
     cursor: pointer;
 }
 .btn-daftar, .btn-daftar:hover{
-    background-color: #ED795F;
-    border: #ED795F;
+    background-color: #4bd19f;
+    border: #4bd19f;
     border-radius: 25px;
     color: #FFF;
     font-weight: bold;
-    height: 45px;
-    width: 165px;
+    height: 30px;
+    width: 100%;
+    padding: 4px;
 }
