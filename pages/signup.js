@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import Swal from 'sweetalert2'
-import MasterLayout from '../components/hoc/masterLayout'
 import VendorForm from '../components/VendorForm';
 import '../css/index.css'
-import Navbar from 'react-bootstrap/Navbar'
-import NavItem from 'react-bootstrap/NavItem' 
 
 
 const submitLoading =(e)=>{
