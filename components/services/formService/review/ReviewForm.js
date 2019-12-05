@@ -152,12 +152,15 @@ function AboutForm({pagex}) {
                         <h5>Jenis Kenduri/Event</h5>
                         <ul>
                             {
-                                details.jenisEvent.map((v,i) => {
-                                    return(
-                                        <li className="list-review-item" key={i}>{v}</li>
-                                    )
-                                })
+                                serviceType != 'Others' ?
+                                    details.jenisEvent.map((v,i) => {
+                                        return(
+                                            <li className="list-review-item" key={i}>{v}</li>
+                                        )
+                                    })
+                                : <li className="list-review-item">{details.jenisEvent}</li>
                             }
+                            
                         </ul>
                         <h5>Waktu Tiba</h5>
                         <p>{details.waktuTiba}</p>

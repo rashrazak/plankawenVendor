@@ -5,7 +5,8 @@ import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
-import Filebase64 from 'react-file-base64'
+// import Filebase64 from 'react-file-base64'
+import ImageCompressor from 'react-image-compressor'
 
 //pending patot ada image compressor
     
@@ -34,18 +35,19 @@ function UploadForm({pagex}) {
     }, [images])
 
     const uploadOnDone = (file) => {
-        let f = file.file;
-        let iL = imageLimit
-        if (f.size > 300000) {
-            alert('Limit saiz gambar hanya 300kb sahaja untuk satu gambar, sila compress gambar anda')
-            return false
-        }
-        if (iL == 0) {
-            alert('Limit upload maximum hanya 3')
-            return false
-        }
-        setimageLimit((old) => old - 1 )
-        setimages((old) => [...old, file])
+        console.log(file)
+        // let f = file.file;
+        // let iL = imageLimit
+        // if (f.size > 300000) {
+        //     alert('Limit saiz gambar hanya 300kb sahaja untuk satu gambar, sila compress gambar anda')
+        //     return false
+        // }
+        // if (iL == 0) {
+        //     alert('Limit upload maximum hanya 3')
+        //     return false
+        // }
+        // setimageLimit((old) => old - 1 )
+        // setimages((old) => [...old, file])
 
     }
 
@@ -64,7 +66,7 @@ function UploadForm({pagex}) {
         <div className="form-service">
             <div className="form-section">
                 <h4>Upload Gambar Servis Anda. Maximum gambar adalah 3 ({imageLimit})</h4>
-                <Filebase64 multiple={ false } onDone={(x) => uploadOnDone(x) } />
+                <ImageCompressor scale={ 100 } quality={ 75 } onDone={(x) => uploadOnDone(x) } />
             </div>
             <div className="form-section">
                 {images.map((val,index) => {

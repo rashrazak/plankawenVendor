@@ -313,7 +313,7 @@ class MyApp extends App {
       description,
       areaCovered,
       serviceDetails,
-      images,
+      images:null,
       tnc,
       extra,
       created: x,
@@ -321,8 +321,9 @@ class MyApp extends App {
     }
 
     let y = firebase.addService(serviceType, data)
-    y.then(() => {
-      Router.push(`/${pagex}/done`)
+    y.then((x) => {
+      console.log(x)
+      // Router.push(`/${pagex}/done`)
     })
     .catch((e) => {
       console.log(e)
