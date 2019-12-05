@@ -6,7 +6,6 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
 // import Filebase64 from 'react-file-base64'
-import ImageCompressor from 'react-image-compressor'
 
 //pending patot ada image compressor
     
@@ -66,7 +65,7 @@ function UploadForm({pagex}) {
         <div className="form-service">
             <div className="form-section">
                 <h4>Upload Gambar Servis Anda. Maximum gambar adalah 3 ({imageLimit})</h4>
-                <ImageCompressor scale={ 100 } quality={ 75 } onDone={(x) => uploadOnDone(x) } />
+                {/* <ImageCompressor scale={ 100 } quality={ 75 } onDone={(x) => uploadOnDone(x) } /> */}
             </div>
             <div className="form-section">
                 {images.map((val,index) => {

@@ -1,9 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react'
-import '../css/venueform.css'
+// import '../css/venueform.css'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Swal from 'sweetalert2'
 
 function VendorForm() {
+
+    const [setuju, setSetuju] = useState(false)
 
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -26,7 +28,6 @@ function VendorForm() {
 
     const [cityArray, setCityArray] = useState([]);
     const handleChangeKawasan = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = cityArray;
@@ -37,7 +38,6 @@ function VendorForm() {
             x.splice(index,1);
             setCityArray([...x]);
         }
-        Swal.close()
     }
  
     return (
@@ -56,7 +56,7 @@ function VendorForm() {
                         <label>Nama Syarikat</label>
                         <Input className="form-custom" type="text" name="text" id="" placeholder="" />
                         <label>Alamat Syarikat</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="textarea" name="text" id="" placeholder="" />
                         <label>Nama Pemilik</label>
                         <Input className="form-custom" type="text" name="text" id="" placeholder="" />
                         <label>Nombor Pendaftaran Syarikat</label>
@@ -67,15 +67,18 @@ function VendorForm() {
                         <Input className="form-custom" type="text" name="text" id="" placeholder="" />
                         <div className="tnc-section">
                             <Label check>
-                                <Input type="checkbox" />{' '}
-                                <p>Dengan mendaftar untuk sebagai Vendor PlanKawen, saya mengaku sudah membaca serta bersetuju dengan Terma dan Syarat yang telah ditetapkan</p>
+                                <Input type="checkbox" 
+                                    checked={setuju}
+                                    onChange={() => setSetuju(!setuju)}
+                                />
+                                <p>Dengan mendaftar untuk sebagai Vendor PlanKawen, saya mengaku sudah membaca serta bersetuju dengan <a href="/terma">Terma dan Syarat</a> yang telah ditetapkan</p>
                             </Label>
                         </div>
                     </div>
                     <div>
                         <label>SSM</label>
                         <div className="file-upload">
-                            <label for="upload" className="file-upload__label">Upload file here</label>
+                            <label htmlFor="upload" className="file-upload__label">Upload file here</label>
                             <Input className="file-upload__input" type="file" name="file" id="testingUpload"/>
                         </div>
                         <label>No. Telefon</label>
