@@ -5,7 +5,7 @@ import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
-// import Filebase64 from 'react-file-base64'
+import Filebase64 from 'react-file-base64'
 
 //pending patot ada image compressor
     

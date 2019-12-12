@@ -1,11 +1,23 @@
 import React, {useContext, useState, useEffect} from 'react'
-// import '../css/venueform.css'
+import useForm from 'react-hook-form'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Swal from 'sweetalert2'
 
 function VendorForm() {
 
-    const [setuju, setSetuju] = useState(false)
+    const [setuju, setSetuju] = useState(false);
+    const [companyEmail, setCompanyEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [companyName, setCompanyName] = useState(''); 
+    const [companyAddress, setCompanyAddress] = useState('');
+    const [owner, setOwner] = useState('')
+    const [companyId, setCompanyId] = useState('')
+    const [bankName, setBankName] = useState('');
+    const [bankAccount, setBankAccount] = useState('')
+    const [ssmImage, setSsmImage] = useState('')
+    const [phoneNo, setPhoneNo] = useState('')
+    const [instagram, setInstagram] = useState('')
+    const [facebook, setFacebook] = useState('');
+    const [kawasan, setKawasan] = useState('');
 
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -39,6 +51,31 @@ function VendorForm() {
             setCityArray([...x]);
         }
     }
+
+    const submitForm = ()=> {
+        var param = {
+            account:0,
+            akaunBank:bankAccount,
+            alamatSyarikat:companyAddress,
+            email:companyEmail,
+            facebook,
+            instagram,
+            kawasan:cityArray,
+            namaBank:bankName,
+            namaPemilik:owner,
+            bilanganPekerja:0,
+            namaSyarikat:companyName,
+            setuju,
+            phone:phoneNo,
+            noPendaftaranSyarikat:companyId,
+            ssmImage,
+            points:0,
+            status:'active',
+            
+
+        }
+        createVendor(param, password)
+    }
  
     return (
         <div className="">
@@ -50,21 +87,21 @@ function VendorForm() {
                 <div className="vendor-form">
                     <div>
                         <label>Email Syarikat</label>
-                        <Input className="form-custom" type="email" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="email" onChange={(e)=>setCompanyEmail(e.target.value)} />
                         <label>Password</label>
-                        <Input className="form-custom" type="password" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="password" onChange={(e)=>setPassword(e.target.value)} />
                         <label>Nama Syarikat</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setCompanyName(e.target.value)} />
                         <label>Alamat Syarikat</label>
-                        <Input className="form-custom" type="textarea" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="textarea" onChange={(e)=>setCompanyAddress(e.target.value)} />
                         <label>Nama Pemilik</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setOwner(e.target.value)} />
                         <label>Nombor Pendaftaran Syarikat</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setCompanyId(e.target.value)} />
                         <label>Nama Bank</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setBankName(e.target.value)} />
                         <label>Nombor Akaun Bank</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setBankAccount(e.target.value)} />
                         <div className="tnc-section">
                             <Label check>
                                 <Input type="checkbox" 
@@ -82,11 +119,11 @@ function VendorForm() {
                             <Input className="file-upload__input" type="file" name="file" id="testingUpload"/>
                         </div>
                         <label>No. Telefon</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setPhoneNo(e.target.value)} />
                         <label>Instagram</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setInstagram(e.target.value)} />
                         <label>Facebook</label>
-                        <Input className="form-custom" type="text" name="text" id="" placeholder="" />
+                        <Input className="form-custom" type="text" onChange={(e)=>setFacebook(e.target.value)} />
                         <div className="">
                             <label>Kawasan</label>
                             <div className="kawasan-section">
@@ -112,7 +149,7 @@ function VendorForm() {
                             </div>
                         </div>
                         <div className="position-button">
-                            <Button color="primary" className="btn-daftar">Daftar Masuk</Button>
+                            <Button color="primary" className="btn-daftar" onClick={()=>submitForm()}>Daftar Masuk</Button>
                         </div>
                     </div>
                 </div>
