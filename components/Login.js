@@ -42,7 +42,7 @@ const Login = () => {
                     {message != '' && <div className="message">{message}</div>}
                     <button type="button" className="btn btn-primary" onClick={e => authenticate(e)}>Login</button>
                 </form>
-                <Link href="/SignUp"><a>Sign Up</a></Link>
+                <Link href="/signup"><a>Sign Up</a></Link>
             </div>
             <style jsx>{`
                 .form-layout { text-align: center; }

@@ -17,6 +17,7 @@ import AddServiceContext from '../contexts/AddServiceContext'
   */
 const initialState = {
   user: null,
+  vendorUser:null,
   isLogin:false,
   vendorDetails:null,
   vendorId:'',
@@ -861,6 +862,7 @@ class MyApp extends App {
       this.setState({addServiceDetailsCaterer:currentService})
     }
   }
+  
 
   addServiceDetailsDoorGift = (hargaPerPerson, discount, waktuTiba, jenisMaterial, maxDesignChanges, jenisHantar) => {
     //add kad first
@@ -981,6 +983,22 @@ class MyApp extends App {
     }
   }
 
+  getVendorUser = () => {
+    var e = null;
+    if (this.state.user == null) {
+      let user = localStorage.getItem('user');
+      user = JSON.parse(user)
+      if (!user) {
+        return null
+      }
+      e = user.email;
+    }
+    let email = e;
+    let result = firebase.getVendorUser(email);
+
+    return result;
+  }
+
   resetAddService = () => {
     this.setState(initialState)
     return true
@@ -990,7 +1008,7 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
         <LoginContext.Provider value={{ user: this.state.user, isLogin:this.state.isLogin, signIn: this.signIn, signOut: this.signOut, check:this.check, 
-          getVendorDetails:this.state.vendorDetails, getVendorId:this.state.vendorId,
+          getVendorDetails:this.state.vendorDetails, getVendorId:this.state.vendorId, getVendorUser:this.getVendorUser,
             saveVendorDetails:this.saveVendorDetails}}>
             <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout, addServiceAboutTypeName:this.addServiceAboutTypeName,
             addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,

@@ -1,9 +1,16 @@
 import React, {useContext, useState, useEffect} from 'react'
-import useForm from 'react-hook-form'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Filebase64 from 'react-file-base64'
+import Router from 'next/router';
+import firebase from '../config/firebaseConfig';
+import LoginContext from '../contexts/LoginContext'
 
 function VendorForm() {
 
+    const { getVendorUser } = useContext(LoginContext);
+    const [cityArray, setCityArray] = useState([]);
+
+    
     const [setuju, setSetuju] = useState(false);
     const [companyEmail, setCompanyEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,11 +20,37 @@ function VendorForm() {
     const [companyId, setCompanyId] = useState('')
     const [bankName, setBankName] = useState('');
     const [bankAccount, setBankAccount] = useState('')
-    const [ssmImage, setSsmImage] = useState('')
+    const [ssmImage, setSsmImage] = useState(null)
     const [phoneNo, setPhoneNo] = useState('')
     const [instagram, setInstagram] = useState('')
     const [facebook, setFacebook] = useState('');
-    const [kawasan, setKawasan] = useState('');
+
+    useEffect(() => {
+        const y = async()=>{
+            var x = await getVendorUser();
+            if (x != null) {
+                var z = x.docs;
+                z.map(doc => {
+                    console.log(doc.data())
+                    var param = doc.data();
+                    setSetuju(param.setuju || false);
+                    setCompanyEmail(param.email)
+                    setCompanyName(param.namaSyarikat)
+                    setCompanyAddress(param.alamatSyarikat)
+                    setOwner(param.namaPemilik)
+                    setCompanyId(param.noPendaftaranSyarikat)
+                    setBankName(param.namaBank)
+                    setBankAccount(param.akaunBank)
+                    setCityArray(param.kawasan)
+                    setSsmImage(param.gambarSsm || '')
+                    setPhoneNo(param.phone)
+                    setInstagram(param.instagram)
+                    setFacebook(param.facebook)
+                })
+            }
+        }
+       y()
+    }, [getVendorUser])
 
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -38,7 +71,6 @@ function VendorForm() {
         {state:'Putrajaya', status:false},
     ];
 
-    const [cityArray, setCityArray] = useState([]);
     const handleChangeKawasan = (e) => {
         let name = e.target.name;
         let check = e.target.checked;
@@ -52,7 +84,37 @@ function VendorForm() {
         }
     }
 
+    const uploadOnDone = (file) => {
+        console.log(file)
+        let f = file.file;
+        let iL = imageLimit
+        if (f.size > 300000) {
+            alert('Limit saiz gambar hanya 300kb sahaja untuk satu gambar, sila compress gambar anda')
+            return false
+        }
+        if (iL == 0) {
+            alert('Limit upload maximum hanya 3')
+            return false
+        }
+        setSsmImage(file)
+
+    }
+
     const submitForm = ()=> {
+        if (setuju == false) {
+            alert('Sila daftar akuan sebagai vendor!')
+            return false;
+        }
+
+        if (ssmImage == false) {
+            alert('Sila lampirkan gambar SSM anda!')
+            return false;
+        }
+
+        if (cityArray == false) {
+            alert('Sila nyatakan kawasan anda!')
+            return false;
+        }
         var param = {
             account:0,
             akaunBank:bankAccount,
@@ -74,7 +136,11 @@ function VendorForm() {
             
 
         }
-        createVendor(param, password)
+        let x = firebase.createVendor(param, password, companyEmail)
+        if (x) {
+            alert('Registered!')
+            Router.push('/');
+        }
     }
  
     return (
@@ -87,21 +153,21 @@ function VendorForm() {
                 <div className="vendor-form">
                     <div>
                         <label>Email Syarikat</label>
-                        <Input className="form-custom" type="email" onChange={(e)=>setCompanyEmail(e.target.value)} />
+                        <Input className="form-custom" type="email" value={companyEmail} onChange={(e)=>setCompanyEmail(e.target.value)} required/>
                         <label>Password</label>
-                        <Input className="form-custom" type="password" onChange={(e)=>setPassword(e.target.value)} />
+                        <Input className="form-custom" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
                         <label>Nama Syarikat</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setCompanyName(e.target.value)} />
+                        <Input className="form-custom" type="text" value={companyName} onChange={(e)=>setCompanyName(e.target.value)} required/>
                         <label>Alamat Syarikat</label>
-                        <Input className="form-custom" type="textarea" onChange={(e)=>setCompanyAddress(e.target.value)} />
+                        <Input className="form-custom" type="textarea" value={companyAddress} onChange={(e)=>setCompanyAddress(e.target.value)} required/>
                         <label>Nama Pemilik</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setOwner(e.target.value)} />
+                        <Input className="form-custom" type="text" value={owner} onChange={(e)=>setOwner(e.target.value)} required/>
                         <label>Nombor Pendaftaran Syarikat</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setCompanyId(e.target.value)} />
+                        <Input className="form-custom" type="text" value={companyId} onChange={(e)=>setCompanyId(e.target.value)} required/>
                         <label>Nama Bank</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setBankName(e.target.value)} />
+                        <Input className="form-custom" type="text" value={bankName} onChange={(e)=>setBankName(e.target.value)} required/>
                         <label>Nombor Akaun Bank</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setBankAccount(e.target.value)} />
+                        <Input className="form-custom" type="text" value={bankAccount} onChange={(e)=>setBankAccount(e.target.value)} required/>
                         <div className="tnc-section">
                             <Label check>
                                 <Input type="checkbox" 
@@ -116,14 +182,14 @@ function VendorForm() {
                         <label>SSM</label>
                         <div className="file-upload">
                             <label htmlFor="upload" className="file-upload__label">Upload file here</label>
-                            <Input className="file-upload__input" type="file" name="file" id="testingUpload"/>
+                            <Filebase64 className="file-upload__input" id="testingUpload" multiple={ false } onDone={(x) => uploadOnDone(x) } />
                         </div>
                         <label>No. Telefon</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setPhoneNo(e.target.value)} />
+                        <Input className="form-custom" type="text" value={phoneNo} onChange={(e)=>setPhoneNo(e.target.value)} required/>
                         <label>Instagram</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setInstagram(e.target.value)} />
+                        <Input className="form-custom" type="text" value={instagram} onChange={(e)=>setInstagram(e.target.value)} required/>
                         <label>Facebook</label>
-                        <Input className="form-custom" type="text" onChange={(e)=>setFacebook(e.target.value)} />
+                        <Input className="form-custom" type="text" value={facebook} onChange={(e)=>setFacebook(e.target.value)} required/>
                         <div className="">
                             <label>Kawasan</label>
                             <div className="kawasan-section">

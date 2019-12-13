@@ -60,6 +60,26 @@ class Firebase {
         // location.reload();
     }
 
+
+    async createVendor(param, password, companyEmail){
+        const check = await this.db.collection('vendor').where('email', '==', companyEmail).get()
+        let result = await check.docs
+        
+        if (result.length > 0) {
+            alert('Account Exist! ')
+            return false;
+        }
+
+        await this.db.collection('vendor').add(param)
+        await this.auth.createUserWithEmailAndPassword(companyEmail, password)
+        return true;
+
+    }
+
+    async getVendorUser(email){
+        return await this.db.collection('vendor').where('email', '==', email).get()
+    }
+
     
 }
 
