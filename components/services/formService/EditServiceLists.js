@@ -74,7 +74,7 @@ function EditServiceLists({serviceType}) {
             if (result) {
                let sl = serviceList[index]
                let id = sl.id;
-               firebase.deleting(service, id)
+               firebase.deleting(sl.serviceType, id)
             }
         }).catch(Swal.noop);
     }

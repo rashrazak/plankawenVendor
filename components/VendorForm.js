@@ -4,6 +4,7 @@ import Filebase64 from 'react-file-base64'
 import Router from 'next/router';
 import firebase from '../config/firebaseConfig';
 import LoginContext from '../contexts/LoginContext'
+import Swal from 'sweetalert2';
 
 function VendorForm() {
 
@@ -24,30 +25,37 @@ function VendorForm() {
     const [phoneNo, setPhoneNo] = useState('')
     const [instagram, setInstagram] = useState('')
     const [facebook, setFacebook] = useState('');
+    const [vendorId, setVendorId] = useState('')
 
     useEffect(() => {
         const y = async()=>{
+            Swal.showLoading()
             var x = await getVendorUser();
             if (x != null) {
-                var z = x.docs;
-                z.map(doc => {
-                    console.log(doc.data())
-                    var param = doc.data();
-                    setSetuju(param.setuju || false);
-                    setCompanyEmail(param.email)
-                    setCompanyName(param.namaSyarikat)
-                    setCompanyAddress(param.alamatSyarikat)
-                    setOwner(param.namaPemilik)
-                    setCompanyId(param.noPendaftaranSyarikat)
-                    setBankName(param.namaBank)
-                    setBankAccount(param.akaunBank)
-                    setCityArray(param.kawasan)
-                    setSsmImage(param.gambarSsm || '')
-                    setPhoneNo(param.phone)
-                    setInstagram(param.instagram)
-                    setFacebook(param.facebook)
-                })
+                if (Router.pathname != '/signup') {
+                    var z = x.docs;
+                    await z.map(doc => {
+                        console.log(doc.data())
+                        console.log(doc.id)
+                        var param = doc.data();
+                        setSetuju(param.setuju || false);
+                        setCompanyEmail(param.email)
+                        setCompanyName(param.namaSyarikat)
+                        setCompanyAddress(param.alamatSyarikat)
+                        setOwner(param.namaPemilik)
+                        setCompanyId(param.noPendaftaranSyarikat)
+                        setBankName(param.namaBank)
+                        setBankAccount(param.akaunBank)
+                        setCityArray(param.kawasan)
+                        setSsmImage(param.gambarSsm || '')
+                        setPhoneNo(param.phone)
+                        setInstagram(param.instagram)
+                        setFacebook(param.facebook)
+                        setVendorId(doc.id)
+                    })
+                }
             }
+            Swal.close()
         }
        y()
     }, [getVendorUser])
@@ -87,13 +95,8 @@ function VendorForm() {
     const uploadOnDone = (file) => {
         console.log(file)
         let f = file.file;
-        let iL = imageLimit
         if (f.size > 300000) {
             alert('Limit saiz gambar hanya 300kb sahaja untuk satu gambar, sila compress gambar anda')
-            return false
-        }
-        if (iL == 0) {
-            alert('Limit upload maximum hanya 3')
             return false
         }
         setSsmImage(file)
@@ -130,17 +133,26 @@ function VendorForm() {
             setuju,
             phone:phoneNo,
             noPendaftaranSyarikat:companyId,
-            ssmImage,
+            ssmImage:'',
             points:0,
             status:'active',
             
 
         }
-        let x = firebase.createVendor(param, password, companyEmail)
-        if (x) {
-            alert('Registered!')
-            Router.push('/');
+        if (Router.pathname == '/signup') {
+            let x = firebase.createVendor(param, password, companyEmail, ssmImage)
+            if (x == true) {
+                alert('Registered!')
+                Router.push('/');
+            }
+        }else{
+            let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
+            if (x == true) {
+                alert('Updated!')
+                // Router.push('/');
+            }
         }
+        
     }
  
     return (

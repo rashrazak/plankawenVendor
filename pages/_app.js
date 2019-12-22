@@ -305,6 +305,7 @@ class MyApp extends App {
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
+    let img = firebase.getImagesService(images)
     let data = {
       vendorId:id,
       email,
@@ -314,7 +315,7 @@ class MyApp extends App {
       description,
       areaCovered,
       serviceDetails,
-      images:null,
+      images:images,
       tnc,
       extra,
       created: x,
