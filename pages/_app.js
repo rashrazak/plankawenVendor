@@ -297,7 +297,7 @@ class MyApp extends App {
       alert(error.message)
     }
   }
-  createAddService = (pagex) => {
+  createAddService = async (pagex) => {
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
@@ -305,8 +305,9 @@ class MyApp extends App {
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
-    let img = firebase.getImagesService(images)
-    let data = {
+    let img = await firebase.getImagesService(images, serviceType, email)
+    console.log(img)
+    var data = {
       vendorId:id,
       email,
       status,
@@ -315,23 +316,33 @@ class MyApp extends App {
       description,
       areaCovered,
       serviceDetails,
-      images:images,
+      images:img || 'test',
       tnc,
       extra,
       created: x,
       getTime: x.getTime()
     }
+    console.log(data.images)
 
+    
     let y = firebase.addService(serviceType, data)
     y.then((x) => {
-      console.log(x)
-      // Router.push(`/${pagex}/done`)
+      console.log(x.id)
+      let y = firebase.updateService(serviceType, data, x.id)
+      y.then(() => {
+        alert('success')
+        Router.push(`/${pagex}/done`)
+      })
+      .catch((e) => {
+        alert('error')
+        console.log(e)
+      }) 
     })
     .catch((e) => {
       console.log(e)
     })
   }
-  updateAddService = (pagex) => {
+  updateAddService = async (pagex) => {
     
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images, serviceId} = {...this.state.addServiceUpload}
@@ -340,6 +351,7 @@ class MyApp extends App {
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
+    let img = await firebase.getImagesService(images, serviceType, email)
     let data = {
       vendorId:id,
       email,
@@ -349,7 +361,7 @@ class MyApp extends App {
       description,
       areaCovered,
       serviceDetails,
-      images,
+      images:img,
       tnc,
       extra,
       created: x,
@@ -357,8 +369,15 @@ class MyApp extends App {
     }
     let y = firebase.updateService(serviceType, data, serviceId)
     y.then(() => {
-      alert('success')
-      Router.push(`/${pagex}/done`)
+      let y = firebase.updateService(serviceType, data, serviceId)
+      y.then(() => {
+        alert('success')
+        Router.push(`/${pagex}/done`)
+      })
+      .catch((e) => {
+        alert('error')
+        console.log(e)
+      })
     })
     .catch((e) => {
       alert('error')

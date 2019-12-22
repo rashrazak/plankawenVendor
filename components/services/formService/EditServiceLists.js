@@ -20,7 +20,7 @@ function EditServiceLists({serviceType}) {
                     'Pelamin',
                     'Caterer',
                     'Hantaran',
-                    'Kugiran',
+                    'Persembahan',
                     'DoorGift',
                     'Others',]
     // const [allPackage, setallPackage] = useState([])

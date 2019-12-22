@@ -50,10 +50,10 @@ function AboutForm({pagex}) {
             {
                 images && coverImage ? 
                     <div className="hero-review">
-                            <img src={coverImage.base64}/>
+                            <img src={coverImage.base64 || coverImage.urlStorage}/>
                         <div className="hero-son-review">
                             {images.map((v,i) => {
-                                return (<img key={i} onClick={() =>setcoverImage(v)} src={v.base64}/>)
+                                return (<img key={i} onClick={() =>setcoverImage(v)} src={v.base64 || v.urlStorage}/>)
                             })}
                         </div>
                     </div>

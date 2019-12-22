@@ -13,7 +13,7 @@ function review(props) {
                 <Step progress={4} />
             </div>
             <div>
-                <h1>Done</h1>
+                {/* <h1>Done</h1> */}
                 <DoneForm pagex={'editservice'} />
             </div>
         </Head>

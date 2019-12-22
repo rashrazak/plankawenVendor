@@ -67,7 +67,7 @@ function UploadForm({pagex}) {
             </div>
             <div className="form-section">
                 {images.map((val,index) => {
-                    let b64 = val.base64
+                    let b64 = val.urlStorage || val.base64
                     return(
                         <div key={index} className="img-section">
                             <img src={b64} alt=""/>

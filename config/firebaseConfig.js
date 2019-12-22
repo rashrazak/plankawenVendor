@@ -48,25 +48,29 @@ class Firebase {
         var newImg = [];
         await images.map(async (x,i)=> {
             var img     = x;
-            var base    = img.base64;
-            
-            
-            var locRef     = storageRef.child(`service/${email}/${serviceType}/${x.name}`)
-            var locResult = locRef.putString(base, 'data_url');
-
-            await locResult.on('state_changed',snapshot=>{
-
-            },(error)=>{
-                console.log(error)
-            },async ()=>{
-                await locResult.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                    let param = {
-                        urlStorage:downloadURL
-                    }
-                    newImg.push(param);
-                })
-            })
-
+            if (img.urlStorage) {
+                let param = {
+                    urlStorage:img.urlStorage
+                }
+                newImg.push(param);
+            }else{
+                var base    = img.base64;
+                var locRef     = storageRef.child(`service/${email}/${serviceType}/${x.name}`)
+                var locResult = locRef.putString(base, 'data_url');
+    
+                await locResult.on('state_changed',snapshot=>{
+    
+                },(error)=>{
+                    console.log(error)
+                },async ()=>{
+                    await locResult.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                        let param = {
+                            urlStorage:downloadURL
+                        }
+                        newImg.push(param);
+                    })
+                })    
+            }
         })
         console.log(newImg);
 
