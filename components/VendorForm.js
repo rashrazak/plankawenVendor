@@ -171,7 +171,7 @@ function VendorForm() {
                     <img className="" src="/static/images/placeholder/vendor-bg.png"></img>
                 </div>
                 <div className="vendor-form">
-
+                    <h4>Anda telah memilih untuk menjadi rakan vendor kami.<br></br>Sila masukkan detail syarikat anda.</h4>   
                     {
                         firstDiv == true ?
                         <React.Fragment>
@@ -184,7 +184,7 @@ function VendorForm() {
                                     <Button color="primary" className="btn-daftar" onClick={()=>{
                                         setFirstDiv(false)
                                         setSecondDiv(true)
-                                    }}>Next1</Button>
+                                    }}>Seterusnya</Button>
                                 </div>
                             </div>    
 
@@ -212,11 +212,11 @@ function VendorForm() {
                                     <Button color="primary" className="btn-daftar" onClick={()=>{
                                         setSecondDiv(false)
                                         setFirstDiv(true)
-                                    }}>Back</Button>
+                                    }}>Kembali</Button>
                                     <Button color="primary" className="btn-daftar" onClick={()=>{
                                         setSecondDiv(false)
                                         setThirdDiv(true)
-                                    }}>Next1</Button>
+                                    }}>Seterusnya</Button>
                                 </div>
                             </div>
                         </React.Fragment>
@@ -236,11 +236,11 @@ function VendorForm() {
                                         <Button color="primary" className="btn-daftar" onClick={()=>{
                                             setSecondDiv(true)
                                             setThirdDiv(false)
-                                        }}>Prev1</Button>
+                                        }}>Kembali</Button>
                                          <Button color="primary" className="btn-daftar" onClick={()=>{
                                             setThirdDiv(false)
                                             setForthDiv(true)
-                                        }}>Next1</Button>
+                                        }}>Seterusnya</Button>
                                     </div>
                                 </div>
                             </React.Fragment>
@@ -292,7 +292,7 @@ function VendorForm() {
                                     <Button color="primary" className="btn-daftar" onClick={()=>{
                                             setThirdDiv(true)
                                             setForthDiv(false)
-                                    }}>Prev1</Button>
+                                    }}>Kembali</Button>
                                     <Button color="primary" className="btn-daftar" onClick={()=>submitForm()}>Daftar Masuk</Button>
                                 </div>
                             </div>
@@ -307,7 +307,7 @@ function VendorForm() {
                 .master-layout { padding: 0;}
                 .bg-color { background: rgb(244,244,244); background: linear-gradient(180deg, rgba(244,244,244,1) 80%, rgba(245,154,134,0.5732668067226891) 100%); height: 100vh; width: 100%; position: relative; }
                 .logo-container { text-align: center; margin-bottom: 10px; }
-                .logo-container > img { width: 50%; }
+                .logo-container > img { width: 300px; }
                 .form-custom { border: 2px solid #EAEAEA; }
                 .vendor-form-section { background-color: #DFDFDF; padding: 20px; border-radius: 10px; }
                 .vendor-form-section > h3 { font-weight: bold;}
@@ -315,7 +315,7 @@ function VendorForm() {
                 .vendor-form-section > div { }
                 .vendor-form { width: 50%; }
                 .vendor-form > div { position: relative;}
-                label { font-weight: 400; color: #3e3e3e; font-size: 14px; margin: 10px 0px 0px 0; }
+                label { font-weight: 400; color: #47CBC4; font-size: 14px; margin: 10px 0px 0px 0; }
                 .testing::after { content:"another word" !important; }
                 .file-upload { position: relative; }
                 .file-upload__label { display: block; padding: 7px; color: #fff; background: #F5F6FA; color: #3e3e3e; border-radius: 4px; border: 2px solid #EAEAEA; transition: background .3s; cursor: pointer;  height: 38px; margin: 0;}
@@ -328,6 +328,7 @@ function VendorForm() {
                 .area-covered-div > label > input { margin-right: 5px; }
                 .position-button > Button { background-color: #4bd19f; margin: 20px; }
                 .tnc-section { font-size: 10px; padding: 10px 0px 0px 20px;}
+                .form-custom { border: #EAEAEA;}
             `}</style>
         </div>
     )
