@@ -110,8 +110,7 @@ class Firebase {
             alert('Account Exist! ')
             return false;
         }
-        this.db.collection('vendor').add(param)
-        this.auth.createUserWithEmailAndPassword(companyEmail, password)
+        
        
         if (ssmImage) {
             var storageRef = this.storage.ref();
@@ -129,15 +128,17 @@ class Firebase {
                 locResult.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                     param.ssmImage = downloadURL;
                     console.log(downloadURL)
-                    
+                    app.firestore().collection('vendor').add(param)
+                    app.auth().createUserWithEmailAndPassword(companyEmail, password)
+                    alert('Registered!')
+                    Router.push('/');
             
                     
                 })
             })
-
+            return true;
         }
 
-        return true;
     }
 
 

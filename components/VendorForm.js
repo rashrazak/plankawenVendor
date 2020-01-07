@@ -149,8 +149,8 @@ function VendorForm() {
         if (Router.pathname == '/signup') {
             let x = firebase.createVendor(param, password, companyEmail, ssmImage)
             if (x == true) {
-                alert('Registered!')
-                Router.push('/');
+                // alert('Registered!')
+                // Router.push('/');
             }
         }else{
             let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
