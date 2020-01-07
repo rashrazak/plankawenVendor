@@ -5,6 +5,7 @@ import Router from 'next/router';
 import firebase from '../config/firebaseConfig';
 import LoginContext from '../contexts/LoginContext'
 import Swal from 'sweetalert2';
+import '../css/venueform.css';
 
 function VendorForm() {
 
@@ -163,9 +164,9 @@ function VendorForm() {
 
     return (
         <div className="">
-            <div className="logo-container">
+            {/* <div className="logo-container">
                 <img className="" src="/static/images/logos/logo-white-tagline.png"></img>
-            </div>
+            </div> */}
             <div className="vendor-form-section">
                 <div className="">
                     <img className="" src="/static/images/placeholder/vendor-bg.png"></img>
@@ -181,7 +182,7 @@ function VendorForm() {
                                 <label>Password</label>
                                 <Input className="form-custom" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
                                 <div className="position-button">
-                                    <Button color="primary" className="btn-daftar" onClick={()=>{
+                                    <Button className="btn-daftar" onClick={()=>{
                                         setFirstDiv(false)
                                         setSecondDiv(true)
                                     }}>Seterusnya</Button>
@@ -205,7 +206,7 @@ function VendorForm() {
                                 <Input className="form-custom" type="text" value={companyId} onChange={(e)=>setCompanyId(e.target.value)} required/>
                                 <label>SSM</label>
                                 <div className="file-upload">
-                                    <label htmlFor="upload" className="file-upload__label">Upload file here</label>
+                                    {/* <label htmlFor="upload" className="file-upload__label">Upload file here</label> */}
                                     <Filebase64 className="file-upload__input" id="testingUpload" multiple={ false } onDone={(x) => uploadOnDone(x) } />
                                 </div>
                                 <div className="position-button">
@@ -304,12 +305,12 @@ function VendorForm() {
             
             <style jsx>{`
                 a { margin-top: 10px;}
-                .master-layout { padding: 0;}
+                .master-layout { padding: 0 !important;}
                 .bg-color { background: rgb(244,244,244); background: linear-gradient(180deg, rgba(244,244,244,1) 80%, rgba(245,154,134,0.5732668067226891) 100%); height: 100vh; width: 100%; position: relative; }
                 .logo-container { text-align: center; margin-bottom: 10px; }
                 .logo-container > img { width: 300px; }
                 .form-custom { border: 2px solid #EAEAEA; }
-                .vendor-form-section { background-color: #DFDFDF; padding: 20px; border-radius: 10px; }
+                .vendor-form-section { background-color: #FFF; padding: 20px; border-radius: 10px; max-width: 1020px; margin: auto; }
                 .vendor-form-section > h3 { font-weight: bold;}
                 .vendor-form-section { display: flex; align-items: center; justify-content: center;}
                 .vendor-form-section > div { }

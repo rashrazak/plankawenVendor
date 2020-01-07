@@ -15,9 +15,9 @@ function signup (){
                     <style jsx>{`
                         .form-layout { text-align: center; }
                         a { margin-top: 10px;}
-                        .bg-color { background-color: #4bd19f; }
+                        .bg-color { background-color: #FFF; }
                         .logo-oficial { margin: auto; }
-                        .vendor-signup-section { max-width: 700px; margin: auto; padding: 100px 0;}
+                        .master-layout { padding: 0;}
                     `}</style>
                 </div>
             </Head>
