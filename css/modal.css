@@ -1,0 +1,6 @@
+.modal-design{
+    max-width: 700px !important;
+}
+.modal-design > .modal-content { 
+    border-radius: 0;
+}

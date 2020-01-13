@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, UncontrolledTooltip } from 'reactstrap';
+import '../../../css/modal.css'
 
 function modalPriceWqty(serviceType) {
     const [modal, setModal] = useState(false);
@@ -13,7 +14,7 @@ function modalPriceWqty(serviceType) {
     return (
         <div>
             <Button color="danger" onClick={toggle}>Price With Qty</Button>
-            <Modal isOpen={modal} toggle={toggle} className=''>
+            <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
                 <div className="form-service">

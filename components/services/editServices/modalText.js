@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import AddServiceContext from '../../../contexts/AddServiceContext'
+import '../../../css/modal.css'
 
 
 
@@ -74,7 +75,7 @@ function modalText(serviceType) {
     return (
         <div>
             <Button color="danger" onClick={toggle}>Text</Button>
-            <Modal isOpen={modal} toggle={toggle} className=''>
+            <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
                 <div className="form-service">
@@ -132,6 +133,7 @@ function modalText(serviceType) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
+                .modal-design { max-width: 700px;}
             `}</style>
         </div>
     )

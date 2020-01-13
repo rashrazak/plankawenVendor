@@ -7,9 +7,7 @@ import '../../css/venueform.css'
 import AddServiceContext from '../../contexts/AddServiceContext'
 import LoginContext from '../../contexts/LoginContext'
 import UploadFormEdit from '../../components/services/formService/upload/UploadFormEdit'
-import ModalText from '../../components/services/editServices/modalText'
-import ModalPriceWQty from '../../components/services/editServices/modalPriceWqty'
-import ModalImage from '../../components/services/editServices/modalImage'
+import SideBarEdit from '../../components/services/editServices/editSidebar'
 
 function edit({pagex}) {
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
@@ -58,9 +56,7 @@ function edit({pagex}) {
     }, [getVendorDetails])
     return (
         <Head title="edit">
-             <ModalText/>
-             <ModalPriceWQty/>
-             <ModalImage/>
+            <SideBarEdit/>
             <div className="review-form">
             {
                 images && coverImage ? 
