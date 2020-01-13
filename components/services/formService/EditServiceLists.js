@@ -60,7 +60,8 @@ function EditServiceLists({serviceType}) {
         await addServiceAbout(sl.serviceName, sl.areaCovered, sl.description, sl.tnc, sl.extra)
         await addServiceUpload(sl.images, st, id);
         await getServiceDetailsEdit(serv, sl.serviceDetails, id)
-        Router.push('/editservice/about')
+        // Router.push('/editservice/about')
+        Router.push('/editservice/edit')
 
     }
 
