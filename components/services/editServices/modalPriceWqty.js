@@ -13,7 +13,7 @@ function modalPriceWqty(serviceType) {
 
     return (
         <div>
-            <Button color="danger" onClick={toggle}>Price With Qty</Button>
+            <Button className="sidebar-modal-button" onClick={toggle}>Price With Qty</Button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>

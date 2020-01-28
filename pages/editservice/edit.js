@@ -9,7 +9,8 @@ import LoginContext from '../../contexts/LoginContext'
 import UploadFormEdit from '../../components/services/formService/upload/UploadFormEdit'
 import SideBarEdit from '../../components/services/editServices/editSidebar'
 
-function edit({pagex}) {
+function edit({pagex, sidebar}) {
+
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
 
@@ -21,10 +22,12 @@ function edit({pagex}) {
     const [vendorDetails, setvendorDetails] = useState([])
     const [imageModal,  setImageModal] = useState(false);
     const editImage = () => setImageModal(!imageModal);
-    const [textAreaModal, setTextAreaModal] = useState(false);
-    const editTextArea = () => setTextAreaModal(!textAreaModal);
+    const [textAreaModal, setTextAreaModal] = useState(false)
+    const editTextArea = () => setTextAreaModal(!textAreaModal)
+    const [textmodal, setTextmodal] = useState(false)
 
-    const [textmodal, setTextmodal] = useState(false);
+    const [sidebarDiv, setSidebarDiv] = useState(false)
+
     // const [modal, setModal] = useState(false);
     // const uploadImage = () => setModal(!modal);
 
@@ -54,10 +57,20 @@ function edit({pagex}) {
     useEffect(() => {
         setvendorDetails(getVendorDetails)
     }, [getVendorDetails])
+
+
+
     return (
         <Head title="edit">
-            <SideBarEdit/>
+            {
+                sidebarDiv ? <SideBarEdit/> : ''
+            }
             <div className="review-form">
+                <div className="button-edit-position">
+                    <Button color="warning" onClick={ () => setSidebarDiv(!sidebarDiv) }>Edit</Button>
+                    <Button color="success">Save</Button>{' '}
+                </div>
+               
             {
                 images && coverImage ? 
                     <div className="hero-review hover-react" onClick={editImage}>
@@ -298,10 +311,10 @@ function edit({pagex}) {
                 <h5>Extra:</h5>
                 <p>{about.extra}</p>
             </div>
-            <div className="form-button-edit">
+            {/* <div className="form-button-edit">
                 <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/upload`)}>Back</Button>{' '}
                 <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}
-            </div>
+            </div> */}
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto;}
                 .hero-review { position: relative;}
@@ -342,6 +355,7 @@ function edit({pagex}) {
                 .list-review-item { color: #75848E; font-size: 14px;}
                 .hover-react:hover{ background-color: rgba(62,62,62,0.5); cursor: pointer; transition: all .3s;}
                 .form-button {display: none;}
+                .button-edit-position { display: flex; justify-content: space-between; align-items: center;}
             `}</style>
         </div>
         </Head>

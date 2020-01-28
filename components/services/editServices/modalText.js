@@ -74,7 +74,7 @@ function modalText(serviceType) {
     
     return (
         <div>
-            <Button color="danger" onClick={toggle}>Text</Button>
+            <Button className="sidebar-modal-button" onClick={toggle}>Text</Button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>

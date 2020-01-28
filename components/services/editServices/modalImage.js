@@ -9,7 +9,7 @@ function modalImage() {
     
     return (
         <div>
-             <Button color="danger" onClick={toggle}>Image</Button>
+            <Button className="sidebar-modal-button" onClick={toggle}>Image</Button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update Image</ModalHeader>
                 <ModalBody>
