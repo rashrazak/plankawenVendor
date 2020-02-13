@@ -3,13 +3,19 @@ export const PackageContext = createContext();
 
 const PackageContextProvider = (props) => {
     const [packageName, setpackageName] = useState('');
+    const [packageDetails, setpackageDetails] = useState('');
+    const [packageImage, setpackageImage] = useState('');
     const [created, setcreated] = useState(false);
     const [serviceListPackage, setserviceListPackage] = useState([]) // [{ serviceId, serviceType, serviceName, serviceDetails, newServiceDetails }]
     const [totalPrice, settotalPrice] = useState(100)
     const [oldPrice, setoldPrice] = useState(0)
 
-    const packageNameFunction = (data) => {
-        setpackageName(data);
+    const packageDetailsFunction = (packageName, tnc, description, extra, areaCovered) => {
+        setpackageDetails({packageName, tnc, description, extra, areaCovered});
+    }
+
+    const packageImageFunction = (data) => {
+        setpackageImage(data);
     }
 
     const isCreated = () => {
@@ -29,7 +35,7 @@ const PackageContextProvider = (props) => {
     }
 
     return (
-        <PackageContext.Provider value={{packageName, packageNameFunction, created, isCreated, serviceListPackage, serviceListFunction, totalPrice, totalPriceFunction, oldPrice, oldPriceFunction}}>
+        <PackageContext.Provider value={{packageName, packageImage, packageDetailsFunction, packageImageFunction, created, isCreated, serviceListPackage, serviceListFunction, totalPrice, totalPriceFunction, oldPrice, oldPriceFunction}}>
             {props.children}
         </PackageContext.Provider>
     )

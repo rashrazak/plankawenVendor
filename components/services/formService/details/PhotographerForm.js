@@ -77,7 +77,9 @@ function PhotographerForm({pagex}) {
             </div>
             <div className="form-section">
                 <h4>Harga (RM)</h4>
-                <Input className="form-custom harga" href="#" id="tooltipHarga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <Input className="form-custom harga" href="#" id="tooltipHarga" type="number" onChange={(e) => {
+                    sethargaDiscount(e.target.value)
+                    setharga(e.target.value)}} value={harga}/>
                 <UncontrolledTooltip placement="left" target="tooltipHarga">
                     Harga LumpSump termasuk kos photobook/album/ dan juga caj penghantaran yang akan disediakan oleh Pelanggan ialah diluar servis  PlanKawen
                 </UncontrolledTooltip>

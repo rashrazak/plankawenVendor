@@ -33,7 +33,9 @@ function PersembahanForm({pagex}) {
         <div className="form-service">
             <div className="form-section">
                 <h4>Harga Servis LumpSump (RM)</h4>
-                <Input className="form-custom harga" type="number" onChange={(e) => {setharga(e.target.value)}} value={harga}/>
+                <Input className="form-custom harga" type="number" onChange={(e) => {
+                    sethargaDiscount(e.target.value)
+                    setharga(e.target.value)}} value={harga}/>
             </div>
             <div className="form-section">
                 <h4>Discount</h4>

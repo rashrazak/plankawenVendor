@@ -20,7 +20,7 @@ function PackageList() {
                     'Pelamin',
                     'Caterer',
                     'Hantaran',
-                    'Kugiran',
+                    'Persembahan',
                     'DoorGift',
                     'Others']
     const [serviceList, setserviceList] = useState([])
@@ -31,6 +31,8 @@ function PackageList() {
     const [totalBefore, settotalBefore] = useState(0)
     const [modal, setmodal] = useState(false)
     const [packageDiscount, setpackageDiscount] = useState(0)
+    const [ic, setIc] = useState()
+    
 
     const selectService = (index) => {
         let data = serviceList[index];
@@ -80,7 +82,7 @@ function PackageList() {
     
                 serv.map((val, index) => {
                     let st = val.serviceType
-                    if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran') {
+                    if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran' || st == 'Caterer') {
                         let hpp = parseInt(val.serviceDetails.hargaPerPerson)
                         let disc = val.serviceDetails.discount
     
@@ -95,6 +97,12 @@ function PackageList() {
                                 har = har - (har * dis);
                                 totalPrice += har
                                 
+                            }else if (q > max && (disc.length === index+1)){
+                                // let har = q * hpp;
+                                // dis = dis / 100;
+                                // har = har - (har * dis);
+                                // totalPrice += har
+                                alert(`Jumlah maximum untuk ${val.serviceName} adalah ${max} orang`)
                             }
                         })
                         if (st == 'KadBanner') {
@@ -114,8 +122,9 @@ function PackageList() {
                         totalPrice += hargaTouchup;
                         totalPrice += hargaFull;
 
-                    }else if (st == 'Videographer' || st == 'Photographer' || st == 'Others'){
-                        
+                    }else if (st == 'Videographer' || st == 'Photographer' || st == 'Others' || st == 'Pelamin' || st == 'Venue' || st == 'Persembahan'){
+                        let harga = val.serviceDetails.hargaDiscount 
+                        totalPrice += harga
                     }
                     
                 });
@@ -139,7 +148,7 @@ function PackageList() {
 
     return (
             <div>
-                <Button onClick={toggle}>Add Service</Button>
+                <Button onClick={toggle}>Pilih Service</Button>
                 {
                     service.length > 0 ?
                         <React.Fragment>
@@ -214,8 +223,7 @@ function PackageList() {
                                     <th>Service Name</th>
                                     <th>Status</th>
                                     <th>Date Created</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Select</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -229,7 +237,6 @@ function PackageList() {
                                                 <td>{val.status}</td>
                                                 <td>{date.toString()}</td>
                                                 <td><Button onClick={() => selectService(index)} >Click </Button></td>
-                                                <td><Button onClick={() => viewInformation(index)} >Click </Button></td>
                                             </tr>
                                         )
                                     })}
