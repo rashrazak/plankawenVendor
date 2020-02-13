@@ -60,7 +60,8 @@ function EditServiceLists({serviceType}) {
         await addServiceAbout(sl.serviceName, sl.areaCovered, sl.description, sl.tnc, sl.extra)
         await addServiceUpload(sl.images, st, id);
         await getServiceDetailsEdit(serv, sl.serviceDetails, id)
-        Router.push('/editservice/about')
+        // Router.push('/editservice/about')
+        Router.push('/editservice/edit')
 
     }
 
@@ -90,7 +91,7 @@ function EditServiceLists({serviceType}) {
     }, [search])
     return (
         
-        <div>
+        <div className="edit-list-section">
             <div>
                 {/* {
                     searchList = serviceList.filter((x) => {
@@ -135,6 +136,9 @@ function EditServiceLists({serviceType}) {
                     </tbody>
                 </Table>
             </div>
+            <style jsx>{`
+                .edit-list-section { max-width: 950px; margin: 20px auto;}
+            `}</style>
         </div>
     )
 }

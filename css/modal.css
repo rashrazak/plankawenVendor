@@ -1,0 +1,13 @@
+.sidebar-edit{
+    display: block;
+}
+.modal-design{
+    max-width: 700px !important;
+}
+.modal-design > .modal-content { 
+    border-radius: 0;
+}
+.sidebar-modal-button{
+    border-radius: 0;
+    border: none;
+}
