@@ -83,7 +83,7 @@ function dashboard() {
             .label-h4 { color: #3E3E3E; font-size: 16px; font-weight: normal;}
             .label-p { color: #9B9B9B; font-size: 12px; font-weight: normal;}
             .container { height: 85vh;}
-            .alert-info { display: flex; background-color: #FEF2EB; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2); padding: 10px; max-width: 800px; margin-left: auto;}
+            .alert-info { display: flex; background-color: #FEF2EB; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2); padding: 10px; max-width: 800px; margin-left: auto; position:absolute; bottom: 10px; right: 30px;}
             .alert-info img { height: 24px; margin-right: 10px;}
             .alert-info p { font-size: 12px; color: #3E3E3E;}
             .dashboard-container { background-color: #F5F6FA; border-radius: 5px; padding: 35px 30px; display: inline-block; width: 68%; height: calc(100vh - 130px); overflow-y: scroll;}
