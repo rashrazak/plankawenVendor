@@ -372,7 +372,7 @@ class MyApp extends App {
       let y = firebase.updateService(serviceType, data, serviceId)
       y.then(() => {
         alert('success')
-        Router.push(`/${pagex}/done`)
+        Router.push(`/${pagex}`)
       })
       .catch((e) => {
         alert('error')

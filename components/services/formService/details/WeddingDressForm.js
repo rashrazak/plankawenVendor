@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function WeddingDressForm({pagex}) {
+function WeddingDressForm({pagex, setModalEdit,editModal}) {
     const jenisSewaArray = [
         {jenis:'Lelaki', status:false},
         {jenis:'Wanita', status:false},
@@ -66,6 +66,11 @@ function WeddingDressForm({pagex}) {
     const submitServiceDetails = () => {
         addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         Router.push(`/${pagex}/upload`);
+    }
+
+    const submitServiceDetails2 = () => {
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
+        setModalEdit(false)
     }
     return (
         <div className="form-service">
@@ -158,10 +163,19 @@ function WeddingDressForm({pagex}) {
                     Terangkan sebarang syarat yang dikenakan untuk baju yang disewa. Contoh, tarikh pemulangan semula, kerosakan pada baju, dan sebagainya
                 </UncontrolledTooltip>
             </div>
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
-            </div>
+            {
+                !editModal ? 
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
+                </div>
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails2()}>Confirm</Button>{' '}
+                </div>
+
+            }
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

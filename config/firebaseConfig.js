@@ -77,21 +77,64 @@ class Firebase {
         return newImg
     }
 
+    async getImagesPackage(images, email){
+        var storageRef = this.storage.ref();
+        var newImg = [];
+        await images.map(async (x,i)=> {
+            var img     = x;
+            if (img.urlStorage) {
+                let param = {
+                    urlStorage:img.urlStorage
+                }
+                newImg.push(param);
+            }else{
+                var base    = img.base64;
+                var locRef     = storageRef.child(`package/${email}/${x.name}`)
+                var locResult = locRef.putString(base, 'data_url');
+    
+                await locResult.on('state_changed',snapshot=>{
+    
+                },(error)=>{
+                    console.log(error)
+                },async ()=>{
+                    await locResult.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                        let param = {
+                            urlStorage:downloadURL
+                        }
+                        newImg.push(param);
+                    })
+                })    
+            }
+        })
+        console.log(newImg);
+
+        return newImg
+    }
+
     async addService(serviceType, data){
         return await this.db.collection(serviceType).add(data)
     }
   
-
     async updateService(serviceType, data, serviceId){
         return await this.db.collection(serviceType).doc(serviceId).set(data)
     }
+    
     //pending patot ada status = approved
     async checkServiceType(serviceType, email){
         return await this.db.collection(serviceType).where('email', '==', email).get() 
     }
 
+    async getPackageById(id){
+        return await this.db.collection('package').doc(id).get() 
+    }
+
     async deleting(serviceType, id){
         await this.db.collection(serviceType).doc(id).delete();
+        location.reload();
+    }
+
+    async deletingPackage(id){
+        await this.db.collection('package').doc(id).delete();
         location.reload();
     }
 
@@ -188,6 +231,17 @@ class Firebase {
         return await this.db.collection('vendor').where('email', '==', email).get()
     }
 
+    async getPackages(email){
+        return await this.db.collection('package').where('email', '==', email).get()
+    }
+
+    async createPackage(data){
+        return await this.db.collection('package').add(data)
+    }
+
+    async updatePackage(id, data){
+        return await this.db.collection('package').doc(id).set(data)
+    }
     
 }
 

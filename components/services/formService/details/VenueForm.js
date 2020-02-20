@@ -7,7 +7,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function VenueForm({serviceType, pagex}) {
+function VenueForm({serviceType, pagex, setModalEdit,editModal}) {
     const {getServiceDetailsVenue, addServiceDetailsVenue} = useContext(AddServiceContext);
     const [harga, setharga] = useState(0);
     const [hargaDiscount, sethargaDiscount] = useState(0);
@@ -42,6 +42,11 @@ function VenueForm({serviceType, pagex}) {
     const submitServiceDetails = () => {
         addServiceDetailsVenue(harga , lokasi, waktuOperasi, alamatPenuh, discount, hargaDiscount)
         Router.push(`/${pagex}/upload`);
+    }
+
+    const submitServiceDetails2 = () => {
+        addServiceDetailsVenue(harga , lokasi, waktuOperasi, alamatPenuh, discount, hargaDiscount)
+        setModalEdit(false)
     }
 
     const addAlamat = () => {
@@ -97,10 +102,20 @@ function VenueForm({serviceType, pagex}) {
                     Tetapkan sebarang syarat yang dikenakan ke atas dewan/lokasi tersebut seperti; waktu operasi, lokasi parkir, jumlah tetamu maksimum dan sebagainya
                 </UncontrolledTooltip>
             </div>
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
-            </div>
+            {
+                !editModal ? 
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
+                </div>
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails2()}>Confirm</Button>{' '}
+                </div>
+
+            }
+            
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

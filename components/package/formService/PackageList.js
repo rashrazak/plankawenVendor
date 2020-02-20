@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import firebase from '../../../config/firebaseConfig'
 
 
-function PackageList() {
+function PackageList({setPackageSelection, packageSelection}) {
     const {user} = useContext(LoginContext);
     const services = ['Venue',
                     'Canopy',
@@ -31,8 +31,6 @@ function PackageList() {
     const [totalBefore, settotalBefore] = useState(0)
     const [modal, setmodal] = useState(false)
     const [packageDiscount, setpackageDiscount] = useState(0)
-    const [ic, setIc] = useState()
-    
 
     const selectService = (index) => {
         let data = serviceList[index];
@@ -42,6 +40,17 @@ function PackageList() {
     }
     
     const toggle = () => setmodal(!modal);
+
+    useEffect(() => {
+        if (packageSelection != null) {
+            setservice(packageSelection.service)
+            settotalAfter(packageSelection.totalAfter)
+            settotalBefore(packageSelection.totalBefore)
+            setquantity(packageSelection.quantity)
+            setpackageDiscount(packageSelection.packageDiscount)
+
+        }
+    }, [packageSelection])
 
     useEffect(() => {
         if (user) {
@@ -79,30 +88,32 @@ function PackageList() {
                 var serv = serviceBefore
                 var totalPrice = 0;
                 var q = quantity; 
+
     
                 serv.map((val, index) => {
                     let st = val.serviceType
-                    if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran' || st == 'Caterer') {
+                    if (st == 'KadBanner' || st == 'Caterer' || st == 'DoorGift' || st == 'Hantaran') {
                         let hpp = parseInt(val.serviceDetails.hargaPerPerson)
                         let disc = val.serviceDetails.discount
-    
                         disc.map((val,index) =>{
                             let dis = val.discount
                             let max = val.max;
                             let min = val.min
-    
+                            var sn = serv[index].serviceName;
+                            
                             if (q >= min && q <= max ) {
                                 let har = q * hpp;
                                 dis = dis / 100;
                                 har = har - (har * dis);
                                 totalPrice += har
                                 
+                                
                             }else if (q > max && (disc.length === index+1)){
                                 // let har = q * hpp;
                                 // dis = dis / 100;
                                 // har = har - (har * dis);
                                 // totalPrice += har
-                                alert(`Jumlah maximum untuk ${val.serviceName} adalah ${max} orang`)
+                                alert(`Jumlah maximum untuk ${sn} adalah ${max} orang`)
                             }
                         })
                         if (st == 'KadBanner') {
@@ -121,17 +132,18 @@ function PackageList() {
                         let hargaFull = val.serviceDetails.hargaDiscountFull;
                         totalPrice += hargaTouchup;
                         totalPrice += hargaFull;
-
-                    }else if (st == 'Videographer' || st == 'Photographer' || st == 'Others' || st == 'Pelamin' || st == 'Venue' || st == 'Persembahan'){
+                        
+                    }else if (st == 'Videographer' || st == 'Photographer' || st == 'Others' || st == 'Pelamin' || st == 'Venue' || st == 'Persembahan' || st == 'WeddingDress' || st == 'Canopy'){
                         let harga = val.serviceDetails.hargaDiscount 
                         totalPrice += harga
+
                     }
                     
                 });
-                let x = totalPrice;
+                let x = parseInt(totalPrice);
                 settotalBefore(x)
                 if (totalAfter != 0) {
-                    let z = totalAfter
+                    let z = parseInt(totalAfter)
                     let y = x;
                     let d = (z / y) * 100
                     d     = Math.round(d);
@@ -146,18 +158,32 @@ function PackageList() {
         calculateServiceBefore()
     }, [serviceBefore,quantity])
 
+    const calculatePackage = () => {
+        const x = {
+            quantity,
+            service,
+            totalAfter,
+            totalBefore,
+            packageDiscount
+        }
+        setPackageSelection(x)
+    }
+
     return (
             <div>
                 <Button onClick={toggle}>Pilih Service</Button>
                 {
                     service.length > 0 ?
-                        <React.Fragment>
-                            <div>
+                        <div className={'row'}>
+                            <div className="col-md-4">
                                 <Label>Quantity (if any)</Label>
                                 <Input type="number" value={quantity} onChange={e => {
                                     setquantity(parseInt(e.target.value))
                                 
                                 }  }/>
+                            </div>
+                            <div className="col-md-4">
+                                <a href="/editservice" target="_blank">View Service</a>
                             </div>
                             <Table>
                                 <thead>
@@ -166,19 +192,29 @@ function PackageList() {
                                     <th>Service Type</th>
                                     <th>Service Name</th>
                                     <th>Details</th>
+                                    <th>Min Details</th>
+                                    <th>Max Details</th>
+                                    <th>Price (with per head)</th>
                                     <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {service.map((val,index) => {
+                                    {service && service.map((val,index) => {
                                         return (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td style={{width:'10%'}}>{val.serviceType}</td>
                                                 <td style={{width:'10%'}}>{val.serviceName}</td>
-                                                <td style={{width:'70%'}}>
-                                                 
+                                                <td style={{width:'60%'}}>{val.description}</td>
+                                                <td style={{width:'10%'}}>
+                                                    <p>Quantity: {val.serviceDetails.discount ? val.serviceDetails.discount[0].min : ''}</p>
+                                                    <p>Discount: {val.serviceDetails.discount ? val.serviceDetails.discount[0].discount : ''}</p>
                                                 </td>
+                                                <td style={{width:'10%'}}>
+                                                    <p>Quantity: {val.serviceDetails.discount ? val.serviceDetails.discount[val.serviceDetails.discount.length-1].min : ''}</p>
+                                                    <p>Discount: {val.serviceDetails.discount ? val.serviceDetails.discount[val.serviceDetails.discount.length-1].discount : ''}</p>
+                                                </td>
+                                                <td style={{width:'10%'}}>{val.serviceDetails.hargaPerPerson}</td>
                                                 <td style={{width:'10%'}}><Button onClick={() => deleteService(index)} >Delete </Button></td>
                                             </tr>
                                         )
@@ -205,7 +241,10 @@ function PackageList() {
                                     </tr>
                                 </thead>
                             </Table>
-                        </React.Fragment>
+                            <center>
+                                <Button color={'primary'} onClick={()=>calculatePackage()}>Submit</Button>
+                            </center>
+                        </div>
                     : ''
                 }
                 

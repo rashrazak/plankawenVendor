@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { Button, Label, Input } from 'reactstrap';
 import '../../../css/venueform.css'
 import '../../../css/about.css'
+import Swal from 'sweetalert2';
 
 import { PackageContext } from '../../../contexts/PackageContext';
 
@@ -29,12 +30,33 @@ function PackageName({packageList, getPackage, setShowPackageDetails}) {
     useEffect(() => {
         console.log(packageList)
         packageDetailsFunction(packageList)
+        if (packageList != null) {
+            setCityArray(packageList.areaCovered)
+        }
     }, [packageList])
+
+  
 
 
     const createPackageFunction = () => {
-        getPackage({packageName:name, tnc, description:descriptionx, extra, areaCovered:cityArray})
-        setShowPackageDetails(old => false)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "All the changes will be override",
+            type: 'warning',
+            showCancelButton: true,
+        }).then((result) => {
+            if (result) {
+                getPackage({
+                    packageName:name?name:packageList?packageList.packageName:'', 
+                    tnc:tnc?tnc:packageList?packageList.tnc:'', 
+                    description:descriptionx?descriptionx:packageList?packageList.description:'',
+                    extra:extra?extra:packageList?packageList.extra:'', 
+                    areaCovered:cityArray?cityArray:packageList?packageList.areaCovered :''
+                })
+                setShowPackageDetails(old => false)
+            }
+        }).catch(Swal.noop);
+        
     }
     const handleChangeKawasan = (e) => {
         let name = e.target.name;
@@ -58,28 +80,28 @@ function PackageName({packageList, getPackage, setShowPackageDetails}) {
         
         <div className="form-service">
             <div>
-                <h4>Nama atau Tajuk Package {name ? name.name : ''}</h4>
-                <Input type="text"  onChange={(e) => setname(e.target.value)} />
+                <h4>Nama atau Tajuk Package {name != null? name.name : ''}</h4>
+                <Input type="text" placeholder={packageList != null? packageList.packageName : 'Nama Package'}  onChange={(e) => setname(e.target.value)} />
                 
             </div>
             <div className="form-section">
                 <h4>Description Package (dengan lengkap)</h4>
-                <Input className="form-custom" type="textarea" name="text" id="descService" value={descriptionx} onChange={(e) => { setDescriptionx(e.target.value) }} />
+                <Input className="form-custom" type="textarea" name="text" id="descService" onChange={(e) => { setDescriptionx(e.target.value) }} placeholder={packageList != null? packageList.description : ' '} />
             </div>
             <div className="form-section">
                 <h4>Terma dan Syarat </h4>
-                <Input className="form-custom" onChange={(e) => settnc(e.target.value)} type="textarea" placeholder="Terms & Conditions" value={tnc} />
+                <Input className="form-custom" onChange={(e) => settnc(e.target.value)} type="textarea" placeholder={packageList != null?packageList.tnc : 'Terms & Conditions'} />
             </div>
             <div className="form-section">
                 <h4>Maklumat tambahan</h4>
-                <Input className="form-custom" onChange={(e) => setextra(e.target.value)} type="textarea" placeholder="Extra Details, free gift etc" value={extra} />
+                <Input className="form-custom" onChange={(e) => setextra(e.target.value)} type="textarea" placeholder={packageList != null? packageList.extra : 'Extra Details, free gift etc'} />
             </div>
             <div className="form-section">
                 <h4> Lokasi Jangkauan</h4>
                 {gMapsCities.map( (cty, index) =>{
                     let bandar = cty.state;
                     let chckd  = false;
-                    if (cityArray != null) {
+                    if (cityArray != []) {
                         chckd = cityArray.includes(bandar) ? true : false;
                     }
                     return(

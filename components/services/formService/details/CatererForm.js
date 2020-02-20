@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function CatererForm({pagex}) {
+function CatererForm({pagex, setModalEdit,editModal}) {
 
     const {getServiceDetailsCaterer, addServiceDetailsCaterer} = useContext(AddServiceContext);
     const [hargaPerPerson, sethargaPerPerson] = useState(0)
@@ -106,6 +106,11 @@ function CatererForm({pagex}) {
     const submitServiceDetails = () => {
         addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk, changeMenu, changeVenue)
         Router.push(`/${pagex}/upload`);
+    }
+
+    const submitServiceDetails2 = () => {
+        addServiceDetailsCaterer(hargaPerPerson, discount, senaraiLauk, changeMenu, changeVenue)
+        setModalEdit(false)
     }
 
     return (
@@ -226,10 +231,19 @@ function CatererForm({pagex}) {
                     Terangkan sebarang syarat sekiranya terdapat sebarang perubahan pada lokasi majlis
                 </UncontrolledTooltip>
             </div>
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
-            </div>
+            {
+                !editModal ? 
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
+                </div>
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails2()}>Confirm</Button>{' '}
+                </div>
+
+            }
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

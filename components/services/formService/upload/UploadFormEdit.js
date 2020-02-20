@@ -7,7 +7,7 @@ import Filebase64 from 'react-file-base64'
 
 //pending patot ada image compressor
     
-function UploadFormEdit({pagex}) {
+function UploadFormEdit({pagex,setModalEdit,editModal}) {
 
     const {getServiceUpload, addServiceUpload, getServiceAbout} = useContext(AddServiceContext);
     const [images, setimages] = useState([])
@@ -59,6 +59,11 @@ function UploadFormEdit({pagex}) {
         addServiceUpload(images, serviceType, serviceId)
         Router.push(`/${pagex}/review`);
     }
+
+    const submitServiceUpload2 = () => {
+        addServiceUpload(images, serviceType, serviceId)
+        setModalEdit(false)
+    }
     return (
         <div className="form-service">
             <div className="form-section">
@@ -76,10 +81,19 @@ function UploadFormEdit({pagex}) {
                     )
                 })}
             </div>
-            {/* <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/details/${serviceType.toLowerCase()}`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
-            </div> */}
+            {
+                editModal == false ?
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/details/${serviceType.toLowerCase()}`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
+                </div> 
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceUpload2()}>Submit</Button>{' '}
+                </div>
+                
+            }
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

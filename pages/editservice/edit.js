@@ -45,13 +45,14 @@ function edit({pagex, sidebar}) {
         let details = getReview[s];
         setdetails(details);
         console.log(details)
+        console.log(pagex)
 
         let about = getReview.addServiceAbout
         setabout(about)
     }, [getReview])
 
     const submitReview = () => {
-        pagex == 'addservice' ? createAddService(pagex) : updateAddService(pagex) ;
+       updateAddService('editservice')
     }
       
     useEffect(() => {
@@ -63,17 +64,17 @@ function edit({pagex, sidebar}) {
     return (
         <Head title="edit">
             {
-                sidebarDiv ? <SideBarEdit/> : ''
+                sidebarDiv ? <SideBarEdit serviceType={serviceType}/> : ''
             }
             <div className="review-form">
                 <div className="button-edit-position">
                     <Button color="warning" onClick={ () => setSidebarDiv(!sidebarDiv) }>Edit</Button>
-                    <Button color="success">Save</Button>{' '}
+                    <Button color="success" onClick={()=>submitReview()}>Save</Button>{' '}
                 </div>
                
             {
                 images && coverImage ? 
-                    <div className="hero-review hover-react" onClick={editImage}>
+                    <div className="hero-review hover-react">
                             <img src={coverImage.base64 || coverImage.urlStorage}/>
                         <div className="hero-son-review">
                             {images.map((v,i) => {
@@ -311,10 +312,6 @@ function edit({pagex, sidebar}) {
                 <h5>Extra:</h5>
                 <p>{about.extra}</p>
             </div>
-            {/* <div className="form-button-edit">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/upload`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}
-            </div> */}
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto;}
                 .hero-review { position: relative;}

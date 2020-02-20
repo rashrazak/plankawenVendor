@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } 
 import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
     
-function VideographerForm({pagex}) {
+function VideographerForm({pagex, setModalEdit,editModal}) {
     const jenisEventArray = [
         {jenis:'Nikah', status:false},
         {jenis:'Walimah', status:false},
@@ -42,6 +42,11 @@ function VideographerForm({pagex}) {
     const submitServiceDetails = () => {
         addServiceDetailsVideographer(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
         Router.push(`/${pagex}/upload`);
+    }
+
+    const submitServiceDetails2 = () => {
+        addServiceDetailsVideographer(harga ,jenisEvent, discount, hargaDiscount, waktuTiba)
+        setModalEdit(false)
     }
     return (
         <div className="form-service">
@@ -103,10 +108,19 @@ function VideographerForm({pagex}) {
                     Terangkan waktu ketibaan anda sebelum Majlis dan bila Gambar/Photobook akan siap untuk penghantaran kepada pelanggan
                 </UncontrolledTooltip>
             </div>
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
-            </div>
+            {
+                !editModal ? 
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
+                </div>
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails2()}>Confirm</Button>{' '}
+                </div>
+
+            }
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

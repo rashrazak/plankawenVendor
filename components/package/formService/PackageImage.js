@@ -6,21 +6,21 @@ import Filebase64 from 'react-file-base64'
 
 //pending patot ada image compressor
     
-function PackageImage({pagex, setShowPackageImage}) {
+function PackageImage({pagex, setShowPackageImage, setpackageImage, packageImage}) {
 
-    const {packageImage, packageImageFunction} = useContext(PackageContext)
+    // const {packageImage, packageImageFunction} = useContext(PackageContext)
     const [images, setimages] = useState([])
     const [imageLimit, setimageLimit] = useState(3)
 
     useEffect(() =>{
-        if (packageImage.length > 0) {
+        if (packageImage.length) {
             setimageLimit((old) => {
-                let lim = packageImage.images;
+                let lim = packageImage;
                 lim = lim.length
                 let val = old - lim ;
                 return val;
             })
-            setimages(packageImage.images)
+            setimages(packageImage)
         }
     },[packageImage])
 
@@ -54,7 +54,7 @@ function PackageImage({pagex, setShowPackageImage}) {
     
     const submitServiceUpload = () => {
         setShowPackageImage(false)
-        packageImageFunction(images)
+        setpackageImage(images)
     }
     return (
         <div className="form-service">

@@ -7,7 +7,6 @@ import '../../../css/modal.css'
 
 function modalText(serviceType) {
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
 
     const {getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
    
@@ -71,6 +70,12 @@ function modalText(serviceType) {
         let aaa = serviceTypex.toLowerCase();
         Router.push(`/${pagex}/details/${aaa}`);
     }
+
+    const toggle = () =>{
+        addServiceAbout(title , cityArray, descriptionx, tnc, extra)
+        setModal(!modal);        
+    } 
+
     
     return (
         <div>

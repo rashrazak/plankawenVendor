@@ -13,12 +13,8 @@ function modalImage() {
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update Image</ModalHeader>
                 <ModalBody>
-                    <UploadFormEdit />
+                    <UploadFormEdit editModal={true} setModalEdit={setModal} />
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={toggle}>Simpan</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>Kembali</Button>
-                </ModalFooter>
             </Modal>
         </div>
     )

@@ -6,7 +6,7 @@ import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     
-function MakeupForm({pagex}) {
+function MakeupForm({pagex, setModalEdit,editModal}) {
     const jenisMakeupArray = [
         {jenis:'Full Makeup', status:false},
         {jenis:'Touchup', status:false}
@@ -107,6 +107,24 @@ function MakeupForm({pagex}) {
         }
         addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina, discountTouchup, discountFull, hargaDiscountTouchup, hargaDiscountFull)
         Router.push(`/${pagex}/upload`);
+    }
+
+    const submitServiceDetails2 = () => {
+        if (jenisMakeup.includes('Full Makeup') && hargaFull == 0) {
+            alert('Sila input harga `Full Makeup` ')
+            return false
+        }
+
+        if (jenisMakeup.includes('Touchup') && hargaTouchup == 0) {
+            alert('Sila input harga `Touchup` ')
+            return false
+        }
+        if (hargaFull == 0 && hargaTouchup == 0) {
+            alert('Sila pilih jenis `makeup` ')
+            return false
+        }
+        addServiceDetailsMakeup(hargaTouchup, hargaFull, jenisMakeup, jantina, discountTouchup, discountFull, hargaDiscountTouchup, hargaDiscountFull)
+        setModalEdit(false)
     }
     return (
         <div className="form-service">
@@ -222,14 +240,19 @@ function MakeupForm({pagex}) {
                         {''}
                     </div>
             }
+            {
+                !editModal ? 
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
+                </div>
+                :
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => setModalEdit(false)}>Cancel</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceDetails2()}>Confirm</Button>{' '}
+                </div>
 
-            
-           
-            
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.push(`/${pagex}/about`)}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceDetails()}>Next</Button>{' '}
-            </div>
+            }
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }

@@ -4,14 +4,14 @@ import ModalPriceWqty from '../editServices/modalPriceWqty'
 import ModalImage from '../editServices/modalImage'
 import '../../../css/modal.css'
 
-function editSidebar() {
+function editSidebar({serviceType}) {
 
 
     return (
         <div className="sidebar-edit">
             <div className="">
                 <ModalText/>
-                <ModalPriceWqty/>
+                <ModalPriceWqty serviceType={serviceType}/>
                 <ModalImage/>
             </div>
         <style jsx>{`

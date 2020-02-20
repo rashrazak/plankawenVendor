@@ -1,15 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, UncontrolledTooltip } from 'reactstrap';
 import '../../../css/modal.css'
+import VenueForm from '../../../components/services/formService/details/VenueForm'
+import CatererForm from '../../../components/services/formService/details/CatererForm'
+import DoorGiftForm from '../../../components/services/formService/details/DoorGiftForm'
+import HantaranForm from '../../../components/services/formService/details/HantaranForm'
+import KadBannerForm from '../../../components/services/formService/details/KadBannerForm'
+import MakeupForm from '../../../components/services/formService/details/MakeupForm'
+import OthersForm from '../../../components/services/formService/details/OthersForm'
+import PelaminForm from '../../../components/services/formService/details/PelaminForm'
+import PersembahanForm from '../../../components/services/formService/details/PersembahanForm'
+import PhotographerForm from '../../../components/services/formService/details/PhotographerForm'
+import VideographerForm from '../../../components/services/formService/details/VideographerForm'
+import WeddingDressForm from '../../../components/services/formService/details/WeddingDressForm'
 
-function modalPriceWqty(serviceType) {
+function modalPriceWqty({serviceType}) {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const [hargaPerPerson, sethargaPerPerson] = useState(0)
-    const [discount, setdiscount] = useState([])
-    const [minDiscount, setminDiscount] = useState(0)
-    const [maxDiscount, setmaxDiscount] = useState(0)
-    const [discountVal, setdiscountVal] = useState(0)
 
     return (
         <div>
@@ -17,72 +24,41 @@ function modalPriceWqty(serviceType) {
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
-                <div className="form-service">
-                    <div className="form-section">
-                        <h4>Harga per Unit (RM)</h4>
-                        <Input className="form-custom" type="number" placeholder="" value={hargaPerPerson} onChange={(e) => {sethargaPerPerson(e.target.value)}} />
-                    </div>
-                    <div className="form-section">
-                        <h4>Senarai harga</h4>
-                        <br/>
-                        <p>Kuantiti Minimum</p>
-                        <Input className="form-custom" type="number" placeholder="min quantity" value={minDiscount} onChange={(e) => {setminDiscount(e.target.value)}} />
-                        <br/>
-                        <p>Kuantiti Maksimum</p>
-                        <Input className="form-custom" type="number" placeholder="max quantity" value={maxDiscount}  onChange={(e) => {setmaxDiscount(e.target.value)}} />
-                        <br/>
-                        <p>Diskaun per Pax (%)</p>
-                        <Input className="form-custom" href="#" id="tooltipDiskaun" type="number" placeholder="any discounted price?" onChange={(e) => {setdiscountVal(e.target.value)}} />
-                        <UncontrolledTooltip placement="left" target="tooltipDiskaun">
-                            Diskaun mengikut minimum dan maksimum per pax. Contoh: <br></br>
-                            1 - 500 (0% diskaun per unit) <br></br>
-                            501 - 1000 (5% diskaun per unit) <br></br>
-                            1001 - 1500 (8% diskaun per unit) 
-                        </UncontrolledTooltip>
-                        <br/>
-                        <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
-                    </div>
-                    <div className="form-section">
-                        { discount.length > 0 ?
-                            <p>Senarai Diskaun</p>
-                            :
-                            ''
-                        }
-                        <br/>
-                        {   discount.length > 0 ?
-                            
-                            discount.map( (val, index) =>{
-                                let ma = val.max;
-                                let mi = val.min;
-                                let d = val.discount;
-
-                                return(
-                                    <React.Fragment key={index}>
-                                        <div className="area-covered-div">
-                                                <span>Min: {mi} | </span>
-                                                <span>Max: {ma} | </span>
-                                                <span>Discount: {d} %</span>
-                                                {(index == (discount.length - 1) )
-                                                    ? 
-                                                    <Button color="danger" className="round-delete" onClick={() => deleteDiscount(index)}>x</Button>
-                                                    :
-                                                    <div></div>
-
-                                                }
-                                                <br/>
-                                        </div>
-                                    </React.Fragment>
-                                )
-                            })
-                            : ''
-                        }
-                    </div>
-                </div>
+                    <h1></h1>
+                {
+                    serviceType == 'Venue' ?
+                    <VenueForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Canopy' ?
+                    <CanopyForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'KadBanner' ?
+                    <KadBannerForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'WeddingDress' ?
+                    <WeddingDressForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Makeup' ?
+                    <MakeupForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Photographer' ?
+                    <PhotographerForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Videographer' ?
+                    <VideographerForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Pelamin' ?
+                    <PelaminForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Caterer' ?
+                    <CatererForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Hantaran' ?
+                    <HantaranForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Persembahan' ?
+                    <PersembahanForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'DoorGift' ?
+                    <DoorGiftForm setModalEdit={setModal} editModal={true} />
+                    : serviceType == 'Others' ?
+                    <OthersForm setModalEdit={setModal} editModal={true} />
+                    :''
+                }
                 </ModalBody>
-                <ModalFooter>
+                {/* <ModalFooter>
                 <Button color="primary" onClick={toggle}>Simpan</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Kembali</Button>
-                </ModalFooter>
+                </ModalFooter> */}
             </Modal>            
         </div>
     )
