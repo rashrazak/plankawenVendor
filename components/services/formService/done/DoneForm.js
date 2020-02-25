@@ -27,7 +27,7 @@ function DoneForm({pagex}) {
     }, [resetAddService])
     return (
         <div className="form-service">
-            <img className="center-block" src="/static/images/logos/thankyou-service.png"></img>
+            <img className="center-block" src="/images/logos/thankyou-service.png"></img>
             <h5>Congratulations!</h5>
             <p>You’ve succesfully add your new service.</p>
             <div className="form-button">

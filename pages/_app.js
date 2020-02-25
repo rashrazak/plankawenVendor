@@ -167,7 +167,7 @@ class MyApp extends App {
   componentDidMount = () => {
       let user = localStorage.getItem('user');
       user = JSON.parse(user)
-      if (user == null && Router.pathname != '/signup'){
+      if (user == null && Router.pathname != '/signup' && Router.pathname != '/terma'){
         firebase.isInitialized().then(val => {
           if (val) {
             console.log(val)

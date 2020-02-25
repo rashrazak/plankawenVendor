@@ -174,7 +174,7 @@ class Firebase {
                     app.firestore().collection('vendor').add(param)
                     app.auth().createUserWithEmailAndPassword(companyEmail, password)
                     alert('Registered!')
-                    Router.push('/');
+                    window.location.href = '/'
             
                     
                 })

@@ -125,6 +125,10 @@ function VendorForm() {
             alert('Sila nyatakan kawasan anda!')
             return false;
         }
+        if (password.length <= 6){
+            alert('Password anda harus melebihi 6 character!')
+            return false;
+        }
         var param = {
             account:0,
             akaunBank:bankAccount,
@@ -148,10 +152,10 @@ function VendorForm() {
         }
         if (Router.pathname == '/signup') {
             let x = firebase.createVendor(param, password, companyEmail, ssmImage)
-            if (x == true) {
-                // alert('Registered!')
-                // Router.push('/');
-            }
+            // if (x == true) {
+            //     alert('Registered!')
+            //     Router.push('/');
+            // }
         }else{
             let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
             if (x == true) {
@@ -165,11 +169,11 @@ function VendorForm() {
     return (
         <div className="">
             {/* <div className="logo-container">
-                <img className="" src="/static/images/logos/logo-white-tagline.png"></img>
+                <img className="" src="/images/logos/logo-white-tagline.png"></img>
             </div> */}
             <div className="vendor-form-section">
                 <div className="">
-                    <img className="" src="/static/images/placeholder/vendor-bg.png"></img>
+                    <img className="" src="/images/placeholder/vendor-bg.png"></img>
                 </div>
                 <div className="vendor-form">
                     <h4>Anda telah memilih untuk menjadi rakan vendor kami.<br></br>Sila masukkan detail syarikat anda.</h4>   

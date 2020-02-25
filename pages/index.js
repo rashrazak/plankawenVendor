@@ -25,7 +25,7 @@ function index() {
         getData()
     },[user])
     return (
-        <Head title={'Hello Admin'}>
+        <Head title={'Hello Vendor'}>
             <div className="body-layout">
                 <Login/>
             </div>

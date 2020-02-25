@@ -37,7 +37,7 @@ function dashboard() {
                     {
                         data == true ?
                         <div className={`alert-info`}>
-                            <img src="/static/images/icon/alert-circle.png" alt="alert icon"/>
+                            <img src="/images/icon/alert-circle.png" alt="alert icon"/>
                             <p>Kemas kini gambar profil dan keterangan mengenai syarikat anda supaya lebih meyakinkan dan memudahkan pelanggan membuat pilihan. Klik <a href="">sini</a> untuk berbuat sedemikian!</p>
                         </div>
                         :''
@@ -52,7 +52,7 @@ function dashboard() {
                                         data == true ?
                                             <img src={user.photoUrl}/>
                                             :
-                                            <img src="static/images/icon/user-placeholder.png"/>
+                                            <img src="/images/icon/user-placeholder.png"/>
 
                                     }
                                    

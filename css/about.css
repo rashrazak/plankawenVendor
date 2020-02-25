@@ -33,21 +33,21 @@
     box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2)
 }
 /* .btn-venue{
-    background-image: url('/static/images/icon/ico-venue-black.png');
+    background-image: url('/images/icon/ico-venue-black.png');
     background-repeat: no-repeat;
     background-position: left 10px center;
 }
 .btn-venue:hover{
-    background-image: url('/static/images/icon/ico-venue-white.png');
+    background-image: url('/images/icon/ico-venue-white.png');
 }
 .btn-canopy{
-    background-image: url('/static/images/icon/ico-canopy-black.png');
+    background-image: url('/images/icon/ico-canopy-black.png');
     background-repeat: no-repeat;
     background-position: left 10px center;
     background-size: 15px;
 }
 .btn-invitation{
-    background-image: url('/static/images/icon/ico-invitation-black.png');
+    background-image: url('/images/icon/ico-invitation-black.png');
     background-repeat: no-repeat;
     background-position: left 10px center;
     background-size: 15px;

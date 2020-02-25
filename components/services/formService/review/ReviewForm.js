@@ -59,12 +59,12 @@ function AboutForm({pagex}) {
                     </div>
                 :
                     <div className="hero-review">
-                        <img src="/static/images/logos/unavailable.png"/>
+                        <img src="/images/logos/unavailable.png"/>
                         <div className="hero-son-review">
-                            <img src="/static/images/logos/unavailable.png"/>
-                            <img src="/static/images/logos/unavailable.png"/>
-                            <img src="/static/images/logos/unavailable.png"/>
-                            <img src="/static/images/logos/unavailable.png"/>
+                            <img src="/images/logos/unavailable.png"/>
+                            <img src="/images/logos/unavailable.png"/>
+                            <img src="/images/logos/unavailable.png"/>
+                            <img src="/images/logos/unavailable.png"/>
                         </div>
                     </div>
 
@@ -72,14 +72,14 @@ function AboutForm({pagex}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img src="/static/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
+                    <p><span><img src="/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
                 </div>
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
                     ? 
                         <React.Fragment>
                             <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Pax)</span> <br></br>{details.hargaPerPerson}</p>
                             </div>
                         </React.Fragment>
@@ -99,15 +99,15 @@ function AboutForm({pagex}) {
                     : 
                         <React.Fragment>
                             <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Asal)</span> <br></br>{details.harga}</p>
                             </div>
                             <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
                             </div>
                             <div className="review-price">
-                                <img src="/static/images/icon/ico-dollar.png"/>
+                                <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
                             </div>
                         </React.Fragment>
@@ -119,7 +119,7 @@ function AboutForm({pagex}) {
                 ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
                     <div className="review-name-and-places">
                         <h4> {about.serviceName}</h4>
-                        <p><span><img src="/static/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
+                        <p><span><img src="/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
                         <h4>Waktu Operasi</h4>
                         <p>{details.waktuOperasi}</p>
                     </div>

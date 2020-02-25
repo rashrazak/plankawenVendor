@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import '../css/bootstrap.min.css'
 import '../css/index.css'
@@ -14,36 +14,41 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem } from 'reactstrap';
+import Link from 'next/link'
 import masterLayout from '../components/hoc/masterLayout'
+import {useRouter} from 'next/router'
 
-export class Headx extends Component {
-    constructor(props) {
-        super(props);
+import firebase from '../config/firebaseConfig'
+
+export function Headx({title, children}){
+    const router = useRouter()
+    const [isOpen, setIsOpen] = useState(false)
     
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-          isOpen: false
-        };
-      }
-    toggle() {
-    this.setState({
-        isOpen: !this.state.isOpen
-    });
+    function toggle() {
+        setIsOpen(!isOpen)
     }
 
-    render() {
-        return (
-            <div>
-                <Head>
-                    <title>{this.props.title}</title>
-                    <meta charSet='utf-8' />
-                    <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWnC2crGKbK0zzmYvXCrrnikRpVX8rtQo&libraries=places"></script>
-                </Head>
-                    <Navbar className="navbar-custom" color="white" light expand="md">
-                        <NavbarBrand href="/"><img className="logo-header" src="/static/images/logos/logo-officialx2.png"/></NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
-                        {/* <Collapse isOpen={this.state.isOpen} navbar> */}
+    function logout() {
+        firebase.signOut().then( ()=> {
+            localStorage.removeItem('user');
+            router.push('/')
+
+          })
+    }
+
+    return (
+        <div>
+            <Head>
+                <title>{title}</title>
+                <meta charSet='utf-8' />
+                <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWnC2crGKbK0zzmYvXCrrnikRpVX8rtQo&libraries=places"></script>
+            </Head>
+                <Navbar className="navbar-custom" color="white" light expand="md">
+                    <NavbarBrand href="/"><img className="logo-header" src="/images/logos/logo-officialx2.png"/></NavbarBrand>
+                    <NavbarToggler onClick={()=>toggle()} />
+                    {
+                        router.pathname != '/'  && router.pathname != '/signup' && router.pathname != '/terma'?
                         <Collapse navbar>
                             <Nav className="ml-auto" navbar>
                             <NavItem>
@@ -51,29 +56,39 @@ export class Headx extends Component {
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
-                                    <img className="logo-user" src="/static/images/logos/logo-userx2.png"/>
+                                    <img className="logo-user" src="/images/logos/logo-userx2.png"/>
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>
-                                    Option 1
+                                    <Link href={'/editservice'}>
+                                    <a>
+                                    Service
+                                    </a>
+                                    </Link>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    Option 2
+                                    <Link href={'/package/view'}>
+                                    <a>
+                                    Service
+                                    </a>
+                                    </Link>
                                 </DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
+                                <DropdownItem onClick={()=> logout()}>
+                                    LogOut
                                 </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             </Nav>
                         </Collapse>
-                    </Navbar>
-                    {this.props.children} 
-            </div>
-            
-        )
-    }
+                        :''
+                    }
+                    
+                </Navbar>
+                {children} 
+        </div>
+        
+    )
 }
 
 export default masterLayout(Headx)
