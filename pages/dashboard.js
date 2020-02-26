@@ -35,7 +35,7 @@ function dashboard() {
              <Head title={ 'Vendor Dashboard'}>
                  <div className={`container`}>
                     {
-                        data == true ?
+                        data == false ?
                         <div className={`alert-info`}>
                             <img src="/images/icon/alert-circle.png" alt="alert icon"/>
                             <p>Kemas kini gambar profil dan keterangan mengenai syarikat anda supaya lebih meyakinkan dan memudahkan pelanggan membuat pilihan. Klik <a href="">sini</a> untuk berbuat sedemikian!</p>
