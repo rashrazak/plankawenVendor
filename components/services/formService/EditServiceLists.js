@@ -6,6 +6,7 @@ import { Table, Button, Input } from 'reactstrap';
 import Swal from 'sweetalert2';
 import Router from 'next/router';
 import { get } from 'https';
+import '../../../css/editServiceList.css';
 
 function EditServiceLists({serviceType}) {
     const {user} = useContext(LoginContext);
@@ -97,42 +98,43 @@ function EditServiceLists({serviceType}) {
                     searchList = serviceList.filter((x) => {
                     return x.serviceName.toLowerCase().indexOf(val.toLowerCase() !== -1);
                 })} */}
-                <h1>Show Lists</h1>
-                <Input type="text" name="search" onChange={(e) => setsearch(e.target.value)}  placeholder="Search" />
+                <h1></h1>
+                <div className={`add-service`}>
+                    <Input className={`seacrh-input`}type="text" name="search" onChange={(e) => setsearch(e.target.value)}  placeholder="Search" />
+                    <button type="button" className={`btn add-btn`}>Add Service</button>
+                </div>
                 <Table>
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Service Name</th>
-                        <th>Status</th>
-                        <th>Date Created</th>
-                        <th>Service Type</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Service Name</th>
+                            <th>Status</th>
+                            <th>Date Created</th>
+                            <th>Service Type</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
-            {searchList.length > 0 ? 
-                searchList.map((val,index) => {
-                    let date = new Date(val.getTime)
-                    return (
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{val.serviceName}</td>
-                            <td>{val.status}</td>
-                            <td>{date.toString()}</td>
-                            <td>{val.serviceType}</td>
-                            <td><Button onClick={() => editFunction(index)} >Click </Button></td>
-                            <td><Button onClick={() => deleteFunction(index)} >Click </Button></td>
-                        </tr>
-                    )
-                })
-            :
-                <tr>
-                    <td>Empty</td>
-                </tr>
-            }             
+                        {searchList.length > 0 ? 
+                            searchList.map((val,index) => {
+                                let date = new Date(val.getTime)
+                                return (
+                                    <tr key={index}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{val.serviceName}</td>
+                                        <td>{val.status}</td>
+                                        <td>{date.toString()}</td>
+                                        <td>{val.serviceType}</td>
+                                        <td className={`button-td`}><button type="button" className={`btn btn-table edit-btn`} onClick={() => editFunction(index)} > </button>
+                                        <button type="button" className={`btn btn-table delete-btn`} onClick={() => deleteFunction(index)} > </button></td>
+                                    </tr>
+                                )
+                            })
+                        :
+                            <tr>
+                                <td>Empty</td>
+                            </tr>
+                        }             
                     </tbody>
                 </Table>
             </div>
