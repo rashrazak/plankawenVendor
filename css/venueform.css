@@ -3,6 +3,12 @@
     font-weight: 400;
     font-size: 14px;
     color: #3E3E3E;
+    transition: all .3s;
+}
+.form-custom:active, .form-custom:focus { 
+    outline: none; 
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14); 
+    transition: all .3s;
 }
 textarea { 
     /* resize: none; */
