@@ -1,11 +1,12 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 import Filebase64 from 'react-file-base64'
-import Router from 'next/router';
-import firebase from '../config/firebaseConfig';
+import Router from 'next/router'
+import firebase from '../config/firebaseConfig'
 import LoginContext from '../contexts/LoginContext'
-// import Swal from 'sweetalert2';
-import '../css/venueform.css';
+
+import Link from 'next/link'
+import '../css/venueform.css'
 
 function VendorForm() {
 
@@ -191,6 +192,9 @@ function VendorForm() {
                                         setSecondDiv(true)
                                     }}>Seterusnya</Button>
                                 </div>
+                                <div className={`login-cont`}>
+                                    <p>Sudah ada akaun? <span><Link href="/index"><a className={``}>Klik disini</a></Link></span></p>
+                                </div>
                             </div>    
 
                         </React.Fragment>
@@ -333,7 +337,9 @@ function VendorForm() {
                 .area-covered-div > label > input { margin-right: 5px; }
                 .position-button > Button { background-color: #4bd19f; margin: 20px; }
                 .tnc-section { font-size: 10px; padding: 10px 0px 0px 20px;}
-                .form-custom { border: #EAEAEA;}
+                .login-cont { margin-top: 30px;}
+                .login-cont > p { font-size: 13px;}
+                .login-cont > p > span > a { color: #007bff; text-decoration: underline;}
             `}</style>
         </div>
     )

@@ -40,13 +40,23 @@ const Login = () => {
                     <input type="password" className="form-control" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                     {/* <input type="submit" className="btn btn-primary" value="Login" /> */}
                     {message != '' && <div className="message">{message}</div>}
-                    <button type="button" className="btn btn-primary" onClick={e => authenticate(e)}>Login</button>
                 </form>
-                <Link href="/signup"><a>Sign Up</a></Link>
+                <div className={`login-cont`}>
+                    <p>Pengguna Baru? <span><Link href="/signup"><a className={``}>Daftar disini</a></Link></span></p>
+                    <button type="button" className="btn btn-login" onClick={e => authenticate(e)}>Login</button>
+                </div>
             </div>
             <style jsx>{`
-                .form-layout { text-align: center; }
-                a { margin-top: 10px;}
+                .form-layout { text-align: center;}
+                .form-control { border: 2px solid #EAEAEA; height: 50px; color: #3E3E3E; font-weight: normal; border-radius: 4px; transition: all .3s;}
+                .form-control:active, .form-control:focus { outline: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14); transition: all .3s;}
+                a { color: #007bff; text-decoration: underline;}
+                .btn-login { background-color: #ED795F; border-radius: 25px; color: #FFF; width: 130px; background-image: url(images/icon/arrow-right.png); background-repeat: no-repeat; background-position: center right 15px; background-size: 22px; transition: all .3s;}
+                .btn-login:hover { background-position: center right 10px;}
+                h1 { margin-bottom: 30px;}
+                .login-cont { margin-top: 20px; display: flex; justify-content: space-between; align-items: center;}
+                p { margin-bottom: 0; font-size: 13px;}
+
             `}</style>
         </div>
     )
