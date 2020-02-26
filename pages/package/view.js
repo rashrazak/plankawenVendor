@@ -9,6 +9,7 @@ import LoginContext from '../../contexts/LoginContext'
 import {Button,Table,Input,Label} from 'reactstrap';
 import Swal from 'sweetalert2';
 import Link from 'next/link'
+import '../../css/packageLists.css'
 
 
 
@@ -64,42 +65,48 @@ function view() {
     }
     return (
         <Head title={'View Packages'}>
-        <h1>View Package</h1>
-        <Table>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Package Name</th>
-                <th>Price before</th>
-                <th>Price After</th>
-                <th>Quantity</th>
-                <th>Edit</th>
-                <th>Delete</th>
+            <div className={`package-list`}>
+                <div className={`add-service`}>
+                    <Input className={`seacrh-input`}type="text" name="search" onChange={(e) => setsearch(e.target.value)}  placeholder="Search" />
+                    <Link href="/package/add"><span><button type="button" className={`btn add-btn`}>Add Package</button> </span></Link>
+                </div>
+                <Table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Package Name</th>
+                        <th>Price before</th>
+                        <th>Price After</th>
+                        <th>Quantity</th>
+                        <th></th>
 
-            </tr>
-            </thead>
-            <tbody>
-            {packageList.length > 0 ? 
-                packageList.map((val,index) => {
-                    return (
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{val.packageDetails.packageName}</td>
-                            <td>{val.packageSelection.totalBefore}</td>
-                            <td>{val.packageSelection.totalAfter}</td>
-                            <td>{val.packageSelection.quantity}</td>
-                            <td><Button onClick={() => editFunction(index)} >Click </Button></td>
-                            <td><Button onClick={() => deleteFunction(index)} >Click </Button></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {packageList.length > 0 ? 
+                        packageList.map((val,index) => {
+                            return (
+                                <tr key={index}>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{val.packageDetails.packageName}</td>
+                                    <td>{val.packageSelection.totalBefore}</td>
+                                    <td>{val.packageSelection.totalAfter}</td>
+                                    <td>{val.packageSelection.quantity}</td>
+                                    <td className={`button-td`}>
+                                        <button type="button" className={`btn btn-table edit-btn`} onClick={() => editFunction(index)} ></button>
+                                        <button type="button" className={`btn btn-table delete-btn`} onClick={() => deleteFunction(index)} > </button>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    :
+                        <tr>
+                            <td>Tiada Package yang dibuat</td>
                         </tr>
-                    )
-                })
-            :
-                <tr>
-                    <td>Tiada Package yang dibuat, klik <Link href="/package/add"><a>Sini</a></Link></td>
-                </tr>
-            }             
-            </tbody>
-        </Table>
+                    }             
+                    </tbody>
+                </Table>
+            </div>
             
         </Head>
     )

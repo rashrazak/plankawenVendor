@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import Router from 'next/router';
 import { get } from 'https';
 import '../../../css/editServiceList.css';
+import Link from 'next/link'
 
 function EditServiceLists({serviceType}) {
     const {user} = useContext(LoginContext);
@@ -101,7 +102,7 @@ function EditServiceLists({serviceType}) {
                 <h1></h1>
                 <div className={`add-service`}>
                     <Input className={`seacrh-input`}type="text" name="search" onChange={(e) => setsearch(e.target.value)}  placeholder="Search" />
-                    <button type="button" className={`btn add-btn`}>Add Service</button>
+                    <Link href="/addservice/about"><span><button type="button" className={`btn add-btn`}>Add Service</button></span></Link>
                 </div>
                 <Table>
                     <thead>
@@ -125,8 +126,10 @@ function EditServiceLists({serviceType}) {
                                         <td>{val.status}</td>
                                         <td>{date.toString()}</td>
                                         <td>{val.serviceType}</td>
-                                        <td className={`button-td`}><button type="button" className={`btn btn-table edit-btn`} onClick={() => editFunction(index)} > </button>
-                                        <button type="button" className={`btn btn-table delete-btn`} onClick={() => deleteFunction(index)} > </button></td>
+                                        <td className={`button-td`}>
+                                            <button type="button" className={`btn btn-table edit-btn`} onClick={() => editFunction(index)} ></button>
+                                            <button type="button" className={`btn btn-table delete-btn`} onClick={() => deleteFunction(index)} > </button>
+                                        </td>
                                     </tr>
                                 )
                             })
