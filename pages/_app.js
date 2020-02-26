@@ -455,11 +455,20 @@ class MyApp extends App {
     currentService['harga'] = harga;
 
     if (currentService['alamatPenuh'] != alamatPenuh) {
-      currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
-      currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
-      currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
-      currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
       currentService['alamatPenuh'] = ap;
+      lok.address_components.map((val,ind)=>{
+        if (val.types[0] == "street_number" || val.types[0] == "sublocality_level_1") {
+            currentService['lokasi']['street'] = val.long_name;
+        }else if (val.types[0] == "route") {
+            currentService['lokasi']['street'] = val.long_name;
+        }else if (val.types[0] == "locality") {
+            currentService['lokasi']['city'] = val.long_name;
+        }else if (val.types[0] == "administrative_area_level_1") {
+            currentService['lokasi']['state'] = val.long_name;
+        }else if (val.types[0] == "postal_code") {
+          currentService['lokasi']['postcode']= val.long_name;
+        }
+    })
     }
 
     currentService['waktuOperasi'] = wo;

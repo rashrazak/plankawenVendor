@@ -44,7 +44,6 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
     },[getServiceDetailsWeddingDress])
 
     const handleChangeJenis = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisSewa;
@@ -55,7 +54,6 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
             x.splice(index,1);
             setjenisSewa([...x]);
         }
-        Swal.close()
     }
 
     const addAlamat = () => {

@@ -29,7 +29,6 @@ function PhotographerForm({pagex, setModalEdit,editModal}) {
     },[getServiceDetailsPhotographer])
 
     const handleChangeJenis = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisEvent;
@@ -40,7 +39,6 @@ function PhotographerForm({pagex, setModalEdit,editModal}) {
             x.splice(index,1);
             setjenisEvent([...x]);
         }
-        Swal.close()
     }
 
     const submitServiceDetails = () => {

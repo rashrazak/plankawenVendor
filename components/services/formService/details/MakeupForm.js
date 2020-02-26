@@ -46,7 +46,6 @@ function MakeupForm({pagex, setModalEdit,editModal}) {
     },[getServiceDetailsMakeup])
 
     const handleChangeJenis = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisMakeup;
@@ -72,7 +71,6 @@ function MakeupForm({pagex, setModalEdit,editModal}) {
                 sethargaTouchup(0)
             }
         }
-        Swal.close()
     }
 
     const handleChangeJantina = (e) => {

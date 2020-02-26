@@ -168,11 +168,11 @@ class Firebase {
             },(error)=>{
                 console.log(error)
             },()=>{
-                locResult.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
                     param.ssmImage = downloadURL;
                     console.log(downloadURL)
-                    app.firestore().collection('vendor').add(param)
-                    app.auth().createUserWithEmailAndPassword(companyEmail, password)
+                    await app.firestore().collection('vendor').add(param)
+                    await app.auth().createUserWithEmailAndPassword(companyEmail, password)
                     alert('Registered!')
                     window.location.href = '/'
             

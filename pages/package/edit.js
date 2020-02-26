@@ -8,7 +8,6 @@ import PackageName from '../../components/package/formService/PackageName';
 import PackageList from '../../components/package/formService/PackageList';
 import PackageImage from '../../components/package/formService/PackageImage';
 import {Button,Table,Input,Label} from 'reactstrap';
-import Swal from 'sweetalert2';
 
 
 function edit() {
@@ -38,11 +37,9 @@ function edit() {
                     setpackageDetails(y.packageDetails)
                     setpackageImage(y.packageImage)
                     setPackageSelection(y.packageSelection)
-                    Swal.close()
                 }
             }    
         }
-        Swal.showLoading()
         getPackage()
     }, [query, id])
 

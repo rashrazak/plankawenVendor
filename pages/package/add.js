@@ -22,9 +22,61 @@ function Package() {
     const [packageImage, setpackageImage] = useState([])
     const [packageSelection, setPackageSelection] = useState(null)
     const [email, setEmail] = useState(null)
+    const [serviceTotal, setServiceTotal] = useState(false)
+    const [serviceList, setServiceList] = useState([])
+    const services = ['Venue',
+                    'Canopy',
+                    'KadBanner',
+                    'WeddingDress',
+                    'Makeup',
+                    'Photographer',
+                    'Videographer',
+                    'Pelamin',
+                    'Caterer',
+                    'Hantaran',
+                    'Persembahan',
+                    'DoorGift',
+                    'Others']
     useEffect(() => {
-        console.log(packageDetails)
-    }, [packageDetails])
+        if (user) {
+            var check = false;
+            async function getData() {
+                if (serviceList.length == 0) {
+                    
+                    await services.map( async (val,index) => {
+                        if (index == (serviceList.length - 1) ) {
+                            check = true
+                        }
+                        var read = await firebase.checkServiceType(val, user.email)
+                        read.forEach(function(doc) {
+                            let x = doc.id;
+                            let y = doc.data()
+                            
+                            let data = {...y, id:x}
+                            setServiceList((old) => [...old, data])
+                        })
+                        
+                        
+                    })
+                    if (check == true) {
+                        console.log(serviceList)
+                        // if (serviceList.length == 0) {
+                        //     alert('Empty service! Please create service')
+                        //     route.push('/addservice/about')
+                        // }
+                    }    
+                }
+            }
+            getData()
+            console.log(serviceList)
+            
+        }
+    }, [user, serviceList])
+    useEffect(() => {
+        if (serviceTotal == true) {
+            
+        }
+    }, [serviceTotal])
 
     useEffect(() => {
         console.log(packageImage)
@@ -59,30 +111,35 @@ function Package() {
         }
         submitPackage()
     }, [packageSelection])
+
     return (
         <Head title={'Package'}>
-            <div>
-                <h1>Package {packageDetails ? packageDetails.name : ''}</h1>
-            </div>
             {
-                showPackageDetails ? 
-                <PackageName packageList={packageDetails} getPackage={setpackageDetails} setShowPackageDetails={setShowPackageDetails} />
-                :
-                <Button onClick={()=> setShowPackageDetails(!showPackageDetails)}>Update Package Details</Button>
-            }
-            
-            {
-                packageDetails ?
-                    <React.Fragment>
+                serviceList.length > 0 ? 
+                <div>
+                    <div>
+                        <h1>Package {packageDetails ? packageDetails.name : ''}</h1>
+                    </div>
+                    <div>
+                        <PackageList setPackageSelection={setPackageSelection} setServiceTotal={setServiceTotal} serviceList={serviceList}/>
                         {
                             showPackageImage ?
                                 <PackageImage setShowPackageImage={setShowPackageImage} setpackageImage={setpackageImage} packageImage={packageImage} />
                             :<Button onClick={()=> setShowPackageImage(!showPackageImage)}>Update Package Image</Button>
                         }
-                        <PackageList setPackageSelection={setPackageSelection} />
-                    </React.Fragment>
-                : ''
+                    </div>
+                    {
+                        showPackageDetails ? 
+                        <PackageName packageList={packageDetails} getPackage={setpackageDetails} setShowPackageDetails={setShowPackageDetails} />
+                        :
+                        <Button onClick={()=> setShowPackageDetails(!showPackageDetails)}>Update Package Details</Button>
+                    }
+                </div>
+                : <h1>Service is empty, create <a href="/addservice/about">here</a></h1>
             }
+            
+
+            
         </Head>
     )
 }

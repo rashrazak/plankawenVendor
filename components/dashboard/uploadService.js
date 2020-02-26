@@ -1,8 +1,14 @@
 import React, {useState} from 'react'
+import Router from 'next/router'
+import firebase from '../../config/firebaseConfig'
 
 function uploadService() {
 
     const [data, setdata] = useState(false)
+
+    function addService(){
+        Router.push('/addservice/about')
+    }
     return (
         <div className={`upload-service-container`}>
             {
@@ -35,7 +41,7 @@ function uploadService() {
                 :
                 <React.Fragment>
                 <h4 className={`label-h4`}>Service Anda</h4>
-                <div className={`upload-service`}>
+                <div className={`upload-service`}  onClick={()=> addService()}>
                     <span></span>
                     <p><span><img src="/images/icon/arrow-left.png"/></span>Klik disini untuk memasukkan servis pertama anda</p>
                 </div>

@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Router from 'next/router';
 import AddServiceContext from '../../../../contexts/AddServiceContext'
-import Swal from 'sweetalert2'
 import Filebase64 from 'react-file-base64'
 
 //pending patot ada image compressor

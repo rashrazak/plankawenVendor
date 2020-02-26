@@ -69,7 +69,7 @@ export function Headx({title, children}){
                                 <DropdownItem>
                                     <Link href={'/package/view'}>
                                     <a>
-                                    Service
+                                    Package
                                     </a>
                                     </Link>
                                 </DropdownItem>

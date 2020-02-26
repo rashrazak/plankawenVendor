@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Head from '../components/Headx'
-import Swal from 'sweetalert2'
 import VendorForm from '../components/VendorForm';
 import '../css/index.css'
 

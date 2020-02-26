@@ -6,7 +6,6 @@ import Head from '../../components/Headx'
 import { Router } from 'next/router'
 import '../../css/venueform.css'
 import '../../css/about.css'
-import Swal from 'sweetalert2'
 
 
 function EditService(props) {

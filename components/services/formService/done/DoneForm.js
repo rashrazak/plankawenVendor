@@ -4,7 +4,6 @@ import Router from 'next/router';
 import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
-import Swal from 'sweetalert2'
     
 function DoneForm({pagex}) {
     const {resetAddService, getReview} = useContext(AddServiceContext);

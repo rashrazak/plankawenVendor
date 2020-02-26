@@ -8,6 +8,7 @@ import firebase from '../../config/firebaseConfig'
 import LoginContext from '../../contexts/LoginContext'
 import {Button,Table,Input,Label} from 'reactstrap';
 import Swal from 'sweetalert2';
+import Link from 'next/link'
 
 
 
@@ -94,7 +95,7 @@ function view() {
                 })
             :
                 <tr>
-                    <td>Empty</td>
+                    <td>Tiada Package yang dibuat, klik <Link href="/package/add"><a>Sini</a></Link></td>
                 </tr>
             }             
             </tbody>

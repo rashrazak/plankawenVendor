@@ -4,7 +4,7 @@ import Filebase64 from 'react-file-base64'
 import Router from 'next/router';
 import firebase from '../config/firebaseConfig';
 import LoginContext from '../contexts/LoginContext'
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import '../css/venueform.css';
 
 function VendorForm() {
@@ -36,7 +36,7 @@ function VendorForm() {
 
     useEffect(() => {
         const y = async()=>{
-            Swal.showLoading()
+            // Swal.showLoading()
             var x = await getVendorUser();
             if (x != null) {
                 if (Router.pathname != '/signup') {
@@ -62,7 +62,7 @@ function VendorForm() {
                     })
                 }
             }
-            Swal.close()
+            // Swal.close()
         }
        y()
     }, [getVendorUser])

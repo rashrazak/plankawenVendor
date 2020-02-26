@@ -4,26 +4,11 @@ import LoginContext from '../../../contexts/LoginContext'
 import { Router } from 'next/router'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
-import Swal from 'sweetalert2'
+import Link from 'next/link'
 import firebase from '../../../config/firebaseConfig'
 
 
-function PackageList({setPackageSelection, packageSelection}) {
-    const {user} = useContext(LoginContext);
-    const services = ['Venue',
-                    'Canopy',
-                    'KadBanner',
-                    'WeddingDress',
-                    'Makeup',
-                    'Photographer',
-                    'Videographer',
-                    'Pelamin',
-                    'Caterer',
-                    'Hantaran',
-                    'Persembahan',
-                    'DoorGift',
-                    'Others']
-    const [serviceList, setserviceList] = useState([])
+function PackageList({setPackageSelection, packageSelection, setServiceTotal, serviceList}) {
     const [service, setservice] = useState([])
     const [serviceBefore, setserviceBefore] = useState([])
     const [quantity, setquantity] = useState(100)
@@ -34,7 +19,7 @@ function PackageList({setPackageSelection, packageSelection}) {
 
     const selectService = (index) => {
         let data = serviceList[index];
-        console.log(data)
+        
         setservice([...service,data])
         setserviceBefore([...serviceBefore,data])
     }
@@ -52,25 +37,8 @@ function PackageList({setPackageSelection, packageSelection}) {
         }
     }, [packageSelection])
 
-    useEffect(() => {
-        if (user) {
-            async function getData() {
-                Swal.showLoading();
-                await services.map( async (val,index) => {
-                    var read = await firebase.checkServiceType(val, user.email)
-                    read.forEach(function(doc) {
-                        let x = doc.id;
-                        let y = doc.data()
-                        let data = {...y, id:x}
-                        setserviceList((old) => [...old, data])
-                    })
-                })
-                Swal.close();
-            }
-            getData()
-            
-        }
-    }, [user])
+    
+
 
 
     const deleteService = (index) => {

@@ -197,7 +197,7 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
                             checked={banner}
                             onChange={(e) => setbanner(e.target.checked)}
                         />
-                        {banner ? "<< Ya" : "<< Tidak"}
+                        {banner ? "<< Klik untuk tidak pilih" : "<< Klik untuk pilih"}
                     </label>
                 </div>
             </div>

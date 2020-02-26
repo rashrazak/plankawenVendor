@@ -73,7 +73,7 @@ function PackageList() {
     useEffect(() => {
         if (user) {
             async function getData() {
-                Swal.showLoading();
+                // Swal.showLoading();
                 await services.map( async (val,index) => {
                     var read = await firebase.checkServiceType(val, user.email)
                     read.forEach(function(doc) {
@@ -83,7 +83,7 @@ function PackageList() {
                         setserviceList((old) => [...old, data])
                     })
                 })
-                Swal.close();
+                // Swal.close();
             }
             getData()
             

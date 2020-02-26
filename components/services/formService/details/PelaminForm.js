@@ -33,7 +33,6 @@ function PelaminForm({pagex, setModalEdit,editModal}) {
     },[getServiceDetailsPelamin])
 
     const handleChangeJenis = (e) => {
-        Swal.showLoading()
         let name = e.target.name;
         let check = e.target.checked;
         let x = jenisEvent;
@@ -44,7 +43,6 @@ function PelaminForm({pagex, setModalEdit,editModal}) {
             x.splice(index,1);
             setjenisEvent([...x]);
         }
-        Swal.close()
     }
 
 

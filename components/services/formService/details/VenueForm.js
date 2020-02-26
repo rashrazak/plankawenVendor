@@ -5,7 +5,6 @@ import '../../../../css/venueform.css'
 import Autocomplete from 'react-google-autocomplete'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
-import Swal from 'sweetalert2'
     
 function VenueForm({serviceType, pagex, setModalEdit,editModal}) {
     const {getServiceDetailsVenue, addServiceDetailsVenue} = useContext(AddServiceContext);

@@ -5,7 +5,6 @@ import LoginContext from '../../contexts/LoginContext'
 import { Router } from 'next/router'
 import '../../css/venueform.css'
 import '../../css/about.css'
-import Swal from 'sweetalert2'
 import firebase from '../../config/firebaseConfig'
 
 
