@@ -1,3 +1,6 @@
+* {
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+}
 .login-layout{
     width: 100%;
     position: relative;
