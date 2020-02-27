@@ -114,6 +114,7 @@ function Package() {
 
     return (
         <Head title={'Package'}>
+            <div className={`container-layout`}>
             {
                 serviceList.length > 0 ? 
                 <div>
@@ -135,9 +136,18 @@ function Package() {
                         <Button onClick={()=> setShowPackageDetails(!showPackageDetails)}>Update Package Details</Button>
                     }
                 </div>
-                : <h1>Service is empty, create <a href="/addservice/about">here</a></h1>
+                : 
+                <div className={`service-empty`}>
+                    <p> Anda tiada servis buat masa kini. Sila klik <a href="/addservice/about">sini</a> untuk tambah servis.</p>
+                </div>
             }
-            
+            </div>
+            <style jsx>{`
+                .container-layout { max-width: 950px; margin: 30px auto;}
+                .service-empty {  background-color: #FEF2EB; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2); padding: 10px; max-width: 800px; margin: auto;}
+                .service-empty p { margin: 0;}
+                .service-empty a { color: #007bff; text-decoration: underline;}
+            `}</style>
 
             
         </Head>
