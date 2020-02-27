@@ -33,6 +33,7 @@
     "react-google-autocomplete": "^1.1.2",
     "react-google-places-autocomplete": "^1.5.2",
     "react-hook-form": "^3.28.15",
+    "react-image-magnifiers": "^1.2.3",
     "react-redux-datatable": "^2.4.6",
     "react-stepper-horizontal": "^1.0.11",
     "reactstrap": "^8.1.1",

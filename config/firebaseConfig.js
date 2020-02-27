@@ -196,31 +196,37 @@ class Firebase {
             let img     = ssmImage;
             let base    = img.base64;
 
-            if (param.ssmImage.length > 5) {
-                var desertRef = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`);
-                // Delete the file
-                desertRef.delete();
+            if (img.base64 != undefined) {
+                if (param.ssmImage.length > 5) {
+                    var desertRef = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`);
+                    // Delete the file
+                    desertRef.delete();
+                }
+
+                
+                
+                
+                var locRef     = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`)
+                var locResult = locRef.putString(base, 'data_url');
+                await locResult.on('state_changed',snapshot=>{
+
+                },(error)=>{
+                    console.log(error)
+                },()=>{
+                    locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
+                        param.ssmImage = downloadURL;
+                        console.log(downloadURL)
+                        await app.firestore().collection('vendor').doc(vendorId).set(param)
+                        return true;
+                    })
+                }) 
+            }else{
+                param.ssmImage = ssmImage
+                await app.firestore().collection('vendor').doc(vendorId).set(param)
             }
 
-            
-            
-            
-            var locRef     = storageRef.child(`vendor/${companyEmail}/ssmImage.jpg`)
-            var locResult = locRef.putString(base, 'data_url');
-            await locResult.on('state_changed',snapshot=>{
-
-            },(error)=>{
-                console.log(error)
-            },()=>{
-                locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
-                    param.ssmImage = downloadURL;
-                    console.log(downloadURL)
-                    await app.firestore().collection('vendor').doc(vendorId).set(param)
-                    return true;
-                })
-            })
-
-            return true
+            alert('Updated!')
+            window.location.href = '/'
 
         }
        

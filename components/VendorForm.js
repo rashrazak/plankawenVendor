@@ -1,15 +1,18 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 import Filebase64 from 'react-file-base64'
-import Router from 'next/router'
+import Router,{useRouter} from 'next/router'
 import firebase from '../config/firebaseConfig'
 import LoginContext from '../contexts/LoginContext'
+import {GlassMagnifier} from "react-image-magnifiers";
+import Swal from 'sweetalert2'
 
 import Link from 'next/link'
 import '../css/venueform.css'
 
 function VendorForm() {
-
+    const route = useRouter()
+    const path  = route.pathname;
     const { getVendorUser } = useContext(LoginContext);
     const [cityArray, setCityArray] = useState([]);
 
@@ -37,7 +40,7 @@ function VendorForm() {
 
     useEffect(() => {
         const y = async()=>{
-            // Swal.showLoading()
+            Swal.showLoading()
             var x = await getVendorUser();
             if (x != null) {
                 if (Router.pathname != '/signup') {
@@ -55,7 +58,7 @@ function VendorForm() {
                         setBankName(param.namaBank)
                         setBankAccount(param.akaunBank)
                         setCityArray(param.kawasan)
-                        setSsmImage(param.gambarSsm || '')
+                        setSsmImage(param.ssmImage || '')
                         setPhoneNo(param.phone)
                         setInstagram(param.instagram)
                         setFacebook(param.facebook)
@@ -63,10 +66,14 @@ function VendorForm() {
                     })
                 }
             }
-            // Swal.close()
+            Swal.close()
         }
        y()
     }, [getVendorUser])
+
+    useEffect(() => {
+        console.log(ssmImage)
+    }, [ssmImage])
 
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -126,7 +133,7 @@ function VendorForm() {
             alert('Sila nyatakan kawasan anda!')
             return false;
         }
-        if (password.length <= 6){
+        if (password.length <= 6 && path == '/signup'){
             alert('Password anda harus melebihi 6 character!')
             return false;
         }
@@ -159,10 +166,10 @@ function VendorForm() {
             // }
         }else{
             let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
-            if (x == true) {
-                alert('Updated!')
-                // Router.push('/');
-            }
+            // if (x == true) {
+            //     alert('Updated!')
+            //     Router.push('/');
+            // }
         }
         
     }
@@ -213,8 +220,14 @@ function VendorForm() {
                                 <label>Nombor Pendaftaran Syarikat</label>
                                 <Input className="form-custom" type="text" value={companyId} onChange={(e)=>setCompanyId(e.target.value)} required/>
                                 <label>SSM</label>
+                                {
+                                    path != '/signup' ?
+                                    <GlassMagnifier imageSrc={ssmImage}/>
+                                    : ''
+
+
+                                }
                                 <div className="file-upload">
-                                    {/* <label htmlFor="upload" className="file-upload__label">Upload file here</label> */}
                                     <Filebase64 className="file-upload__input" id="testingUpload" multiple={ false } onDone={(x) => uploadOnDone(x) } />
                                 </div>
                                 <div className="position-button">
@@ -302,7 +315,7 @@ function VendorForm() {
                                             setThirdDiv(true)
                                             setForthDiv(false)
                                     }}>Kembali</Button>
-                                    <Button color="primary" className="btn-daftar" onClick={()=>submitForm()}>Daftar Masuk</Button>
+                                    <Button color="primary" className="btn-daftar" onClick={()=>submitForm()}>{path == '/signup'?'Daftar Masuk':'Kemaskini'}</Button>
                                 </div>
                             </div>
                         </React.Fragment>
