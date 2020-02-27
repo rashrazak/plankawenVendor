@@ -150,7 +150,7 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
                     1001 - 1500 (8% diskaun per unit) 
                 </UncontrolledTooltip>
                 <br/>
-                <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
+                <button className={`btn btn-add`}  onClick={() => addDiscount()}>Add</button>
             </div>
             <div className="form-section">
                 { discount.length > 0 ?
@@ -220,7 +220,7 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
                         <p>Harga (RM)</p>
                         <Input className="form-custom" type="number" placeholder="Harga Seunit" value={pricex}  onChange={(e) => {setpricex(e.target.value)}} />
                         <br/>
-                        <Button  color="primary" onClick={() => addBanner()}>Add</Button>
+                        <button className={`btn btn-add`} onClick={() => addBanner()}>Add</button>
                     </div>
                     <div className="form-section">
                         { bannerSize.length > 0 ?

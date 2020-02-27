@@ -137,16 +137,15 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                     501 - 1000 (5% diskaun per unit) <br></br>
                     1001 - 1500 (8% diskaun per unit) 
                 </UncontrolledTooltip>
-                <br/>
-                <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
+                <button className={`btn btn-add`}  onClick={() => addDiscount()}>Tambah</button>
             </div>
             <div className="form-section">
                 { discount.length > 0 ?
-                    <p>Senarai Diskaun</p>
+                    <h5>Senarai Diskaun</h5>
                     :
                     ''
                 }
-                <br/>
+                
                 {   discount.length > 0 ?
                     
                     discount.map( (val, index) =>{
@@ -187,16 +186,14 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                     - Kuah dal sayur (boleh ditukar kepada acar) <br></br> 
                     - Daging Berempah
                 </UncontrolledTooltip>
-                <br/>
-                <Button  color="primary" onClick={() => addLauk()}>Add</Button>
+                <button className={`btn btn-add`}  onClick={() => addLauk()}>Tambah</button>
             </div>
             <div className="form-section">
                 { senaraiLauk.length > 0 ?
-                    <p>Senarai Lauk</p>
+                    <h5>Senarai Lauk</h5>
                     :
                     ''
                 }
-                <br/>
                 {   senaraiLauk.length > 0 ?
                     
                     senaraiLauk.map( (val, index) =>{
@@ -247,12 +244,13 @@ function CatererForm({pagex, setModalEdit,editModal}) {
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
-                p {font-weight:400; color: #3e3e3e; font-size: 14px; }
+                p {font-weight:400; color: #3e3e3e; font-size: 14px; margin-bottom: 5px;}
                 .form-section { margin: 20px 0; }
-                h4 { text-align: center; font-weight: 400; color: #75848E; font-size: 16px; margin-bottom: 10px; }
+                h4 { text-align: center; font-weight: 500; color: #75848E; font-size: 16px; margin-bottom: 10px; }
                 .area-covered-div { display: inline-block; margin-right: 10px; width: 100%; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
+                h5 { font-size: 16px; font-weight: bold;}
             `}</style>
         </div>
     )

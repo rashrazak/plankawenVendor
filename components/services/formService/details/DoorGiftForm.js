@@ -123,7 +123,7 @@ function DoorGiftForm({pagex, setModalEdit,editModal}) {
                     1001 - 1500 (8% diskaun per unit) 
                 </UncontrolledTooltip>
                 <br/>
-                <Button  color="primary" onClick={() => addDiscount()}>Add</Button>
+                <button className={`btn btn-add`}  onClick={() => addDiscount()}>Tambah</button>
             </div>
             <div className="form-section">
                 { discount.length > 0 ?
