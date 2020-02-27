@@ -73,6 +73,13 @@ export function Headx({title, children}){
                                     </a>
                                     </Link>
                                 </DropdownItem>
+                                <DropdownItem>
+                                    <Link href={'/update-user'}>
+                                    <a>
+                                    Update user
+                                    </a>
+                                    </Link>
+                                </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem onClick={()=> logout()}>
                                     LogOut

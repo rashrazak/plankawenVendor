@@ -79,7 +79,7 @@ function modalText(serviceType) {
     
     return (
         <div>
-            <button className="btn btn-edit sidebar-modal-button" onClick={toggle}>Text</button>
+            <button className="btn btn-edit sidebar-modal-button" onClick={toggle}>Details</button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
