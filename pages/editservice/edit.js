@@ -69,9 +69,13 @@ function edit({pagex, sidebar}) {
                     <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit</button>
                     {
                         sidebarDiv ?
-                            <SideBarEdit serviceType={serviceType}/>
-                        : ''
+                        <div>
+                             <SideBarEdit serviceType={serviceType}/>
+                             {/* <button className={'btn btn-save'} onClick={()=> submitReview()}>Simpan</button> */}
+                        </div>
+                          : ''
                     }
+                    
                 </div>
                
             {
