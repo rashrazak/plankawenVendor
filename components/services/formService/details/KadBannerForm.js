@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
-// import '../../../../css/Venueform.css'
+import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'

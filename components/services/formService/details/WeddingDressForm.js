@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } 
 import Router from 'next/router';
 import Autocomplete from 'react-google-autocomplete'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
+import '../../../../css/venueform.css'
 // import Multiselect from 'multiselect-dropdown-react';
 import Swal from 'sweetalert2'
     

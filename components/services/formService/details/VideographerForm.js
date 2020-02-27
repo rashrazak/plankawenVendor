@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, UncontrolledTooltip } from 'reactstrap';
 import Router from 'next/router';
+import '../../../../css/venueform.css'
 import AddServiceContext from '../../../../contexts/AddServiceContext'
     
 function VideographerForm({pagex, setModalEdit,editModal}) {
