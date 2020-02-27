@@ -9,13 +9,16 @@ function modalImage() {
     
     return (
         <div>
-            <Button className="sidebar-modal-button" onClick={toggle}>Image</Button>
+            <button className="btn btn-edit sidebar-modal-button" onClick={toggle}>Image</button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update Image</ModalHeader>
                 <ModalBody>
                     <UploadFormEdit editModal={true} setModalEdit={setModal} />
                 </ModalBody>
             </Modal>
+            <style jsx>{`
+                .btn-edit { height: 40px; border-radius: 25px; color: #FFF; font-size: 12px; background-color: #3399ff; font-weight: normal; width: 100px; margin-bottom: 10px;}
+            `}</style>
         </div>
     )
 }

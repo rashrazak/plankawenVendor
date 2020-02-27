@@ -79,7 +79,7 @@ function modalText(serviceType) {
     
     return (
         <div>
-            <Button className="sidebar-modal-button" onClick={toggle}>Text</Button>
+            <button className="btn btn-edit sidebar-modal-button" onClick={toggle}>Text</button>
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
@@ -139,6 +139,7 @@ function modalText(serviceType) {
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
                 .modal-design { max-width: 700px;}
+                .btn-edit { height: 40px; border-radius: 25px; color: #FFF; font-size: 12px; background-color: #3399ff; font-weight: normal; width: 100px; margin-bottom: 10px;}
             `}</style>
         </div>
     )

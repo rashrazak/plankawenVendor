@@ -63,18 +63,20 @@ function edit({pagex, sidebar}) {
 
     return (
         <Head title="edit">
-            {
-                sidebarDiv ? <SideBarEdit serviceType={serviceType}/> : ''
-            }
+           
             <div className="review-form">
                 <div className="button-edit-position">
-                    <Button color="warning" onClick={ () => setSidebarDiv(!sidebarDiv) }>Edit</Button>
-                    <Button color="success" onClick={()=>submitReview()}>Save</Button>{' '}
+                    <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit</button>
+                    {
+                        sidebarDiv ?
+                            <SideBarEdit serviceType={serviceType}/>
+                        : ''
+                    }
                 </div>
                
             {
                 images && coverImage ? 
-                    <div className="hero-review hover-react">
+                    <div className="hero-review">
                             <img src={coverImage.base64 || coverImage.urlStorage}/>
                         <div className="hero-son-review">
                             {images.map((v,i) => {
@@ -84,7 +86,7 @@ function edit({pagex, sidebar}) {
                         
                     </div>
                 :
-                    <div className="hero-review hover-react" onClick={editImage}>
+                    <div className="hero-review" onClick={editImage}>
                         <img src="/images/logos/unavailable.png"/>
                         <div className="hero-son-review">
                             <img src="/images/logos/unavailable.png"/>
@@ -110,26 +112,26 @@ function edit({pagex, sidebar}) {
             </React.Fragment>
             
             <div className="review-catergry-and-price">
-                <div className="review-category hover-react">
+                <div className="review-category">
                     <p><span><img src="/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
                 </div>
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
                     ? 
                         <React.Fragment>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Pax)</span> <br></br>{details.hargaPerPerson}</p>
                             </div>
                         </React.Fragment>
                     : serviceType == 'Makeup' ?
                         <React.Fragment>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
                                 <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
                             </div>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                 <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
@@ -137,15 +139,15 @@ function edit({pagex, sidebar}) {
                         </React.Fragment>
                     : 
                         <React.Fragment>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Asal)</span> <br></br>{details.harga}</p>
                             </div>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
                             </div>
-                            <div className="review-price hover-react">
+                            <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
                             </div>
@@ -156,14 +158,14 @@ function edit({pagex, sidebar}) {
             </div>
             {
                 ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
-                    <div className="review-name-and-places hover-react" onClick={editTextArea}>
+                    <div className="review-name-and-places" onClick={editTextArea}>
                         <h4> {about.serviceName}</h4>
                         <p><span><img src="/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
                         <h4>Waktu Operasi</h4>
                         <p>{details.waktuOperasi}</p>
                     </div>
                 :
-                    <div className="review-name-and-place hover-react" onClick={editTextArea}>
+                    <div className="review-name-and-place" onClick={editTextArea}>
                         <h4>{about.serviceName}</h4>
                     </div>
             }
@@ -313,7 +315,7 @@ function edit({pagex, sidebar}) {
                 <p>{about.extra}</p>
             </div>
             <style jsx>{`
-                .review-form { max-width: 670px; margin: 30px auto;}
+                .review-form { max-width: 670px; margin: 30px auto; position: relative;}
                 .hero-review { position: relative;}
                 .hero-review > img { object-fit: cover; width: 100%; max-height: 206px; object-position: top; border-radius: 5px;}
                 .hero-son-review { position: absolute; bottom: 15px; left: 15px; display: flex; }
@@ -349,10 +351,12 @@ function edit({pagex, sidebar}) {
                 .review-user-image-det > p:nth-child(2) { font-size: 16px; color: #3E3E3E;}
                 .review-user-image-det > p:nth-child(3) { font-size: 12px; color: #47CBC4;}
                 h5 { font-weight: bold; color: #3E3E3E; font-size: 17px; margin-top: 10px;}
-                .list-review-item { color: #75848E; font-size: 14px;}
-                .hover-react:hover{ background-color: rgba(62,62,62,0.5); cursor: pointer; transition: all .3s;}
                 .form-button {display: none;}
-                .button-edit-position { display: flex; justify-content: space-between; align-items: center;}
+                .button-edit-position { position: fixed; left: 60px; z-index: 2;}
+                .button-edit-position .btn { display: block; width: 100px; height: 50px; border-radius: 25px; margin-bottom: 10px; transition: all 3.s}
+                .btn-edit { background-color: #f0ad4e; color: #FFF; font-size: 12px; font-weight: 500;}
+                .btn-edit:hover { box-shadow: 0 4px 10px 0 rgba(0,0,0,0,3); transition: all 3.s }
+                .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
             `}</style>
         </div>
         </Head>
