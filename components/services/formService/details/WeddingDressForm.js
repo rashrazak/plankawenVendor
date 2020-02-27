@@ -178,7 +178,7 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
-                p {font-weight:400; color: #3e3e3e; font-size: 14px; }
+                p {font-weight:400; color: #3e3e3e; font-size: 14px; margin-bottom: 5px;}
                 .form-section { margin: 20px 0; }
                 h4 { text-align: center; font-weight: 400; color: #75848E; font-size: 16px; margin-bottom: 10px; }
                 .area-covered-div { display: inline-block; margin-right: 10px; }

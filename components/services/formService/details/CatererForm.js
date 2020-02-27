@@ -137,7 +137,9 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                     501 - 1000 (5% diskaun per unit) <br></br>
                     1001 - 1500 (8% diskaun per unit) 
                 </UncontrolledTooltip>
-                <button className={`btn btn-add`}  onClick={() => addDiscount()}>Tambah</button>
+                <div className={`add-btn-div`}>
+                    <button className={`btn btn-add`}  onClick={() => addDiscount()}>Tambah</button>
+                </div>
             </div>
             <div className="form-section">
                 { discount.length > 0 ?
@@ -186,7 +188,9 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                     - Kuah dal sayur (boleh ditukar kepada acar) <br></br> 
                     - Daging Berempah
                 </UncontrolledTooltip>
-                <button className={`btn btn-add`}  onClick={() => addLauk()}>Tambah</button>
+                <div className={`add-btn-div`}>
+                    <button className={`btn btn-add`}  onClick={() => addLauk()}>Tambah</button>
+                </div>
             </div>
             <div className="form-section">
                 { senaraiLauk.length > 0 ?
@@ -194,6 +198,7 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                     :
                     ''
                 }
+                <br/>
                 {   senaraiLauk.length > 0 ?
                     
                     senaraiLauk.map( (val, index) =>{
@@ -251,6 +256,7 @@ function CatererForm({pagex, setModalEdit,editModal}) {
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
                 h5 { font-size: 16px; font-weight: bold;}
+                .add-btn-div { text-align: right;}
             `}</style>
         </div>
     )

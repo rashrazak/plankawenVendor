@@ -67,6 +67,9 @@ textarea {
 .bg-color {
     background-color: #FFF;
 }
+.btn-add-div{
+    text-align: right;
+}
 .btn-add {
     background-image: url(/images/icon/plus.png);
     background-repeat: no-repeat;
@@ -80,7 +83,6 @@ textarea {
     font-weight: normal;
     font-size: 13px;
     margin-top: 10px; 
-    float: right;
     text-align: left;
 }
 span {

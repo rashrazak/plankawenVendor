@@ -149,12 +149,13 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
                     501 - 1000 (5% diskaun per unit) <br></br>
                     1001 - 1500 (8% diskaun per unit) 
                 </UncontrolledTooltip>
-                <br/>
-                <button className={`btn btn-add`}  onClick={() => addDiscount()}>Add</button>
+                <div className={`add-btn-div`}>
+                    <button className={`btn btn-add`}  onClick={() => addDiscount()}>Tambah</button>
+                </div>
             </div>
             <div className="form-section">
                 { discount.length > 0 ?
-                    <p>Senarai Diskaun</p>
+                    <h5>Senarai Diskaun</h5>
                     :
                     ''
                 }
@@ -220,15 +221,15 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
                         <p>Harga (RM)</p>
                         <Input className="form-custom" type="number" placeholder="Harga Seunit" value={pricex}  onChange={(e) => {setpricex(e.target.value)}} />
                         <br/>
-                        <button className={`btn btn-add`} onClick={() => addBanner()}>Add</button>
+                        <button className={`btn btn-add`} onClick={() => addBanner()}>Tambah</button>
                     </div>
                     <div className="form-section">
                         { bannerSize.length > 0 ?
-                            <p>Senarai Banner</p>
+                            <h5>Senarai Banner</h5>
                             :
                             ''
                         }
-                        <br/>
+                        
                         {   bannerSize.length > 0 ?
                             
                             bannerSize.map( (val, index) =>{
@@ -272,12 +273,14 @@ function KadBannerForm({pagex, setModalEdit,editModal}) {
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
-                p {font-weight:400; color: #3e3e3e; font-size: 14px; }
+                p {font-weight:400; color: #3e3e3e; font-size: 14px; margin-bottom: 5px;}
                 .form-section { margin: 20px 0; }
                 h4 { text-align: center; font-weight: 400; color: #75848E; font-size: 16px; margin-bottom: 10px; }
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
+                h5 { font-size: 16px; font-weight: bold;}
+                .add-btn-div { text-align: right;}
             `}</style>
         </div>
     )
