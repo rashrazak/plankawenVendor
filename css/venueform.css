@@ -89,3 +89,25 @@ span {
     font-weight: 400;
     font-size: 13px;
 }
+
+@media screen and ( max-width: 480px) {
+    .vendor-form-section {
+        padding: 0 5px !important;
+    }
+    .vendor-form-section > div:first-child {
+        display: none;
+    }
+    .vendor-form {
+        width: 100% !important;
+        margin-top: 10px;
+    }
+    .position-button {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .btn-daftar, .btn-daftar:hover {
+        margin: 0 10px;
+    }
+   
+}
