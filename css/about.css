@@ -52,3 +52,25 @@
     background-position: left 10px center;
     background-size: 15px;
 } */
+
+@media screen and (max-width: 480px) {
+    .stepper-div {
+        margin-top: 10px !important;
+    }
+    .choose-category {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+    }
+    .btn-category {
+        padding: 10px;
+    }
+    .form-service {
+        padding: 0 10px;
+    }
+    /* .form-button {
+        
+    } */
+    .btn-cancel, .btn-cancel:hover, .btn-next, .btn-next:hover {
+        width: 40% !important;
+    }
+}
