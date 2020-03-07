@@ -25,3 +25,23 @@
     padding: 10px;
 
 }
+
+@media screen and ( max-width: 480px) {
+    .login-layout {
+        position: absolute;
+        transform: none;
+        transform: translateY(-70%);
+        padding: 0 10px;
+    }
+    .login-layout > h1 {
+        font-size: 2rem;
+    }
+    .login-cont {
+        display: block !important;
+
+    }
+    .login-cont > button {
+        margin-top: 20px;
+    }
+   
+}

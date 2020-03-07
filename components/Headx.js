@@ -67,7 +67,7 @@ export function Headx({title, children}){
                                     </Link>
                                 </DropdownItem>
                                 <DropdownItem>
-                                    <Link disabled href={`javascript:void(0);`}>
+                                    <Link href={`/`}>
                                     <a>
                                     Package
                                     </a>
