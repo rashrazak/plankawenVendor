@@ -104,7 +104,7 @@ function EditServiceLists({serviceType}) {
                     <Input className={`seacrh-input`}type="text" name="search" onChange={(e) => setsearch(e.target.value)}  placeholder="Search" />
                     <Link href="/addservice/about"><span><button type="button" className={`btn add-btn`}>Add Service</button></span></Link>
                 </div>
-                <Table className={`table table-stripped`}>
+                <Table className={`table table-stripped table-responsive`}>
                     <thead>
                         <tr>
                             <th>#</th>

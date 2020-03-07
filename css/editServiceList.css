@@ -50,3 +50,9 @@
     height: 50px !important;
     border: 1px solid #eaeaea !important;
 }
+
+@media screen and ( max-width: 480px) {
+    .btn-table {
+        margin: 10px 0;
+    }
+}
