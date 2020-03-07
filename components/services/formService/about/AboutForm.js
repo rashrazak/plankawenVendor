@@ -65,6 +65,10 @@ function AboutForm({serviceType, pagex}) {
     }
 
     const submitServiceAbout = () => {
+        if (!serviceTypex) {
+            alert("Sila pilih pilihan service!")
+            return false;
+        }
         addServiceAbout(title , cityArray, descriptionx, tnc, extra)
         let aaa = serviceTypex.toLowerCase();
         Router.push(`/${pagex}/details/${aaa}`);

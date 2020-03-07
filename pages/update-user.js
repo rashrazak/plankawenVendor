@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import Head from '../components/Headx'
-import VendorForm from '../components/VendorForm';
 import '../css/index.css'
+import VendorFormUpdate from '../components/VendorFormUpdate';
 
 function signup (){
         return (
             <Head title="Update User">
                 <div className="bg-color">
                     <div className="vendor-signup-section">
-                        <VendorForm />
+                        <VendorFormUpdate />
                     </div> 
                     {/* <button onClick={(e)=>submitLoading(e)}></button> */}
                     <style jsx>{`

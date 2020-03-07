@@ -277,6 +277,23 @@ class MyApp extends App {
       this.setState({vendorDetails:about})
     }
   }
+
+  removeServiceStorage = () =>{
+    localStorage.removeItem('addServiceAbout');
+    localStorage.removeItem('addServiceUpload');
+    localStorage.removeItem('addServiceDetailsVenue');
+    localStorage.removeItem('addServiceDetailsPhotographer');
+    localStorage.removeItem('addServiceDetailsVideographer');
+    localStorage.removeItem('addServiceDetailsOthers');
+    localStorage.removeItem('addServiceDetailsPelamin');
+    localStorage.removeItem('addServiceDetailsCaterer');
+    localStorage.removeItem('addServiceDetailsKadBanner');
+    localStorage.removeItem('addServiceDetailsWeddingDress');
+    localStorage.removeItem('addServiceDetailsPersembahan');
+    localStorage.removeItem('addServiceDetailsDoorGift');
+    localStorage.removeItem('addServiceDetailsMakeup');
+    localStorage.removeItem('addServiceDetailsHantaran');
+  }
   signOut = () => {
     // this.setState({
     //   user: null,
@@ -330,8 +347,10 @@ class MyApp extends App {
       console.log(x.id)
       let y = firebase.updateService(serviceType, data, x.id)
       y.then(() => {
+        this.removeServiceStorage()
         alert('success')
-        Router.push(`/${pagex}/done`)
+        window.location.href = `/${pagex}/done`;
+        // Router.push(`/${pagex}/done`)
       })
       .catch((e) => {
         alert('error')
@@ -371,8 +390,9 @@ class MyApp extends App {
     y.then(() => {
       let y = firebase.updateService(serviceType, data, serviceId)
       y.then(() => {
+        this.removeServiceStorage()
         alert('success')
-        Router.push(`/${pagex}`)
+        window.location.href = `/${pagex}`
       })
       .catch((e) => {
         alert('error')
@@ -1012,18 +1032,17 @@ class MyApp extends App {
     }
   }
 
-  getVendorUser = () => {
+  getVendorUser = async () => {
+    let user = localStorage.getItem('user');
     var e = null;
-    if (this.state.user == null) {
-      let user = localStorage.getItem('user');
-      user = JSON.parse(user)
-      if (!user) {
-        return null
-      }
-      e = user.email;
+    user = JSON.parse(user)
+    if (!user) {
+      return null
     }
+    e = user.email;
+    console.log(this.state.user)
     let email = e;
-    let result = firebase.getVendorUser(email);
+    let result = await firebase.getVendorUser(email);
 
     return result;
   }

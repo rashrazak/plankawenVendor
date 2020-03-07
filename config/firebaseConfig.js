@@ -1,4 +1,5 @@
 import * as app from 'firebase/app';
+import Swal from 'sweetalert2'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
@@ -173,6 +174,7 @@ class Firebase {
                     console.log(downloadURL)
                     await app.firestore().collection('vendor').add(param)
                     await app.auth().createUserWithEmailAndPassword(companyEmail, password)
+                    Swal.close()
                     alert('Registered!')
                     window.location.href = '/'
             

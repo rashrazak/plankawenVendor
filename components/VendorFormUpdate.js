@@ -10,9 +10,10 @@ import Swal from 'sweetalert2'
 import Link from 'next/link'
 import '../css/venueform.css'
 
-function VendorForm() {
+function VendorFormUpdate() {
     const route = useRouter()
     const path  = route.pathname;
+    const { getVendorUser } = useContext(LoginContext);
     const [cityArray, setCityArray] = useState([]);
 
     
@@ -35,6 +36,38 @@ function VendorForm() {
     const [secondDiv, setSecondDiv] = useState(false)
     const [thirdDiv, setThirdDiv] = useState(false)
     const [forthDiv, setForthDiv] = useState(false)
+
+
+    useEffect(() => {
+        const y = async()=>{
+            var x = await getVendorUser();
+            if (x != null) {
+                var z = await x.docs;
+                console.log(z)
+                await z.map(doc => {
+                    console.log(doc.data())
+                    console.log(doc.id)
+                    var param = doc.data();
+                    setSetuju(param.setuju || false);
+                    setCompanyEmail(param.email)
+                    setCompanyName(param.namaSyarikat)
+                    setCompanyAddress(param.alamatSyarikat)
+                    setOwner(param.namaPemilik)
+                    setCompanyId(param.noPendaftaranSyarikat)
+                    setBankName(param.namaBank)
+                    setBankAccount(param.akaunBank)
+                    setCityArray(param.kawasan)
+                    setSsmImage(param.ssmImage || '')
+                    setPhoneNo(param.phone)
+                    setInstagram(param.instagram)
+                    setFacebook(param.facebook)
+                    setVendorId(doc.id)
+                })
+            }
+        }
+       y()
+    }, [getVendorUser])
+
 
     useEffect(() => {
         console.log(ssmImage)
@@ -84,32 +117,22 @@ function VendorForm() {
     }
 
     const submitForm = ()=> {
-        Swal.fire({
-            title:'Sila Tunggu...',
-            onBeforeOpen:()=>{
-                Swal.showLoading()
-            }
-        })
         if (setuju == false) {
             alert('Sila daftar akuan sebagai vendor!')
-            Swal.close()
             return false;
         }
 
         if (ssmImage == false) {
             alert('Sila lampirkan gambar SSM anda!')
-            Swal.close()
             return false;
         }
 
         if (cityArray == false) {
             alert('Sila nyatakan kawasan anda!')
-            Swal.close()
             return false;
         }
         if (password.length <= 6 && path == '/signup'){
             alert('Password anda harus melebihi 6 character!')
-            Swal.close()
             return false;
         }
         var param = {
@@ -139,6 +162,12 @@ function VendorForm() {
             //     alert('Registered!')
             //     Router.push('/');
             // }
+        }else{
+            let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
+            // if (x == true) {
+            //     alert('Updated!')
+            //     Router.push('/');
+            // }
         }
         
     }
@@ -153,7 +182,7 @@ function VendorForm() {
                     <img className="" src="/images/placeholder/vendor-bg.png"></img>
                 </div>
                 <div className="vendor-form">
-                    <h4>Anda telah memilih untuk menjadi rakan vendor kami.<br></br>Sila masukkan detail syarikat anda.</h4>   
+                    <h4>Sila kemaskini detail syarikat anda.</h4>   
                     {
                         firstDiv == true ?
                         <React.Fragment>
@@ -167,9 +196,6 @@ function VendorForm() {
                                         setFirstDiv(false)
                                         setSecondDiv(true)
                                     }}>Seterusnya</Button>
-                                </div>
-                                <div className={`login-cont`}>
-                                    <p>Sudah ada akaun? <span><Link href="/index"><a className={``}>Klik disini</a></Link></span></p>
                                 </div>
                             </div>    
 
@@ -189,11 +215,11 @@ function VendorForm() {
                                 <label>Nombor Pendaftaran Syarikat</label>
                                 <Input className="form-custom" type="text" value={companyId} onChange={(e)=>setCompanyId(e.target.value)} required/>
                                 <label>SSM</label>
-                                {
+                                {/* {
                                     path != '/signup' ?
                                     <GlassMagnifier imageSrc={ssmImage}/>
                                     : ''
-                                }
+                                } */}
                                 <div className="file-upload">
                                     <Filebase64 className="file-upload__input" id="testingUpload" multiple={ false } onDone={(x) => uploadOnDone(x) } />
                                 </div>
@@ -325,4 +351,4 @@ function VendorForm() {
     )
 }
 
-export default VendorForm
+export default VendorFormUpdate
