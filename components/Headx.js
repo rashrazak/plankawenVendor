@@ -16,6 +16,7 @@ import {
     DropdownItem } from 'reactstrap';
 import Link from 'next/link'
 import masterLayout from '../components/hoc/masterLayout'
+import Footer from '../components/footer'
 import {useRouter} from 'next/router'
 
 import firebase from '../config/firebaseConfig'
@@ -93,6 +94,7 @@ export function Headx({title, children}){
                     
                 </Navbar>
                 {children} 
+                <Footer />
         </div>
         
     )
