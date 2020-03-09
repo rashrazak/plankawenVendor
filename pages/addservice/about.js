@@ -44,19 +44,19 @@ function AddServiceAbout(props) {
                             <h4>Jenis Event</h4>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className="form-custom harga" type="radio" name="jenisEventOthers" value="makanan"  checked={jenisEventOthers == 'makanan' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="makanan"  checked={jenisEventOthers == 'makanan' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
                                     Makanan
                                 </Label>
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className="form-custom harga" type="radio" name="jenisEventOthers" value="dj" checked={ jenisEventOthers == 'dj' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="dj" checked={ jenisEventOthers == 'dj' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
                                     DJ
                                 </Label>
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className="form-custom harga" type="radio" name="jenisEventOthers" value="booth" checked={ jenisEventOthers == 'booth' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="booth" checked={ jenisEventOthers == 'booth' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
                                     Booth
                                 </Label>
                             </FormGroup>
