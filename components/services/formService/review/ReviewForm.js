@@ -74,6 +74,7 @@ function AboutForm({pagex}) {
                 <div className="review-category">
                     <p><span><img src="/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
                 </div>
+                
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
                     ? 
@@ -115,6 +116,7 @@ function AboutForm({pagex}) {
                 }
                 
             </div>
+
             {
                 ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
                     <div className="review-name-and-places">
@@ -130,6 +132,10 @@ function AboutForm({pagex}) {
             }
             
             <div className="review-desc">
+
+                <h5>Tentang servis:</h5>
+                <p>{about.description}</p>
+
                 {   serviceType == "WeddingDress" ?
                     <React.Fragment>
                         <h5>Jenis Kain</h5>
@@ -251,14 +257,11 @@ function AboutForm({pagex}) {
                     
                     ''
                 }
-                
-                <h5>Tentang servis:</h5>
-                <p>{about.description}</p>
 
                 <h5>Terma dan syarat:</h5>
                 <p>{about.tnc}</p>
 
-                <h5>Maklumat Tambahan:</h5>
+                <h5>Maklumat tambahan:</h5>
                 <p>{about.extra}</p>
             </div>
             <div className="form-button">
