@@ -61,7 +61,7 @@ function VenueForm({serviceType, pagex, setModalEdit,editModal}) {
                     sethargaDiscount(e.target.value)
                     setharga(e.target.value)}} value={harga}/>
                 <UncontrolledTooltip placement="left" target="UncontrolledTooltipExample">
-                    Harga Lumpsump termasuk penginapan  (sekiranya ada). Jika anda turut menyediakan servic katering dan lain-lain, anda boleh sekalikan produk/servis anda yang lain dalam ruangan 'Pakej' dan menetapkan harga mengikut pakej anda
+                    Harga Lumpsump termasuk penginapan  (sekiranya ada). Jika anda turut menyediakan servis katering dan lain-lain, anda boleh sekalikan produk/servis anda yang lain dalam ruangan 'Pakej' dan menetapkan harga mengikut pakej anda
                 </UncontrolledTooltip>
             </div>
             <div className="form-section">
