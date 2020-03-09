@@ -1,41 +1,104 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Router from 'next/router'
 import firebase from '../../config/firebaseConfig'
-
+import LoginContext from '../../contexts/LoginContext'
+import Swal from 'sweetalert2'
 function uploadService() {
+    const {user} = useContext(LoginContext)
+    const serviceType = ['Venue',
+                    'Canopy',
+                    'KadBanner',
+                    'WeddingDress',
+                    'Makeup',
+                    'Photographer',
+                    'Videographer',
+                    'Pelamin',
+                    'Caterer',
+                    'Hantaran',
+                    'Persembahan',
+                    'DoorGift',
+                    'Others']
 
     const [data, setdata] = useState(false)
+    const [services, setServices] = useState([])
+
+    useEffect(() => {
+        if (user && services.length == 0) {
+            async function getData() {
+                await serviceType.map( async (val,index) => {
+                    Swal.showLoading()
+                    var read = await firebase.checkServiceType(val, user.email)
+                    await read.forEach(function(doc) {
+                        let x = doc.id;
+                        let y = doc.data()
+                        let data = {...y, id:x}
+                        setServices((old) => [...old, data])
+                    })
+                    Swal.close()
+                })
+            }
+            getData()
+            
+        }
+    }, [user])
+
+    useEffect(() => {
+        console.log(services)
+        if (services.length > 0) {
+            setdata(true)
+        }
+    }, [services])
 
     function addService(){
         Router.push('/addservice/about')
     }
     return (
         <div className={`upload-service-container`}>
+            <div>
+                <button>Service Anda</button>
+                <button>Tempahan</button>
+            </div>
             {
                 data == true ?
                 <React.Fragment>
-                <h4>Service Anda</h4>
-                <div className={`card-flex`}>
-                    <div className={`card-service`}>
-                        <img src="/images/placeholder/service-placheholder.png"/>
-                        <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
+                    <h4>Service Anda</h4>
+                    <div className={`card-flex`}>
+                        {/* <div className={`card-service`}>
+                            <img src="/images/placeholder/service-placheholder.png"/>
+                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
+                        </div>
+                        <div className={`card-service`}>
+                            <img src="/images/placeholder/service-placheholder.png"/>
+                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
+                        </div>
+                        <div className={`card-service`}>
+                            <img src="/images/placeholder/service-placheholder.png"/>
+                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
+                        </div>
+                        <div className={`card-service`}>
+                            <img src="/images/placeholder/service-placheholder.png"/>
+                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
+                        </div> */}
+                        {
+                            services.map((v,i)=> {
+                                let img;
+                                if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
+                                    img = '/images/placeholder/service-placheholder.png'
+                                }else{
+                                    img = v.images[0]['urlStorage']
+                                }
+                                return(
+                                    <div className={`card-service`}>
+                                        <img src={img}/>
+                                        <p><span><img src="/images/icon/ico-venue-black.png"/> {v.serviceType} - {v.serviceName}</span></p>
+                                    </div>
+                                )
+                            })
+                        }
+                        <div className={`card-service card-service-add`}>
+                        
+                        </div>
                     </div>
-                    <div className={`card-service`}>
-                        <img src="/images/placeholder/service-placheholder.png"/>
-                        <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                    </div>
-                    <div className={`card-service`}>
-                        <img src="/images/placeholder/service-placheholder.png"/>
-                        <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                    </div>
-                    <div className={`card-service`}>
-                        <img src="/images/placeholder/service-placheholder.png"/>
-                        <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                    </div>
-                    <div className={`card-service card-service-add`}>
-                       
-                    </div>
-                </div>
                 </React.Fragment>
 
                 :

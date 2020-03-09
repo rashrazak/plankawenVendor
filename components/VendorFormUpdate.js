@@ -117,6 +117,12 @@ function VendorFormUpdate() {
     }
 
     const submitForm = ()=> {
+        Swal.fire({
+            title:'Sila Tunggu...',
+            onBeforeOpen:()=>{
+                Swal.showLoading()
+            }
+        })
         if (setuju == false) {
             alert('Sila daftar akuan sebagai vendor!')
             return false;
@@ -156,19 +162,9 @@ function VendorFormUpdate() {
             
 
         }
-        if (Router.pathname == '/signup') {
-            let x = firebase.createVendor(param, password, companyEmail, ssmImage)
-            // if (x == true) {
-            //     alert('Registered!')
-            //     Router.push('/');
-            // }
-        }else{
+       
             let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
-            // if (x == true) {
-            //     alert('Updated!')
-            //     Router.push('/');
-            // }
-        }
+      
         
     }
 

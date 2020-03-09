@@ -226,7 +226,7 @@ class Firebase {
                 param.ssmImage = ssmImage
                 await app.firestore().collection('vendor').doc(vendorId).set(param)
             }
-
+            Swal.close()
             alert('Updated!')
             window.location.href = '/'
 
