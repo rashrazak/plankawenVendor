@@ -252,13 +252,13 @@ function AboutForm({pagex}) {
                     ''
                 }
                 
-                <h5>Description:</h5>
+                <h5>Tentang servis:</h5>
                 <p>{about.description}</p>
 
-                <h5>Terms And Condition:</h5>
+                <h5>Terma dan syarat:</h5>
                 <p>{about.tnc}</p>
 
-                <h5>Extra:</h5>
+                <h5>Maklumat Tambahan:</h5>
                 <p>{about.extra}</p>
             </div>
             <div className="form-button">
