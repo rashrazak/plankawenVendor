@@ -132,7 +132,7 @@ function AboutForm({pagex}) {
             <div className="review-desc">
                 {   serviceType == "WeddingDress" ?
                     <React.Fragment>
-                        <h5>Jenis Baju</h5>
+                        <h5>Jenis Kain</h5>
                         <ul>
                             {
                                 details.jenisSewa.map((v,i) => {

@@ -184,13 +184,13 @@ function HantaranForm({pagex, setModalEdit,editModal}) {
                 <h4>Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
-                        <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        <Input type="radio" name="jenisHantar" value="Postage"  checked={jenisHantar == 'Postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
                         Postage
                     </Label>
                     </FormGroup>
                     <FormGroup check>
                     <Label check>
-                        <Input type="radio" name="jenisHantar" value="self-pickup" checked={ jenisHantar == 'self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        <Input type="radio" name="jenisHantar" value="Self-pickup" checked={ jenisHantar == 'Self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
                         Self Pickup
                     </Label>
                 </FormGroup>

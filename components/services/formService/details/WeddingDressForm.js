@@ -101,7 +101,8 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
             <div className="form-section">
                 <h4>Jenis Kain</h4>
                 <Input className="form-custom harga" type="text" onChange={(e) => {setJenisMaterial(e.target.value)}} value={jenisMaterial}/>
-            </div><div className="form-section">
+            </div>
+            <div className="form-section">
                 <h4>Perubahan maksimum rekaan</h4>
                 <Input className="form-custom harga" href="#" id="tooltipRekaan" type="number" onChange={(e) => {setmaxDesignChanges(e.target.value)}} value={maxDesignChanges}/>
                 <UncontrolledTooltip placement="left" target="tooltipRekaan">
@@ -132,19 +133,19 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
                 <h4>Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
-                        <Input type="radio" name="jenisHantar" value="postage"  checked={jenisHantar == 'postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        <Input type="radio" name="jenisHantar" value="Postage"  checked={jenisHantar == 'Postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
                         Postage
                     </Label>
                     </FormGroup>
                     <FormGroup check>
                     <Label check>
-                        <Input type="radio" name="jenisHantar" value="self-pickup" checked={ jenisHantar == 'self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
+                        <Input type="radio" name="jenisHantar" value="Self-pickup" checked={ jenisHantar == 'Self-pickup' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />
                         Self Pickup
                     </Label>
                 </FormGroup>
             </div>
             <div className="form-section">
-                <h4>Lokasi Butik (tak boleh letak className)</h4>
+                <h4>Lokasi Butik</h4>
                 <Autocomplete className="auto"
                     style={{width: '100%', borderRadius:'4px', fontWeight:'400', fontSize:'14px', color:'#3e3e3e', padding: '.375rem .75rem', border: '1px solid #ced4da'}}
                     onPlaceSelected={(place) => {
