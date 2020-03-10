@@ -59,7 +59,7 @@ function UploadForm({pagex}) {
         Router.push(`/${pagex}/review`);
     }
     return (
-        <div className="form-service">
+        <div className="form-service form-service-height">
             <div className="form-section">
                 <h4>Upload Gambar Servis Anda. Maximum gambar adalah 3 ({imageLimit})</h4>
                 <Filebase64 multiple={ false } onDone={(x) => uploadOnDone(x) } />
@@ -81,6 +81,7 @@ function UploadForm({pagex}) {
             </div>
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
+                .form-service-height { height: calc(100vh - 350px);}
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
                 p {font-weight:400; color: #3e3e3e; font-size: 14px; }
                 .form-section { margin: 20px 0; }
