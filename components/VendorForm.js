@@ -91,7 +91,7 @@ function VendorForm() {
             }
         })
         if (setuju == false) {
-            alert('Sila daftar akuan sebagai vendor!')
+            alert('Sila daftar akaun sebagai vendor!')
             Swal.close()
             return false;
         }
@@ -109,6 +109,12 @@ function VendorForm() {
         }
         if (password.length <= 6 && path == '/signup'){
             alert('Password anda harus melebihi 6 character!')
+            Swal.close()
+            return false;
+        }
+
+        if (companyName == false || owner == false || facebook == false || instagram == false || companyEmail == false || bankAccount == false || companyAddress == false || bankName == false || companyId == false || phoneNo == false) {
+            alert('Sila isikan semua informasi!')
             Swal.close()
             return false;
         }
