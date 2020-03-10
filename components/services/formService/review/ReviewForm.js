@@ -206,8 +206,8 @@ function AboutForm({pagex}) {
                             <p>details.waktuTiba</p>
                             <h5>Kaedah Hantar</h5>
                             <p>{details.jenisHantar}</p>
-                            <h5>Bayaran Majlis</h5>
-                            {/* <ul>
+                            {/* <h5>Bayaran Majlis</h5>
+                            <ul>
                                 <li>Harga Pax: {details.hargaPerPerson}</li>
                                 {
                                     details.discount.map((v,i) => {
