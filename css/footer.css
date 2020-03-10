@@ -1,0 +1,25 @@
+@media screen and (max-width: 480px) {
+    .container-footer, .footer-logo {
+        display: block !important;
+        width: 100% !important;
+        text-align: center;
+    }
+    .footer-logo >  img {
+        width: 100%;
+    }
+    .footer-link {
+        display: block !important;
+        text-align: center;
+        width: 100% !important;
+        margin-top: 20px;
+    }
+    .footer-link > p { 
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }    
+    .footer-link > img {
+        display: block;
+        margin: 10px auto;
+    }
+}

@@ -3,9 +3,8 @@
 }
 .login-layout{
     width: 100%;
+    height: calc(100vh - 200px);
     position: relative;
-    top: 50%;
-    transform: translateY(50%);
 }
 .login-layout > h1{
     color: #3e3e3e;
@@ -25,13 +24,21 @@
     padding: 10px;
 
 }
+.form-layout-login {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 @media screen and ( max-width: 480px) {
     .login-layout {
         position: absolute;
-        transform: none;
-        transform: translateY(-70%);
-        padding: 0 10px;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
     .login-layout > h1 {
         font-size: 2rem;
@@ -42,6 +49,10 @@
     }
     .login-cont > button {
         margin-top: 20px;
+    }
+    .form-layout-login {
+        position: unset;
+        transform: none;
     }
    
 }
