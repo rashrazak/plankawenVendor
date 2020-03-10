@@ -3,9 +3,8 @@
 }
 .login-layout{
     width: 100%;
+    height: calc(100vh - 200px);
     position: relative;
-    top: 50%;
-    transform: translateY(50%);
 }
 .login-layout > h1{
     color: #3e3e3e;
@@ -24,6 +23,13 @@
 .btn-submit{
     padding: 10px;
 
+}
+.form-layout-login {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @media screen and ( max-width: 480px) {
