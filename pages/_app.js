@@ -369,7 +369,8 @@ class MyApp extends App {
     let {images, serviceId} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
     let {id} = {...this.state.vendorDetails}
-    let visibility = {...this.state.visibility}
+    let visibility = this.state.visibility
+    console.log(visibility)
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
@@ -1037,6 +1038,7 @@ class MyApp extends App {
   }
   addServiceVisibility = (x) => {
     console.log(x)
+    console.log(this.state)
     this.setState({visibility:x})
   }
   getVendorUser = async () => {

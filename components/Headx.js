@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import LoginContext from '../contexts/LoginContext'
 import Head from 'next/head'
 import '../css/bootstrap.min.css'
 import '../css/index.css'
@@ -23,6 +24,7 @@ import firebase from '../config/firebaseConfig'
 
 export function Headx({title, children}){
     const router = useRouter()
+    const {getVendorDetails} = useContext(LoginContext)
     
     const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +58,11 @@ export function Headx({title, children}){
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
-                                    <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>[userNname]</h4>
+                                    {
+                                        getVendorDetails && 
+                                        <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>{getVendorDetails.namaPemilik}</h4>
+
+                                    }
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>

@@ -131,7 +131,7 @@ function EditServiceLists({serviceType}) {
                                         <td>{date.toISOString().split('T')[0]}</td>
                                         {
                                             val.visibility  ?
-                                            <td>{val.visibility == true ?'visible':'hidden'}</td>
+                                            <td>{val.visibility == 'show' ?'visible':'hidden'}</td>
                                             :
                                             <td>Not updated</td>
 

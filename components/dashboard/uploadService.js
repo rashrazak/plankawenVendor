@@ -2,9 +2,12 @@ import React, {useState, useEffect, useContext} from 'react'
 import Router from 'next/router'
 import firebase from '../../config/firebaseConfig'
 import LoginContext from '../../contexts/LoginContext'
+import AddServiceContext from '../../contexts/AddServiceContext'
 import Swal from 'sweetalert2'
 function uploadService() {
     const {user} = useContext(LoginContext)
+    const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName, addServiceVisibility} = useContext(AddServiceContext)
+
     const serviceType = ['Venue',
                     'Canopy',
                     'KadBanner',
@@ -52,6 +55,23 @@ function uploadService() {
     function addService(){
         Router.push('/addservice/about')
     }
+
+    const editFunction = async (index) => {
+        let sl = services[index]
+        let st = sl.serviceType;
+        let serv = 'addServiceDetails'+st;
+        let id = sl.id;
+        await addServiceAboutTypeName(st);
+        await addServiceAbout(sl.serviceName, sl.areaCovered, sl.description, sl.tnc, sl.extra)
+        await addServiceUpload(sl.images, st, id);
+        await getServiceDetailsEdit(serv, sl.serviceDetails, id)
+        if (sl.visibility != undefined) {
+            await addServiceVisibility(sl.visibility)
+        }
+        // Router.push('/editservice/about')
+        Router.push('/editservice/edit')
+
+    }
     return (
         <div className={`upload-service-container`}>
             <div>
@@ -88,7 +108,7 @@ function uploadService() {
                                     img = v.images[0]['urlStorage']
                                 }
                                 return(
-                                    <div className={`card-service`}>
+                                    <div className={`card-service`} onClick={()=>editFunction(i)}>
                                         <img src={img}/>
                                         <p><span><img src="/images/icon/ico-venue-black.png"/> {v.serviceType} - {v.serviceName}</span></p>
                                     </div>
