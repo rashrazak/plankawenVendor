@@ -6,11 +6,16 @@ import UploadService from '../components/dashboard/uploadService'
 import UpcomingProject from '../components/dashboard/upcomingProject'
 import SideBarDashboard from '../components/dashboard/sideBarDash'
 import ProfileDetails from '../components/dashboard/profileDetails'
+import {useMediaQuery} from 'react-responsive'
+import '../css/dashboardMobile.css'
+
 
 function dashboard() {
     const {user,signOut,saveVendorDetails} = useContext(LoginContext);
-
     const [data, setdata] = useState(false)
+
+    const isMobile = useMediaQuery ({ maxWidth: 480 })
+    const isLaptop = useMediaQuery ({ maxWidth: 1920})
 
     useEffect( () => {
         async function getData(){
@@ -47,13 +52,24 @@ function dashboard() {
                      <div className={`dashboard-container`}>
                         <div className={`dashboard-section`}>
                             <ProfileDetails />
+                                {
+                                    isMobile &&
+                                    <React.Fragment>
+                                         <SideBarDashboard />
+                                    </React.Fragment>
+                                }
                             <div className={`details-section`}>
                                 <UploadService />
-                                <UpcomingProject />
+                                <UpcomingProject />             
                             </div> 
                         </div>
-                     </div>
-                    <SideBarDashboard />
+                    </div>
+                    {
+                        !isMobile &&
+                        <React.Fragment>
+                                 <SideBarDashboard />
+                        </React.Fragment>
+                    }
                      {/* {user.email}
                      <button onClick={ signOut }>Log Out</button>
                      <button>Add Service</button> */}
