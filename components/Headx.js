@@ -56,7 +56,7 @@ export function Headx({title, children}){
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
-                                    <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>Haziq</h4>
+                                    <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>{user.name}</h4>
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>
