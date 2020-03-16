@@ -24,6 +24,8 @@
     .card-service {
         width: 48% !important;
         margin-right: 0 !important;
-
+    }
+    .container { 
+        margin-top: 10px;
     }
 }
