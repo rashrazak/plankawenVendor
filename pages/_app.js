@@ -21,6 +21,7 @@ const initialState = {
   isLogin:false,
   vendorDetails:null,
   vendorId:'',
+  visibility:'show',
   addServiceAbout:{
     tnc:'',
     extra:'',
@@ -337,7 +338,8 @@ class MyApp extends App {
       tnc,
       extra,
       created: x,
-      getTime: x.getTime()
+      getTime: x.getTime(),
+      visibility:'show'
     }
     console.log(data.images)
 
@@ -367,6 +369,7 @@ class MyApp extends App {
     let {images, serviceId} = {...this.state.addServiceUpload}
     let {email} = {...this.state.user}
     let {id} = {...this.state.vendorDetails}
+    let visibility = {...this.state.visibility}
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
@@ -384,7 +387,8 @@ class MyApp extends App {
       tnc,
       extra,
       created: x,
-      getTime: x.getTime()
+      getTime: x.getTime(),
+      visibility
     }
     let y = firebase.updateService(serviceType, data, serviceId)
     y.then(() => {
@@ -1031,7 +1035,10 @@ class MyApp extends App {
       this.setState({addServiceUpload:currentService})
     }
   }
-
+  addServiceVisibility = (x) => {
+    console.log(x)
+    this.setState({visibility:x})
+  }
   getVendorUser = async () => {
     let user = localStorage.getItem('user');
     var e = null;
@@ -1059,7 +1066,7 @@ class MyApp extends App {
           getVendorDetails:this.state.vendorDetails, getVendorId:this.state.vendorId, getVendorUser:this.getVendorUser,
             saveVendorDetails:this.saveVendorDetails}}>
             <AddServiceContext.Provider value={{addServiceAbout: this.addServiceAbout, getServiceAbout:this.state.addServiceAbout, addServiceAboutTypeName:this.addServiceAboutTypeName,
-            addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,
+            addServiceVisibility:this.addServiceVisibility,getVisibility:this.state.visibility,addServiceDetailsVenue:this.addServiceDetailsVenue, getServiceDetailsVenue:this.state.addServiceDetailsVenue,
             addServiceDetailsPhotographer:this.addServiceDetailsPhotographer, getServiceDetailsPhotographer:this.state.addServiceDetailsPhotographer,
             addServiceDetailsVideographer:this.addServiceDetailsVideographer, getServiceDetailsVideographer:this.state.addServiceDetailsVideographer,
             addServiceDetailsOthers:this.addServiceDetailsOthers, getServiceDetailsOthers:this.state.addServiceDetailsOthers,addJenisEventOthers:this.addJenisEventOthers,

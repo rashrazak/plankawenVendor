@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 function EditServiceLists({serviceType}) {
     const {user} = useContext(LoginContext);
-    const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName} = useContext(AddServiceContext)
+    const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName, addServiceVisibility} = useContext(AddServiceContext)
     const services = ['Venue',
                     'Canopy',
                     'KadBanner',
@@ -62,6 +62,9 @@ function EditServiceLists({serviceType}) {
         await addServiceAbout(sl.serviceName, sl.areaCovered, sl.description, sl.tnc, sl.extra)
         await addServiceUpload(sl.images, st, id);
         await getServiceDetailsEdit(serv, sl.serviceDetails, id)
+        if (sl.visibility != undefined) {
+            await addServiceVisibility(sl.visibility)
+        }
         // Router.push('/editservice/about')
         Router.push('/editservice/edit')
 
@@ -111,6 +114,7 @@ function EditServiceLists({serviceType}) {
                             <th>Service Name</th>
                             <th>Status</th>
                             <th>Date Created</th>
+                            <th>Visibility Status</th>
                             <th>Service Type</th>
                             <th></th>
                         </tr>
@@ -124,7 +128,14 @@ function EditServiceLists({serviceType}) {
                                         <th scope="row">{index + 1}</th>
                                         <td>{val.serviceName}</td>
                                         <td>{val.status}</td>
-                                        <td>{date.toString()}</td>
+                                        <td>{date.toISOString().split('T')[0]}</td>
+                                        {
+                                            val.visibility  ?
+                                            <td>{val.visibility == true ?'visible':'hidden'}</td>
+                                            :
+                                            <td>Not updated</td>
+
+                                        }
                                         <td>{val.serviceType}</td>
                                         <td className={`button-td`}>
                                             <button type="button" className={`btn btn-table edit-btn`} onClick={() => editFunction(index)} ></button>
