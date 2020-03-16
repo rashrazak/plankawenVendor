@@ -23,11 +23,10 @@ import firebase from '../config/firebaseConfig'
 
 export function Headx({title, children}){
     const router = useRouter()
-    const [isOpen, setIsOpen] = useState(false)
     
-    function toggle() {
-        setIsOpen(!isOpen)
-    }
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
 
     function logout() {
         firebase.signOut().then( ()=> {
@@ -47,17 +46,17 @@ export function Headx({title, children}){
             </Head>
                 <Navbar className="navbar-custom" color="white" light expand="md">
                     <NavbarBrand href="/"><img className="logo-header" src="/images/logos/logo-officialx2.png"/></NavbarBrand>
-                    <NavbarToggler onClick={()=>toggle()} />
+                    <NavbarToggler onClick={toggle} />
                     {
                         router.pathname != '/'  && router.pathname != '/signup' && router.pathname != '/terma'?
-                        <Collapse navbar>
+                        <Collapse isOpen={isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/">Inbox</NavLink>
+                                <NavLink href="/"><img className={`icon-bell`} src="/images/icon/bell.png"/></NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
-                                    <img className="logo-user" src="/images/logos/logo-userx2.png"/>
+                                    <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>[userNname]</h4>
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>
@@ -95,6 +94,11 @@ export function Headx({title, children}){
                 </Navbar>
                 {children} 
                 <Footer />
+                <style jsx>{`
+                    .oval-pic { width: 45px; height: 45px; border-radius: 50%; background-color: #9B9B9B; overflow: hidden; display: inline-block; vertical-align: middle;}
+                    .oval-pic img { object-fit: cover; width: 100%;}
+                    h4 { font-size: 14px; color: #3E3E3E; font-weight: 500; margin: 0;}
+                `}</style>
         </div>
         
     )

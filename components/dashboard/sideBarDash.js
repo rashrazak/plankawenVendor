@@ -62,7 +62,7 @@ function sideBarDash() {
             <style jsx>{`
                 .label-h4 { color: #3E3E3E; font-size: 16px; font-weight: normal;}
                 .label-p { color: #9B9B9B; font-size: 12px; font-weight: normal;}
-                .sidebar-container { float: right; width: 30%; display: inline-block; background-color: #F5F6FA; vertical-align: top; padding: 30px; border-radius: 5px; height: calc(100vh - 130px); overflow-y: scroll;}
+                .sidebar-container { float: right; width: 30%; display: inline-block; background-color: #F5F6FA; vertical-align: top; padding: 30px; border-radius: 5px; height: calc(100vh - 181px); overflow-y: scroll; margin-top: 53px;}
                 .jumlah-terkumpul-div { text-align: center; margin-bottom:  10%;}
                 .jumlah-terkumpul-div > p { color: #9B9B9B; font-size: 12px; font-weight: normal; margin: 0;}
                 .pemberitahuan-div > h4 { color: #75848E; font-size: 14px; font-weight: normal;}
