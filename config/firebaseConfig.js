@@ -4,14 +4,26 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
+//test
+// const config = {
+//     apiKey: "AIzaSyC_0QtkXQApYKK101apDFYf6pn7LNAWItg",
+//     authDomain: "plankawen-61a3a.firebaseapp.com",
+//     databaseURL: "https://plankawen-61a3a.firebaseio.com",
+//     projectId: "plankawen-61a3a",
+//     storageBucket: "plankawen-61a3a.appspot.com",
+//     messagingSenderId: "745867454643",
+//     appId: "1:745867454643:web:a3e3cfba41ea05de"
+//   }
+//production
 const config = {
-    apiKey: "AIzaSyC_0QtkXQApYKK101apDFYf6pn7LNAWItg",
-    authDomain: "plankawen-61a3a.firebaseapp.com",
-    databaseURL: "https://plankawen-61a3a.firebaseio.com",
-    projectId: "plankawen-61a3a",
-    storageBucket: "plankawen-61a3a.appspot.com",
-    messagingSenderId: "745867454643",
-    appId: "1:745867454643:web:a3e3cfba41ea05de"
+    apiKey: "AIzaSyDJwYfTFCcAG71iHs6pqxIyBJaBRa-qOH8",
+    authDomain: "plankawen-19918.firebaseapp.com",
+    databaseURL: "https://plankawen-19918.firebaseio.com",
+    projectId: "plankawen-19918",
+    storageBucket: "plankawen-19918.appspot.com",
+    messagingSenderId: "79976166898",
+    appId: "1:79976166898:web:b6fa8275211bf940b9a76b",
+    measurementId: "G-3ZEDEV7BH1"
   }
 
 class Firebase {
