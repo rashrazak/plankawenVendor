@@ -34,8 +34,8 @@ const Login = () => {
 
     return (
         <div className="login-layout"> 
-            <h1>Welcome Vendor</h1>
             <div className="form-layout form-layout-login">
+                <h1>Welcome Vendor</h1>
                 <form>
                     <input type="email" className="form-control" name="email" placeholder="Email" onChange={e => setEmail(e.target.value)} />
                     <input type="password" className="form-control" name="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
