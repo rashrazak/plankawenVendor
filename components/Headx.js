@@ -33,6 +33,7 @@ export function Headx({title, children}){
     function logout() {
         firebase.signOut().then( ()=> {
             localStorage.removeItem('user');
+            localStorage.removeItem('vendorDetails');
             router.push('/')
 
           })

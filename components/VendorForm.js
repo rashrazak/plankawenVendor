@@ -84,40 +84,36 @@ function VendorForm() {
     }
 
     const submitForm = ()=> {
+        
+        if (setuju == false) {
+            alert('Sila daftar akaun sebagai vendor!')
+            return false;
+        }
+
+        if (ssmImage == false) {
+            alert('Sila lampirkan gambar SSM anda!')
+            return false;
+        }
+
+        if (cityArray == false) {
+            alert('Sila nyatakan kawasan anda!')
+            return false;
+        }
+        if (password.length <= 6 && path == '/signup'){
+            alert('Password anda harus melebihi 6 character!')
+            return false;
+        }
+
+        if (companyName == false || owner == false || facebook == false || instagram == false || companyEmail == false || bankAccount == false || companyAddress == false || bankName == false || companyId == false || phoneNo == false) {
+            alert('Sila isikan semua informasi!')
+            return false;
+        }
         Swal.fire({
             title:'Sila Tunggu...',
             onBeforeOpen:()=>{
                 Swal.showLoading()
             }
         })
-        if (setuju == false) {
-            alert('Sila daftar akaun sebagai vendor!')
-            Swal.close()
-            return false;
-        }
-
-        if (ssmImage == false) {
-            alert('Sila lampirkan gambar SSM anda!')
-            Swal.close()
-            return false;
-        }
-
-        if (cityArray == false) {
-            alert('Sila nyatakan kawasan anda!')
-            Swal.close()
-            return false;
-        }
-        if (password.length <= 6 && path == '/signup'){
-            alert('Password anda harus melebihi 6 character!')
-            Swal.close()
-            return false;
-        }
-
-        if (companyName == false || owner == false || facebook == false || instagram == false || companyEmail == false || bankAccount == false || companyAddress == false || bankName == false || companyId == false || phoneNo == false) {
-            alert('Sila isikan semua informasi!')
-            Swal.close()
-            return false;
-        }
         var param = {
             account:0,
             akaunBank:bankAccount,

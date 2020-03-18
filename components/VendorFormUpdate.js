@@ -117,12 +117,7 @@ function VendorFormUpdate() {
     }
 
     const submitForm = ()=> {
-        Swal.fire({
-            title:'Sila Tunggu...',
-            onBeforeOpen:()=>{
-                Swal.showLoading()
-            }
-        })
+        
         if (setuju == false) {
             alert('Sila daftar akuan sebagai vendor!')
             return false;
@@ -141,6 +136,12 @@ function VendorFormUpdate() {
             alert('Password anda harus melebihi 6 character!')
             return false;
         }
+        Swal.fire({
+            title:'Sila Tunggu...',
+            onBeforeOpen:()=>{
+                Swal.showLoading()
+            }
+        })
         var param = {
             account:0,
             akaunBank:bankAccount,
