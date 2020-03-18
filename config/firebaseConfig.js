@@ -184,11 +184,16 @@ class Firebase {
                 locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
                     param.ssmImage = downloadURL;
                     console.log(downloadURL)
-                    await app.firestore().collection('vendor').add(param)
-                    await app.auth().createUserWithEmailAndPassword(companyEmail, password)
-                    Swal.close()
-                    alert('Registered!')
-                    window.location.href = '/'
+                    await app.auth().createUserWithEmailAndPassword(companyEmail, password).then( async ()=>{
+                        await app.firestore().collection('vendor').add(param)
+                        Swal.close()
+                        alert('Registered!')
+                        window.location.href = '/'
+                    }).catch((err)=>{
+                        Swal.close()
+                        alert(err)
+                    })
+                    
             
                     
                 })

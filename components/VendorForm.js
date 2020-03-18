@@ -86,11 +86,11 @@ function VendorForm() {
     const submitForm = ()=> {
         
         if (setuju == false) {
-            alert('Sila daftar akaun sebagai vendor!')
+            alert('Sila daftar akuan sebagai vendor!')
             return false;
         }
 
-        if (ssmImage == false) {
+        if (ssmImage == null) {
             alert('Sila lampirkan gambar SSM anda!')
             return false;
         }
