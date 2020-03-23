@@ -4,10 +4,13 @@ import firebase from '../../config/firebaseConfig'
 
 function profileDetails() {
 
-    const {user,signOut,saveVendorDetails} = useContext(LoginContext);
+    const {user,getVendorDetails,saveVendorDetails} = useContext(LoginContext);
     const [data, setdata] = useState(false)
     const [editDetails, setEditDetails] = useState(false)
     const [hoverImage, setHoverImage] = useHover();
+    const [imageBinary, setImageBinary] = useState(null)
+    const [vendorId, setVendorId] = useState(null)
+    const [companyDesc, setCompanyDesc] = useState(null)
 
     const toggle = () => setEditDetails(!editDetails)
 
@@ -45,15 +48,27 @@ function profileDetails() {
                 read.forEach(function(doc) {
                     let x = doc.id;
                     let y = doc.data()
+                    setVendorId(doc.id)
                     //get vendor details
-                    if (localStorage.getItem('vendorDetails') == null) {
-                        saveVendorDetails(x, y)
-                    }
+                    saveVendorDetails(x, y)
+                    setCompanyDesc(y.companyDesc)
                 })
             }
         }
         getData()
     },[user])
+
+    useEffect(() => {
+        if (imageBinary != null) {
+            firebase.updateVendorProfileImage(imageBinary,user.email, vendorId)
+        }
+    }, [imageBinary])
+
+    useEffect(() => {
+       if (companyDesc != null && editDetails == false && companyDesc !== getVendorDetails.companyDesc) {
+            firebase.updateVendorCompanyDesc(companyDesc,vendorId)
+       }
+    }, [companyDesc,editDetails])
 
     return (
         <div>
@@ -63,24 +78,38 @@ function profileDetails() {
                         {
                             setHoverImage ?
                                 <React.Fragment>
-                                    <input type="file" className={`input-image`}/>
+                                    <input type="file" className={`input-image`} onChange={(e)=>{
+                                        console.log(e.target.files)
+                                        let fr = new FileReader()
+                                        fr.onload = function(){
+                                            setImageBinary(fr.result)
+                                        }
+                                        fr.readAsDataURL(e.target.files[0])
+                                     } }/>
                                     <span><img className={`user-hover`} src="/images/icon/user-hover.png"/></span> 
                                 </React.Fragment>
                                 : 
-                                data == true ?
-                                <img src={user.photoUrl}/>
+                                imageBinary || getVendorDetails.profileImage ?
+                                <img src={getVendorDetails.profileImage || imageBinary}/>
                                 : 
                                 <img className={`user-placholder`} src="/images/icon/user-placeholder.png"/>
                            
                         }
                     </div>
-                    <p>Disahkan SSM</p>
+                    {
+                        getVendorDetails && getVendorDetails.status == 'active' ?
+                        <p>Disahkan SSM</p>
+                        :''
+
+                    }
                 </div>
                 <div className={`profile-upper`}>
                 {/* <input type="file" className={``}/> */}
                     <h2>Hi, <span>{user.email}</span></h2>
                     <div className={`keterangan-div`}>
-                        <textarea className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini."></textarea>
+                        <textarea value={companyDesc} className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini." onChange={(e)=>{
+                            setCompanyDesc(e.target.value)
+                        }}/>
                         {
                             !editDetails ?
                             <img className={`icon-edit`} src="/images/icon/edit-2.png" onClick={toggle}/>

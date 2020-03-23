@@ -10,11 +10,11 @@ function footer() {
                 <p>© Copyright PlanKawen 2019 <br/> Kuala Lumpur, Malaysia</p>
             </div>
             <div className={`footer-link`}>
-                <Link href="https://plankawen.wixsite.com/website/hubungi-kami"><a><p>Tentang Kami</p></a></Link>
-                <Link href="https://plankawen.wixsite.com/website/tentang-kami"><a><p>Hubungi Kami</p></a></Link>
-                <Link href="https://plankawen.wixsite.com/website/blog"><a><p>Blog</p></a></Link>
-                <Link href="https://www.facebook.com/Plankawen-745730829103427/"><a><img className={`fb-icon`} src="/images/icon/s-facebook.png"/></a></Link>
-                <Link href="https://www.instagram.com/plankawen_/"><a><img className={`insta-icon`} src="/images/icon/s-instagram.png"/></a></Link>
+                <a href="https://plankawen.wixsite.com/website/hubungi-kami"><p>Tentang Kami</p></a>
+                <a href="https://plankawen.wixsite.com/website/tentang-kami"><p>Hubungi Kami</p></a>
+                <a href="https://plankawen.wixsite.com/website/blog"><p>Blog</p></a>
+                <a href="https://www.facebook.com/Plankawen-745730829103427/"><img className={`fb-icon`} src="/images/icon/s-facebook.png"/></a>
+                <a href="https://www.instagram.com/plankawen_/"><img className={`insta-icon`} src="/images/icon/s-instagram.png"/></a>
             </div>
             <style jsx>{`   
                 .container-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 60px; margin: 50px 0 20px 0;}

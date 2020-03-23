@@ -252,6 +252,57 @@ class Firebase {
 
     }
 
+    async updateVendorProfileImage(image, companyEmail, vendorId){
+        if (image) {
+            
+            var storageRef = this.storage.ref();
+            let img     = image;
+
+            if (img != undefined) {
+                // var desertRef = storageRef.child(`vendor/${companyEmail}/userImage.jpg`);
+                // desertRef.delete();
+                
+                var locRef      = storageRef.child(`vendor/${companyEmail}/userImage.jpg`)
+                var locResult   = locRef.putString(img, 'data_url');
+                await locResult.on('state_changed',snapshot=>{
+
+                },(error)=>{
+                    console.log(error)
+                },()=>{
+                    locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
+                        console.log(downloadURL)
+                        await app.firestore().collection('vendor').doc(vendorId).update({
+                            profileImage:downloadURL
+                        }).then(()=>{
+                            
+                        }).catch(err=> console.log(err))
+                        Swal.close()
+                        alert('Updated!')
+                        window.location.href = '/'
+                        return true;
+                    })
+                }) 
+            }
+            
+
+        }
+       
+
+    }
+
+    updateVendorCompanyDesc(companyDesc, vendorId){
+        if (companyDesc) {
+            app.firestore().collection('vendor').doc(vendorId).update({
+                companyDesc
+            }).then(()=>{
+                Swal.close()
+                alert('Updated!')
+                window.location.href = '/'
+                return true;         
+            }).catch(err=> console.log(err))
+        }
+    }
+
     async getVendorUser(email){
         return await this.db.collection('vendor').where('email', '==', email).get()
     }

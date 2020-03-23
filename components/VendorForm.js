@@ -131,7 +131,7 @@ function VendorForm() {
             noPendaftaranSyarikat:companyId,
             ssmImage:'',
             points:0,
-            status:'active',
+            status:'pending',
             
 
         }
