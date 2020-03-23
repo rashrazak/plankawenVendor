@@ -62,11 +62,14 @@ function profileDetails() {
                     <div className={`oval-pic`} ref={hoverImage}>
                         {
                             setHoverImage ?
-                                <img className={`user-hover`} src="/images/icon/user-hover.png"/>
-                            : 
+                                <React.Fragment>
+                                    <input type="file" className={`input-image`}/>
+                                    <span><img className={`user-hover`} src="/images/icon/user-hover.png"/></span> 
+                                </React.Fragment>
+                                : 
                                 data == true ?
                                 <img src={user.photoUrl}/>
-                                :
+                                : 
                                 <img className={`user-placholder`} src="/images/icon/user-placeholder.png"/>
                            
                         }
@@ -74,8 +77,8 @@ function profileDetails() {
                     <p>Disahkan SSM</p>
                 </div>
                 <div className={`profile-upper`}>
+                {/* <input type="file" className={``}/> */}
                     <h2>Hi, <span>{user.email}</span></h2>
-                    {/* <p className={`label-p`}>Kami menyediakan dewan dan beberapa pakej lain yang menarik. Sesuai untuk anda yang mempunyai budget yang limited  beserta pilihan barangan yang pelbagai.</p> */}
                     <div className={`keterangan-div`}>
                         <textarea className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini."></textarea>
                         {
@@ -92,7 +95,7 @@ function profileDetails() {
                 .profile-details { background-color: #F5F6FA;  padding: 10px 20px; position: relative; margin: 20px 0; min-height: 107px; border-radius: 4px;}
                 .oval-kampret { position: absolute; top: -45px; left: 34px;}
                 .oval-kampret > p { text-align: center; font-style: italic; color: #47CBC4; font-size: 12px; margin-top: 10px;}
-                .oval-pic { width: 112px; height: 112px; border-radius: 50%; background-color: #9B9B9B; overflow: hidden; position: relative; cursor: pointer;}
+                .oval-pic { width: 112px; height: 112px; border-radius: 50%; background-color: #9B9B9B; overflow: hidden; position: relative;}
                 .oval-pic:hover { box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); background-color: #7C7C7C;}
                 .oval-pic img { object-fit: cover; width: 100%;}
                 .oval-pic img.user-placholder {object-fit: unset; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px;}
@@ -106,7 +109,7 @@ function profileDetails() {
                 .keterangan-div { position: relative;}
                 .icon-edit { position: absolute; right: 10px; top: 20px; width: 24px; cursor: pointer;}
                 .p-save { color: #47CBC4; font-weight: bold; font-size: 14px; width: auto;}
-                
+                .input-image { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 112px; -webkit-appearance:none; z-index:1; opacity: 0; border-radius: 10px; height: 112px; }
             `}</style>
         </div>
     )
