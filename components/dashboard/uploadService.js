@@ -149,7 +149,7 @@ function uploadService() {
                 .card-service-add { width: 100px; background-color: #EBF9F8;}
                 .card-service-add p { background-color: transparent;}
                 .card-service-add { background-image: url(/images/icon/plus-circle-dark.png); background-repeat: no-repeat; background-position: center 40%;}
-                .btn-coral { background-color: #f4f4f4; border-radius: 6px; font-weight: normal; font-size: 14px; color: #3E3E3E; margin-right: 6px; margin-bottom: 20px;}
+                .btn-coral { background-color: #f4f4f4; border-radius: 6px; font-weight: normal; font-size: 14px; color: #3E3E3E; margin-right: 6px; margin-bottom: 20px; margin-top: 10px;}
                 .btn-coral.btn-active { background-color: #47CBC4; font-weight: bold; color: #FFF;}
             `}</style>
         </div>

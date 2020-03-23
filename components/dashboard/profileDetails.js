@@ -6,6 +6,10 @@ function profileDetails() {
 
     const {user,signOut,saveVendorDetails} = useContext(LoginContext);
     const [data, setdata] = useState(false)
+    const [editDetails, setEditDetails] = useState(false)
+
+    const toggle = () => setEditDetails(!editDetails)
+
 
     useEffect( () => {
         async function getData(){
@@ -40,7 +44,17 @@ function profileDetails() {
                 </div>
                 <div className={`profile-upper`}>
                     <h2>Hi, <span>{user.email}</span></h2>
-                    <p className={`label-p`}>Kami menyediakan dewan dan beberapa pakej lain yang menarik. Sesuai untuk anda yang mempunyai budget yang limited  beserta pilihan barangan yang pelbagai.</p>
+                    {/* <p className={`label-p`}>Kami menyediakan dewan dan beberapa pakej lain yang menarik. Sesuai untuk anda yang mempunyai budget yang limited  beserta pilihan barangan yang pelbagai.</p> */}
+                    <div className={`keterangan-div`}>
+                        <textarea className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini."></textarea>
+                        {
+                            !editDetails ?
+                            <img className={`icon-edit`} src="/images/icon/edit-2.png" onClick={toggle}/>
+                            : 
+                            <p className={`icon-edit p-save`} onClick={toggle}>Simpan</p>
+                        }
+                       
+                    </div>
                 </div>
             </div>
             <style jsx>{`
@@ -53,6 +67,11 @@ function profileDetails() {
                 h2 { margin: 0; font-size: 22px; color: #3e3e3e; font-weight: normal;}
                 h2 > span { font-weight: bold;}
                 p { margin: 0; font-size: 12px; color: #3e3e3e; font-weight: normal;}
+                .form-textarea { background-color: #FFF;border: 1px solid #EAEAEA;border-radius: 4px; resize: none; height: 80px; width: 100%; margin-top: 10px; padding: 10px 20px; padding-right: 70px; font-weight: normal; font-size: 14px;}
+                .form-textarea.active { box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); transition: all .3s;}
+                .keterangan-div { position: relative;}
+                .icon-edit { position: absolute; right: 10px; top: 20px; width: 24px; cursor: pointer;}
+                .p-save { color: #47CBC4; font-weight: bold; font-size: 14px; width: auto;}
             `}</style>
         </div>
     )
