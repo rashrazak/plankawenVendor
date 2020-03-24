@@ -235,13 +235,13 @@ class Firebase {
                     locResult.snapshot.ref.getDownloadURL().then(async function(downloadURL) {
                         param.ssmImage = downloadURL;
                         console.log(downloadURL)
-                        await app.firestore().collection('vendor').doc(vendorId).set(param)
+                        await app.firestore().collection('vendor').doc(vendorId).update(param)
                         return true;
                     })
                 }) 
             }else{
                 param.ssmImage = ssmImage
-                await app.firestore().collection('vendor').doc(vendorId).set(param)
+                await app.firestore().collection('vendor').doc(vendorId).update(param)
             }
             Swal.close()
             alert('Updated!')
