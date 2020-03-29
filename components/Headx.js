@@ -22,6 +22,7 @@ import {useRouter} from 'next/router'
 
 import firebase from '../config/firebaseConfig'
 
+
 export function Headx({title, children}){
     const router = useRouter()
     const {getVendorDetails} = useContext(LoginContext)
@@ -55,13 +56,23 @@ export function Headx({title, children}){
                         <Collapse isOpen={isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/"><img className={`icon-bell`} src="/images/icon/bell.png"/></NavLink>
+                                <NavLink href="/">
+                                <img className={`icon-bell`} src="/images/icon/bell.png"/>
+                                </NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav>
                                     {
                                         getVendorDetails && 
-                                        <h4><span><div className={`oval-pic`}><img className="logo-user" src="/images/logos/logo-userx2.png"/></div> </span>{getVendorDetails.namaPemilik}</h4>
+                                        <h4><span>
+                                        <div className={`oval-pic`}>
+                                            {
+                                                getVendorDetails.profileImage ?
+                                                <img className="logo-user" src={getVendorDetails.profileImage}/>
+                                                :
+                                                <img className="logo-user" src="/images/logos/logo-userx2.png"/>
+                                            }
+                                        </div> </span>{getVendorDetails.namaPemilik}</h4>
 
                                     }
                                 </DropdownToggle>

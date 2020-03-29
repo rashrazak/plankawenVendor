@@ -98,7 +98,7 @@ function profileDetails() {
                     </div>
                     {
                         getVendorDetails && getVendorDetails.status == 'active' ?
-                        <p>Disahkan SSM</p>
+                        <p>Disahkan Plankawen</p>
                         :''
 
                     }
@@ -108,7 +108,11 @@ function profileDetails() {
                     <h2>Hi, <span>{user.email}</span></h2>
                     <div className={`keterangan-div`}>
                         <textarea value={companyDesc} className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini." onChange={(e)=>{
-                            setCompanyDesc(e.target.value)
+                            if (e.target.value.length < 81) {
+                                setCompanyDesc(e.target.value)
+                            }else{
+                                alert('Maksimum 80 patah kata')
+                            }
                         }}/>
                         {
                             !editDetails ?
