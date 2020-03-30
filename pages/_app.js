@@ -318,15 +318,15 @@ class MyApp extends App {
   createAddService = async (pagex) => {
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
-    let {email} = {...this.state.user}
-    let {id} = {...this.state.vendorDetails}
+    let {email,uid} = {...this.state.user}
+    // let {id} = {...this.state.vendorDetails}
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
     let img = await firebase.getImagesService(images, serviceType, email)
     console.log(img)
     var data = {
-      vendorId:id,
+      vendorId:uid,
       email,
       status,
       serviceType,
@@ -341,7 +341,7 @@ class MyApp extends App {
       getTime: x.getTime(),
       visibility:'show'
     }
-    console.log(data.images)
+    console.log(data)
 
     
     let y = firebase.addService(serviceType, data)
@@ -521,12 +521,12 @@ class MyApp extends App {
       this.setState({addServiceDetailsVenue:currentService})
     }
   }
-  addServiceDetailsWeddingDress = (hargax, lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar) => {
+  addServiceDetailsWeddingDress = (hargax, lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar) => {
     let {addServiceDetailsWeddingDress} = {...this.state}
     let currentService = addServiceDetailsWeddingDress;
     let harga = hargax;
     let lok = lokasi;
-    let wo = syaratSewaan;
+    let ss = syaratSewaan;
     let js = jenisSewa;
     let d = discount;
     let hd = hargaDiscount;
@@ -534,14 +534,16 @@ class MyApp extends App {
     let jm = jenisMaterial;
     let mdc = maxDesignChanges;
     let jh = jenisHantar;
+    let wo = waktuOperasi;
     currentService['jenisHantar'] = jh;
     currentService['jenisMaterial'] = jm;
     currentService['maxDesignChanges'] = mdc;
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['syaratSewaan'] = wo;
+    currentService['syaratSewaan'] = ss;
     currentService['jenisSewa'] = js;
+    currentService['waktuOperasi'] = wo;
 
     if (currentService['alamatPenuh'] != alamatPenuh) {
       currentService['lokasi']['street'] = lok.address_components[0]['long_name'];

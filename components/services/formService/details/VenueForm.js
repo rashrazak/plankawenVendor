@@ -95,7 +95,7 @@ function VenueForm({serviceType, pagex, setModalEdit,editModal}) {
                 />
             </div>
             <div className="form-section">
-                <h4>Terma / Syarat</h4>
+                <h4>Waktu operasi</h4>
                 <Input className="form-custom" href="#" id="tooltipTerma" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
                 <UncontrolledTooltip placement="left" target="tooltipTerma">
                     Tetapkan sebarang syarat yang dikenakan ke atas dewan/lokasi tersebut seperti; waktu operasi, lokasi parkir, jumlah tetamu maksimum dan sebagainya

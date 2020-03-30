@@ -38,6 +38,8 @@ function AboutForm({pagex}) {
         setabout(about)
     }, [getReview])
 
+    
+
     const submitReview = () => {
         pagex == 'addservice' ? createAddService(pagex) : updateAddService(pagex) ;
     }

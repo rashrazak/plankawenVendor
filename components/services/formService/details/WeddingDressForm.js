@@ -25,6 +25,7 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
     const [jenisMaterial, setJenisMaterial] = useState('')
     const [maxDesignChanges, setmaxDesignChanges] = useState(0)
     const [jenisHantar, setjenisHantar] = useState('')
+    const [waktuOperasi, setwaktuOperasi] = useState('');
 
     useEffect(() =>{
         setharga(getServiceDetailsWeddingDress.harga)
@@ -36,6 +37,7 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
         setJenisMaterial(getServiceDetailsWeddingDress.jenisMaterial)
         setmaxDesignChanges(getServiceDetailsWeddingDress.maxDesignChanges)
         setjenisHantar(getServiceDetailsWeddingDress.jenisHantar)
+        setwaktuOperasi(getServiceDetailsWeddingDress.waktuOperasi)
 
         setalamatPenuh(() => {
             let al = getServiceDetailsWeddingDress.alamatPenuh
@@ -63,12 +65,12 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
      }
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         Router.push(`/${pagex}/upload`);
     }
 
     const submitServiceDetails2 = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         setModalEdit(false)
     }
     return (
@@ -154,6 +156,10 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
                     types={[]}
                     componentRestrictions={{country: "my"}}
                 />
+            </div>
+            <div className="form-section">
+                <h4>Waktu operasi</h4>
+                <Input className="form-custom" href="#" id="tooltipTerma" type="text" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
             </div>
             <div className="form-section">
                 <h4>Syarat Sewaan Baju </h4>

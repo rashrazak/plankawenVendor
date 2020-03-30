@@ -10,7 +10,7 @@ function profileDetails() {
     const [hoverImage, setHoverImage] = useHover();
     const [imageBinary, setImageBinary] = useState(null)
     const [vendorId, setVendorId] = useState(null)
-    const [companyDesc, setCompanyDesc] = useState(null)
+    const [companyDesc, setCompanyDesc] = useState('')
 
     const toggle = () => setEditDetails(!editDetails)
 
@@ -89,7 +89,7 @@ function profileDetails() {
                                     <span><img className={`user-hover`} src="/images/icon/user-hover.png"/></span> 
                                 </React.Fragment>
                                 : 
-                                imageBinary || getVendorDetails.profileImage ?
+                                imageBinary || ( getVendorDetails && getVendorDetails.profileImage ) ?
                                 <img src={getVendorDetails.profileImage || imageBinary}/>
                                 : 
                                 <img className={`user-placholder`} src="/images/icon/user-placeholder.png"/>

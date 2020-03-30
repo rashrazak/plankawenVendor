@@ -108,7 +108,7 @@ function uploadService() {
                                     img = v.images[0]['urlStorage']
                                 }
                                 return(
-                                    <div className={`card-service`} onClick={()=>editFunction(i)}>
+                                    <div key={i} className={`card-service`} onClick={()=>editFunction(i)}>
                                         <img src={img}/>
                                         <p><span><img src="/images/icon/ico-venue-black.png"/> {v.serviceType} - {v.serviceName}</span></p>
                                     </div>
