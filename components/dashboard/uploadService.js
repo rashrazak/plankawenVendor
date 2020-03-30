@@ -115,7 +115,7 @@ function uploadService() {
                                 )
                             })
                         }
-                        <div className={`card-service card-service-add`}>
+                        <div className={`card-service card-service-add`} onClick={()=> addService()}>
                         
                         </div>
                     </div>
@@ -146,7 +146,7 @@ function uploadService() {
                 .card-service > img { object-fit: cover; width: 100%; height: 85px; object-position: center;} 
                 .card-service p { background-color: #FFF; margin: 0; padding: 10px; border-radius: 0px 0px 5px 5px;}
                 .card-service p span img { margin-right: 10px;}
-                .card-service-add { width: 100px; background-color: #EBF9F8;}
+                .card-service-add { width: 100px; background-color: #EBF9F8; cursor: pointer;}
                 .card-service-add p { background-color: transparent;}
                 .card-service-add { background-image: url(/images/icon/plus-circle-dark.png); background-repeat: no-repeat; background-position: center 40%;}
                 .btn-coral { background-color: #f4f4f4; border-radius: 6px; font-weight: normal; font-size: 14px; color: #3E3E3E; margin-right: 6px; margin-bottom: 20px; margin-top: 10px;}
