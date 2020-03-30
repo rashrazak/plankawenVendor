@@ -203,7 +203,7 @@ function AboutForm({pagex}) {
                             <h5>Jenis Hantar</h5>
                             <p>{details.jenisHantar}</p>
                             <h5>Waktu Tiba</h5>
-                            <p>details.waktuTiba</p>
+                            <p>{details.waktuTiba}</p>
                             <h5>Kaedah Hantar</h5>
                             <p>{details.jenisHantar}</p>
                             {/* <h5>Bayaran Majlis</h5>

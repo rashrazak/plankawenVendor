@@ -12,10 +12,13 @@ function review(props) {
             <div>
                 <Step progress={4} />
             </div>
-            <div>
+            <div className={`height-layout`}>
                 {/* <h1>Done</h1> */}
                 <DoneForm pagex={'addservice'} />
             </div>
+            <style jsx>{`
+                .height-layout { height: calc(100vh - 340px);}
+            `}</style>
         </Head>
     )
 }
