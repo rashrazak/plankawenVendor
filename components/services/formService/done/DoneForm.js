@@ -11,7 +11,7 @@ function DoneForm({pagex}) {
     const complete = () => {
         let x = resetAddService()
         if (x) {
-            Router.push(`/dashboard`)
+            window.location.href = '/'
         }
     }
 
@@ -21,7 +21,6 @@ function DoneForm({pagex}) {
         localStorage.clear();
         localStorage.setItem('user',user);
         localStorage.setItem('vendorDetails',vendorDetails);
-        console.log(getReview);
        
     }, [resetAddService])
     return (
@@ -30,7 +29,7 @@ function DoneForm({pagex}) {
             <h5>Congratulations!</h5>
             <p>You’ve succesfully add your new service.</p>
             <div className="form-button">
-                <Button color={'warning'} className="btn-next" onClick={() => Router.push(`/dashboard`)}>Dashboard</Button>{' '}
+                <Button color={'warning'} className="btn-next" onClick={() => complete()}>Dashboard</Button>
             </div>
             <style jsx>{`
                 .form-button { text-align: center; }

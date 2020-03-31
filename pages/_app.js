@@ -318,15 +318,15 @@ class MyApp extends App {
   createAddService = async (pagex) => {
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
-    let {email,uid} = {...this.state.user}
-    // let {id} = {...this.state.vendorDetails}
+    let {uid} = JSON.parse(localStorage.getItem('user') )
+    let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
     let img = await firebase.getImagesService(images, serviceType, email)
     console.log(img)
     var data = {
-      vendorId:uid,
+      vendorId:uid || id,
       email,
       status,
       serviceType,
@@ -343,40 +343,43 @@ class MyApp extends App {
     }
     console.log(data)
 
-    
-    let y = firebase.addService(serviceType, data)
-    y.then((x) => {
-      console.log(x.id)
-      let y = firebase.updateService(serviceType, data, x.id)
-      y.then(() => {
-        this.removeServiceStorage()
-        alert('success')
-        window.location.href = `/${pagex}/done`;
-        // Router.push(`/${pagex}/done`)
+    setTimeout(() => {
+      let y = firebase.addService(serviceType, data)
+      y.then((x) => {
+        console.log(x.id)
+        let y = firebase.updateService(serviceType, data, x.id)
+        y.then(() => {
+          this.removeServiceStorage()
+          alert('success')
+          window.location.href = `/${pagex}/done`;
+          // Router.push(`/${pagex}/done`)
+        })
+        .catch((e) => {
+          alert('error')
+          console.log(e)
+        }) 
       })
       .catch((e) => {
-        alert('error')
         console.log(e)
-      }) 
-    })
-    .catch((e) => {
-      console.log(e)
-    })
+      })
+
+    },2000)
+    
+    
   }
   updateAddService = async (pagex) => {
     
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images, serviceId} = {...this.state.addServiceUpload}
-    let {email} = {...this.state.user}
-    let {id} = {...this.state.vendorDetails}
+    let {uid} = JSON.parse(localStorage.getItem('user') )
+    let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
     let visibility = this.state.visibility
-    console.log(visibility)
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
     let x = new Date()
     let img = await firebase.getImagesService(images, serviceType, email)
     let data = {
-      vendorId:id,
+      vendorId:id || uid,
       email,
       status,
       serviceType,
@@ -391,23 +394,26 @@ class MyApp extends App {
       getTime: x.getTime(),
       visibility
     }
-    let y = firebase.updateService(serviceType, data, serviceId)
-    y.then(() => {
+    setTimeout(() => {
       let y = firebase.updateService(serviceType, data, serviceId)
       y.then(() => {
-        this.removeServiceStorage()
-        alert('success')
-        window.location.href = `/${pagex}`
+        let y = firebase.updateService(serviceType, data, serviceId)
+        y.then(() => {
+          this.removeServiceStorage()
+          alert('success')
+          window.location.href = `/${pagex}`
+        })
+        .catch((e) => {
+          alert('error')
+          console.log(e)
+        })
       })
       .catch((e) => {
         alert('error')
         console.log(e)
       })
-    })
-    .catch((e) => {
-      alert('error')
-      console.log(e)
-    })
+    },2000)
+    
   }
   getServiceDetailsEdit = (name, val, id) => {
     const x = this.state;
