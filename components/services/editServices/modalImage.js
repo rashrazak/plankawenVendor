@@ -17,7 +17,7 @@ function modalImage() {
                 </ModalBody>
             </Modal>
             <style jsx>{`
-                .btn-edit { height: 40px; border-radius: 25px; color: #FFF; font-size: 12px; background-color: #3399ff; font-weight: normal; width: 100px; margin-bottom: 10px;}
+                .btn-edit { height: 45px; border-radius: 8px; color: #FFF; font-size: 14px; background-color: #75848E; font-weight: normal; width: 150px; margin-bottom: 10px;}
             `}</style>
         </div>
     )

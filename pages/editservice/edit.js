@@ -66,7 +66,7 @@ function edit({pagex, sidebar}) {
            
             <div className="review-form">
                 <div className="button-edit-position">
-                    <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit</button>
+                    <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit Service</button>
                     {
                         sidebarDiv ?
                         <div>
@@ -358,8 +358,8 @@ function edit({pagex, sidebar}) {
                 .form-button {display: none;}
                 .button-edit-position { position: fixed; left: 60px; z-index: 2;}
                 .button-edit-position .btn { display: block; width: 100px; height: 50px; border-radius: 25px; margin-bottom: 10px; transition: all 3.s}
-                .btn-edit { background-color: #f0ad4e; color: #FFF; font-size: 12px; font-weight: 500;}
-                .btn-edit:hover { box-shadow: 0 4px 10px 0 rgba(0,0,0,0,3); transition: all 3.s }
+                .btn-edit { background-color: #FFF; color: #3e3e3e; font-size: 14px; font-weight: 500; text-align: left;}
+                .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
             `}</style>
         </div>
