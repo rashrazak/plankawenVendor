@@ -90,12 +90,20 @@ function AboutForm({pagex}) {
                         <React.Fragment>
                             <div className="review-price">
                                 <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
+                            </div>
+                            <div className="review-price">
                                 <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
+                            </div>
+                            <div className="review-price">
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
                             </div>
                             <div className="review-price">
                                 <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
+                            </div>
+                            <div className="review-price">
                                 <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
+                            </div>
+                            <div className="review-price">
                                 <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
                             </div>
                         </React.Fragment>
@@ -271,7 +279,7 @@ function AboutForm({pagex}) {
                 <Button  className="btn-next" onClick={() => submitReview()}>Next</Button>{' '}
             </div>
             <style jsx>{`
-                .review-form { max-width: 670px; margin: 30px auto;}
+                .review-form { max-width: 670px; margin: 30px auto; overflow: hidden;}
                 .hero-review { position: relative;}
                 .hero-review > img { object-fit: cover; width: 100%; max-height: 206px; object-position: top; border-radius: 5px;}
                 .hero-son-review { position: absolute; bottom: 15px; left: 15px; display: flex; }
@@ -284,12 +292,12 @@ function AboutForm({pagex}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
-                .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
+                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow-x: auto;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; margin-right: 10px; flex: 0 0 180px;}
+                .review-category > p { font-size: 14px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
-                .review-price > p { font-size: 14px; color: #3E3E3E;}
+                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 140px; text-align: right;}
+                .review-price > p { font-size: 14px; color: #3E3E3E; width: 100%; margin: 0;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
                 .review-name-and-places > h4 { font-size: 18px; color: #3E3E3E;}
@@ -306,7 +314,7 @@ function AboutForm({pagex}) {
                 .review-user-image-det > p:first-child { font-size: 10px; color: #9B9B9B;}
                 .review-user-image-det > p:nth-child(2) { font-size: 16px; color: #3E3E3E;}
                 .review-user-image-det > p:nth-child(3) { font-size: 12px; color: #47CBC4;}
-                h5 { font-weight: bold; color: #3E3E3E; font-size: 17px; margin-top: 10px;}
+                h5 { font-weight: 400; color: #75848e; font-size: 12px; margin-top: 10px;}
                 .list-review-item { color: #75848E; font-size: 14px;}
 
             `}</style>
