@@ -47,22 +47,74 @@ function About({typeChange}) {
                 <div className="container container-1">
                     <p>Please choose your category</p>
                     <div className="choose-category">
-                        <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>Lokasi</Button>{' '}
-                        {/* <Button onClick={(e) => eventSelection(1, e)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy</Button>{' '} */}
-                        <Button onClick={(e) => eventSelection(2, e)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>Kad & Banner</Button>{' '}
-                        <Button onClick={(e) => eventSelection(3, e)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>Baju Pengantin</Button>{' '}
-                        <Button onClick={(e) => eventSelection(4, e)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>Make Up</Button>{' '}
-                        <Button onClick={(e) => eventSelection(5, e)} className={`btn-category btn-photo ${serviceType == 'Photographer' ? 'btn-active':''} `}>Photographer</Button>{' '}
-                        <Button onClick={(e) => eventSelection(6, e)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>Videographer</Button>{' '}
-                        <Button onClick={(e) => eventSelection(7, e)} className={`btn-category btn-pelamin ${serviceType == 'Pelamin' ? 'btn-active':''} `}>Pelamin</Button>{' '}
-                        <Button onClick={(e) => eventSelection(8, e)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>Caterer</Button>{' '}
-                        <Button onClick={(e) => eventSelection(9, e)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>Hantaran</Button>{' '}
-                        <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Persembahan' ? 'btn-active':''} `}>Persembahan</Button>{' '}
-                        <Button onClick={(e) => eventSelection(11, e)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>Door Gift</Button>{' '}
-                        <Button onClick={(e) => eventSelection(12, e)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>Others</Button>{' '}
+                        <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                            Lokasi
+                        </Button>{' '}
+                        {/* <Button onClick={(e) => eventSelection(1, e)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy
+                            
+                        </Button>{' '} */}
+                        <Button onClick={(e) => eventSelection(2, e)} className={`btn-category btn-invitation ${serviceType == 'KadBanner' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-cards.png"/>
+                            Kad & Banner
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(3, e)} className={`btn-category btn-dress ${serviceType == 'WeddingDress' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-dress.png"/>
+                            Baju Pengantin
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(4, e)} className={`btn-category btn-makeup ${serviceType == 'Makeup' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-makeup.png"/>
+                            Make Up
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(5, e)} className={`btn-category btn-photo ${serviceType == 'Photographer' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-photography.png"/>
+                            Photographer
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(6, e)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-photography.png"/>
+                            Videographer
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(7, e)} className={`btn-category btn-pelamin ${serviceType == 'Pelamin' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-pelamin.png"/>
+                            Pelamin
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(8, e)} className={`btn-category btn-catering ${serviceType == 'Caterer' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-catering.png"/>
+                            Caterer
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(9, e)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                            Hantaran
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Persembahan' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                            Persembahan
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(11, e)} className={`btn-category btn-doorgift ${serviceType == 'DoorGift' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-goodiebag.png"/>
+                            Door Gift
+                            
+                        </Button>{' '}
+                        <Button onClick={(e) => eventSelection(12, e)} className={`btn-category btn-others ${serviceType == 'Others' ? 'btn-active':''} `}>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-others.png"/>
+                            Others
+                            
+                        </Button>{' '}
                     </div>
                 </div>
             </div>
+            <style jsx>{`
+               .icon-service{width:15%;height:50%;margin-bottom:5px;margin-right:5px}
+            `}</style>
         </React.Fragment>
     )
 }

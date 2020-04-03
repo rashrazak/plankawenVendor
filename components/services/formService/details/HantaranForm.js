@@ -107,10 +107,10 @@ function HantaranForm({pagex, setModalEdit,editModal}) {
             <div className="form-section">
                 <h4>Senarai harga</h4>
                 <br/>
-                <p>Kuantiti Minimum</p>
+                <p>Kuantiti Minimum (Dulang)</p>
                 <Input className="form-custom" type="number" placeholder="min quantity" value={minDiscount} onChange={(e) => {setminDiscount(e.target.value)}} />
                 <br/>
-                <p>Kuantiti Maksimum</p>
+                <p>Kuantiti Maksimum (Dulang)</p>
                 <Input className="form-custom" type="number" placeholder="max quantity" value={maxDiscount}  onChange={(e) => {setmaxDiscount(e.target.value)}} />
                 <br/>
                 <p>Diskaun per Pax (%)</p>
