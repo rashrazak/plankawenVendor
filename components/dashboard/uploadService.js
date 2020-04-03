@@ -22,6 +22,20 @@ function uploadService() {
                     'DoorGift',
                     'Others']
 
+    const serviceIcon = { Venue: 'ico-venue.png', 
+                        Canopy: 'ico-canopy.png', 
+                        KadBanner: 'ico-cards.png',
+                        WeddingDress: 'ico-dress.png',
+                        Makeup: 'ico-makeup.png',
+                        Photographer: 'ico-photography.png', 
+                        Videographer: 'ico-photography.png',
+                        Pelamin: 'ico-pelamin.png', 
+                        Caterer: 'ico-catering.png',
+                        Hantaran: 'ico-canopy.png',
+                        Persembahan: 'ico-canopy.png',
+                        DoorGift: 'ico-goodiebag.png',
+                        Others: 'ico-others.png'}
+
     const [data, setdata] = useState(false)
     const [services, setServices] = useState([])
 
@@ -111,7 +125,7 @@ function uploadService() {
                                     <div key={i} className={`card-service`} onClick={()=>editFunction(i)}>
                                         <img src={img}/>
                                         <div className={`card-service-desc`}>
-                                            <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                                            <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
                                             <p>{v.serviceType} - {v.serviceName}</p>
                                         </div>
                                     </div>
@@ -145,7 +159,7 @@ function uploadService() {
                 .upload-service p { margin: 0; font-size: 12px; color: #3E3E3E;}
                 .upload-service p > span { margin-right: 5px;}
                 .card-flex { display: flex; flex-wrap: wrap;}
-                .card-service { border-radius: 5px; width: 150px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.2); margin-right: 10px; margin-bottom: 20px; background-color: #FFF;}                
+                .card-service { border-radius: 5px; width: 150px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.2); margin-right: 10px; margin-bottom: 20px; background-color: #FFF; cursor: pointer;}                
                 .card-service > img { object-fit: cover; width: 100%; height: 85px; object-position: center;}
                 .card-service-desc {  background-color: #FFF; margin: 0; padding: 10px; border-radius: 0px 0px 5px 5px; display: flex; align-items: flex-start;}
                 .card-service-desc > p {  font-style: normal; font-weight: 900;font-size: 0.75rem; color: #3E3E3E; margin: 0;}
