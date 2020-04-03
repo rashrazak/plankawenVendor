@@ -210,7 +210,7 @@ function AboutForm({pagex}) {
                             <p>{details.jenisMaterial}</p>
                             <h5>Max Design Changes</h5>
                             <p>{details.maxDesignChanges}</p>
-                            <h5>Waktu Tiba</h5>
+                            <h5>Waktu Penghantaran</h5>
                             <p>{details.waktuTiba}</p>
                             <h5>Kaedah Penghantaran</h5>
                             <p>{details.jenisHantar}</p>
