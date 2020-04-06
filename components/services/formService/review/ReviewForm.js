@@ -210,13 +210,15 @@ function AboutForm({pagex}) {
                         </ul>
                         <h5>Butiran Banner</h5>
                         <p>{details.bannerDesc.description}</p>
+                        <ul>
                         {
                             details.bannerDesc.bannerSize.map((v,i) => {
                                 return(
-                                    <li className="list-review-item" key={i}>Harga:{v.harga} <br/> Size:{v.size}</li>
+                                    <li className="list-review-item" key={i}>Harga: RM {v.harga} <br/> Size: {v.size}</li>
                                 )
                             })
-                        }        
+                        }
+                        </ul>
                     </React.Fragment>
                     :   (serviceType == 'DoorGift' || serviceType == 'Hantaran') ?
                         <React.Fragment>
