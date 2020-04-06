@@ -75,7 +75,7 @@ function About({typeChange}) {
                             
                         </Button>{' '}
                         <Button onClick={(e) => eventSelection(6, e)} className={`btn-category btn-video ${serviceType == 'Videographer' ? 'btn-active':''} `}>
-                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-photography.png"/>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-videography.png"/>
                             Videographer
                             
                         </Button>{' '}
@@ -90,12 +90,12 @@ function About({typeChange}) {
                             
                         </Button>{' '}
                         <Button onClick={(e) => eventSelection(9, e)} className={`btn-category btn-hantaran ${serviceType == 'Hantaran' ? 'btn-active':''} `}>
-                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-hantaran.png"/>
                             Hantaran
                             
                         </Button>{' '}
                         <Button onClick={(e) => eventSelection(10, e)} className={`btn-category btn-persembahan ${serviceType == 'Persembahan' ? 'btn-active':''} `}>
-                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
+                        <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-performance.png"/>
                             Persembahan
                             
                         </Button>{' '}

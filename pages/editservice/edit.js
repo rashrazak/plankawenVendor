@@ -14,6 +14,20 @@ function edit({pagex, sidebar}) {
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
 
+    const serviceIcon = { Venue: 'ico-venue-active.png', 
+    Canopy: 'ico-canopy-active.png', 
+    KadBanner: 'ico-cards-active.png',
+    WeddingDress: 'ico-dress-active.png',
+    Makeup: 'ico-makeup-active.png',
+    Photographer: 'ico-photography-active.png', 
+    Videographer: 'ico-videography-active.png',
+    Pelamin: 'ico-pelamin-active.png', 
+    Caterer: 'ico-catering-active.png',
+    Hantaran: 'ico-hantaran-active.png',
+    Persembahan: 'ico-performance-active.png',
+    DoorGift: 'ico-goodiebag-active.png',
+    Others: 'ico-others-active.png'}
+
     const [coverImage, setcoverImage] = useState('')
     const [images, setimages] = useState([])
     const [serviceType, setserviceType] = useState('')
@@ -117,7 +131,7 @@ function edit({pagex, sidebar}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img src="/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
                 </div>
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
@@ -361,6 +375,7 @@ function edit({pagex, sidebar}) {
                 .btn-edit { background-color: #FFF; color: #3e3e3e; font-size: 14px; font-weight: 500; text-align: left;}
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
+                .icon-service{width:20%;}
             `}</style>
         </div>
         </Head>

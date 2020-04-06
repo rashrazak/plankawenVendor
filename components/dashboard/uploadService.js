@@ -28,11 +28,11 @@ function uploadService() {
                         WeddingDress: 'ico-dress.png',
                         Makeup: 'ico-makeup.png',
                         Photographer: 'ico-photography.png', 
-                        Videographer: 'ico-photography.png',
+                        Videographer: 'ico-videography.png',
                         Pelamin: 'ico-pelamin.png', 
                         Caterer: 'ico-catering.png',
-                        Hantaran: 'ico-canopy.png',
-                        Persembahan: 'ico-canopy.png',
+                        Hantaran: 'ico-hantaran.png',
+                        Persembahan: 'ico-performance.png',
                         DoorGift: 'ico-goodiebag.png',
                         Others: 'ico-others.png'}
 

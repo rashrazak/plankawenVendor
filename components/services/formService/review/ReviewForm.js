@@ -12,6 +12,20 @@ function AboutForm({pagex}) {
     const {getReview, createAddService, updateAddService} = useContext(AddServiceContext);
     const {getVendorDetails} = useContext(LoginContext);
 
+    const serviceIcon = { Venue: 'ico-venue-active.png', 
+    Canopy: 'ico-canopy-active.png', 
+    KadBanner: 'ico-cards-active.png',
+    WeddingDress: 'ico-dress-active.png',
+    Makeup: 'ico-makeup-active.png',
+    Photographer: 'ico-photography-active.png', 
+    Videographer: 'ico-videography-active.png',
+    Pelamin: 'ico-pelamin-active.png', 
+    Caterer: 'ico-catering-active.png',
+    Hantaran: 'ico-hantaran-active.png',
+    Persembahan: 'ico-performance-active.png',
+    DoorGift: 'ico-goodiebag-active.png',
+    Others: 'ico-others-active.png'}
+
     const [coverImage, setcoverImage] = useState('')
     const [images, setimages] = useState([])
     const [serviceType, setserviceType] = useState('')
@@ -74,7 +88,7 @@ function AboutForm({pagex}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img src="/images/icon/ico-venue-white.png"/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
                 </div>
                 
                 {
@@ -314,7 +328,7 @@ function AboutForm({pagex}) {
                 .review-user-image-det > p:nth-child(3) { font-size: 12px; color: #47CBC4;}
                 h5 { font-weight: 400; color: #75848e; font-size: 12px; margin-top: 10px;}
                 .list-review-item { color: #75848E; font-size: 14px;}
-
+                .icon-service{width:20%;}
             `}</style>
         </div>
     )
