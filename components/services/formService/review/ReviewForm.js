@@ -102,24 +102,36 @@ function AboutForm({pagex}) {
                         </React.Fragment>
                     : serviceType == 'Makeup' ?
                         <React.Fragment>
-                            <div className="review-price">
-                                <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
-                            </div>
-                            <div className="review-price">
-                                <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
-                            </div>
-                            <div className="review-price">
-                                <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
-                            </div>
-                            <div className="review-price">
-                                <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
-                            </div>
-                            <div className="review-price">
-                                <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
-                            </div>
-                            <div className="review-price">
-                                <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
-                            </div>
+                            {
+                                details.hargaTouchup != false ?
+                                <div>
+                                    <div className="review-price">
+                                        <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
+                                    </div>
+                                    <div className="review-price">
+                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
+                                    </div>
+                                    <div className="review-price">
+                                        <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
+                                    </div>
+                                </div>
+                                :''
+                            }
+                            {
+                                details.hargaFull != false ?
+                                <div>
+                                    <div className="review-price">
+                                        <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
+                                    </div>
+                                    <div className="review-price">
+                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
+                                    </div>
+                                    <div className="review-price">
+                                        <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
+                                    </div>
+                                </div>
+                                :''
+                            }
                         </React.Fragment>
                     : 
                         <React.Fragment>
@@ -210,15 +222,21 @@ function AboutForm({pagex}) {
                         </ul>
                         <h5>Butiran Banner</h5>
                         <p>{details.bannerDesc.description}</p>
-                        <ul>
                         {
                             details.bannerDesc.bannerSize.map((v,i) => {
                                 return(
-                                    <li className="list-review-item" key={i}>Harga: RM {v.harga} <br/> Size: {v.size}</li>
+                                    <div>
+                                        <ul>
+                                            <li className="list-review-item" key={i}>Harga: RM {v.harga} </li>
+                                            <li className="list-review-item" key={i}>Size: {v.size}</li>
+                                            <br/>
+                                        </ul>
+                                        <br/>
+                                    </div>
+                                    
                                 )
                             })
                         }
-                        </ul>
                     </React.Fragment>
                     :   (serviceType == 'DoorGift' || serviceType == 'Hantaran') ?
                         <React.Fragment>

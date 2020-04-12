@@ -153,7 +153,7 @@ class Firebase {
 
 
     async createVendor(param, password, companyEmail, ssmImage){
-
+        param.dateCreated = new Date();
         if (password.length < 6) {
             alert('Your password need more than 6 characters')
             return false;
@@ -205,6 +205,7 @@ class Firebase {
 
 
     async updateVendor(param, password, companyEmail, ssmImage, vendorId){
+        param.dateUpdated = new Date(); 
         if (ssmImage) {
 
             if (password) {
@@ -316,7 +317,7 @@ class Firebase {
     }
 
     async updatePackage(id, data){
-        return await this.db.collection('package').doc(id).set(data)
+        return await this.db.collection('package').doc(id).update(data)
     }
     
 }
