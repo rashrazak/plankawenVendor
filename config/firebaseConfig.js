@@ -151,6 +151,16 @@ class Firebase {
         location.reload();
     }
 
+    async verification(){
+        var user = app.auth().currentUser;
+        user.sendEmailVerification().then(function() {
+            // Email sent.
+            alert('Sent! please check email for verification.')
+        }).catch(function(error) {
+            console.log(error)
+        });
+    }
+
 
     async createVendor(param, password, companyEmail, ssmImage){
         param.dateCreated = new Date();
@@ -187,8 +197,17 @@ class Firebase {
                     await app.auth().createUserWithEmailAndPassword(companyEmail, password).then( async ()=>{
                         await app.firestore().collection('vendor').add(param)
                         Swal.close()
-                        alert('Registered!')
+                        var user = app.auth().currentUser;
+
+                        user.sendEmailVerification().then(function() {
+                        // Email sent.
+                        alert('Registered! please check email for verification.')
+
                         window.location.href = '/'
+
+                        }).catch(function(error) {
+                        // An error happened.
+                        });
                     }).catch((err)=>{
                         Swal.close()
                         alert(err)
@@ -209,7 +228,7 @@ class Firebase {
         if (ssmImage) {
 
             if (password) {
-                var user = firebase.auth().currentUser;
+                var user = app.auth().currentUser;
                 user.updatePassword(password);
             }
             var storageRef = this.storage.ref();

@@ -1,18 +1,20 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import LoginContext from '../contexts/LoginContext'
 import Swal from 'sweetalert2'
 import Link from 'next/link';
 import '../css/login.css'
+import firebase from '../config/firebaseConfig'
 
 
 
 const Login = () => {
 
-    const { signIn, check } = useContext(LoginContext);
+    const { signIn, check, user } = useContext(LoginContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [showVerified, setShowVerified] = useState(false)
 
     const authenticate = async (e) => {
         Swal.showLoading();
@@ -32,6 +34,18 @@ const Login = () => {
         }
     };
 
+    const verified = async (e) => {
+        firebase.verification()
+    };
+
+    useEffect(() => {
+        if (user) {
+            if (user.emailVerified == false) {
+                setShowVerified(true)
+            }
+        }
+    }, [user])
+
     return (
         <div className="login-layout"> 
             <div className="form-layout form-layout-login">
@@ -46,6 +60,16 @@ const Login = () => {
                     <p>Pengguna Baru? <span><Link href="/signup"><a className={``}>Daftar disini</a></Link></span></p>
                     <button type="button" className="btn btn-login" onClick={e => authenticate(e)}>Login</button>
                 </div>
+                {
+                    showVerified ?
+                    <div className={`login-cont`}>
+                        <p>Sila verifikasi.. lihat inbox email</p>
+                        <button type="button" className="btn btn-login" onClick={e => verified(e)}>Verifikasi</button>
+                    </div>
+                    :
+                        ''
+                }
+                
             </div>
             <style jsx>{`
                 .form-layout { text-align: center;}

@@ -199,19 +199,34 @@ class MyApp extends App {
           
         })
       }else if( user != null){
-        this.setState({
-          user:{
-                name:user.name,
-                email:user.email,
-                photoUrl: user.photoUrl,
-                emailVerified: user.emailVerified,
-                uid: user.uid
-            },
-          isLogin:true
-        })
-        if ( Router.pathname == '/'){
-          Router.push('/dashboard');
+        if (user.emailVerified != false) {
+          this.setState({
+            user:{
+                  name:user.name,
+                  email:user.email,
+                  photoUrl: user.photoUrl,
+                  emailVerified: user.emailVerified,
+                  uid: user.uid
+              },
+            isLogin:true
+          })
+          if ( Router.pathname == '/'){
+            Router.push('/dashboard');
+          }
+          
+        }else{
+          this.setState({
+            user:{
+                  name:user.name,
+                  email:user.email,
+                  photoUrl: user.photoUrl,
+                  emailVerified: user.emailVerified,
+                  uid: user.uid
+              },
+            isLogin:true
+          })
         }
+        
       }
     this.getServiceAbout()
     this.getServiceDetailsVenue()

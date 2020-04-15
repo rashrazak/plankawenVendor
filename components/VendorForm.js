@@ -136,6 +136,7 @@ function VendorForm() {
 
         }
         if (Router.pathname == '/signup') {
+            localStorage.removeItem('user')
             let x = firebase.createVendor(param, password, companyEmail, ssmImage)
             // if (x == true) {
             //     alert('Registered!')
