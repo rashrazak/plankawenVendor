@@ -143,7 +143,6 @@ function VendorFormUpdate() {
             }
         })
         var param = {
-            account:0,
             akaunBank:bankAccount,
             alamatSyarikat:companyAddress,
             email:companyEmail,
@@ -158,10 +157,6 @@ function VendorFormUpdate() {
             phone:phoneNo,
             noPendaftaranSyarikat:companyId,
             ssmImage:'',
-            points:0,
-            status:'active',
-            
-
         }
        
             let x = firebase.updateVendor(param, password, companyEmail, ssmImage, vendorId)
