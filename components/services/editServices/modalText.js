@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
 import AddServiceContext from '../../../contexts/AddServiceContext'
 import '../../../css/modal.css'
 
@@ -8,7 +8,7 @@ import '../../../css/modal.css'
 function modalText(serviceType) {
     const [modal, setModal] = useState(false);
 
-    const {getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
+    const {addJenisEventOthers, getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
    
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -38,6 +38,7 @@ function modalText(serviceType) {
     const [serviceTypex, setServiceTypex] = useState('')
     const [tnc, settnc] = useState('');
     const [extra, setextra] = useState('');
+    const [jenisEventOthers, setjenisEventOthers] = useState('')
 
     useEffect(() => {
         // console.log(getServiceAbout)
@@ -51,6 +52,12 @@ function modalText(serviceType) {
         settnc(getServiceAbout.tnc)
         setextra(getServiceAbout.extra)
     },[getServiceAbout])
+
+    useEffect(() => {
+        if (serviceTypex == 'Others') {
+            addJenisEventOthers(jenisEventOthers)
+        }
+    }, [jenisEventOthers])
 
     const handleChangeKawasan = (e) => {
         let name = e.target.name;
@@ -83,6 +90,41 @@ function modalText(serviceType) {
             <Modal isOpen={modal} toggle={toggle} className="modal-design">
                 <ModalHeader toggle={toggle}>Update</ModalHeader>
                 <ModalBody>
+                
+                {
+                    serviceTypex == 'Others' || getServiceAbout.serviceType == 'Others'  ?
+                    <div className="form-service">
+                        <div className="form-section" href="#" id="tooltipEvent">
+                            <h4>Jenis Event</h4>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="makanan"  checked={jenisEventOthers == 'makanan' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    Makanan
+                                </Label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="dj" checked={ jenisEventOthers == 'dj' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    DJ
+                                </Label>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="booth" checked={ jenisEventOthers == 'booth' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    Booth
+                                </Label>
+                            </FormGroup>
+                        </div>
+                        <UncontrolledTooltip placement="left" target="tooltipEvent">
+                            Contoh: <br></br>
+                            Makanan: Cendol, Ice Cream <br></br>
+                            DJ: PA Sistem, Pengacara <br></br>
+                            Booth: Photobooth, Insta booth
+                        </UncontrolledTooltip>
+                    </div>
+                    :''
+
+                }
                 <div className="form-service">
                     <div className="form-section">
                         <h4>Nama atau Tajuk Servis/Produk</h4>
