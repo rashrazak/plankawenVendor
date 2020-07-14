@@ -49,7 +49,7 @@ function About({typeChange}) {
                     <div className="choose-category">
                         <Button onClick={(e) => eventSelection(0, e)} className={`btn-category btn-venue ${serviceType == 'Venue' ? 'btn-active':''} `}>
                         <img className={`icon-service`} src="/images/icon/services-icon/dark/ico-venue.png"/>
-                            Lokasi
+                            Lokasi (venue)
                         </Button>{' '}
                         {/* <Button onClick={(e) => eventSelection(1, e)} className={`btn-category btn-canopy ${serviceType == 'Canopy' ? 'btn-active':''} `}>Canopy
                             

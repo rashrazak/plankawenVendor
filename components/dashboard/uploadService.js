@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react'
 import Router from 'next/router'
-import firebase from '../../config/firebaseConfig'
 import LoginContext from '../../contexts/LoginContext'
 import AddServiceContext from '../../contexts/AddServiceContext'
+import {serviceContext} from '../../contexts/ServiceContext'
 import Swal from 'sweetalert2'
 function uploadService() {
     const {user} = useContext(LoginContext)
     const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName, addServiceVisibility} = useContext(AddServiceContext)
+    const {serviceList} = useContext(serviceContext)
 
     const serviceType = ['Venue',
                     'Canopy',
@@ -36,38 +37,61 @@ function uploadService() {
                         DoorGift: 'ico-goodiebag.png',
                         Others: 'ico-others.png'}
 
-    const [data, setdata] = useState(false)
-    const [services, setServices] = useState([])
+    const [services, setServices] = useState(null)
+    const [packages, setPackages] = useState(null)
+    const [tempahan, setTempahan] = useState(null)
+    const [type, setType] = useState('service')
 
     useEffect(() => {
-        if (user && services.length == 0) {
+        if (user && services == null && packages == null && tempahan == null) {
+            Swal.showLoading()
+
             async function getData() {
-                await serviceType.map( async (val,index) => {
-                    Swal.showLoading()
-                    var read = await firebase.checkServiceType(val, user.email)
-                    await read.forEach(function(doc) {
-                        let x = doc.id;
-                        let y = doc.data()
-                        let data = {...y, id:x}
-                        setServices((old) => [...old, data])
-                    })
-                    Swal.close()
-                })
+               let x = await serviceList
+               if (x) {
+                console.log(x)
+                setServices(x)
+               }
+               
+            }
+
+            async function getPackage() {
+               
+            }
+
+            async function getTempahan() {
+                
+                //need to sort venue and extra services
+
+                // await serviceType.map( async (val,index) => {
+                //     var read = await firebase.checkTempahanType(user.email)
+                //     await read.forEach(function(doc) {
+                //         let x = doc.id;
+                //         let y = doc.data()
+                //         let data = {...y, id:x}
+                //         setPackages((old) => [...old, data])
+                //     })
+                // })
             }
             getData()
+            getPackage()
+            getTempahan()
+            Swal.close()
+
             
         }
-    }, [user])
+    }, [user,serviceList])
 
-    useEffect(() => {
-        console.log(services)
-        if (services.length > 0) {
-            setdata(true)
-        }
-    }, [services])
+    function setServiceFn(service){
+        setType(service)
+    }
 
     function addService(){
         Router.push('/addservice/about')
+    }
+
+    function addPackage(){
+        Router.push('/package/add')
     }
 
     const editFunction = async (index) => {
@@ -89,32 +113,17 @@ function uploadService() {
     return (
         <div className={`upload-service-container`}>
             <div>
-                <button className={`btn btn-coral btn-active`}>Service Anda</button>
-                <button className={`btn btn-coral`}>Tempahan</button>
+                <button className={type == 'service'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('service')}>Service Anda</button>
+                <button className={type == 'package'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('package')}>Package Anda</button>
+                <button className={type == 'tempahan'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('tempahan')}>Tempahan</button>
             </div>
             {
-                data == true ?
+                type == 'service' ?
                 <React.Fragment>
                     <h4>Service Anda</h4>
                     <div className={`card-flex`}>
-                        {/* <div className={`card-service`}>
-                            <img src="/images/placeholder/service-placheholder.png"/>
-                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                        </div>
-                        <div className={`card-service`}>
-                            <img src="/images/placeholder/service-placheholder.png"/>
-                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                        </div>
-                        <div className={`card-service`}>
-                            <img src="/images/placeholder/service-placheholder.png"/>
-                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                        </div>
-                        <div className={`card-service`}>
-                            <img src="/images/placeholder/service-placheholder.png"/>
-                            <p><span><img src="/images/icon/ico-venue-black.png"/> Dewan</span></p>
-                        </div> */}
                         {
-                            services.map((v,i)=> {
+                            services && services.map((v,i)=> {
                                 let img;
                                 if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
                                     img = '/images/placeholder/service-placheholder.png'
@@ -138,14 +147,60 @@ function uploadService() {
                     </div>
                 </React.Fragment>
 
-                :
+                : type == 'package' ?
                 <React.Fragment>
-                <h4 className={`label-h4`}>Service Anda</h4>
-                <div className={`upload-service`}  onClick={()=> addService()}>
-                    <span></span>
-                    <p><span><img src="/images/icon/arrow-left.png"/></span>Klik disini untuk memasukkan servis pertama anda</p>
-                </div>
+                    <h4>Package Anda</h4>
+                    <div className={`card-flex`}>
+                        {
+                            packages && packages.map((v,i)=> {
+                                let img;
+                                if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
+                                    img = '/images/placeholder/service-placheholder.png'
+                                }else{
+                                    img = v.images[0]['urlStorage']
+                                }
+                                return(
+                                    <div key={i} className={`card-service`} onClick={()=>editFunction(i)}>
+                                        <img src={img}/>
+                                        <div className={`card-service-desc`}>
+                                            <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
+                                            <p>{v.serviceType} - {v.serviceName}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        <div className={`card-service card-service-add`} onClick={()=> addPackage()}>
+                        
+                        </div>
+                    </div>
                 </React.Fragment>
+                :type == 'tempahan' ?
+                <React.Fragment>
+                    <h4>Tempahan Anda</h4>
+                    <div className={`card-flex`}>
+                        {
+                            tempahan && tempahan.map((v,i)=> {
+                                let img;
+                                if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
+                                    img = '/images/placeholder/service-placheholder.png'
+                                }else{
+                                    img = v.images[0]['urlStorage']
+                                }
+                                return(
+                                    <div key={i} className={`card-service`} onClick={()=>editFunction(i)}>
+                                        <img src={img}/>
+                                        <div className={`card-service-desc`}>
+                                            <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
+                                            <p>{v.serviceType} - {v.serviceName}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </React.Fragment>
+                :''
 
             }
             

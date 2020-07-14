@@ -136,6 +136,10 @@ class Firebase {
     async checkServiceType(serviceType, email){
         return await this.db.collection(serviceType).where('email', '==', email).get() 
     }
+    //pending patot ada status = approved
+    async checkPackageType(email){
+        return await this.db.collection('packages').where('email', '==', email).get() 
+    }
 
     async getPackageById(id){
         return await this.db.collection('package').doc(id).get() 

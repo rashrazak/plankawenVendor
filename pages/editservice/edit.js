@@ -238,6 +238,30 @@ function edit({pagex, sidebar}) {
                         <h5>Kaedah Hantar</h5>
                         <p>{details.jenisHantar}</p>
                     </React.Fragment>
+                    :serviceType == "Makeup" ?
+                    <React.Fragment>
+                        <h5>Jenis Makeup</h5>
+                        <ul>
+                            {
+                                details.jenisMakeup.map((v,i) => {
+                                    return(
+                                        <li className="list-review-item" key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                        <h5>Jantina</h5>
+                        <ul>
+                            {
+                                details.jantina.map((v,i) => {
+                                    return(
+                                        <li className="list-review-item" key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                       
+                    </React.Fragment>
                     : serviceType == 'Videographer' || serviceType == 'Photographer' || serviceType == 'Others' ? 
                     <React.Fragment>
                         <h5>Jenis Kenduri/Event</h5>

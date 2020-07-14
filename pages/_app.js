@@ -5,6 +5,7 @@ import LoginContext from '../contexts/LoginContext';
 import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
+import ServiceContextProvider from '../contexts/ServiceContext'
 /*
   hargaPerPerson,discount // addServiceDetailsKadBanner/addServiceDetailsCaterer/addServiceDetailsDoorGift/addServiceDetailsHantaran
   harga,hargaDiscount // addServiceDetailsVenue/addServiceDetailsWeddingDress
@@ -1105,9 +1106,11 @@ class MyApp extends App {
             addServiceDetailsHantaran:this.addServiceDetailsHantaran, getServiceDetailsHantaran:this.state.addServiceDetailsHantaran,
             addServiceUpload:this.addServiceUpload, getServiceUpload:this.state.addServiceUpload,
             getReview:this.state, createAddService:this.createAddService, updateAddService:this.updateAddService, resetAddService:this.resetAddService, getServiceDetailsEdit:this.getServiceDetailsEdit  }}>
+            <ServiceContextProvider>
               <PackageContextProvider>
                 <Component {...pageProps} />
               </PackageContextProvider>
+            </ServiceContextProvider>
             </AddServiceContext.Provider>
         </LoginContext.Provider>
     );
