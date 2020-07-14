@@ -386,7 +386,7 @@ function edit({pagex, sidebar}) {
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto; position: relative;}
                 .hero-review { position: relative;}
-                .hero-review > img { object-fit: cover; width: 100%; max-height: 206px; object-position: top; border-radius: 5px;}
+                .hero-review > img { object-fit: cover; width: 100%; height: 206px; object-position: top; border-radius: 5px;}
                 .hero-son-review { position: absolute; bottom: 15px; left: 15px; display: flex; }
                 .hero-son-review > img { width: 40px; height: 40px; object-fit: cover;  border: 2px solid #FFF; border-radius: 4px; margin-right: 6px; cursor: pointer;}
                 .form-button-edit { max-width: 490px; margin: auto; display: flex; justify-content: space-between; }
