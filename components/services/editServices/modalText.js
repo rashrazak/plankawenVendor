@@ -8,7 +8,7 @@ import '../../../css/modal.css'
 function modalText(serviceType) {
     const [modal, setModal] = useState(false);
 
-    const {addJenisEventOthers, getServiceAbout, addServiceAbout} = useContext(AddServiceContext);
+    const {addJenisEventOthers, getServiceAbout, addServiceAbout, getServiceDetailsOthers} = useContext(AddServiceContext);
    
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -51,7 +51,9 @@ function modalText(serviceType) {
         setTitle(getServiceAbout.serviceName);
         settnc(getServiceAbout.tnc)
         setextra(getServiceAbout.extra)
-    },[getServiceAbout])
+        console.log(getServiceDetailsOthers)
+        
+    },[getServiceAbout, getServiceDetailsOthers])
 
     useEffect(() => {
         if (serviceTypex == 'Others') {
@@ -92,25 +94,26 @@ function modalText(serviceType) {
                 <ModalBody>
                 
                 {
-                    serviceTypex == 'Others' || getServiceAbout.serviceType == 'Others'  ?
+                    serviceTypex == 'Others' || getServiceAbout.serviceType == 'Others' && getServiceDetailsOthers ?
                     <div className="form-service">
+                        
                         <div className="form-section" href="#" id="tooltipEvent">
                             <h4>Jenis Event</h4>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="makanan"  checked={jenisEventOthers == 'makanan' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
-                                    Makanan
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="makanan"  checked={getServiceDetailsOthers.jenisEvent == 'makanan' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    Makanan {jenisEventOthers}
                                 </Label>
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="dj" checked={ jenisEventOthers == 'dj' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="dj" checked={ getServiceDetailsOthers.jenisEvent == 'dj' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
                                     DJ
                                 </Label>
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="booth" checked={ jenisEventOthers == 'booth' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
+                                    <Input className=" harga" type="radio" name="jenisEventOthers" value="booth" checked={ getServiceDetailsOthers.jenisEvent == 'booth' ? true : false} onChange={(e) => setjenisEventOthers(e.target.value)} />
                                     Booth
                                 </Label>
                             </FormGroup>
