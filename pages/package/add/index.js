@@ -111,7 +111,7 @@ function Package() {
                                         img = v.images[0]['urlStorage']
                                     }
                                     return(
-                                        <div key={i} className={`card-service`} style={{border:serviceListSelected.includes(v) ? '2px solid red':''}} onClick={()=> serviceListSelected.includes(v) ? deleteFunction(i):selectFunction(i)}>
+                                        <div key={i} className={ serviceListSelected.includes(v) ? 'card-service active-card':'card-service'} onClick={()=> serviceListSelected.includes(v) ? deleteFunction(i):selectFunction(i)}>
                                             <img src={img}/>
                                             <div className={`card-service-desc`}>
                                                 <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
@@ -122,7 +122,7 @@ function Package() {
                                 })
                             }
                         </div>
-                        <div>
+                        <div  className="total-service">
                             <p>Please select more than one. Total: {serviceListSelected ? serviceListSelected.length : 0}</p>
                         </div>
                         <div className="form-service">
@@ -179,19 +179,23 @@ function Package() {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .container-layout { max-width: 950px; margin: 30px auto;}
+                .container-layout { max-width: 800px; margin: 30px auto;}
                 .service-empty {  background-color: #FEF2EB; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2); padding: 10px; max-width: 800px; margin: auto;}
                 .service-empty p { margin: 0;}
                 .service-empty a { color: #007bff; text-decoration: underline;}
-                .card-flex { display: flex; flex-wrap: wrap;}
-                .card-service { border-radius: 5px; width: 150px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.2); margin-right: 10px; margin-bottom: 20px; background-color: #FFF; cursor: pointer;}                
+                .card-flex { display: flex; flex-wrap: wrap; margin-top: 20px;}
+                .card-service { border-radius: 5px; width: 150px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.2); margin-right: 10px; margin-bottom: 20px; background-color: #FFF; cursor: pointer; transition: all .3s}                
                 .card-service > img { object-fit: cover; width: 100%; height: 85px; object-position: center;}
-                .card-service-desc {  background-color: #FFF; margin: 0; padding: 10px; border-radius: 0px 0px 5px 5px; display: flex; align-items: flex-start;}
+                .card-service-desc { margin: 0; padding: 10px; border-radius: 0px 0px 5px 5px; display: flex; align-items: flex-start;}
                 .card-service-desc > p {  font-style: normal; font-weight: 900;font-size: 0.75rem; color: #3E3E3E; margin: 0;}
                 .card-service-desc > img {width: 15px; flex: 0 0 15px; margin-right: 15px;}            
                 .card-service-add { width: 100px; background-color: #EBF9F8; cursor: pointer; height: 100px;}
                 .card-service-add p { background-color: transparent;}
                 .card-service-add { background-image: url(/images/icon/plus-circle-dark.png); background-repeat: no-repeat; background-position: center 50%;}
+                .active-card {  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1); position: relative;}
+                .active-card:before { position: absolute; content: ''; width: 100%; height: 100%; background-color: rgba(234, 91, 59, 0.590308); top: 0; left: 0; background-image: url('/images/icon/check.png'); background-position: center; background-repeat: no-repeat; border-radius: 4px; transition: all .3s}
+                .total-service { text-align: center;}
+                .total-service > p { font-style: normal; font-weight: normal;font-size: 12px;color: #75848E;}
             `}</style>
         </Head>
     )
