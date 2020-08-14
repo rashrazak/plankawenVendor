@@ -13,7 +13,7 @@ import Step from '../../../components/StepByStep'
 function Package() {
     const route = useRouter()
     const {serviceList} = useContext(serviceContext)
-    const {serviceListSelected, setServiceListSelected, title, setTitle, description, setDescription, coveredArea, setCoveredArea} = useContext(PackageContext)
+    const {serviceListSelected, setServiceListSelected, title, setTitle, description, setDescription, coveredArea, setCoveredArea, tnc, setTnc} = useContext(PackageContext)
   
     const [service, setService] = useState(null)
 
@@ -133,6 +133,10 @@ function Package() {
                             <div className="form-section">
                                 <h4>Description Package</h4>
                                 <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                            </div>
+                            <div className="form-section">
+                                <h4>TnC Package</h4>
+                                <Input className="form-custom" type="textarea" name="text" placeholder={'Syarat dan peraturan'} value={tnc} onChange={(e) => { setTnc(e.target.value) }} />
                             </div>
                             <div className="form-section">
                                 <h4> Lokasi Jangkauan</h4>

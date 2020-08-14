@@ -4,15 +4,135 @@ import Step from '../../../components/StepByStep'
 import {PackageContext} from '../../../contexts/PackageContext'
 import Head from '../../../components/Headx'
 import {Button,Table,Input,Label} from 'reactstrap';
+import PackageEdit from '../../../components/package/PackageEdit'
+import * as ls from 'local-storage'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
 
 function details() {
     const route = useRouter()
 
-    const weirdService = ['KadBanner','Makeup','Caterer','Hantaran','DoorGift','Others']
+    const {serviceListSelected, setServiceListSelected, quantity, setQuantity, discount, setDiscount, oriPrice, setOriPrice, price, setPrice} = useContext(PackageContext)
 
-    const {serviceListSelected, setServiceListSelected, title, setTitle, description, setDescription, coveredArea, setCoveredArea, quantity, setQuantity} = useContext(PackageContext)
+    const [serviceSelected, setServiceSelected] = useState([])
+
+
+    useEffect(() => {
+        if (serviceSelected.length == 0 && serviceListSelected) {
+            setServiceSelected(serviceListSelected)
+            calculatePrice(serviceListSelected, quantity)
+        }else{
+            setPrice(0)
+            setDiscount(0)
+        }
+    }, [serviceSelected])
+
+    useEffect(() => {
+        calculatePrice(serviceSelected, quantity)
+    }, [quantity])
+
+    useEffect(() => {
+        if (oriPrice && !price) {
+            setPrice(oriPrice)
+        }
+    }, [oriPrice])
+
+    useEffect(() => {
+        if (price && oriPrice) {
+
+            if (price < oriPrice) {
+                let perc = parseFloat(price) / parseFloat(oriPrice)
+                let disc = 100 - (perc * 100)
+                console.log(disc)
+                setDiscount(disc.toFixed(0))
+            }else {
+                setDiscount('No Discount')
+
+            }
+        }
+    }, [price])
+    useEffect(() => {},[discount])
+
+    const returnValue = (data, index, price) =>{
+        let service = serviceListSelected
+
+        if (data.serviceType == 'Makeup') {
+            let makeup = service[index]
+            makeup.serviceDetails.hargaTouchup = price.hargaTouchup || 0
+            makeup.serviceDetails.hargaFull = price.hargaFull || 0
+            service[index] = makeup
+            
+        }else if (data.serviceType == 'KadBanner'){
+
+            let kadbanner = service[index]
+            kadbanner.serviceDetails.hargaPerPerson = price.hargaPerPerson || 0
+            if (data.serviceDetails.banner == true) {
+                kadbanner.serviceDetails.bannerDesc.bannerSize = price.banner
+            }
+            service[index] = kadbanner
+        }else if (data.serviceType == 'Hantaran' || data.serviceType == 'Caterer' || data.serviceType == 'DoorGift'){
+            let random = service[index]
+            random.serviceDetails.hargaPerPerson =  price.hargaPerPerson || 0
+            service[index] = random
+    
+        }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'){
+            let fix = service[index]
+            fix.serviceDetails.harga =  price.harga || 0
+            service[index] = fix
+        }
+        //sambung
+        setServiceSelected([...service])
+        calculatePrice(service, quantity)
+    }
+
+    const calculatePrice = (service, quan) =>{
+        let qty = quan
+        let serviceAll = service
+        let orip = 0
+        serviceAll.map((v,i)=>{
+            if (v.serviceType == 'Makeup') {
+                let makeup = v
+
+                orip += parseInt( makeup.serviceDetails.hargaTouchup )
+                orip += parseInt( makeup.serviceDetails.hargaFull )
+                
+            }else if (v.serviceType == 'KadBanner'){
+
+                let kadbanner = v
+                if (qty > 0) {
+                    orip = orip + (parseInt( kadbanner.serviceDetails.hargaPerPerson ) * qty)
+                }
+                if (v.serviceDetails.banner == true) {
+                    let banner = kadbanner.serviceDetails.bannerDesc.bannerSize
+                    banner.map((val, index)=>{
+                        orip += parseInt( val.harga )
+                    })
+                }
+            }else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'){
+                let random = v
+                if (qty > 0) {
+                    orip = orip +  (parseInt( random.serviceDetails.hargaPerPerson ) * qty)
+                }
+        
+            }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
+                let fix = v
+
+                orip += parseInt( fix.serviceDetails.harga )
+                
+            }
+
+            if (i == (serviceAll.length - 1) ) {
+                setOriPrice(orip.toFixed(2))
+            }
+        })
+        
+    }
+
+    const goingNext = () => {
+        setServiceListSelected([...serviceListSelected])
+        ls.set('packageDetails')
+        route.push('/package/add/upload')
+    }
     return (
         <Head title={'Package - Details'}>
             <div className={`container-layout`}>
@@ -20,7 +140,7 @@ function details() {
                 <Step progress={1} />
             </div>
             {
-                serviceListSelected ?
+                serviceSelected.length >= 1 ?
                 <div className="form-service">
                     <div className="form-section">
                         <h4>Enter your quantity amount </h4>
@@ -38,15 +158,9 @@ function details() {
                         </thead>
                         <tbody>
                             {
-                                serviceSelected && serviceSelected.map((v,i)=>{
+                                 serviceSelected.map((v,i)=>{
                                     return(
-                                        <tr key={i}>
-                                            <th scope="row">{i+1}</th>
-                                            <td>{v.serviceName}</td>
-                                            <td>{v.serviceType}</td>
-                                            <td>{v.hargaDiscount ? v.hargaDiscount : v.harga} /</td>
-                                            <td></td>
-                                        </tr>
+                                        <PackageEdit key={i} returnValue={returnValue} data={v} indexList={i}/>
                                     )
                                 })
                             }
@@ -54,12 +168,22 @@ function details() {
                         </tbody>
                     </Table>
                     <div className="form-section">
-                        
+                        <h4>Final Price</h4>
+                        <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
+                    </div>
+                    <div className="form-section">
+                        <p>Original Total Price: RM {oriPrice}</p>
+                        <p>New Total Price: RM {price}</p> 
+                        <p>Discounted amount: % {discount}</p>  
                     </div>
                 </div>
                 :
-                <h1>Please select the service <span style={{textDecoration:'underline'}} onClick={route.back()}>here</span>!</h1>
+                <h1>Please select the service <span style={{textDecoration:'underline'}} onClick={() =>route.back()}>here</span>!</h1>
             }
+            </div>
+            <div className="form-button">
+                <Button  className="btn-cancel" onClick={() => route.back()}>Back</Button>{' '}
+                <Button  className="btn-next" onClick={() => goingNext()}>Next</Button>{' '}
             </div>
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
