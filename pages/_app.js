@@ -350,7 +350,7 @@ class MyApp extends App {
       description,
       areaCovered,
       serviceDetails,
-      images:img || 'test',
+      images:img || [],
       tnc,
       extra,
       created: x,

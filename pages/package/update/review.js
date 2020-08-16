@@ -3,16 +3,16 @@ import Head from '../../../components/Headx'
 import Step from '../../../components/StepByStep'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
-import PackageUpload from '../../../components/package/PackageUpload'
+import PackageReview from '../../../components/package/PackageReview'
 function Upload(props) {
 
     return (
-        <Head title={ 'Upload Details'}>
+        <Head title={ 'Update Details'}>
             <div>
                 <Step progress={2} />
             </div>
             <div>
-                <PackageUpload  pagex={'upload service'} />
+                <PackageReview  pagex={'update review'} />
             </div>
         </Head>
     )

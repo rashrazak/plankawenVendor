@@ -14,6 +14,7 @@ function PackageUpload({pagex}) {
     const [imageLimit, setimageLimit] = useState(3)
    
     const uploadOnDone = (file) => {
+
         let f = file.file;
         let iL = imageLimit
         if (f.size > 300000) {
@@ -24,6 +25,7 @@ function PackageUpload({pagex}) {
             alert('Limit upload maximum hanya 3')
             return false
         }
+        
         setimageLimit((old) => old - 1 )
         setImages((old) => [...old, file])
 

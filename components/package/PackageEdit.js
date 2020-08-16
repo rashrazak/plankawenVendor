@@ -7,7 +7,6 @@ const [makeupFull, setMakeupFull] = useState(0)
 const [makeupTouchup, setMakeupTouchup] = useState(0)
 const [kadPrice, setKadPrice] = useState(0)
 const [banner, setBanner] = useState(null)
-const [newBanner, setNewBanner] = useState([])
 const [fixPrice, setFixPrice] = useState(0)
 const [randomPrice, setRandomPrice] = useState(0)
 
@@ -66,7 +65,7 @@ const handleBanner = (v, i, size) =>{
         <React.Fragment key={indexList}>
             {
                 data.serviceType == 'Makeup' ?
-                    <tr>
+                    <>
                         <th scope="row">{indexList+1}</th>
                         <td>{data.serviceName}</td>
                         <td>{data.serviceType}</td>
@@ -77,10 +76,10 @@ const handleBanner = (v, i, size) =>{
 
                         }
                         <td>{edit == false ?<span onClick={()=>setEdit(!edit)}>Edit</span>:<span onClick={()=>clickEdit()}>Save</span>}</td>
-                    </tr>
+                    </>
                     
                 : (data.serviceType == 'KadBanner')?
-                    <tr>
+                    <>
                         <th scope="row">{indexList+1}</th>
                         <td>{data.serviceName}</td>
                         <td>{data.serviceType}</td>
@@ -116,9 +115,9 @@ const handleBanner = (v, i, size) =>{
                             </td>
                         }
                         <td>{edit == false ?<span onClick={()=>setEdit(!edit)}>Edit</span>:<span onClick={()=>clickEdit()}>Save</span>}</td>
-                    </tr>   
+                    </>   
                 : (data.serviceType == 'Hantaran' || data.serviceType == 'Caterer' || data.serviceType == 'DoorGift')?
-                    <tr>
+                    <>
                         <th scope="row">{indexList+1}</th>
                         <td>{data.serviceName}</td>
                         <td>{data.serviceType}</td>
@@ -132,11 +131,11 @@ const handleBanner = (v, i, size) =>{
                             </td>
                         }
                         <td>{edit == false ?<span onClick={()=>setEdit(!edit)}>Edit</span>:<span onClick={()=>clickEdit()}>Save</span>}</td>
-                    </tr>
+                    </>
                     
             
                 : (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others')?
-                    <tr>
+                    <>
                         <th scope="row">{indexList+1}</th>
                         <td>{data.serviceName}</td>
                         <td>{data.serviceType}</td>
@@ -150,8 +149,8 @@ const handleBanner = (v, i, size) =>{
                             </td>
                         }
                         <td>{edit == false ?<span onClick={()=>setEdit(!edit)}>Edit</span>:<span onClick={()=>clickEdit()}>Save</span>}</td>
-                    </tr>
-                :''
+                    </>
+                :null
             }
             
         </React.Fragment>
