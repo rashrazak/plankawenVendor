@@ -3,11 +3,27 @@ import Router from 'next/router'
 import LoginContext from '../../contexts/LoginContext'
 import AddServiceContext from '../../contexts/AddServiceContext'
 import {serviceContext} from '../../contexts/ServiceContext'
+import {PackageContext} from '../../contexts/PackageContext'
 import Swal from 'sweetalert2'
 function uploadService() {
     const {user} = useContext(LoginContext)
     const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName, addServiceVisibility} = useContext(AddServiceContext)
+    const {getAllPackages, packagesAll, editPackage, setEditPackage} = useContext(PackageContext)
     const {serviceList} = useContext(serviceContext)
+
+    const [services, setServices] = useState(null)
+    const [packages, setPackages] = useState(null)
+    const [tempahan, setTempahan] = useState(null)
+    const [type, setType] = useState('service')
+
+    useEffect(() => {
+        if(packagesAll.length === 0 && user){
+            getAllPackages(user.email)
+        }else{
+            console.log(packagesAll)
+            setPackages(packagesAll)
+        } 
+    },[packagesAll, user])
 
     const serviceType = ['Venue',
                     'Canopy',
@@ -37,13 +53,10 @@ function uploadService() {
                         DoorGift: 'ico-goodiebag.png',
                         Others: 'ico-others.png'}
 
-    const [services, setServices] = useState(null)
-    const [packages, setPackages] = useState(null)
-    const [tempahan, setTempahan] = useState(null)
-    const [type, setType] = useState('service')
+    
 
     useEffect(() => {
-        if (user && services == null && packages == null && tempahan == null) {
+        if (user && services == null) {
             Swal.showLoading()
 
             async function getData() {
@@ -52,10 +65,6 @@ function uploadService() {
                 console.log(x)
                 setServices(x)
                }
-               
-            }
-
-            async function getPackage() {
                
             }
 
@@ -74,7 +83,6 @@ function uploadService() {
                 // })
             }
             getData()
-            getPackage()
             getTempahan()
             Swal.close()
 
@@ -108,6 +116,14 @@ function uploadService() {
         }
         // Router.push('/editservice/about')
         Router.push('/editservice/edit')
+
+    }
+
+    const editPackageFn = async (index) => {
+        let pkg = packages[index]
+        setEditPackage(pkg)
+        Router.push('/package/update')
+
 
     }
     return (
@@ -160,11 +176,11 @@ function uploadService() {
                                     img = v.images[0]['urlStorage']
                                 }
                                 return(
-                                    <div key={i} className={`card-service`} onClick={()=>editFunction(i)}>
+                                    <div key={i} className={`card-service`} onClick={()=>editPackageFn(i)}>
                                         <img src={img}/>
                                         <div className={`card-service-desc`}>
-                                            <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
-                                            <p>{v.serviceType} - {v.serviceName}</p>
+                                            <img className={`icon-service`} src={`/images/icon/black.png`}/>
+                                            <p>{v.title}</p>
                                         </div>
                                     </div>
                                 )

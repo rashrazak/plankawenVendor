@@ -15,6 +15,22 @@ const PackageContextProvider = (props) => {
     const [price, setPrice] = useState(0)
     const [packageId, setPackageId] = useState('')
 
+    const [packagesAll, setPackagesAll] = useState([])
+    const [editPackage, setEditPackage] = useState(null)
+
+    const getAllPackages = async (email) =>{
+        console.log(email)
+        const pkg = await firebase.checkPackageType(email)
+        pkg.forEach(function(doc) {
+            let x = doc.id;
+            let y = doc.data()
+            let data = {...y, id:x}
+            console.log(data)
+            setPackagesAll((old) => [...old, data])
+        })
+
+    }
+
     const submitPackage = async () =>{
 
         let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
@@ -61,6 +77,17 @@ const PackageContextProvider = (props) => {
           },2000)
     }
 
+    const editVisibility = (type) => {
+        let pkg = editPackage
+        setEditPackage(null)
+        pkg.visibility = type
+        setEditPackage(pkg)
+    }
+
+    const updatePackage = () => {
+
+    }
+
 
 
    
@@ -68,7 +95,8 @@ const PackageContextProvider = (props) => {
     return (
         <PackageContext.Provider value={{serviceListSelected, setServiceListSelected, 
         title, setTitle, description, setDescription, coveredArea, setCoveredArea,
-         quantity, setQuantity, tnc, setTnc, images, submitPackage, setImages,discount, setDiscount, oriPrice, setOriPrice, price, setPrice, packageId, setPackageId}}>
+         quantity, setQuantity, tnc, setTnc, images, submitPackage, setImages,discount, setDiscount, oriPrice, setOriPrice, price, setPrice,
+         getAllPackages, packageId, setPackageId, packagesAll, editPackage, setEditPackage, editVisibility, updatePackage}}>
             {props.children} 
         </PackageContext.Provider>
     )

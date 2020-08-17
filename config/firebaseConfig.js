@@ -138,7 +138,7 @@ class Firebase {
     }
     //pending patot ada status = approved
     async checkPackageType(email){
-        return await this.db.collection('packages').where('email', '==', email).get() 
+        return await this.db.collection('package').where('email', '==', email).get() 
     }
 
     async getPackageById(id){
