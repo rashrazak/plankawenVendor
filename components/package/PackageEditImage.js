@@ -16,6 +16,10 @@ function modalImage() {
                 <ModalBody>
                    <PackageUpload />
                 </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={()=>setModal(!modal)}>Simpan</Button>
+                    <Button color="secondary" onClick={()=>setModal(!modal)}>Kembali</Button>
+                </ModalFooter>
             </Modal>
             <style jsx>{`
                 .btn-edit { height: 45px; border-radius: 8px; color: #FFF; font-size: 14px; background-color: #75848E; font-weight: normal; width: 150px; margin-bottom: 10px;}

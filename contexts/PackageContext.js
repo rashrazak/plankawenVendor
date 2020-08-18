@@ -59,6 +59,7 @@ const PackageContextProvider = (props) => {
             let y = firebase.createPackage(data)
             y.then((x) => {
               console.log(x.id)
+              data.packageId = x.id
               let y = firebase.updatePackage(x.id, data)
               y.then(() => {
                 alert('success')
@@ -84,13 +85,36 @@ const PackageContextProvider = (props) => {
         setEditPackage(pkg)
     }
 
-    const updatePackage = () => {
+    const updatePackage = async () => {
 
+        let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
+        let img = await firebase.getImagesPackage(images, email)
+        let pkg = editPackage
+        pkg.images = img
+        setTimeout(() => {
+            let y = firebase.updatePackage(pkg.packageId, pkg)
+            y.then(() => {
+                let y = firebase.updatePackage(pkg.packageId, pkg)
+                y.then(() => {
+                alert('success')
+                window.location.href = `/dashboard`
+                })
+                .catch((e) => {
+                alert('error')
+                console.log(e)
+                })
+            })
+            .catch((e) => {
+                alert('error')
+                console.log(e)
+            })
+        },2000)
     }
 
 
-
-   
+    const removeContext = () => {
+        
+    }
 
     return (
         <PackageContext.Provider value={{serviceListSelected, setServiceListSelected, 

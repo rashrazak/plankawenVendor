@@ -59,10 +59,16 @@ function PackageUpload({pagex}) {
                     )
                 })}
             </div>
-            <div className="form-button">
-                <Button  className="btn-cancel" onClick={() => Router.back()}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
-            </div>
+            {
+                Router.pathname.includes('add') ?
+                <div className="form-button">
+                    <Button  className="btn-cancel" onClick={() => Router.back()}>Back</Button>{' '}
+                    <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
+                </div>
+                : ''
+
+            }
+            
             <style jsx>{`
                 .form-button { display: flex; justify-content: space-between; }
                 .form-service-height { height: calc(100vh - 350px);}

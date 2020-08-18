@@ -1,10 +1,12 @@
 import React,{useEffect, useState, useContext} from 'react'
 import {PackageContext} from '../../contexts/PackageContext'
+import LoginContext from '../../contexts/LoginContext'
 import PackageEditAbout from './PackageEditAbout'
 import PackageEditImage from './PackageEditImage'
 
 function PackageEditSidebar() {
     const {editVisibility, editPackage, updatePackage} = useContext(PackageContext)
+    const {user} = useContext(LoginContext)
 
     const submitReview = () => {
         updatePackage()
