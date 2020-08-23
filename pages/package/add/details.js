@@ -151,7 +151,7 @@ function details() {
                         <h4>Enter your quantity amount </h4>
                         <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
                     </div>
-                    <Table>
+                    <table>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -165,26 +165,28 @@ function details() {
                             {
                                  serviceSelected.map((v,i)=>{
                                     return(
-                                        <tr key={i}>
+                                        <tr key={i} className="tr-bg">
                                             <PackageEdit key={i}  returnValue={returnValue} data={v} indexList={i}/>
                                         </tr>
                                     )
                                 })
                             }  
                         </tbody>
-                    </Table>
+                    </table>
                     <div className="form-section">
                         <h4>Final Price</h4>
                         <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                     </div>
-                    <div className="form-section">
-                        <p>Original Total Price: RM {oriPrice}</p>
-                        <p>New Total Price: RM {price}</p> 
-                        <p>Discounted amount: % {discount}</p>  
+                    <div className="form-section form-last">
+                        <p>Original Total Price: <span>RM {oriPrice}</span></p>
+                        <p>New Total Price: <span>RM {price}</span></p> 
+                        <p>Discounted amount: <span>% {discount}</span></p>  
                     </div>
                 </div>
                 :
-                <h1>Please select the service <span style={{textDecoration:'underline'}} onClick={() =>route.back()}>here</span>!</h1>
+                <div className="select-service">
+                    <h1 style={{textAlign: 'center'}}>Please select the service <span style={{textDecoration:'underline', cursor: 'pointer'}} onClick={() =>route.back()}>here</span>!</h1>
+                </div>
             }
             </div>
             <div className="form-button">
@@ -192,7 +194,7 @@ function details() {
                 <Button  className="btn-next" onClick={() => goingNext()}>Next</Button>{' '}
             </div>
             <style jsx>{`
-                .form-button { display: flex; justify-content: space-between; }
+                .form-button { display: flex; justify-content: space-between; max-width: 490px; margin: 10px auto;}
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
                 p {font-weight:400; color: #3e3e3e; font-size: 14px; }
                 .form-section { margin: 20px 0; }
@@ -213,6 +215,15 @@ function details() {
                 .card-service-add { width: 100px; background-color: #EBF9F8; cursor: pointer; height: 100px;}
                 .card-service-add p { background-color: transparent;}
                 .card-service-add { background-image: url(/images/icon/plus-circle-dark.png); background-repeat: no-repeat; background-position: center 50%;}
+                table { width: 100%; border-collapse:separate; border-spacing:0 6px;}
+                th { font-size: 12px; font-weight: normal; color: #75848E; padding: 0 10px;}
+                .select-service { height: calc(100vh - 302px);}
+                tbody > tr { background-color: #F5F7F8;}
+                .form-last { background-color: #F5F6FA; padding: 20px 40px; border-radius: 6px;}
+                .form-last > p { font-size: 14px; color: #75848E; font-weight: normal; margin-bottom: 2px;}
+                .form-last > p > span { color: #2b2b2b; float: right;}
+                th:last-child { width: 100px;}
+                
             `}</style>
         </Head>
     )

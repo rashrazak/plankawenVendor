@@ -175,7 +175,7 @@ function Package() {
                 <Button  className="btn-next" onClick={() => route.push('/package/add/details')}>Next</Button>{' '}
             </div>
             <style jsx>{`
-                .form-button { display: flex; justify-content: space-between; }
+                .form-button { max-width: 490px; margin: 10px auto; display: flex; justify-content: space-between;}
                 .checkbox-type { display: flex; justify-content:space-around; align-item: center; }
                 p {font-weight:400; color: #3e3e3e; font-size: 14px; }
                 .form-section { margin: 20px 0; }

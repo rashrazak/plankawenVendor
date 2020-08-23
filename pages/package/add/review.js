@@ -9,7 +9,7 @@ function Upload(props) {
     return (
         <Head title={ 'Add Details'}>
             <div>
-                <Step progress={2} />
+                <Step progress={3} />
             </div>
             <div>
                 <PackageReview  pagex={'review service'} />
