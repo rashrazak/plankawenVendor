@@ -274,6 +274,20 @@ function edit({pagex, sidebar}) {
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
                 .icon-service{width:20%;}
+                @media screen and (max-width: 480px ){
+                    .review-catergry-and-price {
+                        overflow-x: scroll;padding: 0px 10px;
+                    }
+                    .review-catergry-and-price > div {
+                        flex: 0 0 143px;
+                    }
+                    .button-edit-position {
+                        position: relative;top: 0;left: 0;padding: 10px;
+                    }
+                    .sidebar-edit {
+                        width: 100%;
+                    }
+                }
             `}</style>
         </div>
         </Head>

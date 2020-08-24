@@ -250,6 +250,13 @@ function PackageReview() {
                 .review-price > img { width: 16px;}
                 .review-desc { background-color: #F5F6FA; padding: 20px; margin-bottom: 22px; border-radius: 4px;}
                 .review-desc > p { color:  #75848E; font-size: 14px;}
+                @media screen and ( max-width: 480px ) {
+                    .review-form { padding: 0 20px;}
+                    .package-details { flex-wrap: wrap;}
+                    .package-img { flex: 0 0 100%;}
+                    .package-subs::after { content: none;}
+                    .package-subs-2 { position: unset;}
+                }
             `}</style>
         </div>
     )

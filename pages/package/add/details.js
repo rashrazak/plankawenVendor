@@ -223,7 +223,10 @@ function details() {
                 .form-last > p { font-size: 14px; color: #75848E; font-weight: normal; margin-bottom: 2px;}
                 .form-last > p > span { color: #2b2b2b; float: right;}
                 th:last-child { width: 100px;}
-                
+                @media screen and ( max-width: 480px ){
+                    .container-layout { padding: 0 20px;}
+                    .form-button { padding: 0 20px;}
+                }
             `}</style>
         </Head>
     )

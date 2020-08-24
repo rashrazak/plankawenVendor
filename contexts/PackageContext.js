@@ -33,51 +33,51 @@ const PackageContextProvider = (props) => {
 
     const submitPackage = async () =>{
 
-        console.log(title)
+        // console.log(title)
 
-        // let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
+        let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
 
-        // let img = await firebase.getImagesPackage(images, email)
+        let img = await firebase.getImagesPackage(images, email)
 
-        // let data = {
-        //     selectServices:serviceListSelected,
-        //     title,
-        //     description,
-        //     tnc,
-        //     coveredArea,
-        //     images: img || [], 
-        //     quantity, 
-        //     discount,
-        //     originalPrice:oriPrice, 
-        //     totalPrice:price,
-        //     dateCreated: new Date(),
-        //     status:'pending',
-        //     visibility:'show',
-        //     email,
-        //     vendorId:id
-        // }
+        let data = {
+            selectServices:serviceListSelected,
+            title,
+            description,
+            tnc,
+            coveredArea,
+            images: img || [], 
+            quantity, 
+            discount,
+            originalPrice:oriPrice, 
+            totalPrice:price,
+            dateCreated: new Date(),
+            status:'pending',
+            visibility:'show',
+            email,
+            vendorId:id
+        }
 
-        // setTimeout(() => {
-        //     let y = firebase.createPackage(data)
-        //     y.then((x) => {
-        //       console.log(x.id)
-        //       data.packageId = x.id
-        //       let y = firebase.updatePackage(x.id, data)
-        //       y.then(() => {
-        //         alert('success')
-        //         window.location.href = `/package/add/done`;
-        //         // Router.push(`/${pagex}/done`)
-        //       })
-        //       .catch((e) => {
-        //         alert('error')
-        //         console.log(e)
-        //       }) 
-        //     })
-        //     .catch((e) => {
-        //       console.log(e)
-        //     })
+        setTimeout(() => {
+            let y = firebase.createPackage(data)
+            y.then((x) => {
+              console.log(x.id)
+              data.packageId = x.id
+              let y = firebase.updatePackage(x.id, data)
+              y.then(() => {
+                alert('success')
+                window.location.href = `/package/add/done`;
+                // Router.push(`/${pagex}/done`)
+              })
+              .catch((e) => {
+                alert('error')
+                console.log(e)
+              }) 
+            })
+            .catch((e) => {
+              console.log(e)
+            })
       
-        //   },2000)
+          },2000)
     }
 
     const editVisibility = (type) => {

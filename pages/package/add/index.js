@@ -183,7 +183,7 @@ function Package() {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .container-layout { max-width: 800px; margin: 30px auto;}
+                .container-layout { max-width: 800px; margin: 30px auto; }
                 .service-empty {  background-color: #FEF2EB; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2); padding: 10px; max-width: 800px; margin: auto;}
                 .service-empty p { margin: 0;}
                 .service-empty a { color: #007bff; text-decoration: underline;}
@@ -200,6 +200,10 @@ function Package() {
                 .active-card:before { position: absolute; content: ''; width: 100%; height: 100%; background-color: rgba(234, 91, 59, 0.590308); top: 0; left: 0; background-image: url('/images/icon/check.png'); background-position: center; background-repeat: no-repeat; border-radius: 4px; transition: all .3s}
                 .total-service { text-align: center;}
                 .total-service > p { font-style: normal; font-weight: normal;font-size: 12px;color: #75848E;}
+                @media screen and ( max-width: 480px ){
+                    .container-layout { padding: 0 20px;}
+                    .form-button { padding: 0 20px;}
+                }
             `}</style>
         </Head>
     )

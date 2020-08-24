@@ -82,6 +82,10 @@ function PackageUpload({pagex}) {
                 .img-section { display: inline-block; width: 150px; height: 150px; position:relative; margin-right: 10px;}
                 .img-section > img { width: 150px; height: 150px; object-fit: cover; border: 2px solid #EAEAEA;}
                 .delete-image { position: absolute; top: -5px; right: -5px; background-color: red; cursor: pointer; height: 18px; width: 18px; border-radius: 25px; text-align: center; font-size: 13px; color: #FFF;}
+                @media screen and ( max-width: 480px ){
+                    .form-button { padding: 0 20px;}
+                    .form-service-height { height: 100%;}
+                }
             `}</style>
         </div>
     )

@@ -30,6 +30,11 @@ function PackageEditSidebar() {
             .btn-save { background-color: #47CBC4; color: #FFF; font-size: 14px; font-weight: 500; display: block; width: 150px; height: 45px; border-radius: 8px; margin-bottom: 10px; transition: all 3.s}
             .btn-edit { height: 45px; border-radius: 8px; color: #FFF; font-size: 14px; background-color: #75848E; font-weight: normal; width: 150px; margin-bottom: 10px;}
             .btn-danger2 { background-color: #FE6847; color: #FFF; font-size: 12px; font-weight: 500; display: block; width: 100px; height: 50px; border-radius: 25px; margin-bottom: 10px; transition: all 3.s}
+            @media screen and (max-width: 480px ){
+                .sidebar-edit {
+                   position: relative;
+                }
+            }
         `}</style>
         </div>
     )

@@ -29,6 +29,11 @@ function index() {
             <div className="body-layout">
                 <Login/>
             </div>
+            <style jsx>{`
+                @media screen and ( max-width: 480px) {
+                    
+                }
+            `}</style>
         </Head>
     )
 }

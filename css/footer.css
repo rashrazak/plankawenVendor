@@ -13,12 +13,12 @@
         width: 100% !important;
         margin-top: 20px;
     }
-    .footer-link > p { 
+    .footer-link > a > p { 
         display: block;
         width: 100%;
         margin-bottom: 10px;
     }    
-    .footer-link > img {
+    .footer-link > a > img {
         display: block;
         margin: 10px auto;
     }

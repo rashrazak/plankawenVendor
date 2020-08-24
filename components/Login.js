@@ -81,6 +81,9 @@ const Login = () => {
                 h1 { margin-bottom: 30px;}
                 .login-cont { margin-top: 20px; display: flex; justify-content: space-between; align-items: center;}
                 p { margin-bottom: 0; font-size: 13px;}
+                @media screen and ( max-width: 480px) {
+                    .login-layout { padding: 10px;}
+                }
 
             `}</style>
         </div>
