@@ -100,7 +100,7 @@ function Package() {
                     </div>
 
                     <React.Fragment>
-                        <h4>Please select which service you would like to add to your package</h4>
+                        <h4>Sila pilih servis untuk package anda</h4>
                         <div className={`card-flex`}>
                             {
                                 service && service.map((v,i)=> {
@@ -127,15 +127,15 @@ function Package() {
                         </div>
                         <div className="form-service">
                             <div className="form-section">
-                                <h4>Nama atau Tajuk Package</h4>
+                                <h4>Nama atau Tajuk Pakej</h4>
                                 <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
                             </div>
                             <div className="form-section">
-                                <h4>Description Package</h4>
+                                <h4>Deskripsi Pakej</h4>
                                 <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                             </div>
                             <div className="form-section">
-                                <h4>TnC Package</h4>
+                                <h4>Terma dan Syarat</h4>
                                 <Input className="form-custom" type="textarea" name="text" placeholder={'Syarat dan peraturan'} value={tnc} onChange={(e) => { setTnc(e.target.value) }} />
                             </div>
                             <div className="form-section">
