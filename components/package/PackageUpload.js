@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Button} from 'reactstrap';
-import Router from 'next/router';
+import {useRouter} from 'next/router'
 import {PackageContext} from '../../contexts/PackageContext'
 import Filebase64 from 'react-file-base64'
 import * as ls from 'local-storage'
@@ -9,7 +9,7 @@ import * as ls from 'local-storage'
 //pending patot ada image compressor
     
 function PackageUpload({pagex}) {
-
+    const Router = useRouter()
     const {images, setImages} = useContext(PackageContext);
     const [imageLimit, setimageLimit] = useState(3)
    
