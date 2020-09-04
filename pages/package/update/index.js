@@ -47,6 +47,7 @@ function edit({pagex, sidebar}) {
     useEffect(() => {
         if (editPackage) {
             let images = editPackage.images;
+            console.log(editPackage)
             if (images.length > 0) {
                 setcoverImage(images[0]);
                 setimages(images);
@@ -126,67 +127,23 @@ function edit({pagex, sidebar}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>
                 </div>
-                {
-                    (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
-                    ? 
-                        <React.Fragment>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Pax)</span> <br></br>{details.hargaPerPerson}</p>
-                            </div>
-                        </React.Fragment>
-                    : serviceType == 'Makeup' ?
-                        <React.Fragment>
-                            {
-                                details.hargaTouchup != false ?
-                                <div>
-                                    <div className="review-price">
-                                        <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
-                                    </div>
-                                    <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
-                                    </div>
-                                    <div className="review-price">
-                                        <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
-                                    </div>
-                                </div>
-                                :''
-                            }
-                            {
-                                details.hargaFull != false ?
-                                <div>
-                                    <div className="review-price">
-                                        <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
-                                    </div>
-                                    <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
-                                    </div>
-                                    <div className="review-price">
-                                        <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
-                                    </div>
-                                </div>
-                                :''
-                            }
-                        </React.Fragment>
-                    : 
-                        <React.Fragment>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Asal)</span> <br></br>{details.harga}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
-                            </div>
-                        </React.Fragment>
+                <React.Fragment>
+                    <div className="review-price">
+                        <img src="/images/icon/ico-dollar.png"/>
+                        <p><span>MYR (Harga Asal)</span> <br></br>{editPackage.totalPrice}</p>
+                    </div>
+                    <div className="review-price">
+                        <img src="/images/icon/ico-dollar.png"/>
+                        <p><span>MYR (Harga Disk)</span> <br></br>{editPackage.originalPrice}</p>
+                    </div>
+                    <div className="review-price">
+                        <img src="/images/icon/ico-dollar.png"/>
+                        <p><span>% (Diskaun)</span> <br></br>{editPackage.discount}</p>
+                    </div>
+                </React.Fragment>
 
-                }
                 
             </div>
             {
@@ -216,6 +173,22 @@ function edit({pagex, sidebar}) {
             </React.Fragment>
             
             <div className="review-desc">
+
+                <h5>Servis Pilihan</h5>
+
+                {
+                    editPackage.selectServices.map((v,i)=>{
+                        return (
+                            <div key={i} style={{position: 'relative'}}>
+                                <p>Nama Servis: {v.serviceName}</p>
+                                <p>Jenis Servis: {v.serviceType}</p>
+                                <p>Desription: {v.description}</p>
+                                <img style={{position: 'absolute', right: '10px', width:'18%', bottom: '10px'}} src={v.images[0].urlStorage} />
+                                <br/>
+                            </div>
+                        )
+                    })
+                }
 
                 <h5>Covered Area:</h5>
                 <p>{editPackage && editPackage.coveredArea.map((v,i)=>{
