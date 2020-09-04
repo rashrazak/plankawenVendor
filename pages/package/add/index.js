@@ -123,7 +123,7 @@ function Package() {
                             }
                         </div>
                         <div  className="total-service">
-                            <p>Please select more than one. Total: {serviceListSelected ? serviceListSelected.length : 0}</p>
+                            <p>Minimum servis untuk pakej: {serviceListSelected ? serviceListSelected.length : 0}</p>
                         </div>
                         <div className="form-service">
                             <div className="form-section">

@@ -47,7 +47,7 @@ function details() {
                 console.log(disc)
                 setDiscount(disc.toFixed(0))
             }else {
-                setDiscount('No Discount')
+                setDiscount('Tiada Diskaun')
 
             }
         }
@@ -147,18 +147,15 @@ function details() {
             {
                 serviceSelected.length >= 1 ?
                 <div className="form-service">
-                    <div className="form-section">
-                        <h4>Enter your quantity amount </h4>
-                        <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
-                    </div>
+                    
                     <table>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Service name</th>
-                                <th>Category</th>
-                                <th>Price /unit</th>
-                                <th>Edit price</th>
+                                <th>Nama Servis</th>
+                                <th>Kategori</th>
+                                <th>Harga / unit</th>
+                                <th>Edit Harga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -174,13 +171,17 @@ function details() {
                         </tbody>
                     </table>
                     <div className="form-section">
-                        <h4>Final Price</h4>
+                        <h4>Sila masukkan jumlah quantity  </h4>
+                        <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
+                    </div>
+                    <div className="form-section">
+                        <h4>Harga Diskaun</h4>
                         <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                     </div>
                     <div className="form-section form-last">
-                        <p>Original Total Price: <span>RM {oriPrice}</span></p>
-                        <p>New Total Price: <span>RM {price}</span></p> 
-                        <p>Discounted amount: <span>% {discount}</span></p>  
+                        <p>Harga Asal: <span>RM {oriPrice}</span></p>
+                        <p>Harga Diskaun Baharu: <span>RM {price}</span></p> 
+                        <p>Jumlah Diskaun: <span>% {discount}</span></p>  
                     </div>
                 </div>
                 :

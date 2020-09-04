@@ -198,7 +198,7 @@ function edit({pagex, sidebar}) {
                 <h5>Description:</h5>
                 <p>{editPackage && editPackage.description}</p>
 
-                <h5>Terms And Condition:</h5>
+                <h5>Syarat dan Terma:</h5>
                 <p>{ editPackage && editPackage.tnc}</p>
 
                

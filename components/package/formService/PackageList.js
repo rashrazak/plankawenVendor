@@ -158,7 +158,7 @@ function PackageList({setPackageSelection, packageSelection, setServiceTotal, se
                                 <tr>
                                     <th>#</th>
                                     <th>Service Type</th>
-                                    <th>Service Name</th>
+                                    <th>Nama Servis</th>
                                     <th>Details</th>
                                     <th>Min Details</th>
                                     <th>Max Details</th>
@@ -227,7 +227,7 @@ function PackageList({setPackageSelection, packageSelection, setServiceTotal, se
                                 <tr>
                                     <th>#</th>
                                     <th>Service Type</th>
-                                    <th>Service Name</th>
+                                    <th>Nama Servis</th>
                                     <th>Status</th>
                                     <th>Date Created</th>
                                     <th>Select</th>

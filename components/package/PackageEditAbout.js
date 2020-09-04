@@ -125,7 +125,7 @@ function PackageEditAbout() {
                 console.log(disc)
                 setDiscount(disc.toFixed(0))
             }else {
-                setDiscount('No Discount')
+                setDiscount('Tiada Diskaun')
 
             }
         }
@@ -244,7 +244,7 @@ function PackageEditAbout() {
                         serviceList && service ? 
                         <div>
                             <React.Fragment>
-                                <h4>Please select which service you would like to add to your package</h4>
+                                <h4>Sila pilih servis untuk package anda</h4>
                                 <div className={`card-flex`}>
                                     {
                                         service && service.map((v,i)=> {
@@ -276,19 +276,19 @@ function PackageEditAbout() {
                                     
                                 </div>
                                 <div  className="total-service">
-                                    <p>Please select more than one. Total: {serviceListSelected ? serviceListSelected.length : 0}</p>
+                                    <p>Minimum servis untuk pakej: {serviceListSelected ? serviceListSelected.length : 0}</p>
                                 </div>
                                 <div className="form-service">
                                     <div className="form-section">
-                                        <h4>Nama atau Tajuk Package</h4>
+                                        <h4>Nama atau Tajuk Pakej</h4>
                                         <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
                                     </div>
                                     <div className="form-section">
-                                        <h4>Description Package</h4>
+                                        <h4>Deskripsi Pakej</h4>
                                         <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                                     </div>
                                     <div className="form-section">
-                                        <h4>TnC Package</h4>
+                                        <h4>Terma dan Syarat</h4>
                                         <Input className="form-custom" type="textarea" name="text" placeholder={'Syarat dan peraturan'} value={tnc} onChange={(e) => { setTnc(e.target.value) }} />
                                     </div>
                                     <div className="form-section">
@@ -325,18 +325,15 @@ function PackageEditAbout() {
                     {
                         serviceListSelected.length >= 1 ?
                         <div className="form-service">
-                            <div className="form-section">
-                                <h4>Enter your quantity amount </h4>
-                                <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
-                            </div>
+                            
                             <Table>
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Service name</th>
-                                        <th>Category</th>
-                                        <th>Price /unit</th>
-                                        <th>Edit price</th>
+                                        <th>Nama Servis</th>
+                                        <th>Kategori</th>
+                                        <th>Harga / unit</th>
+                                        <th>Edit Harga</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -352,13 +349,17 @@ function PackageEditAbout() {
                                 </tbody>
                             </Table>
                             <div className="form-section">
-                                <h4>Final Price</h4>
+                                <h4>Sila masukkan jumlah quantity  </h4>
+                                <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
+                            </div>
+                            <div className="form-section">
+                                <h4>Harga Diskaun</h4>
                                 <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                             </div>
                             <div className="form-section">
-                                <p>Original Total Price: RM {oriPrice}</p>
-                                <p>New Total Price: RM {price}</p> 
-                                <p>Discounted amount: % {discount}</p>  
+                                <p>Harga Asal: RM {oriPrice}</p>
+                                <p>Harga Diskaun Baharu: RM {price}</p> 
+                                <p>Jumlah Diskaun: % {discount}</p>  
                             </div>
                         </div>
                         :
