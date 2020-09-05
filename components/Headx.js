@@ -84,13 +84,13 @@ export function Headx({title, children}){
                                     </a>
                                     </Link>
                                 </DropdownItem>
-                                <DropdownItem>
+                                {/* <DropdownItem>
                                     <Link href={`/`}>
                                     <a>
                                     Package
                                     </a>
                                     </Link>
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem>
                                     <Link href={'/update-user'}>
                                     <a>

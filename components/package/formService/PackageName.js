@@ -85,7 +85,7 @@ function PackageName({packageList, getPackage, setShowPackageDetails}) {
                 
             </div>
             <div className="form-section">
-                <h4>Deskripsi Pakej (dengan lengkap)</h4>
+                <h4>Tentang Pakej (dengan lengkap)</h4>
                 <Input className="form-custom" type="textarea" name="text" id="descService" onChange={(e) => { setDescriptionx(e.target.value) }} placeholder={packageList != null? packageList.description : ' '} />
             </div>
             <div className="form-section">

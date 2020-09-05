@@ -131,7 +131,7 @@ function Package() {
                                 <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
                             </div>
                             <div className="form-section">
-                                <h4>Deskripsi Pakej</h4>
+                                <h4>Tentang Pakej</h4>
                                 <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                             </div>
                             <div className="form-section">

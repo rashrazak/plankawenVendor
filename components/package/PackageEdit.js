@@ -63,7 +63,7 @@ const handleBanner = (v, i, size) =>{
     setBanner([...ban])
 }
     return (
-        <React.Fragment key={indexList}>
+        <React.Fragment>
             {
                 data.serviceType == 'Makeup' ?
                     <>

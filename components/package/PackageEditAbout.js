@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Table, Input, FormText, Modal, ModalHeader, Mo
 import '../../css/modal.css'
 import {PackageContext} from '../../contexts/PackageContext'
 import PackageEdit from './PackageEdit'
-
+import * as ls from 'local-storage'
 import {serviceContext} from '../../contexts/ServiceContext'
 import { useRouter  } from 'next/router'
 import '../../css/venueform.css'
@@ -18,6 +18,22 @@ function PackageEditAbout() {
     const {serviceListSelected, setServiceListSelected, title, setTitle, description, setDescription, coveredArea, setCoveredArea, tnc, setTnc, setEditPackage, editPackage, quantity, setQuantity, discount, setDiscount, oriPrice, setOriPrice, price, setPrice} = useContext(PackageContext)
   
     const [service, setService] = useState(null)
+    const [serviceSelect, setServiceSelect] = useState(null)
+
+    useEffect(() => {
+        const getServ = async () => {
+            if (!service || !serviceList) {
+                let x = await serviceList
+                setService(x)
+                let y = await serviceListSelected
+                setServiceSelect(y)
+            }
+        }
+
+        getServ()
+
+       
+    }, [service, serviceSelect])
 
     useEffect(() => {
         if (editPackage) {
@@ -66,20 +82,7 @@ function PackageEditAbout() {
                         DoorGift: 'ico-goodiebag.png',
                         Others: 'ico-others.png'}
     
-    useEffect(() => {
-        const getServ = async () => {
-            if (!service && serviceList) {
-                let x = await serviceList
-                setService(x)
-            }else if(!serviceList){
-                // route.push('/dashboard')
-            }
-        }
-
-        getServ()
-        
-    }, [service])
-
+    
 
 
     const handleChangeKawasan = (e) => {
@@ -94,15 +97,15 @@ function PackageEditAbout() {
             setCoveredArea([...x]);
         }
     }
-
+``
     const selectFunction = (i) =>{
         let data = service
-        setServiceListSelected(old => [...old, data[i] ])
+        setServiceSelect(old => [...old, data[i] ])
     }
 
     const deleteFunction = (name, type, i) =>{
         let data = service
-        setServiceListSelected(old => old.filter(v => v.serviceName != name && v.serviceType != type))
+        setServiceSelect(old => old.filter(v => v.serviceName != name && v.serviceType != type))
     }
     
 
@@ -227,10 +230,16 @@ function PackageEditAbout() {
         pkg.originalPrice = oriPrice
         pkg.dateUpdated = new Date()
         pkg.title = title
-        pkg.selectServices = serviceListSelected
+        pkg.selectServices = serviceSelect
 
         setEditPackage(pkg)
         setModal(!modal);        
+    }
+
+    const revert = () => {
+        setServiceSelect(null)
+        setService(null)
+        setModal(!modal)
     }
 
     return (
@@ -241,36 +250,39 @@ function PackageEditAbout() {
                 <ModalBody>
                     <div className={`container-layout`}>
                     {
-                        serviceList && service ? 
+                        serviceList && service && serviceSelect ? 
                         <div>
                             <React.Fragment>
                                 <h4>Sila pilih servis untuk package anda</h4>
                                 <div className={`card-flex`}>
                                     {
                                         service && service.map((v,i)=> {
-                                            let name = v.serviceName
-                                            let type = v.serviceType
-                                            let avail = false
-                                            serviceListSelected.map((va,ind)=>{
-                                                if (va.serviceName === name && va.serviceType == type) {
-                                                    avail = true
+                                            if (v.serviceType != 'Pelamin' && v.serviceType != 'Hantaran') {
+                                                let name = v.serviceName
+                                                let type = v.serviceType
+                                                let avail = false
+                                                serviceSelect && serviceSelect.map((va,ind)=>{
+                                                    if (va.serviceName === name && va.serviceType == type) {
+                                                        avail = true
+                                                    }
+                                                })
+                                                let img;
+                                                if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
+                                                    img = '/images/placeholder/service-placheholder.png'
+                                                }else{
+                                                    img = v.images[0]['urlStorage']
                                                 }
-                                            })
-                                            let img;
-                                            if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
-                                                img = '/images/placeholder/service-placheholder.png'
-                                            }else{
-                                                img = v.images[0]['urlStorage']
-                                            }
-                                            return(
-                                                <div key={i} className={ avail == true ? 'card-service active-card':'card-service'} onClick={()=> avail == true ? deleteFunction(name, type, i):selectFunction(i)}>
-                                                    <img src={img}/>
-                                                    <div className={`card-service-desc`}>
-                                                        <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
-                                                        <p>{v.serviceType} - {v.serviceName}</p>
+                                                return(
+                                                    <div key={i} className={ avail == true ? 'card-service active-card':'card-service'} onClick={()=> avail == true ? deleteFunction(name, type, i):selectFunction(i)}>
+                                                        <img src={img}/>
+                                                        <div className={`card-service-desc`}>
+                                                            <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
+                                                            <p>{v.serviceType} - {v.serviceName}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            )
+                                                )    
+                                            }
+
                                         })
                                     }
                                     
@@ -284,7 +296,7 @@ function PackageEditAbout() {
                                         <Input className="form-custom" type="text" name="text" id="titleService" placeholder="" value={title} onChange={(e) => {setTitle(e.target.value)}} />
                                     </div>
                                     <div className="form-section">
-                                        <h4>Deskripsi Pakej</h4>
+                                        <h4>Tentang Pakej</h4>
                                         <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                                     </div>
                                     <div className="form-section">
@@ -338,10 +350,10 @@ function PackageEditAbout() {
                                 </thead>
                                 <tbody>
                                     {
-                                        serviceListSelected.map((v,i)=>{
+                                        serviceSelect && serviceSelect.map((v,i)=>{
                                             return(
-                                                <tr key={i+10}>
-                                                    <PackageEdit returnValue={returnValue} data={v} indexList={i}/>
+                                                <tr key={i}>
+                                                    <PackageEdit  returnValue={returnValue} data={v} indexList={i}/>
                                                 </tr>
                                             )
                                         })
@@ -370,7 +382,7 @@ function PackageEditAbout() {
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={()=>toggle()}>Simpan</Button>
-                    <Button color="secondary" onClick={()=>setModal(!modal)}>Kembali</Button>
+                    <Button color="secondary" onClick={()=>revert()}>Kembali</Button>
                 </ModalFooter>
             </Modal>
             <style jsx>{`
