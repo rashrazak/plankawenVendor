@@ -277,7 +277,7 @@ function VendorForm() {
                                             checked={setuju}
                                             onChange={() => setSetuju(!setuju)}
                                         />
-                                        <p>Dengan mendaftar untuk sebagai Vendor PlanKawen, saya mengaku sudah membaca serta bersetuju dengan <a href="/terma">Terma dan Syarat</a> yang telah ditetapkan</p>
+                                        <p>Dengan mendaftar untuk sebagai Vendor PlanKawen, saya mengaku sudah membaca serta bersetuju dengan <a target="_blank" href="/terma">Terma dan Syarat</a> yang telah ditetapkan</p>
                                     </Label>
                                 </div>
                                 <div className="position-button">
