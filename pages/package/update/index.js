@@ -179,12 +179,13 @@ function edit({pagex, sidebar}) {
                 {
                     editPackage && editPackage.selectServices.map((v,i)=>{
                         return (
-                            <div key={i} style={{position: 'relative'}}>
-                                <p>Nama Servis: {v.serviceName}</p>
-                                <p>Jenis Servis: {v.serviceType}</p>
-                                <p>Desription: {v.description}</p>
-                                <img style={{position: 'absolute', right: '10px', width:'18%', bottom: '10px'}} src={v.images[0].urlStorage} />
-                                <br/>
+                            <div key={i} style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'justify-between', marginBottom: '6px'}}>
+                                <div className="package-review-flex" style={{width: '100%'}}>
+                                    <p style={{marginBottom: 0}}>Nama Servis: {v.serviceName}</p>
+                                    <p>Jenis Servis: {v.serviceType}</p>
+                                    <p>Desription: {v.description}</p>
+                                </div>
+                                <img style={{width: '30%', height: '100px', objectFit: 'cover'}} src={v.images[0].urlStorage} />
                             </div>
                         )
                     })
@@ -247,6 +248,7 @@ function edit({pagex, sidebar}) {
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
                 .icon-service{width:20%;}
+                .package-review-flex > p { margin: 0; color: #75848E; font-size: 14px; font-weight: normal;}
                 @media screen and (max-width: 480px ){
                     .review-catergry-and-price {
                         overflow-x: scroll;padding: 0px 10px;
