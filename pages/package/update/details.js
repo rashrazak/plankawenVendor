@@ -171,7 +171,7 @@ function details() {
                         </tbody>
                     </Table>
                     <div className="form-section">
-                        <h4>Sila masukkan jumlah quantity  </h4>
+                        <h4>sila masukkan jumlah kuantiti  </h4>
                         <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
                     </div>
                     <div className="form-section">

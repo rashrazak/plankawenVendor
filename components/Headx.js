@@ -35,7 +35,7 @@ export function Headx({title, children}){
         firebase.signOut().then( ()=> {
             localStorage.removeItem('user');
             localStorage.removeItem('vendorDetails');
-            router.push('/')
+            location.reload();
 
           })
     }

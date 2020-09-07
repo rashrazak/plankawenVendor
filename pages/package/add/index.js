@@ -7,6 +7,7 @@ import { useRouter  } from 'next/router'
 import '../../../css/venueform.css'
 import '../../../css/about.css'
 import Step from '../../../components/StepByStep'
+import * as ls from 'local-storage'
 
 
 
@@ -14,8 +15,45 @@ function Package() {
     const route = useRouter()
     const {serviceList} = useContext(serviceContext)
     const {serviceListSelected, setServiceListSelected, title, setTitle, description, setDescription, coveredArea, setCoveredArea, tnc, setTnc} = useContext(PackageContext)
-  
     const [service, setService] = useState(null)
+    const [listSelected, setListSelected] = useState([])
+
+
+    useEffect(() => {
+        const getServ =  () => {
+            if (ls('packageSelected') && listSelected.length == 0) {
+                setListSelected(ls.get('packageSelected'))
+
+            }
+        }
+
+        getServ()
+        console.log(listSelected)
+    }, [listSelected])
+
+    useEffect(() => {
+        const getServ =  () => {
+            if (!service && serviceList) {
+                setService(serviceList)
+            }
+        }
+
+        getServ()
+        
+    }, [serviceList])
+
+    
+        
+
+    useEffect(() => {
+        if (!title || !description || !coveredArea || !tnc) {
+            setTitle( ls.get('packageTitle') || null )
+            setDescription( ls.get('packageDescription') || null )
+            setTnc( ls.get('packageTnc') || '' )
+            setCoveredArea( ls.get('packageCoveredArea') || null )
+        }
+    }, [ title, description, coveredArea, tnc])
+  
 
     const gMapsCities = [
         {state:'Johor', status:false},
@@ -50,19 +88,7 @@ function Package() {
                         DoorGift: 'ico-goodiebag.png',
                         Others: 'ico-others.png'}
     
-    useEffect(() => {
-        const getServ = async () => {
-            if (!service && serviceList) {
-                let x = await serviceList
-                setService(x)
-            }else if(!serviceList){
-                route.push('/dashboard')
-            }
-        }
-
-        getServ()
-        
-    }, [service])
+   
 
 
 
@@ -81,19 +107,39 @@ function Package() {
 
     const selectFunction = (i) =>{
         let data = service
-        setServiceListSelected(old => [...old, data[i] ])
+        setListSelected(old => [...old, data[i] ])
     }
 
     const deleteFunction = (i) =>{
         let data = service
-        setServiceListSelected(old => old.filter(v => v != data[i]))
+        setListSelected(old => old.filter(v => v != data[i]))
+    }
+
+    const goNext = () =>{
+        if (!listSelected  || !title || !description || !coveredArea || !tnc) {
+            alert('Sila penuhkan form anda')
+            return false
+       }
+       if (listSelected.length < 2) {
+            alert('Sila pilih pakej lebih dari 2')
+            return false
+       }
+
+
+        ls.set('packageSelected',listSelected)
+        setServiceListSelected(listSelected)
+        ls.set('packageTitle', title)
+        ls.set('packageDescription', description)
+        ls.set('packageTnc', tnc)
+        ls.set('packageCoveredArea', coveredArea)
+        route.push('/package/add/details')
     }
 
     return (
         <Head title={'Package'}>
             <div className={`container-layout`}>
             {
-                serviceList && service ? 
+                serviceList && service && listSelected.length > 0 ? 
                 <div>
                     <div>
                         <Step progress={0} />
@@ -110,8 +156,15 @@ function Package() {
                                     }else{
                                         img = v.images[0]['urlStorage']
                                     }
+                                    let found = false;
+                                    for(let i = 0; i < listSelected.length; i++) {
+                                        if (listSelected[i].id == v.id) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
                                     return(
-                                        <div key={i} className={ serviceListSelected.includes(v) ? 'card-service active-card':'card-service'} onClick={()=> serviceListSelected.includes(v) ? deleteFunction(i):selectFunction(i)}>
+                                        <div key={i} className={ found ? 'card-service active-card':'card-service'} onClick={()=> found ? deleteFunction(i):selectFunction(i)}>
                                             <img src={img}/>
                                             <div className={`card-service-desc`}>
                                                 <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
@@ -123,7 +176,7 @@ function Package() {
                             }
                         </div>
                         <div  className="total-service">
-                            <p>Minimum servis untuk pakej: {serviceListSelected ? serviceListSelected.length : 0}</p>
+                            <p>Minimum servis untuk pakej :2 :: {listSelected ? listSelected.length : 0}</p>
                         </div>
                         <div className="form-service">
                             <div className="form-section">
@@ -172,7 +225,7 @@ function Package() {
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => route.back()}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => route.push('/package/add/details')}>Next</Button>{' '}
+                <Button  className="btn-next" onClick={() =>goNext()}>Next</Button>{' '}
             </div>
             <style jsx>{`
                 .form-button { max-width: 490px; margin: 10px auto; display: flex; justify-content: space-between;}
