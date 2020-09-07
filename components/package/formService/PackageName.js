@@ -80,12 +80,12 @@ function PackageName({packageList, getPackage, setShowPackageDetails}) {
         
         <div className="form-service">
             <div>
-                <h4>Nama atau Tajuk Package {name != null? name.name : ''}</h4>
+                <h4>Nama atau Tajuk Pakej {name != null? name.name : ''}</h4>
                 <Input type="text" placeholder={packageList != null? packageList.packageName : 'Nama Package'}  onChange={(e) => setname(e.target.value)} />
                 
             </div>
             <div className="form-section">
-                <h4>Description Package (dengan lengkap)</h4>
+                <h4>Tentang Pakej (dengan lengkap)</h4>
                 <Input className="form-custom" type="textarea" name="text" id="descService" onChange={(e) => { setDescriptionx(e.target.value) }} placeholder={packageList != null? packageList.description : ' '} />
             </div>
             <div className="form-section">

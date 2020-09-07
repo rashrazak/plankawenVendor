@@ -1,5 +1,6 @@
-import React,{createContext, useState} from 'react'
+import React,{createContext, useState, useEffect} from 'react'
 import firebase from'../config/firebaseConfig'
+import * as ls from 'local-storage'
 export const PackageContext = createContext();
 
 const PackageContextProvider = (props) => {
@@ -17,6 +18,12 @@ const PackageContextProvider = (props) => {
 
     const [packagesAll, setPackagesAll] = useState([])
     const [editPackage, setEditPackage] = useState(null)
+
+    useEffect(() => {
+        if (editPackage == null && ls('editPackage')) {
+            setEditPackage(ls.get('editPackage'))
+        }
+    },[editPackage])
 
     const getAllPackages = async (email) =>{
         console.log(email)

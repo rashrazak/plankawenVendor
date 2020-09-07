@@ -10,7 +10,7 @@ function profileDetails() {
     const [hoverImage, setHoverImage] = useHover();
     const [imageBinary, setImageBinary] = useState(null)
     const [vendorId, setVendorId] = useState(null)
-    const [companyDesc, setCompanyDesc] = useState('')
+    const [companyDesc, setCompanyDesc] = useState(null)
 
     const toggle = () => setEditDetails(!editDetails)
 

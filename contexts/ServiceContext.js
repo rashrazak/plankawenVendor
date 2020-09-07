@@ -25,7 +25,7 @@ const serviceContextProvider = (props) => {
     const [serviceList, setServiceList] = useState(null)
 
     useEffect(() => {
-        if (!serviceList && user) {
+        if (!serviceList && user && !ls('serviceList')) {
             async function getData() {
                 let result = []
                 await services.map( async (val,index) => {
@@ -42,6 +42,7 @@ const serviceContextProvider = (props) => {
 
                     if (index == (services.length - 1) ) {
                         setServiceList(result)
+                        ls.set('serviceList',result)
                     }
                     
                     
@@ -49,6 +50,8 @@ const serviceContextProvider = (props) => {
               
             }
             getData()
+        }else if(ls('serviceList') && !serviceList && user){
+            setServiceList(ls.get('serviceList'))
         }
     }, [serviceList, user])
 

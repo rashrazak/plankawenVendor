@@ -35,7 +35,7 @@ export function Headx({title, children}){
         firebase.signOut().then( ()=> {
             localStorage.removeItem('user');
             localStorage.removeItem('vendorDetails');
-            router.push('/')
+            location.reload();
 
           })
     }
@@ -91,13 +91,13 @@ export function Headx({title, children}){
                                     </a>
                                     </Link>
                                 </DropdownItem>
-                                <DropdownItem>
+                                {/* <DropdownItem>
                                     <Link href={`/`}>
                                     <a>
                                     Package
                                     </a>
                                     </Link>
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem>
                                     <Link href={'/update-user'}>
                                     <a>

@@ -105,7 +105,7 @@ function PackageList() {
                         <tr>
                             <th>#</th>
                             <th>Service Type</th>
-                            <th>Service Name</th>
+                            <th>Nama Servis</th>
                             <th>Status</th>
                             <th>Date Created</th>
                             <th>Edit</th>

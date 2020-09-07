@@ -7,11 +7,18 @@ import * as ls from 'local-storage'
 
 function PackageReview() {
 
-    const {submitPackage, serviceListSelected, quantity, discount, oriPrice, price , images, title, description} = useContext(PackageContext)
+    const {submitPackage, discount, oriPrice } = useContext(PackageContext)
+    const serviceListSelected = ls.get('packageSelected2')
+    const quantity = ls.get('packageQuantity')
+    const price = ls.get('packagePrice')
+    const images = ls.get('packageImages')
+    const title = ls.get('packageTitle')
+    const description = ls.get('packageDescription')
+    const coveredArea = ls.get('packageCoveredArea')
+    const tnc = ls.get('packageTnc')
     
-    const [serviceSelected, setserviceSelected] = useState([])
+    // const [serviceSelected, setserviceSelected] = useState([])
     const [coverImages, setcoverImages] = useState('')
-    const [image, setImage] = useState([])
     const [hargaFull, setHargaFull] = useState('')
     const [hargaTouchup, setHargaTouchup] = useState('')
 
@@ -34,7 +41,6 @@ function PackageReview() {
 
         let image = images
         if (image.length > 0) {
-            setImage(image)
             setcoverImages(image[0])
         }
         
@@ -56,7 +62,7 @@ function PackageReview() {
                     <img src={coverImages.base64 || coverImages.urlStorage}/>
                     <div className="hero-son-review">
                         {
-                            image.map((v, i) => {
+                            images.map((v, i) => {
                                 return (
                                     <img key={i} onClick={() => setcoverImages(v)} src={v.base64 || v.urlStorage}/>
                                 )
@@ -87,12 +93,17 @@ function PackageReview() {
             </div>
             <h5>{title}</h5>
             <div className="review-desc">
-                <p>{description}</p>
+                <p>Description: {description}</p>
+                <p>TnC: {tnc}</p>
+                <p>Quantity: {quantity}</p>
+                <p>Harga RM: {price}</p>
+                <p>Covered Area: {coveredArea.map((v)=>{
+                    return (<span>{v}, </span>)})}</p>
             </div>
 
             <div className="review-package">
                 {
-                    serviceListSelected.map((v,i) => {
+                    serviceListSelected&&serviceListSelected.map((v,i) => {
 
                         let price = 0
 
