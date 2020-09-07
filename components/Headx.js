@@ -78,6 +78,13 @@ export function Headx({title, children}){
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                 <DropdownItem>
+                                    <Link href={'/dashboard'}>
+                                    <a>
+                                    Dashboard
+                                    </a>
+                                    </Link>
+                                </DropdownItem>
+                                <DropdownItem>
                                     <Link href={'/editservice'}>
                                     <a>
                                     Service
