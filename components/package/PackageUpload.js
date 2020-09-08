@@ -13,11 +13,7 @@ function PackageUpload({pagex}) {
     const {images, setImages} = useContext(PackageContext);
     const [imageLimit, setimageLimit] = useState(3)
 
-    useEffect(() => {
-        if (images.length == 0) {
-            setImages(ls.get('packageImages'))
-        }
-    }, [images])
+   
    
     const uploadOnDone = (file) => {
 

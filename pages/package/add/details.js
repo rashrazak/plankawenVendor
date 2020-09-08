@@ -21,6 +21,15 @@ function details() {
         if (serviceSelected.length == 0 && serviceListSelected.length > 0) {
             setServiceSelected(serviceListSelected)
             calculatePrice(serviceListSelected, quantity)
+            // if (ls('packageSelected2')) {
+            //     let x = ls.get('packageSelected2')
+            //     setServiceSelected(x)
+            //     setServiceListSelected(x)
+            //     calculatePrice(x, quantity)
+            // }else{
+            //     setServiceSelected(serviceListSelected)
+            //     calculatePrice(serviceListSelected, quantity)
+            // }
         }else if(serviceSelected.length == 0 && serviceListSelected.length == 0){
             let x = ls.get('packageSelected2')
             setServiceSelected(x)
@@ -65,7 +74,7 @@ function details() {
     }, [price])
 
     const returnValue = (data, index, price) =>{
-        let service = serviceListSelected
+        let service = serviceSelected
 
         if (data.serviceType == 'Makeup') {
             let makeup = service[index]
@@ -144,16 +153,16 @@ function details() {
     }
 
     const goingNext = () => {
-        setServiceListSelected([...serviceListSelected])
-        ls.set('packageSelected2',serviceListSelected)
+        setServiceListSelected(serviceSelected)
+        ls.set('packageSelected2',serviceSelected)
         ls.set('packagePrice',price)
         ls.set('packageQuantity',quantity)
         route.push('/package/add/upload')
     }
 
     const goingBack = () => {
-        setServiceListSelected([...serviceListSelected])
-        ls.set('packageSelected2',serviceListSelected)
+        setServiceListSelected(serviceSelected)
+        ls.set('packageSelected2',serviceSelected)
         ls.set('packagePrice',price)
         ls.set('packageQuantity',quantity)
         route.back()
@@ -191,17 +200,17 @@ function details() {
                         </tbody>
                     </table>
                     <div className="form-section">
-                        <h4>sila masukkan jumlah kuantiti  </h4>
+                        <h4>sila masukkan jumlah minimum kuantiti  </h4>
                         <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
                     </div>
-                    <div className="form-section">
+                    {/* <div className="form-section">
                         <h4>Harga Diskaun</h4>
                         <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
-                    </div>
+                    </div> */}
                     <div className="form-section form-last">
                         <p>Harga Asal: <span>RM {oriPrice}</span></p>
-                        <p>Harga Diskaun Baharu: <span>RM {price}</span></p> 
-                        <p>Jumlah Diskaun: <span>% {discount}</span></p>  
+                        {/* <p>Harga Diskaun Baharu: <span>RM {price}</span></p> 
+                        <p>Jumlah Diskaun: <span>% {discount}</span></p>   */}
                     </div>
                 </div>
                 :

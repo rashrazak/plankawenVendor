@@ -95,10 +95,11 @@ function PackageReview() {
             <div className="review-desc">
                 <p>Description: {description}</p>
                 <p>TnC: {tnc}</p>
-                <p>Quantity: {quantity}</p>
+                <p>Minimum Quantity: {quantity}</p>
                 <p>Harga RM: {price}</p>
-                <p>Covered Area: {coveredArea.map((v)=>{
-                    return (<span>{v}, </span>)})}</p>
+                <p>Covered Area: </p>
+                {coveredArea && coveredArea.map((v)=>{
+                    return (<p>{v} </p>)})}
             </div>
 
             <div className="review-package">

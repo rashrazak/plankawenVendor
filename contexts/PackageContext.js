@@ -19,6 +19,25 @@ const PackageContextProvider = (props) => {
     const [packagesAll, setPackagesAll] = useState([])
     const [editPackage, setEditPackage] = useState(null)
 
+    // useEffect(() => {
+    //     const getServ =  () => {
+    //         if (serviceListSelected.length === 0 && ls('packageSelected')) {
+    //             setServiceListSelected(ls.get('packageSelected'))
+    //         }
+    //     }
+
+    //     getServ()
+    // }, [serviceListSelected])
+
+    useEffect(() => {
+        if (images.length == 0  && ls('packageImages')) {
+            let x = ls.get('packageImages')
+            if (x.length > 0) {
+                setImages(ls.get('packageImages'))
+            }
+        }
+    }, [images])
+
     useEffect(() => {
         if (editPackage == null && ls('editPackage')) {
             setEditPackage(ls.get('editPackage'))
@@ -40,7 +59,14 @@ const PackageContextProvider = (props) => {
 
     const submitPackage = async () =>{
 
-        // console.log(title)
+        const serviceListSelected = ls.get('packageSelected2')
+        const quantity = ls.get('packageQuantity')
+        const price = ls.get('packagePrice')
+        const images = ls.get('packageImages')
+        const title = ls.get('packageTitle')
+        const description = ls.get('packageDescription')
+        const coveredArea = ls.get('packageCoveredArea')
+        const tnc = ls.get('packageTnc')
 
         let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
 

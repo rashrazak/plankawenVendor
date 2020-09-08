@@ -11,7 +11,7 @@ function DoneForm({pagex}) {
     const complete = () => {
         let x = resetAddService()
         if (x) {
-            window.location.href = '/'
+            window.location.href = '/dashboard'
         }
     }
 

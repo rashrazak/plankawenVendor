@@ -18,18 +18,27 @@ function Package() {
     const [service, setService] = useState(null)
     const [listSelected, setListSelected] = useState([])
 
-
     useEffect(() => {
         const getServ =  () => {
-            if (ls('packageSelected') && listSelected.length == 0) {
+            if (listSelected.length === 0 && ls('packageSelected')) {
                 setListSelected(ls.get('packageSelected'))
-
             }
         }
 
         getServ()
-        console.log(listSelected)
     }, [listSelected])
+
+
+    // useEffect(() => {
+    //     const getServ =  () => {
+    //         if (listSelected.length === 0 && serviceListSelected.length > 0) {
+    //             setListSelected(serviceListSelected)
+                
+    //         }
+    //     }
+
+    //     getServ()
+    // }, [listSelected])
 
     useEffect(() => {
         const getServ =  () => {
@@ -47,10 +56,25 @@ function Package() {
 
     useEffect(() => {
         if (!title || !description || !coveredArea || !tnc) {
-            setTitle( ls.get('packageTitle') || null )
-            setDescription( ls.get('packageDescription') || null )
-            setTnc( ls.get('packageTnc') || '' )
-            setCoveredArea( ls.get('packageCoveredArea') || null )
+            if (ls('packageTitle')) {
+                setTitle( ls.get('packageTitle') )
+                
+            }
+
+            if (ls('packageDescription')) {
+                setDescription( ls.get('packageDescription') )
+                
+            }
+
+            if (ls('packageTnc')) {
+                setTnc( ls.get('packageTnc') )
+                
+            }
+
+            if (ls('packageCoveredArea')) {
+                setCoveredArea( ls.get('packageCoveredArea') )
+                
+            }
         }
     }, [ title, description, coveredArea, tnc])
   
@@ -110,9 +134,8 @@ function Package() {
         setListSelected(old => [...old, data[i] ])
     }
 
-    const deleteFunction = (i) =>{
-        let data = service
-        setListSelected(old => old.filter(v => v != data[i]))
+    const deleteFunction = (id) =>{
+        setListSelected(old => old.filter(v => v.id != id))
     }
 
     const goNext = () =>{
@@ -139,7 +162,7 @@ function Package() {
         <Head title={'Package'}>
             <div className={`container-layout`}>
             {
-                serviceList && service && listSelected.length > 0 ? 
+                serviceList && service  ? 
                 <div>
                     <div>
                         <Step progress={0} />
@@ -150,28 +173,33 @@ function Package() {
                         <div className={`card-flex`}>
                             {
                                 service && service.map((v,i)=> {
-                                    let img;
-                                    if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
-                                        img = '/images/placeholder/service-placheholder.png'
+                                    if(v.serviceType == 'Pelamin' || v.serviceType == 'Hantaran'){
+                                        
                                     }else{
-                                        img = v.images[0]['urlStorage']
-                                    }
-                                    let found = false;
-                                    for(let i = 0; i < listSelected.length; i++) {
-                                        if (listSelected[i].id == v.id) {
-                                            found = true;
-                                            break;
+                                        let img;
+                                        if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
+                                            img = '/images/placeholder/service-placheholder.png'
+                                        }else{
+                                            img = v.images[0]['urlStorage']
                                         }
-                                    }
-                                    return(
-                                        <div key={i} className={ found ? 'card-service active-card':'card-service'} onClick={()=> found ? deleteFunction(i):selectFunction(i)}>
-                                            <img src={img}/>
-                                            <div className={`card-service-desc`}>
-                                                <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
-                                                <p>{v.serviceType} - {v.serviceName}</p>
+                                        let found = false;
+                                        for(let i = 0; i < listSelected.length; i++) {
+                                            if (listSelected[i].id == v.id) {
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                        return(
+                                            <div key={i} className={ found ? 'card-service active-card':'card-service'} onClick={()=> found ? deleteFunction(v.id):selectFunction(i)}>
+                                                <img src={img}/>
+                                                <div className={`card-service-desc`}>
+                                                    <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
+                                                    <p>{v.serviceType} - {v.serviceName}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
+                                        )
+                                    }
+                                    
                                 })
                             }
                         </div>
