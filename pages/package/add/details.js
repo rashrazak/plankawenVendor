@@ -18,18 +18,27 @@ function details() {
 
 
     useEffect(() => {
-        if (serviceSelected.length == 0 && serviceListSelected) {
+        if (serviceSelected.length == 0 && serviceListSelected.length > 0) {
             setServiceSelected(serviceListSelected)
             calculatePrice(serviceListSelected, quantity)
+        }else if(serviceSelected.length == 0 && serviceListSelected.length == 0){
+            let x = ls.get('packageSelected2')
+            setServiceSelected(x)
+            setServiceListSelected(x)
+            calculatePrice(x, quantity)
         }else{
             setPrice(0)
             setDiscount(0)
         }
-    }, [serviceSelected])
+    }, [serviceSelected, serviceListSelected])
 
     useEffect(() => {
         // console.log(quantity)
-        calculatePrice(serviceSelected, quantity)
+        if (ls('packageQuantity')) {
+            setQuantity(parseInt(ls.get('packageQuantity')))
+        }else{
+            calculatePrice(serviceSelected, quantity)
+        }
     }, [quantity])
 
     useEffect(() => {
@@ -47,12 +56,13 @@ function details() {
                 console.log(disc)
                 setDiscount(disc.toFixed(0))
             }else {
-                setDiscount('No Discount')
+                setDiscount('Tiada Diskaun')
 
             }
+        }else if(!price && ls('packagePrice')){
+            setPrice(parseInt(ls.get('packagePrice')))
         }
     }, [price])
-    useEffect(() => {},[discount])
 
     const returnValue = (data, index, price) =>{
         let service = serviceListSelected
@@ -135,8 +145,18 @@ function details() {
 
     const goingNext = () => {
         setServiceListSelected([...serviceListSelected])
-        ls.set('packageDetails')
+        ls.set('packageSelected2',serviceListSelected)
+        ls.set('packagePrice',price)
+        ls.set('packageQuantity',quantity)
         route.push('/package/add/upload')
+    }
+
+    const goingBack = () => {
+        setServiceListSelected([...serviceListSelected])
+        ls.set('packageSelected2',serviceListSelected)
+        ls.set('packagePrice',price)
+        ls.set('packageQuantity',quantity)
+        route.back()
     }
     return (
         <Head title={'Package - Details'}>
@@ -147,18 +167,15 @@ function details() {
             {
                 serviceSelected.length >= 1 ?
                 <div className="form-service">
-                    <div className="form-section">
-                        <h4>Enter your quantity amount </h4>
-                        <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
-                    </div>
+                    
                     <table>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Service name</th>
-                                <th>Category</th>
-                                <th>Price /unit</th>
-                                <th>Edit price</th>
+                                <th>Nama Servis</th>
+                                <th>Kategori</th>
+                                <th>Harga / unit</th>
+                                <th>Edit Harga</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -166,7 +183,7 @@ function details() {
                                  serviceSelected.map((v,i)=>{
                                     return(
                                         <tr key={i} className="tr-bg">
-                                            <PackageEdit key={i}  returnValue={returnValue} data={v} indexList={i}/>
+                                            <PackageEdit  returnValue={returnValue} data={v} indexList={i}/>
                                         </tr>
                                     )
                                 })
@@ -174,18 +191,22 @@ function details() {
                         </tbody>
                     </table>
                     <div className="form-section">
-                        <h4>Final Price</h4>
+                        <h4>sila masukkan jumlah kuantiti  </h4>
+                        <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
+                    </div>
+                    <div className="form-section">
+                        <h4>Harga Diskaun</h4>
                         <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                     </div>
                     <div className="form-section form-last">
-                        <p>Original Total Price: <span>RM {oriPrice}</span></p>
-                        <p>New Total Price: <span>RM {price}</span></p> 
-                        <p>Discounted amount: <span>% {discount}</span></p>  
+                        <p>Harga Asal: <span>RM {oriPrice}</span></p>
+                        <p>Harga Diskaun Baharu: <span>RM {price}</span></p> 
+                        <p>Jumlah Diskaun: <span>% {discount}</span></p>  
                     </div>
                 </div>
                 :
                 <div className="select-service">
-                    <h1 style={{textAlign: 'center'}}>Please select the service <span style={{textDecoration:'underline', cursor: 'pointer'}} onClick={() =>route.back()}>here</span>!</h1>
+                    <h4 style={{textAlign: 'center'}}>Please select the service <span style={{textDecoration:'underline', cursor: 'pointer'}} onClick={() =>goingBack()}>here</span>!</h4>
                 </div>
             }
             </div>

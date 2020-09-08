@@ -12,6 +12,12 @@ function PackageUpload({pagex}) {
     const Router = useRouter()
     const {images, setImages} = useContext(PackageContext);
     const [imageLimit, setimageLimit] = useState(3)
+
+    useEffect(() => {
+        if (images.length == 0) {
+            setImages(ls.get('packageImages'))
+        }
+    }, [images])
    
     const uploadOnDone = (file) => {
 
@@ -42,6 +48,10 @@ function PackageUpload({pagex}) {
         ls.set('packageImages', images)
         Router.push('/package/add/review')
     }
+    const getBack = () =>{
+        ls.set('packageImages', images)
+        Router.back()
+    }
     return (
         <div className="form-service form-service-height">
             <div className="form-section">
@@ -62,7 +72,7 @@ function PackageUpload({pagex}) {
             {
                 Router.pathname.includes('add') ?
                 <div className="form-button">
-                    <Button  className="btn-cancel" onClick={() => Router.back()}>Back</Button>{' '}
+                    <Button  className="btn-cancel" onClick={() => getBack()}>Back</Button>{' '}
                     <Button  className="btn-next" onClick={() => submitServiceUpload()}>Next</Button>{' '}
                 </div>
                 : ''

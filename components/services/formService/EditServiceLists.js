@@ -111,7 +111,7 @@ function EditServiceLists({serviceType}) {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Service Name</th>
+                            <th>Nama Servis</th>
                             <th>Status</th>
                             <th>Date Created</th>
                             <th>Visibility Status</th>

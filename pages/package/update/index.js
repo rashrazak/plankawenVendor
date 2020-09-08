@@ -7,10 +7,11 @@ import {PackageContext} from '../../../contexts/PackageContext'
 import LoginContext from '../../../contexts/LoginContext'
 import UploadFormEdit from '../../../components/services/formService/upload/UploadFormEdit'
 import PackageEditSidebar from '../../../components/package/PackageEditSidebar';
+import * as ls from 'local-storage'
 
 function edit({pagex, sidebar}) {
 
-    const {editPackage, setImages} = useContext(PackageContext);
+    const {editPackage, setImages, setEditPackage} = useContext(PackageContext);
     const {getVendorDetails} = useContext(LoginContext);
 
     const serviceIcon = { Venue: 'ico-venue-active.png', 
@@ -56,9 +57,8 @@ function edit({pagex, sidebar}) {
                 })
             }
         }else{
-            Router.back();
+            // Router.back();
         }
-        
        
     }, [editPackage])
 
@@ -79,7 +79,7 @@ function edit({pagex, sidebar}) {
                 <div className="button-edit-position">
                     <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit Package</button>
                     {
-                        sidebarDiv ?
+                         editPackage && sidebarDiv ?
                         <div>
                             <PackageEditSidebar />
                         </div>
@@ -124,35 +124,35 @@ function edit({pagex, sidebar}) {
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
-            
-            <div className="review-catergry-and-price">
-                <div className="review-category">
-                    <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>
+            { 
+                editPackage?
+                <div className="review-catergry-and-price">
+                    <div className="review-category">
+                        <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>
+                    </div>
+                    <React.Fragment>
+                        <div className="review-price">
+                            <img src="/images/icon/ico-dollar.png"/>
+                            <p><span>MYR (Harga Asal)</span> <br></br>{editPackage.totalPrice}</p>
+                        </div>
+                        <div className="review-price">
+                            <img src="/images/icon/ico-dollar.png"/>
+                            <p><span>MYR (Harga Disk)</span> <br></br>{editPackage.originalPrice}</p>
+                        </div>
+                        <div className="review-price">
+                            <img src="/images/icon/ico-dollar.png"/>
+                            <p><span>% (Diskaun)</span> <br></br>{editPackage.discount}</p>
+                        </div>
+                    </React.Fragment>
                 </div>
-                <React.Fragment>
-                    <div className="review-price">
-                        <img src="/images/icon/ico-dollar.png"/>
-                        <p><span>MYR (Harga Asal)</span> <br></br>{editPackage.totalPrice}</p>
-                    </div>
-                    <div className="review-price">
-                        <img src="/images/icon/ico-dollar.png"/>
-                        <p><span>MYR (Harga Disk)</span> <br></br>{editPackage.originalPrice}</p>
-                    </div>
-                    <div className="review-price">
-                        <img src="/images/icon/ico-dollar.png"/>
-                        <p><span>% (Diskaun)</span> <br></br>{editPackage.discount}</p>
-                    </div>
-                </React.Fragment>
-
-                
-            </div>
+                :''
+            }
+            
             {
                 ( serviceType == 'WeddingDress' || serviceType == 'Venue') ?
                     <div className="review-name-and-places" onClick={editTextArea}>
                         <h4> {about.serviceName}</h4>
                         <p><span><img src="/images/icon/ico-location.png"/></span>{details.alamatPenuh}</p>
-                        <h4>Waktu Operasi</h4>
-                        <p>{details.waktuOperasi}</p>
                     </div>
                 :
                     <div className="review-name-and-place" onClick={editTextArea}>
@@ -177,14 +177,15 @@ function edit({pagex, sidebar}) {
                 <h5>Servis Pilihan</h5>
 
                 {
-                    editPackage.selectServices.map((v,i)=>{
+                    editPackage && editPackage.selectServices.map((v,i)=>{
                         return (
-                            <div key={i} style={{position: 'relative'}}>
-                                <p>Nama Servis: {v.serviceName}</p>
-                                <p>Jenis Servis: {v.serviceType}</p>
-                                <p>Desription: {v.description}</p>
-                                <img style={{position: 'absolute', right: '10px', width:'18%', bottom: '10px'}} src={v.images[0].urlStorage} />
-                                <br/>
+                            <div key={i} style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'justify-between', marginBottom: '6px'}}>
+                                <div className="package-review-flex" style={{width: '100%'}}>
+                                    <p style={{marginBottom: 0}}>Nama Servis: {v.serviceName}</p>
+                                    <p>Jenis Servis: {v.serviceType}</p>
+                                    <p>Desription: {v.description}</p>
+                                </div>
+                                <img style={{width: '30%', height: '100px', objectFit: 'cover'}} src={v.images[0].urlStorage} />
                             </div>
                         )
                     })
@@ -198,7 +199,7 @@ function edit({pagex, sidebar}) {
                 <h5>Description:</h5>
                 <p>{editPackage && editPackage.description}</p>
 
-                <h5>Terms And Condition:</h5>
+                <h5>Syarat dan Terma:</h5>
                 <p>{ editPackage && editPackage.tnc}</p>
 
                
@@ -247,6 +248,7 @@ function edit({pagex, sidebar}) {
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
                 .icon-service{width:20%;}
+                .package-review-flex > p { margin: 0; color: #75848E; font-size: 14px; font-weight: normal;}
                 @media screen and (max-width: 480px ){
                     .review-catergry-and-price {
                         overflow-x: scroll;padding: 0px 10px;

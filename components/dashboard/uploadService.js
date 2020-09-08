@@ -5,6 +5,7 @@ import AddServiceContext from '../../contexts/AddServiceContext'
 import {serviceContext} from '../../contexts/ServiceContext'
 import {PackageContext} from '../../contexts/PackageContext'
 import Swal from 'sweetalert2'
+import * as ls from 'local-storage'
 function uploadService() {
     const {user} = useContext(LoginContext)
     const {addServiceAbout,addServiceUpload,getServiceDetailsEdit, addServiceAboutTypeName, addServiceVisibility} = useContext(AddServiceContext)
@@ -122,6 +123,7 @@ function uploadService() {
     const editPackageFn = async (index) => {
         let pkg = packages[index]
         setEditPackage(pkg)
+        ls.set('editPackage', pkg)
         Router.push('/package/update')
 
 
