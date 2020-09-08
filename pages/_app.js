@@ -6,6 +6,7 @@ import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
 import ServiceContextProvider from '../contexts/ServiceContext'
+import * as ls from 'local-storage'
 /*
   hargaPerPerson,discount // addServiceDetailsKadBanner/addServiceDetailsCaterer/addServiceDetailsDoorGift/addServiceDetailsHantaran
   harga,hargaDiscount // addServiceDetailsVenue/addServiceDetailsWeddingDress
@@ -368,6 +369,7 @@ class MyApp extends App {
           this.removeServiceStorage()
           alert('success')
           window.location.href = `/${pagex}/done`;
+          ls.remove('serviceList')
           // Router.push(`/${pagex}/done`)
         })
         .catch((e) => {
@@ -418,6 +420,7 @@ class MyApp extends App {
           this.removeServiceStorage()
           alert('success')
           window.location.href = `/${pagex}`
+          ls.remove('serviceList')
         })
         .catch((e) => {
           alert('error')

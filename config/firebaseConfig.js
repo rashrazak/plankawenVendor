@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
+import * as ls from 'local-storage'
 
 //test
 // const config = {
@@ -147,6 +148,7 @@ class Firebase {
 
     async deleting(serviceType, id){
         await this.db.collection(serviceType).doc(id).delete();
+        ls.remove('serviceList')
         location.reload();
     }
 
