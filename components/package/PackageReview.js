@@ -93,13 +93,15 @@ function PackageReview() {
             </div>
             <h5>{title}</h5>
             <div className="review-desc">
-                <p>Description: {description}</p>
-                <p>TnC: {tnc}</p>
-                <p>Minimum Quantity: {quantity}</p>
-                <p>Harga RM: {price}</p>
-                <p>Covered Area: </p>
+                <p>Description: <br/><span>{description}</span></p>
+                <p>TnC: <br/><span>{tnc}</span></p>
+                <p>Minimum Quantity: <br/><span>{quantity}</span></p>
+                <p>Harga RM: <br/><span>{price}</span></p>
+                <p>Covered Area: <br/>
+
                 {coveredArea && coveredArea.map((v)=>{
-                    return (<p>{v} </p>)})}
+                    return (<span style={{display: 'block'}}>{v} </span>)})}
+                </p>
             </div>
 
             <div className="review-package">
@@ -262,6 +264,7 @@ function PackageReview() {
                 .review-price > img { width: 16px;}
                 .review-desc { background-color: #F5F6FA; padding: 20px; margin-bottom: 22px; border-radius: 4px;}
                 .review-desc > p { color:  #75848E; font-size: 14px;}
+                .review-desc > p > span { color: #515D65; font-size: 16px; font-weight: bold;}
                 @media screen and ( max-width: 480px ) {
                     .review-form { padding: 0 20px;}
                     .package-details { flex-wrap: wrap;}
