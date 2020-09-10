@@ -136,12 +136,16 @@ function edit({pagex, sidebar}) {
                             <p><span>MYR (Harga Asal)</span> <br></br>{editPackage.totalPrice}</p>
                         </div>
                         <div className="review-price">
-                            <img src="/images/icon/ico-dollar.png"/>
-                            <p><span>MYR (Harga Disk)</span> <br></br>{editPackage.originalPrice}</p>
+                            <img src="/images/icon/ico-canopy-black.png"/>
+                            <p><span>Minimum Qty</span> <br></br>{editPackage.quantity}</p>
                         </div>
                         <div className="review-price">
-                            <img src="/images/icon/ico-dollar.png"/>
-                            <p><span>% (Diskaun)</span> <br></br>{editPackage.discount}</p>
+                            <img src="/images/icon/bell.png"/>
+                            <p><span>Status</span> <br></br>{editPackage.status}</p>
+                        </div>
+                        <div className="review-price">
+                            <img src="/images/icon/edit.png"/>
+                            <p><span>Visible</span> <br></br>{editPackage.visibility}</p>
                         </div>
                     </React.Fragment>
                 </div>
@@ -184,6 +188,50 @@ function edit({pagex, sidebar}) {
                                     <p style={{marginBottom: 0}}>Nama Servis: {v.serviceName}</p>
                                     <p>Jenis Servis: {v.serviceType}</p>
                                     <p>Desription: {v.description}</p>
+                                    {
+                                        v.serviceType == 'Makeup'?
+                                            <div>
+                                                <p>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
+                                                <p>Harga Full: {v.serviceDetails.hargaFull}</p>
+                                            </div>
+                                            
+                                        : v.serviceType == 'KadBanner'?
+                                            <div>
+                                                <p>Harga Kad: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
+                                                {
+                                                    v.serviceDetails.banner == true ?
+                                                        <div>
+                                                            <p>Description: {v.serviceDetails.bannerDesc.description}</p>
+                                                            {
+                                                                kadbanner.serviceDetails.bannerDesc.bannerSize.map((val, index)=>{
+                                                                    return(
+                                                                        <div>
+                                                                            <p>Harga:{val.harga}</p>
+                                                                            <p>Size:{val.size}</p>
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
+                                                        
+                                                    :''
+                                                }
+                                            </div>
+                                                
+
+                                        :v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'?
+                                            <div>
+                                                <p>Harga {v.serviceType}: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
+                                                
+                                            </div>
+                                        :v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'?
+                                            <div>
+                                                <p>Harga {v.serviceType}: {v.serviceDetails.harga} </p>
+                                                
+                                            </div>
+                                            
+                                        :''
+                                    }
                                 </div>
                                 <img style={{width: '30%', height: '100px', objectFit: 'cover'}} src={v.images[0].urlStorage} />
                             </div>
@@ -222,7 +270,7 @@ function edit({pagex, sidebar}) {
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}

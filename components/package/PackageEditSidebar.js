@@ -8,6 +8,18 @@ function PackageEditSidebar() {
     const {editVisibility, editPackage, updatePackage} = useContext(PackageContext)
     const {user} = useContext(LoginContext)
 
+    const [visible, setVisible] = useState('hidden')
+
+    useEffect(() => {
+        if (editPackage && !visible) {
+            setVisible(editPackage.visibility)
+        }else{
+            console.log(visible)
+            editVisibility(visible)
+        }
+        // console.log(visible)
+    })
+
     const submitReview = () => {
         updatePackage()
     }
@@ -17,12 +29,16 @@ function PackageEditSidebar() {
                 <PackageEditAbout />
                 <PackageEditImage />
                 {
-                    editPackage && editPackage.visibility == 'show' ?
-                    <button className={'btn btn-edit'} onClick={()=> editVisibility('hidden')}>Hide</button>
+                    visible == 'hidden' ?
+                    <div>
+                        <button className={'btn btn-edit'} onClick={()=> setVisible('show')}>Hide</button>
+                    </div>
                     :
-                    <button className={'btn btn-edit'} onClick={()=> editVisibility('show')}>Show</button>
+                    <div>
+                        <button className={'btn btn-edit'} onClick={()=> setVisible('hidden')}>Show</button>
+                    </div>
                 }
-                <button className={'btn btn-save'} onClick={()=> submitReview()}>Simpan</button>
+                <button className={'btn btn-save'} onClick={()=> submitReview()}>Simpan Ke DB</button>
             </div>
         <style jsx>{`
             .sidebar-edit { max-width: 300px; position: absolute; left: 0;}

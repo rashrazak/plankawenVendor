@@ -25,15 +25,13 @@ function PackageEditAbout() {
             if (!service || !serviceList) {
                 let x = await serviceList
                 setService(x)
-                let y = await serviceListSelected
-                setServiceSelect(y)
             }
         }
 
         getServ()
 
        
-    }, [service, serviceSelect])
+    }, [service])
 
     useEffect(() => {
         if (editPackage) {
@@ -41,6 +39,7 @@ function PackageEditAbout() {
             setCoveredArea([...editPackage.coveredArea])
             setDescription(editPackage.description)
             setServiceListSelected([...editPackage.selectServices])
+            setServiceSelect([...editPackage.selectServices])
             setTnc(editPackage.tnc)
             setQuantity(parseInt(editPackage.quantity))
             setOriPrice(parseFloat(editPackage.originalPrice) )
@@ -237,8 +236,17 @@ function PackageEditAbout() {
     }
 
     const revert = () => {
-        setServiceSelect(null)
-        setService(null)
+        //revert back to default
+        setTitle(editPackage.title)
+        setCoveredArea([...editPackage.coveredArea])
+        setDescription(editPackage.description)
+        setServiceListSelected([...editPackage.selectServices])
+        setServiceSelect([...editPackage.selectServices])
+        setTnc(editPackage.tnc)
+        setQuantity(parseInt(editPackage.quantity))
+        setOriPrice(parseFloat(editPackage.originalPrice) )
+        setPrice(parseFloat(editPackage.totalPrice))
+        setDiscount(parseInt(editPackage.discount))
         setModal(!modal)
     }
 
@@ -288,7 +296,7 @@ function PackageEditAbout() {
                                     
                                 </div>
                                 <div  className="total-service">
-                                    <p>Minimum servis untuk pakej: {serviceListSelected ? serviceListSelected.length : 0}</p>
+                                    <p>Minimum servis untuk pakej (2): {serviceListSelected ? serviceListSelected.length : 0}</p>
                                 </div>
                                 <div className="form-service">
                                     <div className="form-section">
@@ -370,8 +378,8 @@ function PackageEditAbout() {
                             </div>
                             <div className="form-section">
                                 <p>Harga Asal: RM {oriPrice}</p>
-                                <p>Harga Diskaun Baharu: RM {price}</p> 
-                                <p>Jumlah Diskaun: % {discount}</p>  
+                                {/* <p>Harga Diskaun Baharu: RM {price}</p> 
+                                <p>Jumlah Diskaun: % {discount}</p>   */}
                             </div>
                         </div>
                         :
@@ -381,8 +389,8 @@ function PackageEditAbout() {
                 
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={()=>toggle()}>Simpan</Button>
-                    <Button color="secondary" onClick={()=>revert()}>Kembali</Button>
+                    <Button color="primary" onClick={()=>toggle()}>Update</Button>
+                    <Button color="secondary" onClick={()=>revert()}>Cancel</Button>
                 </ModalFooter>
             </Modal>
             <style jsx>{`

@@ -2,11 +2,16 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import '../../css/modal.css'
 import PackageUpload from './PackageUpload'
-
+import {PackageContext} from '../../contexts/PackageContext'
+import {serviceContext} from '../../contexts/ServiceContext'
 
 function modalImage() {
+    const {images} = useContext(PackageContext);
+    
+
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const { setEditPackage, editPackage} = useContext(PackageContext)
     
     return (
         <div>
@@ -17,8 +22,8 @@ function modalImage() {
                    <PackageUpload />
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={()=>setModal(!modal)}>Simpan</Button>
-                    <Button color="secondary" onClick={()=>setModal(!modal)}>Kembali</Button>
+                    <Button color="primary" onClick={()=>setModal(!modal)}>Update</Button>
+                    {/* <Button color="secondary" onClick={()=>setModal(!modal)}>Kembali</Button> */}
                 </ModalFooter>
             </Modal>
             <style jsx>{`
