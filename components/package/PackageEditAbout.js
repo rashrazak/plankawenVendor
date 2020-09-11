@@ -102,9 +102,13 @@ function PackageEditAbout() {
         setServiceSelect(old => [...old, data[i] ])
     }
 
-    const deleteFunction = (name, type, i) =>{
-        let data = service
-        setServiceSelect(old => old.filter(v => v.serviceName != name && v.serviceType != type))
+    // const deleteFunction = (name, type, i) =>{
+    //     let data = service
+    //     setServiceSelect(old => old.filter(v => v.serviceName != name && v.serviceType != type))
+    // }
+
+    const deleteFunction = (id) =>{
+        setServiceSelect(old => old.filter(v => v.id != id))
     }
     
 
@@ -112,8 +116,10 @@ function PackageEditAbout() {
   
 
     useEffect(() => {
-        // console.log(quantity)
-        calculatePrice(serviceListSelected, quantity)
+        console.log(quantity)
+        if (service) {
+            calculatePrice(serviceSelect, quantity)
+        }
     }, [quantity])
 
 
@@ -138,8 +144,14 @@ function PackageEditAbout() {
         calculatePrice(serviceListSelected, quantity)
     },[serviceListSelected])
 
+    useEffect(() => {
+        if (service) {
+            calculatePrice(serviceSelect, quantity)
+        }
+    },[serviceSelect])
+
     const returnValue = (data, index, price) =>{
-        let service = serviceListSelected
+        let service = serviceSelect
 
         if (data.serviceType == 'Makeup') {
             let makeup = service[index]
@@ -167,6 +179,7 @@ function PackageEditAbout() {
         }
         //sambung
         setServiceListSelected([...service])
+        setServiceSelect([...service])
         calculatePrice(service, quantity)
     }
 
@@ -232,6 +245,7 @@ function PackageEditAbout() {
         pkg.selectServices = serviceSelect
 
         setEditPackage(pkg)
+        console.log(pkg)
         setModal(!modal);        
     }
 
@@ -269,11 +283,15 @@ function PackageEditAbout() {
                                                 let name = v.serviceName
                                                 let type = v.serviceType
                                                 let avail = false
-                                                serviceSelect && serviceSelect.map((va,ind)=>{
-                                                    if (va.serviceName === name && va.serviceType == type) {
-                                                        avail = true
+
+                                                let found = false;
+                                                for(let i = 0; i < serviceSelect.length; i++) {
+                                                    if (serviceSelect[i].id == v.id) {
+                                                        found = true;
+                                                        break;
                                                     }
-                                                })
+                                                }
+                                               
                                                 let img;
                                                 if (v.images.length == 0 || v.images[0]['urlStorage'] == undefined) {
                                                     img = '/images/placeholder/service-placheholder.png'
@@ -281,7 +299,7 @@ function PackageEditAbout() {
                                                     img = v.images[0]['urlStorage']
                                                 }
                                                 return(
-                                                    <div key={i} className={ avail == true ? 'card-service active-card':'card-service'} onClick={()=> avail == true ? deleteFunction(name, type, i):selectFunction(i)}>
+                                                    <div key={i} className={ found ? 'card-service active-card':'card-service'} onClick={()=> found ? deleteFunction(v.id):selectFunction(i)}>
                                                         <img src={img}/>
                                                         <div className={`card-service-desc`}>
                                                             <img className={`icon-service`} src={`/images/icon/services-icon/dark/${serviceIcon[v.serviceType]}`}/>
@@ -369,13 +387,13 @@ function PackageEditAbout() {
                                 </tbody>
                             </Table>
                             <div className="form-section">
-                                <h4>sila masukkan jumlah kuantiti  </h4>
+                                <h4>sila masukkan minimum kuantiti  </h4>
                                 <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
                             </div>
-                            <div className="form-section">
+                            {/* <div className="form-section">
                                 <h4>Harga Diskaun</h4>
                                 <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
-                            </div>
+                            </div> */}
                             <div className="form-section">
                                 <p>Harga Asal: RM {oriPrice}</p>
                                 {/* <p>Harga Diskaun Baharu: RM {price}</p> 

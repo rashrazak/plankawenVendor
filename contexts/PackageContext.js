@@ -125,6 +125,7 @@ const PackageContextProvider = (props) => {
         let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
         let img = await firebase.getImagesPackage(images, email)
         let pkg = editPackage
+        ls.set('editPackage', pkg)
         pkg.images = img
         setTimeout(() => {
             let y = firebase.updatePackage(pkg.packageId, pkg)
@@ -132,7 +133,7 @@ const PackageContextProvider = (props) => {
                 let y = firebase.updatePackage(pkg.packageId, pkg)
                 y.then(() => {
                 alert('success')
-                window.location.href = `/dashboard`
+                location.reload();
                 })
                 .catch((e) => {
                 alert('error')
