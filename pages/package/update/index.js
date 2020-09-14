@@ -14,19 +14,19 @@ function edit({pagex, sidebar}) {
     const {editPackage, setImages, setEditPackage} = useContext(PackageContext);
     const {getVendorDetails} = useContext(LoginContext);
 
-    const serviceIcon = { Venue: 'ico-venue-active.png', 
-    Canopy: 'ico-canopy-active.png', 
-    KadBanner: 'ico-cards-active.png',
-    WeddingDress: 'ico-dress-active.png',
-    Makeup: 'ico-makeup-active.png',
-    Photographer: 'ico-photography-active.png', 
-    Videographer: 'ico-videography-active.png',
-    Pelamin: 'ico-pelamin-active.png', 
-    Caterer: 'ico-catering-active.png',
-    Hantaran: 'ico-hantaran-active.png',
-    Persembahan: 'ico-performance-active.png',
-    DoorGift: 'ico-goodiebag-active.png',
-    Others: 'ico-others-active.png'}
+    const serviceIcon = { Venue: 'ico-venue.png', 
+    Canopy: 'ico-canopy.png', 
+    KadBanner: 'ico-cards.png',
+    WeddingDress: 'ico-dress.png',
+    Makeup: 'ico-makeup.png',
+    Photographer: 'ico-camera.png', 
+    Videographer: 'ico-camera.png',
+    Pelamin: 'ico-pelamin.png', 
+    Caterer: 'ico-catering.png',
+    Hantaran: 'ico-hantaran.png',
+    Persembahan: 'ico-performance.png',
+    DoorGift: 'ico-doorgift.png',
+    Others: 'ico-others.png'}
 
     const [coverImage, setcoverImage] = useState('')
     const [images, setimages] = useState([])
@@ -176,7 +176,7 @@ function edit({pagex, sidebar}) {
             
             <div className="review-desc">
 
-            <h5>Description:</h5>
+                <h5>Description:</h5>
                 <p>{editPackage && editPackage.description}</p>
 
                 <h5>Covered Area:</h5>
@@ -186,67 +186,133 @@ function edit({pagex, sidebar}) {
 
                 <h5>Syarat dan Terma:</h5>
                 <p>{ editPackage && editPackage.tnc}</p>
+                
+            </div>
 
-                <h5>Servis Pilihan</h5>
+            <div className="">
 
-                {
-                    editPackage && editPackage.selectServices.map((v,i)=>{
-                        return (
-                            <div key={i} style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'justify-between', marginBottom: '6px'}}>
-                                <div className="package-review-flex" style={{width: '100%'}}>
-                                
-                                    <p style={{marginBottom: 0}}>Nama Servis: {v.serviceName}</p>
-                                    <p>Jenis Servis: {v.serviceType}</p>
-                                    <p>Desription: {v.description}</p>
-                                    {
-                                        v.serviceType == 'Makeup'?
-                                            <>
-                                                <p>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
-                                                <p>Harga Full: {v.serviceDetails.hargaFull}</p>
-                                            </>
-                                            
-                                        : v.serviceType == 'KadBanner'?
-                                            <>
-                                                <p>Harga Kad: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
-                                                {
-                                                    v.serviceDetails.banner == true ?
-                                                        <div>
-                                                            <p>Description: {v.serviceDetails.bannerDesc.description}</p>
-                                                            {
-                                                                kadbanner.serviceDetails.bannerDesc.bannerSize.map((val, index)=>{
-                                                                    return(
-                                                                        <>
-                                                                            <p>Harga:{val.harga}</p>
-                                                                            <p>Size:{val.size}</p>
-                                                                        </>
-                                                                        
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                        
-                                                    :''
-                                                }
-                                            </>
-                                                
+            {
+                     editPackage && editPackage.selectServices.map((v,i) => {
 
-                                        :v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'?
-                                            <>
-                                                <p>Harga {v.serviceType}: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
-                                                
-                                            </>
-                                        :v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'?
-                                            <>
-                                                <p>Harga {v.serviceType}: {v.serviceDetails.harga} </p>
-                                                
-                                            </>
-                                            
-                                        :''
-                                    }
+                        let price = 0
+
+                        if (v.serviceType == "Makeup") {
+
+                            price += parseInt(v.serviceDetails.hargaFull)
+                            price += parseInt(v.serviceDetails.hargaTouchup)
+
+                            return (
+                                <div className="package-details" key={i}>
+                                    <div className="package-img">
+                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <div className="package-icon">
+                                            <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
+                                            <div className="package-icon-text">
+                                                <h6>{v.serviceName}</h6>
+                                                <p>{v.serviceType}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="package-subs">
+                                        <p style={{marginBottom: 0}}>Description: {v.description}</p>
+                                        <p style={{marginBottom: 0}}>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
+                                        <p style={{marginBottom: 0}}>Harga full: {v.serviceDetails.hargaFull}</p>
+                                        <div className="package-subs-2">
+                                            <p>Harga: <span>MYR {price}</span></p>  
+                                        </div>                                       
+                                    </div>
                                 </div>
-                                <img style={{width: '30%', height: '100px', objectFit: 'cover'}} src={v.images[0].urlStorage} />
-                            </div>
-                        )
+                            )
+
+                        } else if (v.serviceType == 'KadBanner') {
+
+                            let priceBanner = 0
+
+                            price += (quantity * v.serviceDetails.hargaPerPerson)
+                            // v.serviceDetails.bannerDesc.bannarSize.forEach( obj => priceBanner += parseInt(obj.harga))
+                            // price += priceBanner
+
+                            const reducer = (accumulator, currentValue) => parseInt(accumulator.harga) + parseInt(currentValue.harga)
+                            
+                            priceBanner = v.serviceDetails.bannerDesc.bannerSize.reduce(reducer)
+                            price += priceBanner
+
+                            return (
+                                <div className="package-details" key={i}>
+                                    <div className="package-img">
+                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <div className="package-icon">
+                                            <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
+                                            <div className="package-icon-text">
+                                                <h6>{v.serviceName}</h6>
+                                                <p>{v.serviceType}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="package-subs">
+                                        <p>Description: {v.description}</p>
+                                        <div className="package-subs-2">
+                                            <p>Harga: <span>MYR {price}</span></p>  
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            )
+
+                        } else if (v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift')  {
+
+                            price += parseInt(v.serviceDetails.hargaPerPerson)
+        
+                            return (
+                                <div className="package-details" key={i}>
+                                    <div className="package-img">
+                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <div className="package-icon">
+                                            <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
+                                            <div className="package-icon-text">
+                                                <h6>{v.serviceName}</h6>
+                                                <p>{v.serviceType}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="package-subs">
+                                        <p>Description: {v.description}</p>
+                                        <div className="package-subs-2">
+                                            <p>Quantity: <span>{quantity}</span></p>  
+                                            <p>Harga: <span>MYR {price}</span></p>  
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            )
+
+                        } else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others') {
+
+                            price += parseInt(v.serviceDetails.harga)
+
+                            return (
+
+                                <div className="package-details" key={i}>
+                                    <div className="package-img">
+                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <div className="package-icon">
+                                            <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
+                                            <div className="package-icon-text">
+                                                <h6>{v.serviceName}</h6>
+                                                <p>{v.serviceType}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="package-subs">
+                                        <p>Description: {v.description}</p>
+                                        {/* <p>Harga: {v.serviceDetails.harga}</p> */}
+                                        <div className="package-subs-2">
+                                            <p>Harga: <span>MYR {price}</span></p>  
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            )
+                        }
+
+                        
                     })
                 }
             </div>
@@ -295,6 +361,20 @@ function edit({pagex, sidebar}) {
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
                 .icon-service{width:20%;}
                 .package-review-flex > p { margin: 0; color: #75848E; font-size: 14px; font-weight: normal;}
+                .package-details { display: flex; margin: 10px 0;}
+                .package-img { margin-right: 10px; flex: 0 0 200px; border: 1px solid #F4F4F4; border-radius: 4px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.1);}
+                .package-img > img { width: 100%; object-fit: cover; height: 95px;}
+                .package-subs { background-color: #F5F6FA; padding: 10px; width: 100%; position: relative;}
+                .package-subs::after { position: absolute; content: ''; bottom: 50px; left: 0; right: 0; background-color: #EAEAEA; height: 1px; width: 100%;}
+                .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal;  margin-bottom: 0;}
+                .package-subs-2 { position: absolute; bottom: 0px; display: flex;}
+                .package-subs-2 > p { font-size: 14px; color: #515D65; font-weight: normal; }
+                .package-subs-2 > p:first-child { margin-right: 16px;}
+                .package-subs-2 > p > span { font-weight: bold;}
+                .package-icon { display: flex; align-items: center; padding: 6px;}
+                .package-icon > img { margin-right: 10px;}
+                .package-icon-text > h6 { font-weight: bold; font-size: 12px; color: #3E3E3E; margin-bottom: 0;}
+                .package-icon-text > p{ font-weight: normal; font-size: 11px; color: #75848E; margin-bottom: 0;}
                 @media screen and (max-width: 480px ){
                     .review-catergry-and-price {
                         overflow-x: scroll;padding: 0px 10px;
