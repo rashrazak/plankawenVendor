@@ -161,9 +161,10 @@ function PackageReview() {
                             // price += priceBanner
 
                             const reducer = (accumulator, currentValue) => parseInt(accumulator.harga) + parseInt(currentValue.harga)
-                            
-                            priceBanner = v.serviceDetails.bannerDesc.bannerSize.reduce(reducer)
-                            price += priceBanner
+                            if (v.serviceDetails.banner == true && v.serviceDetails.bannerDesc.bannerSize.length > 0) {
+                                priceBanner = v.serviceDetails.bannerDesc.bannerSize.reduce(reducer)
+                                price += priceBanner
+                            }
 
                             return (
                                 <div className="package-details" key={i}>
