@@ -123,7 +123,7 @@ function edit({pagex, sidebar}) {
                 </Modal>
             </React.Fragment>
             { 
-                editPackage?
+                editPackage ?
                 <div className="review-catergry-and-price">
                     <div className="review-category">
                         <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>

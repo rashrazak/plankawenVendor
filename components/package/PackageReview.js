@@ -90,7 +90,21 @@ function PackageReview() {
                     <img src="/images/icon/ico-dollar.png"/>
                     <p><span>MYR</span> <br></br> {price}</p>
                 </div>
+                <div className="review-price">
+                    <img src="/images/icon/ico-canopy-black.png"/>
+                    <p><span>Minimum Qty</span> <br></br> {quantity}</p>
+                </div>
+                <div className="review-price">
+                    <img src="/images/icon/bell.png"/>
+                    <p><span>Status</span> <br></br> Pending</p>
+                </div>
+                <div className="review-price">
+                    <img src="/images/icon/edit.png"/>
+                    <p><span>Visible</span> <br></br> Show</p>
+                </div>
             </div>
+
+            
             <h5>{title}</h5>
             <div className="review-desc">
                 <p>Description: <br/><span>{description}</span></p>
