@@ -176,6 +176,17 @@ function edit({pagex, sidebar}) {
             
             <div className="review-desc">
 
+            <h5>Description:</h5>
+                <p>{editPackage && editPackage.description}</p>
+
+                <h5>Covered Area:</h5>
+                <p>{editPackage && editPackage.coveredArea.map((v,i)=>{
+                        return (<span key={i}>{v} <br/> </span>)    
+                })}</p>
+
+                <h5>Syarat dan Terma:</h5>
+                <p>{ editPackage && editPackage.tnc}</p>
+
                 <h5>Servis Pilihan</h5>
 
                 {
@@ -183,18 +194,19 @@ function edit({pagex, sidebar}) {
                         return (
                             <div key={i} style={{position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'justify-between', marginBottom: '6px'}}>
                                 <div className="package-review-flex" style={{width: '100%'}}>
+                                
                                     <p style={{marginBottom: 0}}>Nama Servis: {v.serviceName}</p>
                                     <p>Jenis Servis: {v.serviceType}</p>
                                     <p>Desription: {v.description}</p>
                                     {
                                         v.serviceType == 'Makeup'?
-                                            <div>
+                                            <>
                                                 <p>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
                                                 <p>Harga Full: {v.serviceDetails.hargaFull}</p>
-                                            </div>
+                                            </>
                                             
                                         : v.serviceType == 'KadBanner'?
-                                            <div>
+                                            <>
                                                 <p>Harga Kad: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
                                                 {
                                                     v.serviceDetails.banner == true ?
@@ -203,10 +215,11 @@ function edit({pagex, sidebar}) {
                                                             {
                                                                 kadbanner.serviceDetails.bannerDesc.bannerSize.map((val, index)=>{
                                                                     return(
-                                                                        <div>
+                                                                        <>
                                                                             <p>Harga:{val.harga}</p>
                                                                             <p>Size:{val.size}</p>
-                                                                        </div>
+                                                                        </>
+                                                                        
                                                                     )
                                                                 })
                                                             }
@@ -214,19 +227,19 @@ function edit({pagex, sidebar}) {
                                                         
                                                     :''
                                                 }
-                                            </div>
+                                            </>
                                                 
 
                                         :v.serviceType == 'Hantaran' || v.serviceType == 'Caterer' || v.serviceType == 'DoorGift'?
-                                            <div>
+                                            <>
                                                 <p>Harga {v.serviceType}: {v.serviceDetails.hargaPerPerson} X {v.quantity}</p>
                                                 
-                                            </div>
+                                            </>
                                         :v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'?
-                                            <div>
+                                            <>
                                                 <p>Harga {v.serviceType}: {v.serviceDetails.harga} </p>
                                                 
-                                            </div>
+                                            </>
                                             
                                         :''
                                     }
@@ -236,19 +249,6 @@ function edit({pagex, sidebar}) {
                         )
                     })
                 }
-
-                <h5>Covered Area:</h5>
-                <p>{editPackage && editPackage.coveredArea.map((v,i)=>{
-                        return (<span key={i}>{v} <br/> </span>)    
-                })}</p>
-                
-                <h5>Description:</h5>
-                <p>{editPackage && editPackage.description}</p>
-
-                <h5>Syarat dan Terma:</h5>
-                <p>{ editPackage && editPackage.tnc}</p>
-
-               
             </div>
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto; position: relative;}

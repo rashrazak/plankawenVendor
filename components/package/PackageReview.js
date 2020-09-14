@@ -128,7 +128,9 @@ function PackageReview() {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>{v.description}</p>
+                                        <p style={{marginBottom: 0}}>Description: {v.description}</p>
+                                        <p style={{marginBottom: 0}}>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
+                                        <p style={{marginBottom: 0}}>Harga full: {v.serviceDetails.hargaFull}</p>
                                         <div className="package-subs-2">
                                             <p>Price worth: <span>MYR {price}</span></p>  
                                         </div>                                       
@@ -162,7 +164,7 @@ function PackageReview() {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>{v.description}</p>
+                                        <p>Description: {v.description}</p>
                                         <div className="package-subs-2">
                                             <p>Price worth: <span>MYR {price}</span></p>  
                                         </div>                                       
@@ -187,7 +189,7 @@ function PackageReview() {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>{v.description}</p>
+                                        <p>Description: {v.description}</p>
                                         <div className="package-subs-2">
                                             <p>Quantity: <span>{quantity}</span></p>  
                                             <p>Price worth: <span>MYR {price}</span></p>  
@@ -214,7 +216,8 @@ function PackageReview() {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>{v.description}</p>
+                                        <p>Description: {v.description}</p>
+                                        {/* <p>Harga: {v.serviceDetails.harga}</p> */}
                                         <div className="package-subs-2">
                                             <p>Price worth: <span>MYR {price}</span></p>  
                                         </div>                                       
@@ -244,7 +247,7 @@ function PackageReview() {
                 .package-img > img { width: 100%; object-fit: cover; height: 95px;}
                 .package-subs { background-color: #F5F6FA; padding: 10px; width: 100%; position: relative;}
                 .package-subs::after { position: absolute; content: ''; bottom: 50px; left: 0; right: 0; background-color: #EAEAEA; height: 1px; width: 100%;}
-                .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal; }
+                .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal;  margin-bottom: 0;}
                 .package-subs-2 { position: absolute; bottom: 0px; display: flex;}
                 .package-subs-2 > p { font-size: 14px; color: #515D65; font-weight: normal; }
                 .package-subs-2 > p:first-child { margin-right: 16px;}
