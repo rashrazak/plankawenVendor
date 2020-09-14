@@ -213,7 +213,7 @@ function edit({pagex, sidebar}) {
                                                         <div>
                                                             <p>Description: {v.serviceDetails.bannerDesc.description}</p>
                                                             {
-                                                                kadbanner.serviceDetails.bannerDesc.bannerSize.map((val, index)=>{
+                                                                v.serviceDetails.bannerDesc.bannerSize.map((val, index)=>{
                                                                     return(
                                                                         <>
                                                                             <p>Harga:{val.harga}</p>

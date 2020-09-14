@@ -4,14 +4,24 @@ import '../../css/modal.css'
 import PackageUpload from './PackageUpload'
 import {PackageContext} from '../../contexts/PackageContext'
 import {serviceContext} from '../../contexts/ServiceContext'
+import * as ls from 'local-storage'
 
 function modalImage() {
-    const {images} = useContext(PackageContext);
-    
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const { setEditPackage, editPackage} = useContext(PackageContext)
+    const { setEditPackage, editPackage, images} = useContext(PackageContext)
+
+    const updateImage = () =>{
+        if (images) {
+            let ep = editPackage
+            ep.images = images
+            ls.set('editPackage', ep)
+        }
+        setModal(!modal)
+        alert('Success: Sila simpan ke DB')
+        location.reload()
+    }
     
     return (
         <div>
@@ -22,7 +32,7 @@ function modalImage() {
                    <PackageUpload />
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={()=>setModal(!modal)}>Update</Button>
+                    <Button color="primary" onClick={()=>updateImage()}>Update</Button>
                     {/* <Button color="secondary" onClick={()=>setModal(!modal)}>Kembali</Button> */}
                 </ModalFooter>
             </Modal>

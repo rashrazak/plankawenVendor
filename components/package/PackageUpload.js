@@ -10,7 +10,7 @@ import * as ls from 'local-storage'
     
 function PackageUpload({pagex}) {
     const Router = useRouter()
-    const {images, setImages} = useContext(PackageContext);
+    const {images, setImages, editPackage, setEditPackage} = useContext(PackageContext);
     const [imageLimit, setimageLimit] = useState(3)
 
    

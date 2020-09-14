@@ -245,8 +245,10 @@ function PackageEditAbout() {
         pkg.selectServices = serviceSelect
 
         setEditPackage(pkg)
-        console.log(pkg)
-        setModal(!modal);        
+        ls.set('editPackage', pkg)
+        // setModal(!modal);  
+        alert('Success: Sila simpan ke DB')
+        location.reload()      
     }
 
     const revert = () => {
