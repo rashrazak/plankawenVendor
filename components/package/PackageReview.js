@@ -132,7 +132,7 @@ function PackageReview() {
                                         <p style={{marginBottom: 0}}>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
                                         <p style={{marginBottom: 0}}>Harga full: {v.serviceDetails.hargaFull}</p>
                                         <div className="package-subs-2">
-                                            <p>Price worth: <span>MYR {price}</span></p>  
+                                            <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@ function PackageReview() {
                                     <div className="package-subs">
                                         <p>Description: {v.description}</p>
                                         <div className="package-subs-2">
-                                            <p>Price worth: <span>MYR {price}</span></p>  
+                                            <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@ function PackageReview() {
                                         <p>Description: {v.description}</p>
                                         <div className="package-subs-2">
                                             <p>Quantity: <span>{quantity}</span></p>  
-                                            <p>Price worth: <span>MYR {price}</span></p>  
+                                            <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@ function PackageReview() {
                                         <p>Description: {v.description}</p>
                                         {/* <p>Harga: {v.serviceDetails.harga}</p> */}
                                         <div className="package-subs-2">
-                                            <p>Price worth: <span>MYR {price}</span></p>  
+                                            <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
                                     </div>
                                 </div>
