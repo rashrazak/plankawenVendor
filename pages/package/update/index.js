@@ -186,9 +186,8 @@ function edit({pagex, sidebar}) {
 
                 <h5>Syarat dan Terma:</h5>
                 <p>{ editPackage && editPackage.tnc}</p>
-                
-            </div>
 
+            </div>
             <div className="">
 
             {
@@ -343,7 +342,7 @@ function edit({pagex, sidebar}) {
                 .review-name-and-places > h4 > span { font-weight: bold;}
                 .review-name-and-places > p { font-size: 12px; color: #3E3E3E;}
                 .review-name-and-places > p > span  { margin-right: 10px;}
-                .review-desc { background-color: #F5F6FA; padding: 20px; margin-bottom: 22px; border-radius: 4px;}
+                .review-desc { padding: 20px 0; margin-bottom: 22px;}
                 .review-desc > p { color:  #75848E; font-size: 14px;}
                 .review-user  { background-color: #F5F6FA; padding: 20px; border-radius: 4px; margin-bottom: 22px; display: flex;}
                 .review-user-image > img { width: 74px; height: 74px; object-fit: cover; border-radius: 50%;}
