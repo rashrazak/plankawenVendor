@@ -107,10 +107,8 @@ function PackageReview() {
             
             <h5>{title}</h5>
             <div className="review-desc">
-                <p>Description: <br/><span>{description}</span></p>
-                <p>TnC: <br/><span>{tnc}</span></p>
-                <p>Minimum Quantity: <br/><span>{quantity}</span></p>
-                <p>Harga RM: <br/><span>{price}</span></p>
+                <p>Tentang Pakej: <br/><span>{description}</span></p>
+                <p>Terma & Syarat: <br/><span>{tnc}</span></p>
                 <p>Covered Area: <br/>
 
                 {coveredArea && coveredArea.map((v)=>{
@@ -263,6 +261,7 @@ function PackageReview() {
                 .package-subs { background-color: #F5F6FA; padding: 10px; width: 100%; position: relative;}
                 .package-subs::after { position: absolute; content: ''; bottom: 50px; left: 0; right: 0; background-color: #EAEAEA; height: 1px; width: 100%;}
                 .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal;  margin-bottom: 0;}
+                .package-subs > p:first-child { width: 68%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
                 .package-subs-2 { position: absolute; bottom: 0px; display: flex;}
                 .package-subs-2 > p { font-size: 14px; color: #515D65; font-weight: normal; }
                 .package-subs-2 > p:first-child { margin-right: 16px;}
@@ -280,7 +279,7 @@ function PackageReview() {
                 .review-price > p { font-size: 14px; color: #3E3E3E; width: 100%; margin: 0;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
-                .review-desc { background-color: #F5F6FA; padding: 20px; margin-bottom: 22px; border-radius: 4px;}
+                .review-desc { padding: 20px 0; margin-bottom: 22px;}
                 .review-desc > p { color:  #75848E; font-size: 14px;}
                 .review-desc > p > span { color: #515D65; font-size: 16px; font-weight: bold;}
                 @media screen and ( max-width: 480px ) {
