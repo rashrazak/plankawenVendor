@@ -137,7 +137,7 @@ function AboutForm({pagex}) {
                         <React.Fragment>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Asal)</span> <br></br>{details.harga}</p>
+                                <p><span>MYR (Harga Pakej)</span> <br></br>{details.harga}</p>
                             </div>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>

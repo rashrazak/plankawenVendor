@@ -59,7 +59,7 @@ function PackageReview() {
             {
                 images && coverImages ?
                 <div className="hero-review">
-                    <img src={coverImages.base64 || coverImages.urlStorage}/>
+                    <img src={coverImages? coverImages.base64 || coverImages.urlStorage : ''}/>
                     <div className="hero-son-review">
                         {
                             images.map((v, i) => {
@@ -192,7 +192,7 @@ function PackageReview() {
                             return (
                                 <div className="package-details" key={i}>
                                     <div className="package-img">
-                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <img src={v.images.length > 0 ? v.images[0].base64 || v.images[0].urlStorage: ''}/>
                                         <div className="package-icon">
                                             <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
                                             <div className="package-icon-text">

@@ -172,7 +172,7 @@ function PackageEditAbout() {
             random.serviceDetails.hargaPerPerson =  price.hargaPerPerson || 0
             service[index] = random
     
-        }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'){
+        }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others' || data.serviceType == 'Venue'){
             let fix = service[index]
             fix.serviceDetails.harga =  price.harga || 0
             service[index] = fix
@@ -215,7 +215,7 @@ function PackageEditAbout() {
                     orip = orip +  (parseInt( random.serviceDetails.hargaPerPerson ) * qty)
                 }
         
-            }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others'){
+            }else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others' || v.serviceType == 'Venue'){
                 let fix = v
 
                 orip += parseInt( fix.serviceDetails.harga )
@@ -397,7 +397,7 @@ function PackageEditAbout() {
                                 <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                             </div> */}
                             <div className="form-section">
-                                <p>Harga Asal: RM {oriPrice}</p>
+                                <p>Harga Pakej: RM {oriPrice}</p>
                                 {/* <p>Harga Diskaun Baharu: RM {price}</p> 
                                 <p>Jumlah Diskaun: % {discount}</p>   */}
                             </div>
