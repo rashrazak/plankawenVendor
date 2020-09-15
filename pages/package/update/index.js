@@ -131,7 +131,7 @@ function edit({pagex, sidebar}) {
                     <React.Fragment>
                         <div className="review-price">
                             <img src="/images/icon/ico-dollar.png"/>
-                            <p><span>MYR (Harga Pakej)</span> <br></br>{editPackage.originalPrice}</p>
+                            <p><span>MYR (Harga Pakej) (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
                         </div>
                         {/* <div className="review-price">
                             <img src="/images/icon/ico-canopy-black.png"/>
@@ -334,7 +334,7 @@ function edit({pagex, sidebar}) {
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 180px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
