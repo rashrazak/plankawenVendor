@@ -261,7 +261,7 @@ function PackageReview() {
                 .package-subs { background-color: #F5F6FA; padding: 10px; width: 100%; position: relative;}
                 .package-subs::after { position: absolute; content: ''; bottom: 50px; left: 0; right: 0; background-color: #EAEAEA; height: 1px; width: 100%;}
                 .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal;  margin-bottom: 0;}
-                .package-subs > p:first-child { width: 68%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+                .package-subs > p:first-child { width: 96%; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; display: -webkit-box;}
                 .package-subs-2 { position: absolute; bottom: 0px; display: flex;}
                 .package-subs-2 > p { font-size: 14px; color: #515D65; font-weight: normal; }
                 .package-subs-2 > p:first-child { margin-right: 16px;}
