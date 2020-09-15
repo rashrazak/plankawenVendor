@@ -133,7 +133,7 @@ function edit({pagex, sidebar}) {
                             <img src="/images/icon/ico-dollar.png"/>
                             <p><span>MYR (Harga Asal)</span> <br></br>{editPackage.originalPrice}</p>
                         </div>
-                        <div className="review-price">
+                        {/* <div className="review-price">
                             <img src="/images/icon/ico-canopy-black.png"/>
                             <p><span>Minimum Qty</span> <br></br>{editPackage.quantity}</p>
                         </div>
@@ -144,7 +144,7 @@ function edit({pagex, sidebar}) {
                         <div className="review-price">
                             <img src="/images/icon/edit.png"/>
                             <p><span>Visible</span> <br></br>{editPackage.visibility}</p>
-                        </div>
+                        </div> */}
                     </React.Fragment>
                 </div>
                 :''

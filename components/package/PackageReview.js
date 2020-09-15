@@ -88,9 +88,9 @@ function PackageReview() {
                 </div>
                 <div className="review-price">
                     <img src="/images/icon/ico-dollar.png"/>
-                    <p><span>MYR</span> <br></br> {price}</p>
+                     <p><span>MYR (Min {quantity} pax)</span> <br></br> {oriPrice}</p>
                 </div>
-                <div className="review-price">
+                {/* <div className="review-price">
                     <img src="/images/icon/ico-canopy-black.png"/>
                     <p><span>Minimum Qty</span> <br></br> {quantity}</p>
                 </div>
@@ -101,7 +101,7 @@ function PackageReview() {
                 <div className="review-price">
                     <img src="/images/icon/edit.png"/>
                     <p><span>Visible</span> <br></br> Show</p>
-                </div>
+                </div> */}
             </div>
 
             
@@ -275,7 +275,7 @@ function PackageReview() {
                 .review-category > p { font-size: 14px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
                 .icon-service{width:20%;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 140px; text-align: right;}
+                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 170px; text-align: right;}
                 .review-price > p { font-size: 14px; color: #3E3E3E; width: 100%; margin: 0;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
