@@ -25,7 +25,7 @@ useEffect(() => {
         }else if (data.serviceType == 'Hantaran' || data.serviceType == 'Caterer' || data.serviceType == 'DoorGift'){
             setRandomPrice(parseFloat(data.serviceDetails.hargaPerPerson))
     
-        }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'){
+        }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'  || data.serviceType == 'Venue'){
             setFixPrice(parseFloat(data.serviceDetails.harga))
         }
     }
@@ -48,7 +48,7 @@ const clickEdit = () =>{
     }else if (data.serviceType == 'Hantaran' || data.serviceType == 'Caterer' || data.serviceType == 'DoorGift'){
         price.hargaPerPerson = randomPrice
 
-    }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'){
+    }else if (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others'|| data.serviceType == 'Venue'){
         price.harga = fixPrice
     }
 
@@ -135,18 +135,18 @@ const handleBanner = (v, i, size) =>{
                     </>
                     
             
-                : (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others')?
+                : (data.serviceType == 'Photographer' || data.serviceType == 'Videographer' || data.serviceType == 'WeddingDress' || data.serviceType == 'Pelamin' || data.serviceType == 'Others' || data.serviceType == 'Venue')?
                     <>
                         <td scope="row">{indexList+1}</td>
                         <td>{data.serviceName}</td>
                         <td>{data.serviceType}</td>
                         {   edit == true?
                             <td>
-                                Price Per Person: RM <input className="form-control form-control-edit" type="number" value={fixPrice} onChange={(e)=>setFixPrice(e.target.value)} /> 
+                                Price: RM <input className="form-control form-control-edit" type="number" value={fixPrice} onChange={(e)=>setFixPrice(e.target.value)} /> 
                             </td>
                             :
                             <td>
-                                Price Per Person: RM {fixPrice} 
+                                Price: RM {fixPrice} 
                             </td>
                         }
                         <td>{edit == false ?<span onClick={()=>setEdit(!edit)}><img src="/images/icon/edit.svg"/></span>:<span onClick={()=>clickEdit()}>Save</span>}</td>
