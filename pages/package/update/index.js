@@ -131,7 +131,7 @@ function edit({pagex, sidebar}) {
                     <React.Fragment>
                         <div className="review-price">
                             <img src="/images/icon/ico-dollar.png"/>
-                            <p><span>MYR (Harga Pakej)</span> <br></br>{editPackage.originalPrice}</p>
+                            <p><span>MYR (Harga Pakej) (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
                         </div>
                         {/* <div className="review-price">
                             <img src="/images/icon/ico-canopy-black.png"/>
@@ -330,11 +330,11 @@ function edit({pagex, sidebar}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px;}
+                .review-catergry-and-price { display: flex; justify-content: between; margin: 13px 0px 18px 0px;}
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 180px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
@@ -367,6 +367,7 @@ function edit({pagex, sidebar}) {
                 .package-subs { background-color: #F5F6FA; padding: 10px; width: 100%; position: relative;}
                 .package-subs::after { position: absolute; content: ''; bottom: 50px; left: 0; right: 0; background-color: #EAEAEA; height: 1px; width: 100%;}
                 .package-subs > p { font-size: 14px; color: #515D65; font-weight: normal;  margin-bottom: 0;}
+                .package-subs > p:first-child { width: 96%; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; display: -webkit-box;}
                 .package-subs-2 { position: absolute; bottom: 0px; display: flex;}
                 .package-subs-2 > p { font-size: 14px; color: #515D65; font-weight: normal; }
                 .package-subs-2 > p:first-child { margin-right: 16px;}
