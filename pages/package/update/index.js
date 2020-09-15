@@ -283,7 +283,7 @@ function edit({pagex, sidebar}) {
                                 </div>
                             )
 
-                        } else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others') {
+                        } else if (v.serviceType == 'Photographer' || v.serviceType == 'Videographer' || v.serviceType == 'WeddingDress' || v.serviceType == 'Pelamin' || v.serviceType == 'Others' || v.serviceType == 'Venue') {
 
                             price += parseInt(v.serviceDetails.harga)
 
