@@ -128,11 +128,10 @@ function edit({pagex, sidebar}) {
                     <div className="review-category">
                         <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>
                     </div>
-                    <React.Fragment>
-                        <div className="review-price">
-                            <img src="/images/icon/ico-dollar.png"/>
-                            <p><span>MYR (Harga Pakej) (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
-                        </div>
+                    <div className="review-price">
+                        <img src="/images/icon/ico-dollar.png"/>
+                        <p><span>MYR (Harga Pakej) (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
+                    </div>
                         {/* <div className="review-price">
                             <img src="/images/icon/ico-canopy-black.png"/>
                             <p><span>Minimum Qty</span> <br></br>{editPackage.quantity}</p>
@@ -145,7 +144,7 @@ function edit({pagex, sidebar}) {
                             <img src="/images/icon/edit.png"/>
                             <p><span>Visible</span> <br></br>{editPackage.visibility}</p>
                         </div> */}
-                    </React.Fragment>
+                    
                 </div>
                 :''
             }
@@ -330,11 +329,11 @@ function edit({pagex, sidebar}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: between; margin: 13px 0px 18px 0px;}
+                .review-catergry-and-price { display: flex; justify-content: space-between; margin: 13px 0px 18px 0px; width: 100%;}
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 180px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 200px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
