@@ -366,7 +366,7 @@ function PackageEditAbout() {
                         serviceListSelected.length >= 1 ?
                         <div className="form-service">
                             
-                            <Table>
+                            <table className="table table-responsive">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -387,7 +387,7 @@ function PackageEditAbout() {
                                         })
                                     }  
                                 </tbody>
-                            </Table>
+                            </table>
                             <div className="form-section">
                                 <h4>sila masukkan minimum kuantiti  </h4>
                                 <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />

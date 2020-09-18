@@ -80,21 +80,21 @@ function Package() {
   
 
     const gMapsCities = [
-        {state:'Johor', status:false},
-        {state:'Kedah', status:false},
-        {state:'Kelantan', status:false},
-        {state:'Melaka', status:false},
-        {state:'Negeri Sembilan', status:false},
-        {state:'Pahang', status:false},
-        {state:'Penang', status:false},
-        {state:'Perak', status:false},
-        {state:'Perlis', status:false},
-        {state:'Sabah', status:false},
-        {state:'Sarawak', status:false},
+        // {state:'Johor', status:false},
+        // {state:'Kedah', status:false},
+        // {state:'Kelantan', status:false},
+        // {state:'Melaka', status:false},
+        // {state:'Negeri Sembilan', status:false},
+        // {state:'Pahang', status:false},
+        // {state:'Penang', status:false},
+        // {state:'Perak', status:false},
+        // {state:'Perlis', status:false},
+        // {state:'Sabah', status:false},
+        // {state:'Sarawak', status:false},
         {state:'Selangor', status:false},
         {state:'Kuala Lumpur', status:false},
-        {state:'Terengganu', status:false},
-        {state:'Labuan', status:false},
+        // {state:'Terengganu', status:false},
+        // {state:'Labuan', status:false},
         {state:'Putrajaya', status:false},
     ];
 
@@ -169,7 +169,7 @@ function Package() {
                     </div>
 
                     <React.Fragment>
-                        <h4>Sila pilih servis untuk package anda</h4>
+                        <h4>Sila pilih servis untuk pakej anda</h4>
                         <div className={`card-flex`}>
                             {
                                 service && service.map((v,i)=> {
@@ -213,7 +213,7 @@ function Package() {
                             </div>
                             <div className="form-section">
                                 <h4>Tentang Pakej</h4>
-                                <Input className="form-custom" type="textarea" name="text" placeholder={'Pakage yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
+                                <Input className="form-custom" type="textarea" name="text" placeholder={'Pakej yang lumayan tahun ini, rebut sekarang dan dapatkan tempahan tarikh anda sebelum penuh.'} value={description} onChange={(e) => { setDescription(e.target.value) }} />
                             </div>
                             <div className="form-section">
                                 <h4>Terma dan Syarat</h4>

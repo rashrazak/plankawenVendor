@@ -274,7 +274,7 @@ function PackageReview() {
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; margin-right: 10px; flex: 0 0 180px;}
                 .review-category > p { font-size: 14px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .icon-service{width:20%;}
+                .icon-service{width:20%; margin-right: 10px;}
                 .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 170px; text-align: right;}
                 .review-price > p { font-size: 14px; color: #3E3E3E; width: 100%; margin: 0;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}

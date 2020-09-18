@@ -129,22 +129,9 @@ function edit({pagex, sidebar}) {
                         <p><span><img className="icon-service" src={'/images/icon/black.png'}/></span>{editPackage.title}</p>
                     </div>
                     <div className="review-price">
-                        <img src="/images/icon/ico-dollar.png"/>
-                        <p><span>MYR (Harga Pakej) (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
+                        <img style={{marginRight: '10px'}} src="/images/icon/ico-dollar.png"/>
+                        <p><span>MYR (Min {editPackage.quantity} pax)</span> <br></br>{editPackage.originalPrice}</p>
                     </div>
-                        {/* <div className="review-price">
-                            <img src="/images/icon/ico-canopy-black.png"/>
-                            <p><span>Minimum Qty</span> <br></br>{editPackage.quantity}</p>
-                        </div>
-                        <div className="review-price">
-                            <img src="/images/icon/bell.png"/>
-                            <p><span>Status</span> <br></br>{editPackage.status}</p>
-                        </div>
-                        <div className="review-price">
-                            <img src="/images/icon/edit.png"/>
-                            <p><span>Visible</span> <br></br>{editPackage.visibility}</p>
-                        </div> */}
-                    
                 </div>
                 :''
             }
@@ -175,15 +162,15 @@ function edit({pagex, sidebar}) {
             
             <div className="review-desc">
 
-                <h5>Description:</h5>
+                <h5>Tentang Pakej:</h5>
                 <p>{editPackage && editPackage.description}</p>
 
-                <h5>Covered Area:</h5>
+                <h5>Lokasi Jangkauan:</h5>
                 <p>{editPackage && editPackage.coveredArea.map((v,i)=>{
                         return (<span key={i}>{v} <br/> </span>)    
                 })}</p>
 
-                <h5>Syarat dan Terma:</h5>
+                <h5>Terma dan Syarat:</h5>
                 <p>{ editPackage && editPackage.tnc}</p>
 
             </div>
@@ -212,7 +199,7 @@ function edit({pagex, sidebar}) {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p style={{marginBottom: 0}}>Description: {v.description}</p>
+                                        <p style={{marginBottom: 0}}>{v.description}</p>
                                         <p style={{marginBottom: 0}}>Harga Touchup: {v.serviceDetails.hargaTouchup}</p>
                                         <p style={{marginBottom: 0}}>Harga full: {v.serviceDetails.hargaFull}</p>
                                         <div className="package-subs-2">
@@ -249,7 +236,7 @@ function edit({pagex, sidebar}) {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>Description: {v.description}</p>
+                                        <p>{v.description}</p>
                                         <div className="package-subs-2">
                                             <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
@@ -274,9 +261,9 @@ function edit({pagex, sidebar}) {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>Description: {v.description}</p>
+                                        <p>{v.description}</p>
                                         <div className="package-subs-2">
-                                            <p>Quantity: <span>{quantity}</span></p>  
+                                            {/* <p>Quantity: <span>{quantity}</span></p>   */}
                                             <p>Harga: <span>MYR {price}</span></p>  
                                         </div>                                       
                                     </div>
@@ -301,7 +288,7 @@ function edit({pagex, sidebar}) {
                                         </div>
                                     </div>
                                     <div className="package-subs">
-                                        <p>Description: {v.description}</p>
+                                        <p>{v.description}</p>
                                         {/* <p>Harga: {v.serviceDetails.harga}</p> */}
                                         <div className="package-subs-2">
                                             <p>Harga: <span>MYR {price}</span></p>  
@@ -330,10 +317,10 @@ function edit({pagex, sidebar}) {
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
                 .review-catergry-and-price { display: flex; justify-content: space-between; margin: 13px 0px 18px 0px; width: 100%;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 200px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
@@ -358,7 +345,7 @@ function edit({pagex, sidebar}) {
                 .btn-edit { background-color: #FFF; color: #3e3e3e; font-size: 14px; font-weight: 500; text-align: left;}
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
-                .icon-service{width:20%;}
+                .icon-service{ width: 16px; height: 16px; }
                 .package-review-flex > p { margin: 0; color: #75848E; font-size: 14px; font-weight: normal;}
                 .package-details { display: flex; margin: 10px 0;}
                 .package-img { margin-right: 10px; flex: 0 0 200px; border: 1px solid #F4F4F4; border-radius: 4px; box-shadow: 0 0 4px 0 rgba(0,0,0,0.1);}
@@ -376,18 +363,16 @@ function edit({pagex, sidebar}) {
                 .package-icon-text > h6 { font-weight: bold; font-size: 12px; color: #3E3E3E; margin-bottom: 0;}
                 .package-icon-text > p{ font-weight: normal; font-size: 11px; color: #75848E; margin-bottom: 0;}
                 @media screen and (max-width: 480px ){
-                    .review-catergry-and-price {
-                        overflow-x: scroll;padding: 0px 10px;
-                    }
-                    .review-catergry-and-price > div {
-                        flex: 0 0 143px;
-                    }
-                    .button-edit-position {
-                        position: relative;top: 0;left: 0;padding: 10px;
-                    }
-                    .sidebar-edit {
-                        width: 100%;
-                    }
+                    .review-catergry-and-price { overflow-x: scroll;padding: 0px 10px;}
+                    .review-catergry-and-price > div {flex: 0 0 143px;}
+                    .button-edit-position {position: relative;top: 0;left: 0;padding: 10px;}
+                    .sidebar-edit {width: 100%;} 
+                    .review-desc { padding: 0 16px;}
+                    .package-details { flex-wrap: wrap; padding: 16px;}
+                    .package-subs { margin-top: 6px;}
+                    .package-subs::after { position: unset;}
+                    .package-img { flex: 0 0 100%;}
+                    .package-subs-2 { position: relative;}
                 }
             `}</style>
         </div>

@@ -177,7 +177,7 @@ function details() {
                 serviceSelected.length >= 1 ?
                 <div className="form-service">
                     
-                    <table>
+                    <table className="table-responsive">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -200,7 +200,7 @@ function details() {
                         </tbody>
                     </table>
                     <div className="form-section">
-                        <h4>sila masukkan jumlah minimum kuantiti  </h4>
+                        <h4>sila masukkan kuantiti minimum </h4>
                         <Input className="form-custom" type="number" placeholder="" value={quantity} onChange={(e) => {setQuantity(e.target.value)}} />
                     </div>
                     {/* <div className="form-section">
@@ -208,7 +208,7 @@ function details() {
                         <Input className="form-custom" type="number" placeholder="" value={price} onChange={(e) => {setPrice(e.target.value)}} />
                     </div> */}
                     <div className="form-section form-last">
-                        <p>Harga Pakej: <span>RM {oriPrice}</span></p>
+                        <p>Harga Pakej (per kuantiti minimum): <span>RM {oriPrice}</span></p>
                         {/* <p>Harga Diskaun Baharu: <span>RM {price}</span></p> 
                         <p>Jumlah Diskaun: <span>% {discount}</span></p>   */}
                     </div>
