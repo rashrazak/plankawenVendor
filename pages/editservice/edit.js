@@ -397,14 +397,14 @@ function edit({pagex, sidebar}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; width: 150px; margin-right: 10px;}
+                .review-catergry-and-price { display: flex; flex-wrap: no-wrap; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow-x: scroll;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 150px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
+                .review-price { padding: 0 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
                 .review-price > p { font-size: 14px; color: #3E3E3E;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
-                .review-price > img { width: 16px;}
+                .review-price > img { width: 16px; margin-right: 6px;}
                 .review-name-and-places > h4 { font-size: 18px; color: #3E3E3E;}
                 .review-name-and-places > h4 > span { font-weight: bold;}
                 .review-name-and-places > p { font-size: 12px; color: #3E3E3E;}
@@ -426,7 +426,12 @@ function edit({pagex, sidebar}) {
                 .btn-edit { background-color: #FFF; color: #3e3e3e; font-size: 14px; font-weight: 500; text-align: left;}
                 .btn-edit:hover, .btn-edit:focus, .btn-edit:active { box-shadow: none; transition: all 3.s }
                 .btn-save { background-color: #22bb33; color: #FFF; font-size: 12px; font-weight: 500;}
-                .icon-service{width:20%;}
+                .icon-service {width: 20%;}
+                @media screen and (max-width: 480px) {
+                    .button-edit-position { position: relative; left: 0;}
+                    .review-category { }
+                    .review-name-and-places { padding: 0 20px;}
+                }
             `}</style>
         </div>
         </Head>

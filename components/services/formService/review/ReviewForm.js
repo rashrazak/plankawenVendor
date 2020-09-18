@@ -328,7 +328,7 @@ function AboutForm({pagex}) {
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; margin-right: 10px; flex: 0 0 180px;}
                 .review-category > p { font-size: 14px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
-                .review-price { padding: 0 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; width: 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 140px; text-align: right;}
+                .review-price { padding: 0 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 143px; border: 1px solid #EAEAEA; margin-right: 10px; flex: 0 0 140px; text-align: right;}
                 .review-price > p { font-size: 14px; color: #3E3E3E; width: 100%; margin: 0;}
                 .review-price > p > span { color: #59D0C9; font-size: 10px;}
                 .review-price > img { width: 16px;}
@@ -348,7 +348,10 @@ function AboutForm({pagex}) {
                 .review-user-image-det > p:nth-child(3) { font-size: 12px; color: #47CBC4;}
                 h5 { font-weight: 400; color: #75848e; font-size: 12px; margin-top: 10px;}
                 .list-review-item { color: #75848E; font-size: 14px;}
-                .icon-service{width:20%;}
+                .icon-service{width:20px;}
+                @media screen and ( max-width: 480px ) {
+                    .review-name-and-places { padding: 0 20px;}
+                }
             `}</style>
         </div>
     )

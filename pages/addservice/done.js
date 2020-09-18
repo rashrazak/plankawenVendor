@@ -18,6 +18,9 @@ function review(props) {
             </div>
             <style jsx>{`
                 .height-layout { height: calc(100vh - 340px);}
+                @media screen and ( max-width: 480px ) {
+                    .height-layout { height: 100%;}
+                }
             `}</style>
         </Head>
     )

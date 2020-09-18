@@ -16,7 +16,7 @@
 }
 .btn-category{
     border-radius: 4px;
-    width: 175px;
+    flex: 0 0 150px;
     height: 50px;
     font-weight: 400;
     color: #3E3E3E;
