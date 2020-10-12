@@ -181,7 +181,7 @@ function HantaranForm({pagex, setModalEdit,editModal}) {
                 <Input className="form-custom harga" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
             </div>
             <div className="form-section">
-                <h4>Penghantaran</h4>
+                <h4>Waktu Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
                         <Input type="radio" name="jenisHantar" value="Postage"  checked={jenisHantar == 'Postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />

@@ -168,7 +168,7 @@ function DoorGiftForm({pagex, setModalEdit,editModal}) {
                 </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Penghantaran</h4>
+                <h4>Waktu Penghantaran</h4>
                 <FormGroup check>
                     <Label check>
                         <Input type="radio" name="jenisHantar" value="Postage"  checked={jenisHantar == 'Postage' ? true : false} onChange={(e) => setjenisHantar(e.target.value)} />

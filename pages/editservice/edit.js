@@ -290,7 +290,7 @@ function edit({pagex, sidebar}) {
                             }
                             
                         </ul>
-                        <h5>Waktu Tiba</h5>
+                        <h5>Penghantaran</h5>
                         <p>{details.waktuTiba}</p>
                     </React.Fragment>
                     : serviceType == 'KadBanner' ?
@@ -327,11 +327,11 @@ function edit({pagex, sidebar}) {
                         <React.Fragment>
                             <h5>Material</h5>
                             <p>{details.jenisMaterial}</p>
-                            <h5>Max Design Changes</h5>
+                            <h5>Perubahan maksimum rekaan?</h5>
                             <p>{details.maxDesignChanges}</p>
                             <h5>Jenis Hantar</h5>
                             <p>{details.jenisHantar}</p>
-                            <h5>Waktu Tiba</h5>
+                            <h5>Penghantaran</h5>
                             <p>details.waktuTiba</p>
                             <h5>Kaedah Hantar</h5>
                             <p>{details.jenisHantar}</p>
@@ -351,9 +351,9 @@ function edit({pagex, sidebar}) {
                         <React.Fragment>
                             <h5>Material</h5>
                             <p>{details.jenisMaterial}</p>
-                            <h5>Max Design Changes</h5>
+                            <h5>Perubahan Maksimum Rekaan</h5>
                             <p>{details.maxDesignChanges}</p>
-                            <h5>Waktu Tiba</h5>
+                            <h5>Penghantaran</h5>
                             <p>{details.waktuTiba}</p>
                         </React.Fragment>
                    
@@ -379,7 +379,7 @@ function edit({pagex, sidebar}) {
                     <React.Fragment>
                         <h5>Nama Persembahan</h5>
                         <p>{details.namaPersembahan}</p>
-                        <h5>Berapa Kali Persembahan</h5>
+                        <h5>Bil. Persembahan</h5>
                         <p>{details.kaliPersembahan}</p>
                     </React.Fragment>
                     :

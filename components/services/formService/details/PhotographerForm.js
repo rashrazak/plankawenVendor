@@ -83,7 +83,7 @@ function PhotographerForm({pagex, setModalEdit,editModal}) {
                     sethargaDiscount(e.target.value)
                     setharga(e.target.value)}} value={harga}/>
                 <UncontrolledTooltip placement="left" target="tooltipHarga">
-                    Harga LumpSump termasuk kos photobook/album/ dan juga caj penghantaran yang akan disediakan oleh Pelanggan ialah diluar servis  PlanKawen
+                    Harga LumpSump termasuk kos photobook/album/ dan juga caj penghantaran untuk produk disiapkan. Sebarang kos penginapan yang akan disediakan oleh Pelanggan ialah diluar servis  PlanKawen
                 </UncontrolledTooltip>
             </div>
             <div className="form-section">

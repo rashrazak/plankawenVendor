@@ -88,7 +88,7 @@ function PelaminForm({pagex, setModalEdit,editModal}) {
                     sethargaDiscount(e.target.value)
                     setharga(e.target.value)}} value={harga}/>
                 <UncontrolledTooltip placement="left" target="tooltipHarga">
-                    Harga LumpSump termasuk kos penghantaran/pemasangan/pengemasan untuk produk disiapkan. Sebarang kos penginapan yang akan disediakan oleh Pelanggan ialah diluar servis PlanKawen
+                    Harga LumpSump termasuk kos penghantaran/ pemasangan/ pengemasan untuk produk disiapkan. Sebarang kos penginapan yang akan disediakan oleh Pelanggan ialah diluar servis PlanKawen
                 </UncontrolledTooltip>
             </div>
             <div className="form-section">
@@ -125,7 +125,7 @@ function PelaminForm({pagex, setModalEdit,editModal}) {
                 </UncontrolledTooltip>
             </div>
             <div className="form-section">
-                <h4>Penghantaran</h4>
+                <h4>Waktu Penghantaran</h4>
                 <Input className="form-custom harga" href="#" id="tooltipPenghantaran" type="text" value={waktuTiba} onChange={(e) => {setwaktuTiba(e.target.value)}} />
                 <UncontrolledTooltip placement="left" target="tooltipPenghantaran">
                     Tetapkan waktu untuk pemasangan dan mengemas  barang-barang pelamin tersebut. Contoh: <br></br>
