@@ -574,7 +574,7 @@ class MyApp extends App {
       currentService['lokasi']['street'] = lok.address_components[0]['long_name'];
       currentService['lokasi']['state'] = lok.address_components[2]['long_name'];
       currentService['lokasi']['city'] = lok.address_components[1]['long_name'] || lok.address_components[2]['long_name'];
-      currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'];
+      currentService['lokasi']['postcode'] = lok.address_components[4]['long_name'] ||lok.address_components[2]['long_name'];
       currentService['alamatPenuh'] = ap;
     }
 

@@ -159,16 +159,15 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
             </div>
             <div className="form-section">
                 <h4>Waktu operasi</h4>
-                <Input className="form-custom" href="#" id="tooltipTerma" type="text" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
+                <Input onFocus={() => addAlamat()} className="form-custom" href="#" id="tooltipTerma" type="text" placeholder="Nyatakan Waktu Operasi Lokasi" value={waktuOperasi} onChange={(e) => {setwaktuOperasi(e.target.value)}} />
             </div>
-            <div className="form-section">
-                <h4>Syarat Sewaan Baju </h4>
-                {/* by default waktu operasi */}
+            {/* <div className="form-section">
+                <h4>Terma dan Syarat</h4>
                 <Input className="form-custom" href="#" id="tooltipSyarat" onFocus={() => addAlamat()} type="textarea" placeholder="Nyatakan Syarat Sewaan Baju" value={syaratSewaan} onChange={(e) => {setsyaratSewaan(e.target.value)}} />
                 <UncontrolledTooltip placement="left" target="tooltipSyarat">
                     Terangkan sebarang syarat yang dikenakan untuk baju yang disewa. Contoh, tarikh pemulangan semula, kerosakan pada baju, dan sebagainya
                 </UncontrolledTooltip>
-            </div>
+            </div> */}
             {
                 !editModal ? 
                 <div className="form-button">

@@ -179,35 +179,7 @@ function MakeupForm({pagex, setModalEdit,editModal}) {
                     })
                 }
             </div>
-            {
-                makeupTouchup ?
-                    <div> 
-                        <div className="form-section">
-                            <h4>Harga Touchup (RM)</h4>
-                            <Input className="form-custom" type="number" placeholder="" value={hargaTouchup} onChange={(e) => {sethargaTouchup(e.target.value)}} />
-                        </div>
-                        <div className="form-section">
-                        <h4>Diskaun (%)</h4>
-                        <Input className="form-custom harga" type="number" onChange={(e) => {
-                                let x = e.target.value;
-                                let har = hargaTouchup;
-                                x = x / 100;
-                                har = har - (har * x);
-                                sethargaDiscountTouchup(har);
-                                setdiscountTouchup(e.target.value)
-                                }} value={discountTouchup} 
-                            />
-                        </div>
-                        <div className="form-section">
-                            <h4>Harga selepas Diskaun (RM)</h4>
-                            <Input className="form-custom harga" type="number" disabled value={hargaDiscountTouchup} />
-                        </div>
-                    </div>
-                :
-                    <div>
-                        {''}
-                    </div>
-            }
+            
 
             {
                 makeupFull ? 
@@ -233,6 +205,35 @@ function MakeupForm({pagex, setModalEdit,editModal}) {
                         <Input className="form-custom harga" type="number" disabled value={hargaDiscountFull} />
                     </div>
                 </div>       
+                :
+                    <div>
+                        {''}
+                    </div>
+            }
+            {
+                makeupTouchup ?
+                    <div> 
+                        <div className="form-section">
+                            <h4>Harga Touchup (RM)</h4>
+                            <Input className="form-custom" type="number" placeholder="" value={hargaTouchup} onChange={(e) => {sethargaTouchup(e.target.value)}} />
+                        </div>
+                        <div className="form-section">
+                        <h4>Diskaun (%)</h4>
+                        <Input className="form-custom harga" type="number" onChange={(e) => {
+                                let x = e.target.value;
+                                let har = hargaTouchup;
+                                x = x / 100;
+                                har = har - (har * x);
+                                sethargaDiscountTouchup(har);
+                                setdiscountTouchup(e.target.value)
+                                }} value={discountTouchup} 
+                            />
+                        </div>
+                        <div className="form-section">
+                            <h4>Harga selepas Diskaun (RM)</h4>
+                            <Input className="form-custom harga" type="number" disabled value={hargaDiscountTouchup} />
+                        </div>
+                    </div>
                 :
                     <div>
                         {''}

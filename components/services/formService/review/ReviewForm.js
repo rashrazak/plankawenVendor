@@ -88,7 +88,17 @@ function AboutForm({pagex}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>
+                    {
+                        serviceType == 'WeddingDress'?
+                            'Baju Pengantin'
+                        :
+                        serviceType == 'KadBanner' ?
+                            'Kad Banner'
+                        :
+                        serviceType
+                    }
+                    </p>
                 </div>
                 
                 {
@@ -109,10 +119,10 @@ function AboutForm({pagex}) {
                                         <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
+                                        <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
+                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
                                     </div>
                                 </div>
                                 :''
@@ -124,11 +134,12 @@ function AboutForm({pagex}) {
                                         <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
-                                    </div>
-                                    <div className="review-price">
                                         <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
                                     </div>
+                                    <div className="review-price">
+                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
+                                    </div>
+                                    
                                 </div>
                                 :''
                             }
@@ -137,15 +148,15 @@ function AboutForm({pagex}) {
                         <React.Fragment>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Pakej)</span> <br></br>{details.harga}</p>
+                                <p><span>MYR</span> <br></br>{details.harga}</p>
+                            </div>
+                            <div className="review-price">
+                                <img src="/images/icon/nrll.png"/>
+                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
                             </div>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
                                 <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
                             </div>
                         </React.Fragment>
 
@@ -163,18 +174,20 @@ function AboutForm({pagex}) {
                     </div>
                 :
                     <div className="review-name-and-places">
-                        <h4>Service Name : <span>{about.serviceName} </span></h4>
+                        <h4><span>{about.serviceName} </span></h4>
                     </div>
             }
             
             <div className="review-desc">
 
-                <h5>Tentang servis:</h5>
+                <h5>Description:</h5>
                 <p>{about.description}</p>
 
                 {   serviceType == "WeddingDress" ?
                     <React.Fragment>
                         <h5>Jenis Kain</h5>
+                        <p>{details.jenisMaterial}</p>
+                        <h5>Jenis Sewaan</h5>
                         <ul>
                             {
                                 details.jenisSewa.map((v,i) => {
@@ -220,6 +233,7 @@ function AboutForm({pagex}) {
                                 })
                             }
                         </ul>
+                        
                         <h5>Butiran Banner</h5>
                         <p>{details.bannerDesc.description}</p>
                         {
@@ -229,9 +243,7 @@ function AboutForm({pagex}) {
                                         <ul>
                                             <li className="list-review-item" key={i}>Harga: RM {v.harga} </li>
                                             <li className="list-review-item" key={i}>Size: {v.size}</li>
-                                            <br/>
                                         </ul>
-                                        <br/>
                                     </div>
                                     
                                 )
@@ -295,6 +307,29 @@ function AboutForm({pagex}) {
                         <h5>Berapa Kali Persembahan</h5>
                         <p>{details.kaliPersembahan}</p>
                     </React.Fragment>
+                    : serviceType == 'Makeup' ?
+                    <React.Fragment>
+                    <h5>Jenis Makeup</h5>
+                        <ul>
+                            {
+                                details.jenisMakeup.map((v,i) => {
+                                    return(
+                                        <li className="list-review-item" key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                        <h5>Jantina</h5>
+                        <ul>
+                            {
+                                details.jantina.map((v,i) => {
+                                    return(
+                                        <li className="list-review-item" key={i}>{v}</li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </React.Fragment>
                     :
                     
                     ''
@@ -303,7 +338,7 @@ function AboutForm({pagex}) {
                 <h5>Terma dan syarat:</h5>
                 <p>{about.tnc}</p>
 
-                <h5>Maklumat tambahan:</h5>
+                <h5>Extra:</h5>
                 <p>{about.extra}</p>
             </div>
             <div className="form-button">

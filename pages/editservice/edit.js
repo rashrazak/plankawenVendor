@@ -131,7 +131,18 @@ function edit({pagex, sidebar}) {
             
             <div className="review-catergry-and-price">
                 <div className="review-category">
-                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>{serviceType}</p>
+                    <p><span><img className="icon-service" src={'/images/icon/services-icon/white/'+serviceIcon[serviceType]}/></span>
+                    {
+                        serviceType == 'WeddingDress'?
+                            'Baju Pengantin'
+                        :
+                        serviceType == 'KadBanner' ?
+                            'Kad Banner'
+                        :
+                        serviceType
+                    }
+                    
+                    </p>
                 </div>
                 {
                     (serviceType == 'KadBanner' || serviceType == 'Caterer' || serviceType == 'DoorGift' || serviceType == 'Hantaran')
@@ -221,6 +232,8 @@ function edit({pagex, sidebar}) {
             </React.Fragment>
             
             <div className="review-desc">
+                <h5>Description:</h5>
+                <p>{about.description}</p>
                 {   serviceType == "WeddingDress" ?
                     <React.Fragment>
                         <h5>Jenis Baju</h5>
@@ -374,10 +387,9 @@ function edit({pagex, sidebar}) {
                     ''
                 }
                 
-                <h5>Description:</h5>
-                <p>{about.description}</p>
+               
 
-                <h5>Syarat dan Terma:</h5>
+                <h5>Terma dan Syarat:</h5>
                 <p>{about.tnc}</p>
 
                 <h5>Extra:</h5>
