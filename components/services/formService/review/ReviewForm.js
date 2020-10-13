@@ -114,50 +114,58 @@ function AboutForm({pagex}) {
                         <React.Fragment>
                             {
                                 details.hargaTouchup != false ?
-                                <div>
+                                <>
                                     <div className="review-price">
+                                        <img src="/images/icon/ico-dollar.png"/>
                                         <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
+                                        <img src="/images/icon/ico-percent-dark.png"/>
+                                        <p><span>%</span> <br></br>{details.discountTouchup}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
+                                        <img src="/images/icon/ico-dollar.png"/>
+                                        <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscountTouchup}</p>
                                     </div>
-                                </div>
+                                </>
                                 :''
                             }
                             {
                                 details.hargaFull != false ?
-                                <div>
+                                <>
                                     <div className="review-price">
+                                        <img src="/images/icon/ico-dollar.png"/>
                                         <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
+                                        <img src="/images/icon/ico-percent-dark.png"/>
+                                        <p><span>%</span> <br></br>{details.discountFull}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
+                                        <img src="/images/icon/ico-dollar.png"/>
+                                        <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscountFull}</p>
                                     </div>
-                                    
-                                </div>
+                                </>
+                               
                                 :''
                             }
                         </React.Fragment>
                     : 
                         <React.Fragment>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR</span> <br></br>{details.harga}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/nrll.png"/>
-                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
-                            </div>
+                           
+                                <div className="review-price">
+                                    <img src="/images/icon/ico-dollar.png"/>
+                                    <p><span>MYR</span> <br></br>{details.harga}</p>
+                                </div>
+                                <div className="review-price">
+                                    <img src="/images/icon/ico-percent-dark.png"/>
+                                    <p><span>%</span> <br></br>{details.discount}</p>
+                                </div>
+                                <div className="review-price">
+                                    <img src="/images/icon/ico-dollar.png"/>
+                                    <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscount}</p>
+                                </div>
+                          
                         </React.Fragment>
 
                 }
@@ -359,7 +367,7 @@ function AboutForm({pagex}) {
                 .area-covered-div { display: inline-block; margin-right: 10px; }
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
-                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow-x: auto;}
+                .review-catergry-and-price { display: flex; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow-x: auto; flex-wrap: nowrap;}
                 .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; margin-right: 10px; flex: 0 0 180px;}
                 .review-category > p { font-size: 14px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}

@@ -157,32 +157,39 @@ function edit({pagex, sidebar}) {
                         <React.Fragment>
                             {
                                 details.hargaTouchup != false ?
-                                <div>
+                                <>
                                     <div className="review-price">
+                                        <img src="/images/icon/ico-dollar.png"/>
                                         <p><span>MYR (Touchup)</span> <br></br>{details.hargaTouchup}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountTouchup}</p>
-                                    </div>
-                                    <div className="review-price">
+                                        <img src="/images/icon/ico-percent-dark.png"/>
                                         <p><span>% (Diskaun)</span> <br></br>{details.discountTouchup}</p>
                                     </div>
-                                </div>
+                                    <div className="review-price">
+                                    <   img src="/images/icon/ico-dollar.png"/>
+                                        <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscountTouchup}</p>
+                                    </div>
+                                </>
                                 :''
                             }
                             {
                                 details.hargaFull != false ?
-                                <div>
+                                <>
                                     <div className="review-price">
+                                        <img src="/images/icon/ico-dollar.png"/>
                                         <p><span>MYR (Full)</span> <br></br>{details.hargaFull}</p>
                                     </div>
                                     <div className="review-price">
-                                        <p><span>MYR (Diskaun)</span> <br></br>{details.hargaDiscountFull}</p>
-                                    </div>
-                                    <div className="review-price">
+                                        <img src="/images/icon/ico-percent-dark.png"/>
                                         <p><span>% (Diskaun)</span> <br></br>{details.discountFull}</p>
                                     </div>
-                                </div>
+                                    <div className="review-price">
+                                        <img src="/images/icon/ico-dollar.png"/>
+                                        <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscountFull}</p>
+                                    </div>
+                                    
+                                </>
                                 :''
                             }
                         </React.Fragment>
@@ -190,15 +197,15 @@ function edit({pagex, sidebar}) {
                         <React.Fragment>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Pakej)</span> <br></br>{details.harga}</p>
+                                <p><span>MYR</span> <br></br>{details.harga}</p>
+                            </div>
+                            <div className="review-price">
+                                <img src="/images/icon/ico-percent-dark.png"/>
+                                <p><span>%</span> <br></br>{details.discount}</p>
                             </div>
                             <div className="review-price">
                                 <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>MYR (Harga Disk)</span> <br></br>{details.hargaDiscount}</p>
-                            </div>
-                            <div className="review-price">
-                                <img src="/images/icon/ico-dollar.png"/>
-                                <p><span>% (Diskaun)</span> <br></br>{details.discount}</p>
+                                <p><span>Harga Diskaun</span> <br></br>{details.hargaDiscount}</p>
                             </div>
                         </React.Fragment>
 
@@ -410,7 +417,7 @@ function edit({pagex, sidebar}) {
                 .area-covered-div > label { font-weight: 400; color: #3E3E3E; font-size: 14px;}
                 .area-covered-div > label > input { margin-right: 5px; }
                 .review-catergry-and-price { display: flex; flex-wrap: no-wrap; justify-content: flex-start; margin: 13px 0px 18px 0px; overflow-x: scroll;}
-                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 150px; margin-right: 10px;}
+                .review-category { background-color: #ED795F; color: #FFF; padding: 20px; border-radius: 5px; flex: 0 0 155px; margin-right: 10px;}
                 .review-category > p { font-size: 12px; color: #FFF; margin: 0;}
                 .review-category > p > span { margin-right: 10px;}
                 .review-price { padding: 0 16px; display: flex; justify-content: space-between; align-items: center; border-radius: 5px; flex: 0 0 143px; border: 1px solid #EAEAEA; margin-right: 10px;}
