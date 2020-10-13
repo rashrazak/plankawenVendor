@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import Link from 'next/link';
 import '../css/login.css'
 import firebase from '../config/firebaseConfig'
-
+import * as ls from 'local-storage'
 
 
 const Login = () => {
@@ -18,8 +18,10 @@ const Login = () => {
 
     const authenticate = async (e) => {
         Swal.showLoading();
+        ls.clear()
         e.preventDefault();
         if (email != '' || password != '') {
+
             let result = await check(email);
             if (!result) {
                 setMessage('You are not registered, please contact admin')
