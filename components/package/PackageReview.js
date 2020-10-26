@@ -21,6 +21,7 @@ function PackageReview() {
     const [coverImages, setcoverImages] = useState('')
     const [hargaFull, setHargaFull] = useState('')
     const [hargaTouchup, setHargaTouchup] = useState('')
+    const [creating, setCreating] = useState(false)
 
     const serviceIcon = { Venue: 'ico-venue.png', 
     Canopy: 'ico-canopy.png', 
@@ -111,8 +112,8 @@ function PackageReview() {
                 <p>Terma & Syarat: <br/><span>{tnc}</span></p>
                 <p>Covered Area: <br/>
 
-                {coveredArea && coveredArea.map((v)=>{
-                    return (<span style={{display: 'block'}}>{v} </span>)})}
+                {coveredArea && coveredArea.map((v, i)=>{
+                    return (<span key={i} style={{display: 'block'}}>{v} </span>)})}
                 </p>
             </div>
 
@@ -130,7 +131,8 @@ function PackageReview() {
                             return (
                                 <div className="package-details" key={i}>
                                     <div className="package-img">
-                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <img src={v.images.length > 0 ? v.images[0].base64 || v.images[0].urlStorage: ''}/>
+
                                         <div className="package-icon">
                                             <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
                                             <div className="package-icon-text">
@@ -167,7 +169,7 @@ function PackageReview() {
                             return (
                                 <div className="package-details" key={i}>
                                     <div className="package-img">
-                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <img src={v.images.length > 0 ? v.images[0].base64 || v.images[0].urlStorage: ''}/>
                                         <div className="package-icon">
                                             <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
                                             <div className="package-icon-text">
@@ -219,7 +221,7 @@ function PackageReview() {
 
                                 <div className="package-details" key={i}>
                                     <div className="package-img">
-                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <img src={v.images.length > 0 ? v.images[0].base64 || v.images[0].urlStorage: ''}/>
                                         <div className="package-icon">
                                             <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
                                             <div className="package-icon-text">
@@ -246,7 +248,15 @@ function PackageReview() {
             </div>
             <div className="form-button">
                 <Button  className="btn-cancel" onClick={() => Router.back()}>Back</Button>{' '}
-                <Button  className="btn-next" onClick={() => submitPackage()}>Next</Button>{' '}
+                {
+                    !creating ?
+                    <Button  className="btn-next" onClick={() => 
+                        {
+                            setCreating(!creating)
+                            submitPackage() }}>Next</Button>
+                    :''
+                }
+                
             </div>
             <style jsx>{`
                 .review-form { max-width: 670px; margin: 30px auto; overflow: hidden;}

@@ -104,6 +104,7 @@ const PackageContextProvider = (props) => {
               .catch((e) => {
                 alert('error')
                 console.log(e)
+                window.location.reload()
               }) 
             })
             .catch((e) => {
