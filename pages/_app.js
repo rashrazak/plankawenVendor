@@ -4,6 +4,7 @@ import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
+import sendEmail, {adminEmail} from '../config/emailConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
 import ServiceContextProvider from '../contexts/ServiceContext'
 import * as ls from 'local-storage'
@@ -367,7 +368,13 @@ class MyApp extends App {
         let y = firebase.updateService(serviceType, data, x.id)
         y.then(() => {
           this.removeServiceStorage()
-          alert('success')
+          // alert('success')
+          sendEmail({
+            email:data.email,
+            type: 'services-created-admin',
+            title: data.serviceName,
+            serviceType: data.serviceType
+          })
           window.location.href = `/${pagex}/done`;
           ls.remove('serviceList')
           // Router.push(`/${pagex}/done`)

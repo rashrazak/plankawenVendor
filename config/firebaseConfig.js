@@ -4,6 +4,8 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 import * as ls from 'local-storage'
+import sendEmail, {adminEmail} from './emailConfig'
+
 
 //test
 // const config = {
@@ -26,6 +28,7 @@ const config = {
     appId: "1:79976166898:web:b6fa8275211bf940b9a76b",
     measurementId: "G-3ZEDEV7BH1"
   }
+
 
 class Firebase {
     constructor(){
@@ -135,11 +138,11 @@ class Firebase {
     
     //pending patot ada status = approved
     async checkServiceType(serviceType, email){
-        return await this.db.collection(serviceType).where('email', '==', email).get() 
+        return await this.db.collection(serviceType).where('email', '==', email).where('status','==', 'active').get() 
     }
     //pending patot ada status = approved
     async checkPackageType(email){
-        return await this.db.collection('package').where('email', '==', email).get() 
+        return await this.db.collection('package').where('email', '==', email).where('status','==', 'active').get() 
     }
 
     async getPackageById(id){
@@ -207,6 +210,10 @@ class Firebase {
 
                         user.sendEmailVerification().then(function() {
                         // Email sent.
+                        sendEmail({
+                            email:data.email,
+                            type: 'vendor-created-admin'
+                        })
                         alert('Registered! please check email for verification.')
 
                         window.location.href = '/'
@@ -334,7 +341,7 @@ class Firebase {
     }
 
     async getPackages(email){
-        return await this.db.collection('package').where('email', '==', email).get()
+        return await this.db.collection('package').where('email', '==', email).where('status','==', 'active').get()
     }
 
     async createPackage(data){

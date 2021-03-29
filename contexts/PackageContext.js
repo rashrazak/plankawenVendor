@@ -1,5 +1,6 @@
 import React,{createContext, useState, useEffect} from 'react'
 import firebase from'../config/firebaseConfig'
+import sendEmail from'../config/emailConfig'
 import * as ls from 'local-storage'
 export const PackageContext = createContext();
 
@@ -97,6 +98,11 @@ const PackageContextProvider = (props) => {
               data.packageId = x.id
               let y = firebase.updatePackage(x.id, data)
               y.then(() => {
+                sendEmail({
+                    email:data.email,
+                    type: 'package-created-admin',
+                    title: data.title,
+                })
                 alert('success')
                 window.location.href = `/package/add/done`;
                 // Router.push(`/${pagex}/done`)
