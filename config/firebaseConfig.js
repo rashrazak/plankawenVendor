@@ -207,16 +207,14 @@ class Firebase {
                         await app.firestore().collection('vendor').add(param)
                         Swal.close()
                         var user = app.auth().currentUser;
-
-                        user.sendEmailVerification().then(function() {
-                        // Email sent.
                         sendEmail({
-                            email:data.email,
+                            email:companyEmail,
                             type: 'vendor-created-admin'
                         })
-                        alert('Registered! please check email for verification.')
-
-                        window.location.href = '/'
+                        user.sendEmailVerification().then(function() {
+                            // Email sent.
+                            alert('Registered! please check email for verification.')
+                            window.location.href = '/'
 
                         }).catch(function(error) {
                         // An error happened.

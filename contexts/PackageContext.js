@@ -97,8 +97,8 @@ const PackageContextProvider = (props) => {
               console.log(x.id)
               data.packageId = x.id
               let y = firebase.updatePackage(x.id, data)
-              y.then(() => {
-                sendEmail({
+              y.then(async () => {
+                await sendEmail({
                     email:data.email,
                     type: 'package-created-admin',
                     title: data.title,

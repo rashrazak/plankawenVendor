@@ -366,10 +366,10 @@ class MyApp extends App {
       y.then((x) => {
         console.log(x.id)
         let y = firebase.updateService(serviceType, data, x.id)
-        y.then(() => {
+        y.then(async () => {
           this.removeServiceStorage()
           // alert('success')
-          sendEmail({
+          await sendEmail({
             email:data.email,
             type: 'services-created-admin',
             title: data.serviceName,
