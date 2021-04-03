@@ -30,7 +30,7 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
     useEffect(() =>{
         setharga(getServiceDetailsWeddingDress.harga)
         setlokasi(getServiceDetailsWeddingDress.lokasi)
-        setsyaratSewaan(getServiceDetailsWeddingDress.syaratSewaan)
+        // setsyaratSewaan(getServiceDetailsWeddingDress.syaratSewaan)
         setdiscount(getServiceDetailsWeddingDress.discount)
         sethargaDiscount(getServiceDetailsWeddingDress.hargaDiscount)
         setjenisSewa(getServiceDetailsWeddingDress.jenisSewa)
@@ -65,12 +65,12 @@ function WeddingDressForm({pagex, setModalEdit,editModal}) {
      }
 
     const submitServiceDetails = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         Router.push(`/${pagex}/upload`);
     }
 
     const submitServiceDetails2 = () => {
-        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
+        addServiceDetailsWeddingDress(harga , lokasi, alamatPenuh, waktuOperasi, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar)
         setModalEdit(false)
     }
     return (

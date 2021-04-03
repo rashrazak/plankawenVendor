@@ -336,7 +336,7 @@ class MyApp extends App {
   createAddService = async (pagex) => {
     let {serviceType, serviceName, description, areaCovered, status, tnc, extra} = {...this.state.addServiceAbout}
     let {images} = {...this.state.addServiceUpload}
-    let {uid} = JSON.parse(localStorage.getItem('user') )
+    let {uid} = JSON.parse(localStorage.getItem('user') ) //ni firebase renew id
     let {id, email} = JSON.parse(localStorage.getItem('vendorDetails') )
     let objectType = `addServiceDetails${serviceType}`
     let serviceDetails = this.state[objectType]
@@ -344,7 +344,7 @@ class MyApp extends App {
     let img = await firebase.getImagesService(images, serviceType, email)
     console.log(img)
     var data = {
-      vendorId:uid || id,
+      vendorId:id,
       email,
       status,
       serviceType,
@@ -553,12 +553,12 @@ class MyApp extends App {
       this.setState({addServiceDetailsVenue:currentService})
     }
   }
-  addServiceDetailsWeddingDress = (hargax, lokasi, alamatPenuh, waktuOperasi, syaratSewaan, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar) => {
+  addServiceDetailsWeddingDress = (hargax, lokasi, alamatPenuh, waktuOperasi, jenisSewa, discount, hargaDiscount, jenisMaterial, maxDesignChanges, jenisHantar) => {
     let {addServiceDetailsWeddingDress} = {...this.state}
     let currentService = addServiceDetailsWeddingDress;
     let harga = hargax;
     let lok = lokasi;
-    let ss = syaratSewaan;
+    // let ss = syaratSewaan;
     let js = jenisSewa;
     let d = discount;
     let hd = hargaDiscount;
@@ -573,7 +573,7 @@ class MyApp extends App {
     currentService['discount'] = d;
     currentService['hargaDiscount'] = hd;
     currentService['harga'] = harga;
-    currentService['syaratSewaan'] = ss;
+    // currentService['syaratSewaan'] = ss;
     currentService['jenisSewa'] = js;
     currentService['waktuOperasi'] = wo;
 
@@ -597,7 +597,7 @@ class MyApp extends App {
       let currentService = addServiceDetailsWeddingDress;
       let harga = about.harga;
       let lokasi = about.lokasi;
-      let syaratSewaan = about.syaratSewaan;
+      // let syaratSewaan = about.syaratSewaan;
       let d = about.discount;
       let hd = about.hargaDiscount;
       let alamatPenuh = about.alamatPenuh;
@@ -613,7 +613,7 @@ class MyApp extends App {
       currentService['hargaDiscount'] = hd;
       currentService['harga'] = harga;
       currentService['lokasi'] = lokasi;
-      currentService['syaratSewaan'] = syaratSewaan;
+      // currentService['syaratSewaan'] = syaratSewaan;
       currentService['alamatPenuh'] = alamatPenuh;
       this.setState({addServiceDetailsWeddingDress:currentService})
     }
