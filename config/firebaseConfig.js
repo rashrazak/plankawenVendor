@@ -4,6 +4,8 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import * as ls from 'local-storage'
+import emailjs from 'emailjs-com';
+
 
 const config = {
     apiKey: "AIzaSyDJwYfTFCcAG71iHs6pqxIyBJaBRa-qOH8",
@@ -198,10 +200,16 @@ class Firebase {
                         await app.firestore().collection('vendor').add(param)
                         Swal.close()
                         var user = app.auth().currentUser;
-                        sendEmail({
-                            email:companyEmail,
-                            type: 'vendor-created-admin'
-                        })
+                        // sendEmail({
+                        //     email:companyEmail,
+                        //     type: 'vendor-created-admin'
+                        // })
+                        
+                        // let sendMailData = {
+                        //     vendor_email:email,
+                        //     package_title:title,
+                        //   }
+                        // emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
                         user.sendEmailVerification().then(function() {
                             // Email sent.
                             alert('Registered! please check email for verification.')

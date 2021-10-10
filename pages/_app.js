@@ -5,6 +5,7 @@ import LoginContext from '../contexts/LoginContext';
 import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
 // import sendEmail, {adminEmail} from '../config/emailConfig';
+import emailjs from 'emailjs-com';
 import AddServiceContext from '../contexts/AddServiceContext'
 import ServiceContextProvider from '../contexts/ServiceContext'
 import * as ls from 'local-storage'
@@ -375,6 +376,12 @@ class MyApp extends App {
           //   title: data.serviceName,
           //   serviceType: data.serviceType
           // })
+          let sendMailData = {
+            vendor_email:email,
+            service_title:serviceName,
+            service_type:serviceType,
+          }
+          emailjs.send('service_aaq80og','template_6x35syr', sendMailData)
           window.location.href = `/${pagex}/done`;
           ls.remove('serviceList')
           // Router.push(`/${pagex}/done`)

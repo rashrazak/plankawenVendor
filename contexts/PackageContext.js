@@ -1,6 +1,7 @@
 import React,{createContext, useState, useEffect} from 'react'
 import firebase from'../config/firebaseConfig'
 // import sendEmail from'../config/emailConfig'
+import emailjs from 'emailjs-com';
 import * as ls from 'local-storage'
 export const PackageContext = createContext();
 
@@ -103,6 +104,11 @@ const PackageContextProvider = (props) => {
                 //     type: 'package-created-admin',
                 //     title: data.title,
                 // })
+                let sendMailData = {
+                    vendor_email:email,
+                    package_title:title,
+                  }
+                emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
                 alert('success')
                 window.location.href = `/package/add/done`;
                 // Router.push(`/${pagex}/done`)
