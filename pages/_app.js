@@ -4,7 +4,7 @@ import Router from 'next/router';
 import LoginContext from '../contexts/LoginContext';
 import PackageContextProvider from '../contexts/PackageContext';
 import firebase from '../config/firebaseConfig';
-import sendEmail, {adminEmail} from '../config/emailConfig';
+// import sendEmail, {adminEmail} from '../config/emailConfig';
 import AddServiceContext from '../contexts/AddServiceContext'
 import ServiceContextProvider from '../contexts/ServiceContext'
 import * as ls from 'local-storage'
@@ -369,12 +369,12 @@ class MyApp extends App {
         y.then(async () => {
           this.removeServiceStorage()
           // alert('success')
-          await sendEmail({
-            email:data.email,
-            type: 'services-created-admin',
-            title: data.serviceName,
-            serviceType: data.serviceType
-          })
+          // await sendEmail({
+          //   email:data.email,
+          //   type: 'services-created-admin',
+          //   title: data.serviceName,
+          //   serviceType: data.serviceType
+          // })
           window.location.href = `/${pagex}/done`;
           ls.remove('serviceList')
           // Router.push(`/${pagex}/done`)
