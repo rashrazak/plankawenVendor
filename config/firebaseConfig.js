@@ -1,23 +1,10 @@
-import * as app from 'firebase/app';
 import Swal from 'sweetalert2'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/storage'
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import * as ls from 'local-storage'
-import sendEmail, {adminEmail} from './emailConfig'
 
-
-//test
-// const config = {
-//     apiKey: "AIzaSyC_0QtkXQApYKK101apDFYf6pn7LNAWItg",
-//     authDomain: "plankawen-61a3a.firebaseapp.com",
-//     databaseURL: "https://plankawen-61a3a.firebaseio.com",
-//     projectId: "plankawen-61a3a",
-//     storageBucket: "plankawen-61a3a.appspot.com",
-//     messagingSenderId: "745867454643",
-//     appId: "1:745867454643:web:a3e3cfba41ea05de"
-//   }
-//production
 const config = {
     apiKey: "AIzaSyDJwYfTFCcAG71iHs6pqxIyBJaBRa-qOH8",
     authDomain: "plankawen-19918.firebaseapp.com",
@@ -27,15 +14,19 @@ const config = {
     messagingSenderId: "79976166898",
     appId: "1:79976166898:web:b6fa8275211bf940b9a76b",
     measurementId: "G-3ZEDEV7BH1"
-  }
+}
+
+const app = initializeApp({...config});
+
+
+// import sendEmail, {adminEmail} from './emailConfig'
 
 
 class Firebase {
     constructor(){
-        !app.apps.length ? app.initializeApp(config) : app.app();
-        this.auth = app.auth();
-        this.db = app.firestore();
-        this.storage = app.storage();
+        this.auth = getAuth(app);
+        this.db = getFirestore(app);
+        this.storage = getStorage(app);
     }
 
     async check(email){
@@ -138,11 +129,11 @@ class Firebase {
     
     //pending patot ada status = approved
     async checkServiceType(serviceType, email){
-        return await this.db.collection(serviceType).where('email', '==', email).where('status','==', 'active').get() 
+        return await this.db.collection(serviceType).where('email', '==', email).get() 
     }
     //pending patot ada status = approved
     async checkPackageType(email){
-        return await this.db.collection('package').where('email', '==', email).where('status','==', 'active').get() 
+        return await this.db.collection('package').where('email', '==', email).get() 
     }
 
     async getPackageById(id){
@@ -339,7 +330,7 @@ class Firebase {
     }
 
     async getPackages(email){
-        return await this.db.collection('package').where('email', '==', email).where('status','==', 'active').get()
+        return await this.db.collection('package').where('email', '==', email).get()
     }
 
     async createPackage(data){
