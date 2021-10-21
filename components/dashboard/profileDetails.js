@@ -107,13 +107,16 @@ function profileDetails() {
                 {/* <input type="file" className={``}/> */}
                     <h2>Hi, <span>{user.email}</span></h2>
                     <div className={`keterangan-div`}>
-                        <textarea value={companyDesc} className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini." onChange={(e)=>{
-                            if (e.target.value.length < 81) {
-                                setCompanyDesc(e.target.value)
-                            }else{
-                                alert('Maksimum 80 patah kata')
-                            }
-                        }}/>
+                        {
+                            companyDesc && <textarea value={companyDesc} className={ editDetails ? 'form-textarea active' : 'form-textarea' } disabled={!editDetails} placeholder="Masukkan keterangan syarikat anda disini." onChange={(e)=>{
+                                if (e.target.value.length < 81) {
+                                    setCompanyDesc(e.target.value)
+                                }else{
+                                    alert('Maksimum 80 patah kata')
+                                }
+                            }}/>
+                        }
+                        
                         {
                             !editDetails ?
                             <img className={`icon-edit`} src="/images/icon/edit-2.png" onClick={toggle}/>
