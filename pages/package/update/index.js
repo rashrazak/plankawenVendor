@@ -78,7 +78,7 @@ function edit({pagex, sidebar}) {
                     <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit Package</button>
                     {
                          editPackage && sidebarDiv ?
-                        <div>
+                        <div className="mobile-y-scroll">
                             <PackageEditSidebar />
                         </div>
                           : ''
@@ -373,6 +373,11 @@ function edit({pagex, sidebar}) {
                     .package-subs::after { position: unset;}
                     .package-img { flex: 0 0 100%;}
                     .package-subs-2 { position: relative;}
+                    .review-form  { padding: 0 10px;}
+                    .mobile-y-scroll {
+                        overflow-y: scroll;
+                        width: 100%;
+                    }          
                 }
             `}</style>
         </div>

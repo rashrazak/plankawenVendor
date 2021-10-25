@@ -17,8 +17,8 @@ function footer() {
                 <a href="https://www.instagram.com/plankawen_/"><img className={`insta-icon`} src="/images/icon/s-instagram.png"/></a>
             </div>
             <style jsx>{`   
-                .container-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 60px; margin: 50px 0 20px 0;}
-                .footer-logo { display: flex; align-items: center; justify-content: space-between; width: 30%;}
+                .container-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 60px; margin: 50px 0 20px 0; position:fixed; bottom: 0; left: 0; width:100%;}
+                .footer-logo { display: flex; align-items: center; justify-content: space-between; width: 40%;}
                 .footer-logo > img { width: 50%;}
                 .footer-link { display: flex; align-items: center; justify-content: space-between; width: 35%; flex-wrap: wrap;}
                 .footer-logo > p { color: #BABABA; font-size: 12px; font-weight: 100; margin: 0;}
@@ -29,6 +29,7 @@ function footer() {
                 @media screen and ( max-width: 480px ) {
                     .footer-link { width: 100%:}
                     .fb-icon, .insta-icon { width: 20px; }
+                    .container-footer { position: unset;}
                 }
             `}</style>
         </div>

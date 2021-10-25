@@ -154,6 +154,9 @@ function EditServiceLists({serviceType}) {
             </div>
             <style jsx>{`
                 .edit-list-section { max-width: 950px; margin: 20px auto;}
+                @media screen and (max-width: 480px) {
+                    .edit-list-section { width: 100%; padding: 10px;}
+                }
             `}</style>
         </div>
     )

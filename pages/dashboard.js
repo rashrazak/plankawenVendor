@@ -94,6 +94,19 @@ function dashboard() {
             .oval-pic img { object-fit: cover; width: 100%;}
             .profile-pic { width: 170px; position: relative; overflow:hidden}
             .details-section { width: 100%; height: 100%; overflow-y: scroll;}
+            @media screen and (max-width: 480px){
+                .dashboard-container {
+                    display: block;
+                    width: 100%;
+                    padding: 50px 0px;
+                }
+                .oval-kampret { 
+                    position: unset;
+                }
+                .container {
+                    height: 100%;
+                }
+            }
         `}</style>
         </div>
     )

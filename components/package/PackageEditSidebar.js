@@ -25,7 +25,7 @@ function PackageEditSidebar() {
     }
     return (
         <div className="sidebar-edit">
-            <div className="">
+            <div className="flex-display">
                 <PackageEditAbout />
                 <PackageEditImage />
                 {
@@ -49,6 +49,11 @@ function PackageEditSidebar() {
             @media screen and (max-width: 480px ){
                 .sidebar-edit {
                    position: relative;
+                }
+                .flex-display {
+                    display: flex;
+                    gap: 3px;
+                    width: 100%;
                 }
             }
         `}</style>

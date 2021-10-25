@@ -394,6 +394,7 @@ function AboutForm({pagex}) {
                 .icon-service{width:20px;}
                 @media screen and ( max-width: 480px ) {
                     .review-name-and-places { padding: 0 20px;}
+                    .review-form { padding: 0 10px;}
                 }
             `}</style>
         </div>

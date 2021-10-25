@@ -83,7 +83,7 @@ function edit({pagex, sidebar}) {
                     <button className={'btn btn-edit'} onClick={()=> setSidebarDiv(!sidebarDiv) }>Edit Service</button>
                     {
                         sidebarDiv ?
-                        <div>
+                        <div className="mobile-y-scroll">
                              <SideBarEdit serviceType={serviceType}/>
                              {/* <button className={'btn btn-save'} onClick={()=> submitReview()}>Simpan</button> */}
                         </div>
@@ -450,6 +450,17 @@ function edit({pagex, sidebar}) {
                     .button-edit-position { position: relative; left: 0;}
                     .review-category { }
                     .review-name-and-places { padding: 0 20px;}
+                    .review-form {
+                        width: 100%;
+                        padding: 0px 10px;
+                    }
+                    .button-edit-position {
+                        position: unset;
+                    }
+                    .mobile-y-scroll {
+                        overflow-y: scroll;
+                        width: 100%;
+                    }
                 }
             `}</style>
         </div>

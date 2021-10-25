@@ -17,6 +17,7 @@ function signup (){
                         .bg-color { background-color: #FFF; }
                         .logo-oficial { margin: auto; }
                         .master-layout { padding: 0;}
+                        .vendor-signup-section { padding: 0 10px;}
                     `}</style>
                 </div>
             </Head>
