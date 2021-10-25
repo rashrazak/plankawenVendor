@@ -17,7 +17,7 @@ function footer() {
                 <a href="https://www.instagram.com/plankawen_/"><img className={`insta-icon`} src="/images/icon/s-instagram.png"/></a>
             </div>
             <style jsx>{`   
-                .container-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 60px; margin: 50px 0 20px 0; position:fixed; bottom: 0; left: 0; width:100%;}
+                .container-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 60px; margin: 50px 0 20px 0;}
                 .footer-logo { display: flex; align-items: center; justify-content: space-between; width: 40%;}
                 .footer-logo > img { width: 50%;}
                 .footer-link { display: flex; align-items: center; justify-content: space-between; width: 35%; flex-wrap: wrap;}

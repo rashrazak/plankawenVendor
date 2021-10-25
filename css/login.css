@@ -3,7 +3,7 @@
 }
 .login-layout{
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 170px);
     position: relative;
 }
 .login-layout > h1{
