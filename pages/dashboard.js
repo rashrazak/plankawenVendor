@@ -52,24 +52,24 @@ function dashboard() {
                      <div className={`dashboard-container`}>
                         <div className={`dashboard-section`}>
                             <ProfileDetails />
-                                {
+                                {/* {
                                     isMobile &&
                                     <React.Fragment>
                                          <SideBarDashboard />
                                     </React.Fragment>
-                                }
+                                } */}
                             <div className={`details-section`}>
                                 <UploadService />
                                 <UpcomingProject />             
                             </div> 
                         </div>
                     </div>
-                    {
+                    {/* {
                         !isMobile &&
                         <React.Fragment>
                                  <SideBarDashboard />
                         </React.Fragment>
-                    }
+                    } */}
                      {/* {user.email}
                      <button onClick={ signOut }>Log Out</button>
                      <button>Add Service</button> */}

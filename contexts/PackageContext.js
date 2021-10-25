@@ -108,7 +108,7 @@ const PackageContextProvider = (props) => {
                     vendor_email:email,
                     package_title:title,
                   }
-                emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
+                // emailjs.send('service_aaq80og','template_k0aiiyu', sendMailData)
                 alert('success')
                 window.location.href = `/package/add/done`;
                 // Router.push(`/${pagex}/done`)

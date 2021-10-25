@@ -133,7 +133,7 @@ function uploadService() {
             <div>
                 <button className={type == 'service'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('service')}>Service Anda</button>
                 <button className={type == 'package'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('package')}>Package Anda</button>
-                <button className={type == 'tempahan'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('tempahan')}>Tempahan</button>
+                {/* <button className={type == 'tempahan'?'btn btn-coral btn-active':'btn btn-coral'} onClick={()=>setServiceFn('tempahan')}>Tempahan</button> */}
             </div>
             {
                 type == 'service' ?

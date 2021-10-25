@@ -381,7 +381,7 @@ class MyApp extends App {
             service_title:serviceName,
             service_type:serviceType,
           }
-          emailjs.send('service_aaq80og','template_6x35syr', sendMailData)
+          // emailjs.send('service_aaq80og','template_6x35syr', sendMailData)
           window.location.href = `/${pagex}/done`;
           ls.remove('serviceList')
           // Router.push(`/${pagex}/done`)

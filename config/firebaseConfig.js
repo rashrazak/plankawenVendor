@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, sendEmailVerification  } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword, sendEmailVerification, updatePassword  } from 'firebase/auth';
 import { getFirestore,  collection, getDocs, query, where, addDoc, doc, updateDoc, setDoc, deleteDoc  } from "firebase/firestore";
 import { getStorage, ref, deleteObject, uploadString, getDownloadURL   } from "firebase/storage";
 import * as ls from 'local-storage'
@@ -158,8 +158,8 @@ class Firebase {
   
     async updateService(serviceType, data, serviceId){
         // return await this.db.collection(serviceType).doc(serviceId).set(data)
-        const refData = doc(this.db, 'vendor', vendorId);
-        return await setDoc(refData, param)
+        const refData = doc(this.db, serviceType, serviceId);
+        return await setDoc(refData, data)
     }
     
     //pending patot ada status = approved
@@ -233,7 +233,7 @@ class Firebase {
             var locRef = ref(this.storage, `vendor/${companyEmail}/ssmImage.jpg`)
 
             // var locResult = locRef.putString(base, 'data_url');
-            uploadString(locResult, base, 'data_url').then(snapshot =>{
+            uploadString(locRef, base, 'data_url').then(snapshot =>{
                 getDownloadURL(locRef).then(async(downloadURL)=>{
                     param.ssmImage = downloadURL;
                     await createUserWithEmailAndPassword(this.auth, companyEmail, password).then( async ()=>{
@@ -243,6 +243,7 @@ class Firebase {
                         sendEmailVerification(user).then(function() {
                             // Email sent.
                             alert('Registered! please check email for verification.')
+                            ls.clear()
                             window.location.href = '/'
 
                         }).catch(function(error) {
@@ -306,12 +307,13 @@ class Firebase {
 
     async updateVendor(param, password, companyEmail, ssmImage, vendorId){
         param.dateUpdated = new Date(); 
+        console.log(ssmImage)
         if (ssmImage) {
 
             if (password) {
                 // var user = app.auth().currentUser;
                 var user = this.auth.currentUser;
-                user.updatePassword(password);
+                updatePassword(user, password);
             }
             let img     = ssmImage;
             let base    = img.base64;
