@@ -189,7 +189,7 @@ function edit({pagex, sidebar}) {
                             return (
                                 <div className="package-details" key={i}>
                                     <div className="package-img">
-                                        <img src={v.images[0].base64 || v.images[0].urlStorage}/>
+                                        <img src={v.images[0]?.base64 || v.images[0]?.urlStorage}/>
                                         <div className="package-icon">
                                             <img style={{height: 24, width: 24}} src={'/images/icon/services-icon/dark/'+serviceIcon[v.serviceType]}/>
                                             <div className="package-icon-text">
